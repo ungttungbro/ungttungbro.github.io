@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+    <head>
+        <title>Jonas</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="author" content="Jang Young Wan" />
+        <meta name="description" content="Personal homepage of Jonas" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="favicon.ico" />
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;amp;display=swap" />
+        <link rel="stylesheet" type="text/css" href="./css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="./css/base.css" />
+        <link rel="stylesheet" type="text/css" href="./css/standard-layout.css" />
+        <link rel="stylesheet" type="text/css" href="./css/mobile-layout.css" />
+
+    </head>
+    <body>
+        <!-- 사이트 전체 레이아웃 -->
+        <div id="site_layout">
+
+            <!--헤더 부분 [ menu, welcome image ]-->
+            <div id="header">
+                <div id="menus">
+                    <div id="menu_items">
+                        <div id="menu_left">
+                            <a href="#signature_image"><img id="logo" src="./images/logo.png" alt="로고" /></a>
+                        </div>
+                        
+                        <div id="menu_right">                                
+                            <a href="#experience">Experience</a>
+                            <a href="#works">Works</a> 
+                            <a href="#skills">Skills</a> 
+                            <a href="#gallery">Gallery</a> 
+                            <a href="#links">Links</a>
+                            <a href="mailto:youngwan.jang@gmail.com">Contact</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 웰컵 이미지 -->
+                <div>
+                    <img id="signature_image" src="./images/welcome.jpg" alt="welcome image" />                   
+                </div>
+            </div>
+
+            <!-- 콘텐츠 부분 -->
+            <div id="contents">
+                
+                <!-- experience 콘텐츠 [메뉴의 책갈피 이동 이거 사용]-->
+                <div id="experience">
+                    <div class="contents_title_text">Experience</div>
+                    <div id="experience_timeline"></div>
+                </div>
+                
+                <!-- Works [메뉴의 책갈피 이동 이거 사용]-->
+                <div id="works">                     
+                    <div class="contents_title_text">Works</div>                    
+                    <div id="works_item" style="padding-left: 1em; padding-right: 1em;"></div>
+                </div>
+                
+                <!-- skills [메뉴의 책갈피 이동 이거 사용]-->
+                <div id="skills">                    
+                    <div class="contents_title_text">Skills</div>
+                    <div id="skills_item" style="padding: 1em;"></div>
+                </div>
+                
+                 <!-- gallery [메뉴의 책갈피 이동 이거 사용]-->
+                <div id="gallery">                    
+                    <div class="contents_title_text">Gallery</div>
+                    <div id="gallery_table"></div>                       
+                </div>
+
+                <!-- links [메뉴의 책갈피 이동 이거 사용]-->
+                <div id="links">
+                    <div class="contents_title_text">Links (References)</div>                        
+                    <div id="links_item" style="padding: 1em"></div>                       
+                </div>
+
+            </div>
+
+            <div id="footer">
+                &copy; Made By Jonas
+                 <p>
+                    <a href="http://validator.kldp.org/check?uri=referer"
+                    onclick="this.href=this.href.replace(/referer$/,encodeURIComponent(document.URL))"><img
+                    src="//validator.kldp.org/w3cimgs/validate/xhtml10-blue.png" alt="Valid XHTML 1.0 Strict" height="15" width="80" /></a>
+                </p>
+            </div>
+        </div>
+
+        <!-- jQuery 1.10.2 - Google CDN -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <!-- CDN fallback: Google CDN 접속 안될 때 로컬 파일 사용 -->
+        <script type="text/javascript">
+        if (typeof jQuery == 'undefined') {
+        //<![CDATA[
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.src = 'js/jquery-1.10.2.min.js';
+            document.getElementsByTagName('head')[0].appendChild(s);
+        }
+        //]]>
+        </script>
+
+        <script type="text/javascript" src="./data/data.js"></script>
+        <script type="text/javascript" src="./js/layout.js"></script>
+        <script type="text/javascript">
+            var $experience_el = $('#experience_timeline');
+            $experience_el.append(buildExperienceLayoutHTML());      
+            
+            var $works_el = $('#works_item');
+            $works_el.append(buildWorksLayoutHTML());
+
+            var $skills_el = $('#skills_item');
+            $skills_el.append(buildSkillsLayoutHTML());
+
+            var $gallery_el = $('#gallery_table');
+            $gallery_el.append(buildGalleryLayoutHTML());
+
+            var $links_el = $('#links_item');
+            $links_el.append(buildLinksLayoutHTML());
+        </script>
+
+    </body>
+</html>
