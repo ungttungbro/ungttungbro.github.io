@@ -326,7 +326,7 @@ function buildLinksThanksTo(data) {
 $(function () {
     var anchor_offset = 0;
 
-    $(window).on('load', function () {
+    function adjustAnchorOffset() {
         anchor_offset = $('#menus').outerHeight(); // fixed header
         if (location.hash) {
             var $target = $(location.hash);
@@ -338,7 +338,18 @@ $(function () {
                 }, 0);
             }
         }
+    }
+
+   
+    $(window).on('load', function () {
+        adjustAnchorOffset();
     });
+
+    $(window).on('resize', function () {
+        adjustAnchorOffset();       
+        $('#gallery_table').html(buildGalleryLayoutHTML());
+    });
+
 
     $('.works_toggle').on('click', function (e) {
         e.preventDefault();
