@@ -339,7 +339,6 @@ $(function () {
             }
         }
     }
-
    
     $(window).on('load', function () {
         adjustAnchorOffset();
