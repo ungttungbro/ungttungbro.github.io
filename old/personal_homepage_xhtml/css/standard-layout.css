@@ -132,7 +132,8 @@
 }
 
 .year {
-    display: inline-block;
+    float: left;
+    white-space: nowrap;
     vertical-align: top;
     font-size: 1.5em;
     font-weight: bold;
@@ -147,8 +148,9 @@
 }
 
 .content {
-    display: inline-block;
-    vertical-align: top;
+    float: none;
+    overflow: hidden;
+    /*vertical-align: top;*/
     padding-top: 0.4em;
 }
 

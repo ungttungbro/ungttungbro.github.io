@@ -43,7 +43,14 @@
         margin-top: 13em;
     }
 
-     .year {
+    .experience_timeline_item {
+        display: table;
+        width: 100%;
+    }
+
+    .year {
+        display: table-cell;
+        white-space: nowrap;
         font-size: 1.25em;
         margin-left: 0;
         padding-left: 0;
@@ -53,8 +60,8 @@
     }
 
     .content {
-        display: inline-block;
-        width: 78%;    
+        display: table-cell;
+        width: 100%;    
         vertical-align: top;
         line-height: 1.6;
         padding-top: 0.2em;
@@ -125,26 +132,31 @@
     }
 
     #signature_image {
-        margin-top: 10em;
+        margin-top: 8em;
+    }
+
+    .experience_timeline_item {
+        display: table;
+        width: 100%;
     }
 
     .year {
+        display: table-cell;
+        white-space: nowrap;
         font-size: 1.25em;
-        margin-left: 0;
-        padding-left: 0;
-        margin-right: 0.25em;
-        padding-right: 0.25em;
+        padding-right: 0.5em;
+        vertical-align: top;
         border: 0px solid #778899;
     }
 
     .content {
-        display: inline-block;
-        width: 76%;    
-        vertical-align: top;
+        display: table-cell;
+        width: 100%;               /* 남은 공간 */
         line-height: 1.6;
         padding-top: 0.1em;
         padding-left: 0.5em;
-        border-left: 0px solid #718178;
+        vertical-align: top;
+        border: 0px solid #718178;
     }
 
     .teaching_activity_photo, .academic_research_photo {
