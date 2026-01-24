@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Jonas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="페이지 설명">
+    <meta name="keywords" content="keyword1, keyword2">
+    <meta name="author" content="Jonas">
+    <meta name="robots" content="index, follow">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;amp;display=swap" />
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/base.css">
+    <link rel="stylesheet" type="text/css" href="./css/standard-layout.css">
+    <!--<link rel="stylesheet" type="text/css" href="./css/mobile-layout.css">-->
+    <link rel="icon" href="/favicon.ico">
+  </head>
+<body>
+  <header>
+    <div id="header-layout">
+      <nav id="navigation"></nav>
+      <div class="signature-comment">
+        <h3>welcome</h3>       
+        <br>SW 개발과 코딩강의 및 연구 경험을 바탕으로
+        <br>진로·직업 컨설턴트로 활동하고 있습니다.
+        <br>사람을 돕는 방법을 고민합니다.
+        <br>
+        <br>
+        <br><a href="#scroll-indicator"><img id="scroll-indicator" src="./images/arrow.png" height="60" alt="로고" /></a>     
+      </div>
+    </div>
+  </header>
+
+  <main>
+      <div id="experience"></div>
+  </main>
+
+  <footer>
+     
+  </footer>
+
+  <script 
+    src="https://code.jquery.com/jquery-2.2.4.min.js" 
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+     <!-- CDN fallback: Google CDN 접속 안될 때 로컬 파일 사용 -->
+  <script type="text/javascript">
+    if (typeof jQuery == 'undefined') {
+    //<![CDATA[
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.src = 'js/jquery-2.2.4.min.js';
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+    //]]>
+  </script>
+  <script type="module">
+    import { experienceData } from './data/data.js';
+    import { siteMap } from './js/siteMap.js';
+    import { createNavigationItems, createExperience } from './js/siteTemplate.js';
+
+    const $navigationEl = $('#navigation');
+    $navigationEl.append(createNavigationItems(
+      './images/logo.png', 
+      siteMap, 
+      '#about', 
+      '', 
+      '', 
+      'youngwan.jang@gmail.com'
+    ));
+
+    const $experienceEl = $('#experience');
+    $experienceEl.append(createExperience(experienceData));
+  </script>
+
+
+</body>
+</html>

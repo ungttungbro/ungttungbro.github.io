@@ -1,0 +1,89 @@
+@import "../common/base.css";
+
+#blog-post-list {
+  display: block;
+  text-align: left;
+  line-height: 1.6;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+
+#blog-grid {
+  display: grid;
+  flex-direction: column;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+  margin-top: 0rem;
+  border: 0px solid #333333;
+}
+
+#blog-archive {
+  margin-top: 1rem;
+}
+
+#lifelog_list, #archive_list, #reflection {
+  font-size: 0.9rem;
+  text-align: left;
+  line-height: 1.25rem;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+
+#blog_post_list_all {
+  line-height: 1.5;
+}
+
+#blog_post_list_all .meta {
+  color: #565656;
+}
+
+#blog_post_list_all a:hover {
+  color: #222222;
+  text-decoration: none;
+  letter-spacing: 0.0025rem;
+}
+
+/*#blog_post_list_all a:hover {
+  color: #565656;
+  text-decoration: none;
+}*/
+
+.blog-post-photo-medium {
+  width: 30rem;
+  height:auto;
+  border-radius: var(--base_border_radius_medium);
+  border: 0 solid #eeeeee;
+}
+
+.lifelog-photo-medium {
+  width: 100%;
+  max-width: 60rem;
+  height:auto;
+  margin: 0 auto;
+  border-radius: var(--base_border_radius_large);
+  border: 0 solid #dddddd;
+}
+
+.blog-post-photo-comment {
+  font-size: 0.85rem; 
+  color: #073f3f;
+}
+
+.blog-post .meta {
+  color: #555555;
+  font-size: 1rem;
+}
+
+.blog-post hr {
+  border-color: #666666;
+}
+
+#reflection-content {
+  text-align: center;
+}
+
+.meta    { font-size: 0.9rem; color: #999999; }
+.title   { font-size: 1rem; font-weight: 500; }
+.summary { font-size: 0.95rem; font-weight: 400; }

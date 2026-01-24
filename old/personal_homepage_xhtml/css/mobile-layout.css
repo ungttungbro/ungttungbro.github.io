@@ -1,0 +1,192 @@
+/* 태블릿 */
+@media (max-width: 1024px) {
+    body { font-size: 16px; }
+    
+    #menu_right a {
+        margin-left: 0em;
+    }
+    
+    #career_photo_me { display: none; }
+}
+
+@media (max-width: 768px) {
+    body { font-size: 16px; }
+    
+    #menu_left {
+        float : none;
+        border-bottom: 0.1em solid #718178;
+        margin-bottom: 0.25em;
+    }
+
+    #menu_right {
+        float : none;
+    }
+
+    #menu_right a {
+        margin-left: 0em;
+    }
+
+    #menus {
+        height: 6.75em;
+        font-size: 2em;
+        word-spacing: 0.5em;
+    }
+
+    #menu_items {        
+        padding-left: 1em;
+        padding-right: 1em;
+        line-height: 1.6;
+        margin: 0 auto;
+    }
+
+    #signature_image {
+        margin-top: 13em;
+    }
+
+    .experience_timeline_item {
+        display: table;
+        width: 100%;
+    }
+
+    .year {
+        display: table-cell;
+        white-space: nowrap;
+        font-size: 1.25em;
+        margin-left: 0;
+        padding-left: 0;
+        margin-right: 0.25em;
+        padding-right: 0.25em;
+        border: 0px solid #778899;
+    }
+
+    .content {
+        display: table-cell;
+        width: 100%;    
+        vertical-align: top;
+        line-height: 1.6;
+        padding-top: 0.2em;
+        padding-left: 0.5em;
+        border-left: 0px solid #718178;
+    }
+
+    .teaching_activity_photo, .academic_research_photo {
+        width: 8em;
+        height: auto;
+        border: 0.25em solid #eeeeee;
+        top: 50%;
+        left: 50%;
+    }
+
+    .skills_language_icon_img {
+        width: 4.5em;
+        height: auto;
+        margin-left: 2em;
+    }
+
+    .works_personal_project_image {
+        display: none;       
+        margin-right: 1em;
+        margin-top: 0;
+    }
+
+    .gallery_item {
+        padding: 0.5em;
+    }
+
+    .contents_title_text {
+        padding-top: 0.75em;
+    }
+
+    #career_photo_me { display: none; }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 16px; }
+
+    #menu_left {
+        float : none;
+        border-bottom: 0.1em solid #718178;
+        margin-bottom: 0.25em;
+    }
+
+    #menu_right {
+        float : none;        
+        border: 0px solid #ffffff;
+    }
+
+    #menu_right a {
+        margin-left: 0em;
+    }
+
+    #menus {
+        height: 6.75em;
+        font-size: 1.25em;
+        word-spacing: 0.5em;
+    }
+
+    #menu_items {        
+        padding-left: 1em;
+        padding-right: 1em;
+        line-height: 1.6;
+        margin: 0 auto;
+    }
+
+    #signature_image {
+        margin-top: 8em;
+    }
+
+    .experience_timeline_item {
+        display: table;
+        width: 100%;
+    }
+
+    .year {
+        display: table-cell;
+        white-space: nowrap;
+        font-size: 1.25em;
+        padding-right: 0.5em;
+        vertical-align: top;
+        border: 0px solid #778899;
+    }
+
+    .content {
+        display: table-cell;
+        width: 100%;               /* 남은 공간 */
+        line-height: 1.6;
+        padding-top: 0.1em;
+        padding-left: 0.5em;
+        vertical-align: top;
+        border: 0px solid #718178;
+    }
+
+    .teaching_activity_photo, .academic_research_photo {
+        width: 8em;
+        height: auto;
+        border: 0.25em solid #eeeeee;
+        top: 50%;
+        left: 50%;
+    }
+
+    .skills_language_icon_img {
+        width: 3em;
+        height: auto;
+        margin-left: 1em;
+    }
+
+    .works_personal_project_image {
+        display: none;       
+        margin-right: 1em;
+        margin-top: 0;
+    }
+
+    .gallery_item {
+        padding: 0.5em;
+    }
+
+    .contents_title_text {
+        font-size: 1.75rem;
+        padding-top: 1em;
+    }
+
+    #career_photo_me { display: none; }
+}

@@ -1,0 +1,50 @@
+@import "../common/base.css";
+
+:root {  
+  --myphoto_width_size: 20rem;
+  --myphoto_height_size: 15rem;
+  --profile_box_background_color: #333333;
+}
+
+#photo_zone .about_photo { 
+  width: var(--myphoto_width_size); 
+  height: var(--myphoto_height_size);
+  border: var(--base_border_line);
+  border-radius: var(--base_border_radius_medium);
+  margin: auto;
+}
+
+#profile {  
+  width: var(--myphoto_width_size);
+  border: var(--base_border_line);
+  background-color: var(--profile_box_background_color);
+  border-radius: var(--base_border_radius_medium);
+  margin-top: var(--base_margin_size_medium);
+  padding: 0.5rem;
+}
+
+#thumbnails {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  line-height: 0px;
+  margin: auto;
+  font-size: 0;
+  border: 0px solid #222222;
+}
+
+.profile_thumbnail {
+  display: inline-block;
+  width: 3.75rem;
+  height: 2.8rem;
+  cursor: pointer;
+  font-size: initial;
+  vertical-align: bottom;
+  transition-duration: 0.3s;
+  transition-property: transform, opacity;
+}
+
+.profile_thumbnail:hover {  
+  transform: scale(1.0);
+  opacity: 0.8;
+  border: 0.01rem solid #999999;
+}

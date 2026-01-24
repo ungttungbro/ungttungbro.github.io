@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    color: #dddddd;
+}
+
+body {
+    font-size: 1.1vw;
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.5rem;
+}
+
+b {
+    font-weight: bold;
+}
+
+a {
+    color: #dddddd;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ae4b08;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+}
+
+h1 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  padding: 0rem;
+  line-height: 1.5rem;
+}
+
+h2 {
+  font-size: 2rem;  
+  font-weight: bold;
+  padding-top : 0rem;
+}
+
+h3 {
+  font-size: 5rem;  
+  font-weight: 500;
+  padding-top : 0rem;
+  padding-bottom: 0.75rem;
+}
+
+
+::-webkit-scrollbar { width: 0.1rem; }
+::-webkit-scrollbar-thumb { background-color: #666666;}
+::-webkit-scrollbar-track { background-color: #333333;}

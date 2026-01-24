@@ -1,0 +1,63 @@
+@import "../common/base.css";
+
+* {    
+    box-sizing: border-box;
+}
+
+:root {
+    --photolog_thumbnail_width_size: 6.5rem;
+    --photolog_thumbnail_height_size: 4.5rem;
+}
+
+.photolog_thumbnail {
+    width: var(--photolog_thumbnail_width_size);
+    height: var(--photolog_thumbnail_height_size);
+    border-radius: var(--base_border_radius_light);
+    float: left;
+    margin-right: 0.3rem;
+    transition-duration: 0.3s;
+    transition-property: transform, opacity;
+    z-index: 1;
+}
+
+.teaser_figure {
+    line-height: 1.5;
+    max-height: calc(1.5em * 3); /* 3줄 */
+    overflow: hidden;
+
+    word-break: break-all;
+    text-align: justify;
+    cursor: pointer;
+    color: inherit;
+
+    margin-bottom: 0.5rem;
+    
+    box-sizing: border-box;
+}
+
+/* 마지막 요소만 border 제거 */
+.teaser_figure:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.teaser_figure:hover {
+    color : var(--base_anchor_tag_hover_color);
+    z-index: 1;
+}
+
+.teaser_figure:hover .photolog_thumbnail {
+    transform: scale(1.0);
+    opacity: 0.8;
+    border: 0.01rem solid #999999;
+    z-index: 1;
+}
+
+.photolog_photo {
+    width : 100%;
+    height : auto;
+    margin: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;  
+    scroll-margin-bottom: 5vh;
+}
