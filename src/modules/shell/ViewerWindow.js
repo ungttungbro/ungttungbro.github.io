@@ -91,17 +91,23 @@ export class ViewerWindow {
             });
         });
 
-        let header_panel = this.headerContents;
-        if(header_panel !== null) { contents.appendChild(header_panel); }
-        else { header_panel = document.createElement('div'); header_panel.style.display = 'none'; }        
-        
-        let contents_panel = this.mainContents;        
-        if (contents_panel !== null) { contents.appendChild(contents_panel); }
-        else { contents_panel = document.createElement('div'); contents_panel.style.display = 'none'; }        
+        if(this.headerContents !== null) { 
+            const header_panel = document.createElement('div'); header_panel.className = 'header_panel';
+            header_panel.appendChild(this.headerContents);
+            contents.appendChild(header_panel); 
+        }      
+               
+        if (this.mainContents !== null) {
+            const contents_panel = document.createElement('div'); contents_panel.className = 'content_panel';
+            contents_panel.appendChild(this.mainContents);
+            contents.appendChild(contents_panel);
+        } 
 
-        let footer_panel = this.footerContents;
-        if (footer_panel !== null) { contents.appendChild(footer_panel); }
-        else { footer_panel = document.createElement('div'); footer_panel.style.display = 'none'; }
+        if (this.footerContents !== null) {
+            const footer_panel = document.createElement('div'); footer_panel.className = 'footer_panel';
+            footer_panel.appendChild(this.footerContents);
+            contents.appendChild(footer_panel); 
+        } 
         
         return contents;
     }

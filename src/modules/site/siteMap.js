@@ -14,30 +14,34 @@ export const siteMap = Object.freeze({
 
     blog: Object.freeze({
         blogSectionHeaderId: 'blog_title',
-        lifelogSectionHeaderId: 'lifelog_title',
-        archiveSectionHeaderId: 'archive_title',
-        reflectionHeaderId: 'reflection_title',
         blogCaptionImgId: 'blog-caption-img',
-        lifelogCaptionImgId: 'lifelog-caption-img',
-        archiveCaptionImgId: 'archive-caption-img',
-        reflectionCaptionImgId: 'reflection-caption-img',
         blogCaptionId: 'blog-caption-text',
-        lifelogCaptionId: 'lifelog-caption-text',
-        archiveCaptionId: 'archive-caption-text',
-        reflectionCaptionId: 'reflection-caption-text',
-        blogSectionHeaderIcon: './assets/icons/blog.png',
-        lifelogSectionHeaderIcon: './assets/icons/lifelog.png',
-        archiveSectionHeaderIcon: './assets/icons/archive.png',
-        reflectionSectionHeaderIcon: './assets/icons/reflection.png',
-        className: 'title_box',
         blogCaptionText: '라이팅스 (writings)',
-        lifelogCaptionText: '라이프로그 (lifelog)',
-        archiveCaptionText: '아카이브 (archive)',
-        reflectionCaptionText: '리플렉션 (reflection)',
+        blogSectionHeaderIcon: './assets/icons/blog.png',
         blogSectionHeaderIconAlt: 'blog Section Header Icon',
+
+        lifelogSectionHeaderId: 'lifelog_title',
+        lifelogCaptionImgId: 'lifelog-caption-img',
+        lifelogCaptionId: 'lifelog-caption-text',
+        lifelogSectionHeaderIcon: './assets/icons/lifelog.png',
+        lifelogCaptionText: '라이프로그 (lifelog)',
         lifelogSectionHeaderIconAlt: 'lifelog Section Header Icon',
+
+        archiveSectionHeaderId: 'archive_title',
+        archiveCaptionImgId: 'archive-caption-img',
+        archiveCaptionId: 'archive-caption-text',
+        archiveCaptionText: '아카이브 (archive)',
+        archiveSectionHeaderIcon: './assets/icons/archive.png',        
         archiveSectionHeaderIconAlt: 'archive Section Header Icon',
-        archiveSectionHeaderIconAlt: 'reflection Section Header Icon'
+
+        reflectionHeaderId: 'reflection_title',        
+        reflectionCaptionImgId: 'reflection-caption-img',
+        reflectionCaptionId: 'reflection-caption-text',
+        reflectionCaptionText: '리플렉션 (reflection)',
+        reflectionSectionHeaderIcon: './assets/icons/reflection.png',        
+        reflectionSectionHeaderIconAlt: 'reflection Section Header Icon',
+        
+        className: 'title_box',
     }),
 
 

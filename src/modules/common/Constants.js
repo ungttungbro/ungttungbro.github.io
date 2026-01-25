@@ -16,3 +16,8 @@ export const ICON_SIZE = Object.freeze({
 export const COMMON = Object.freeze({
     COPYRIGHT: '&copy; Jonas'
 });
+
+export const VIEWER = Object.freeze({
+    LSIT_RATIO_SMALL: 0.2,
+    LIST_RATIO_MIDDLE: 0.235
+});

@@ -80,6 +80,10 @@
   border-color: #666666;
 }
 
+.blog-content-panel {
+  padding: 1.5rem;
+}
+
 #reflection-content {
   text-align: center;
 }

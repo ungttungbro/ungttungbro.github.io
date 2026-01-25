@@ -87,7 +87,7 @@
   color: #dedede;
   font-weight: bold;
   margin: auto;
-  scroll-snap-align : center;
+  /*scroll-snap-align : center;*/
   border-top: 1px solid #444444;
 }
 
