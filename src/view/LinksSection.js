@@ -1,6 +1,5 @@
 'use strict';
 
-import { LINKS_SECTION_NAMES, LINKS_SECTION_PATHS } from "../modules/common/Constants.js";
 import { ELEMENT_TYPE } from "../modules/common/Constants.js";
 import { siteMap } from "../modules/site/siteMap.js";
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";

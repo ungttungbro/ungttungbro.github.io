@@ -69,9 +69,9 @@ export class BlogSection {
             24, 40, 0
         );
 
-        blog_blog.appendChild(blog_section_header);
-
         Templates.createSectionHeaderEvent(blog_section_header, siteMap.blog.blogCaptionId);
+
+        blog_blog.appendChild(blog_section_header);
 
         const post_list = this.generateSubjectList(
             'blog',
@@ -206,18 +206,10 @@ export class BlogSection {
 
         section_header.addEventListener('click',  e => {
             this.onSectionHeaderClick (
-                e,
-                viewer_id,
-                icon_path,
-                viewer_title_text,
+                e, viewer_id, icon_path, viewer_title_text,
                 this.generateSubjectList(
-                    blog_type,
-                    subjectList_id,
-                    icon_path,
-                    data,
-                    title_truncate_length, 
-                    summary_truncate_length, 
-                    row_count
+                    blog_type, subjectList_id, icon_path, data,
+                    title_truncate_length, summary_truncate_length, row_count
                 ),
                 null,
                 COMMON.COPYRIGHT

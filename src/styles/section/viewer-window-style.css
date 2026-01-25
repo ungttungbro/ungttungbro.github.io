@@ -48,7 +48,7 @@
 }
 
 .header_panel {
-  background-image: url('/assets/icons/viewer-background-light.gif');
+  background-image: url('/assets/icons/viewer-background-medium.gif');
   color: #3d3d3d;
   user-select: none;  
   padding : 0.75rem;  
@@ -67,7 +67,7 @@
 } 
 
 .content_panel {
-  background-image: url('/assets/icons/viewer-background-light.gif');
+  background-image: url('/assets/icons/viewer-background-medium.gif');
   background-color: #2a2a2a;
   color: #2e2e2e;
   font-size: 1.1rem;
