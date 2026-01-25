@@ -6,10 +6,10 @@
   --base_font_light : 1rem;
   --base_font_medium : 1.25rem;
   --base_font_large : 1.5rem;
+  --base_font_line_height_light : 1.25;
   --base_font_line_height : 1.6;
   --base_font_color : #cdcdcd;
 
-  --base_layout_width_size : 90rem;
   --base_layout_background_color: #BFA27A;
 
   --base_section_width_size : 27.25rem;
@@ -170,20 +170,4 @@ li {
   overflow: hidden;
   clip: rect(0,0,0,0);
   border: 0;
-}
-
-/*@media (max-width: 1200px) {
-  html { font-size: 15px; }
-}
-
-@media (max-width: 992px) {
-  html { font-size: 14px; }
-}
-
-@media (max-width: 768px) {
-  html { font-size: 13px; }
-}
-
-@media (max-width: 480px) {
-  html { font-size: 1.5vh; }
 }

@@ -34,7 +34,9 @@
   </header>
 
   <main>
+    <div id="about">
       <div id="experience"></div>
+    </div>
   </main>
 
   <footer>
@@ -56,23 +58,14 @@
     }
     //]]>
   </script>
-  <script type="module">
-    import { experienceData } from './data/data.js';
-    import { siteMap } from './js/siteMap.js';
-    import { createNavigationItems, createExperience } from './js/siteTemplate.js';
-
+  <script type="module">    
+    import { createNavigationItemsElement, createExperienceElement } from './js/siteLayout.js';
+    
     const $navigationEl = $('#navigation');
-    $navigationEl.append(createNavigationItems(
-      './images/logo.png', 
-      siteMap, 
-      '#about', 
-      '', 
-      '', 
-      'youngwan.jang@gmail.com'
-    ));
+    $navigationEl.append(createNavigationItemsElement());
 
     const $experienceEl = $('#experience');
-    $experienceEl.append(createExperience(experienceData));
+    $experienceEl.append(createExperienceElement());
   </script>
 
 

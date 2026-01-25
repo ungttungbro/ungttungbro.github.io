@@ -62,7 +62,7 @@ export class BlogSection {
             siteMap.blog.blogCaptionImgId,
             siteMap.blog.blogCaptionId,
             'blog_post_list_all_viewer',
-            'blog_post_list_all',
+            'post-index',
             '라이팅스 (writings) 목록',
             'blog',
             siteMap.blog.className,
@@ -79,7 +79,7 @@ export class BlogSection {
 
         const post_list = this.generateSubjectList(
             'blog',
-            'blog_post_list',
+            'latest-post',
             siteMap.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
             50, 106, 4
@@ -98,7 +98,7 @@ export class BlogSection {
             siteMap.blog.lifelogCaptionImgId,
             siteMap.blog.lifelogCaptionId,
             'lifelog_post_list_all_viewer',
-            'lifelog_post_list_all',
+            'post-index',
             '라이프로그 (lifelog) 목록',
             'lifelog',
             siteMap.blog.className,
@@ -115,7 +115,7 @@ export class BlogSection {
 
         const lifelog_list = this.generateSubjectList(
             'lifelog',
-            'lifelog_list', 
+            'latest-post', 
             siteMap.blog.lifelogSectionHeaderIcon,
             this.blogService.lifelogMetaData, 
             32, 0, 5
@@ -133,8 +133,8 @@ export class BlogSection {
             siteMap.blog.archiveSectionHeaderId,
             siteMap.blog.archiveCaptionImgId,
             siteMap.blog.archiveCaptionId,
-            'archive_post_list_all_viewer',
-            'archive_post_list_all',
+            'archive_list_all_viewer',
+            'post-index',
             '아카이브 (archive) 목록',
             'archive',
             siteMap.blog.className,
@@ -151,7 +151,7 @@ export class BlogSection {
         
         const archive_list = this.generateSubjectList(
             'archive',
-            'archive_list', 
+            'latest-post', 
             siteMap.blog.archiveSectionHeaderIcon, 
             this.blogService.archiveMetaData, 
             40, 0, 3
@@ -170,7 +170,7 @@ export class BlogSection {
             siteMap.blog.reflectionCaptionImgId,
             siteMap.blog.reflectionCaptionId,
             'reflection_post_list_all_viewer',
-            'reflection_post_list_all',
+            'post-index',
             '리플렉션 (reflection) 목록',
             'reflection',
             siteMap.blog.className,
@@ -187,7 +187,7 @@ export class BlogSection {
 
         const reflection_list = this.generateSubjectList(
             'reflection',
-            'reflection_list', 
+            'latest-post',
             siteMap.blog.reflectionSectionHeaderIcon, 
             this.blogService.reflectionMetaData, 
             40, 0, 7
@@ -199,20 +199,20 @@ export class BlogSection {
     }
 
     generateSectionHeader(
-        section_header_id, img_id, caption_id, viewer_id, subjectList_id,
-        viewer_title_text, blog_type, class_name, data, icon_path, text, icon_alt,
+        section_header_id, img_id, caption_id, viewer_id, post_index_class_name,
+        viewer_title_text, blog_type, section_header_class_name, data, icon_path, text, icon_alt,
         title_truncate_length, summary_truncate_length, row_count
     ) {
         const section_header = Templates.createSectionHeader(
             section_header_id, img_id, caption_id,
-            class_name, icon_path, text, icon_alt
+            section_header_class_name, icon_path, text, icon_alt
         );
 
         section_header.addEventListener('click',  e => {
             this.onSectionHeaderClick (
                 e, viewer_id, icon_path, viewer_title_text,
                 this.generateSubjectList(
-                    blog_type, subjectList_id, icon_path, data,
+                    blog_type, post_index_class_name, icon_path, data,
                     title_truncate_length, summary_truncate_length, row_count
                 ),
                 null,
@@ -262,13 +262,13 @@ export class BlogSection {
     }
 
     generateSubjectList(
-        type, list_element_id, section_icon, data, 
+        type, class_name, section_icon, data, 
         title_truncate_length, summary_truncate_length, row_count
     ) {
         const frag = document.createDocumentFragment();
 
         const subject_list = document.createElement(ELEMENT_TYPE.DIV);
-        subject_list.id = list_element_id;
+        subject_list.className = class_name;
 
         const iterator = data.entries();
         let result = iterator.next();
@@ -277,18 +277,19 @@ export class BlogSection {
         while (!result.done) {
             const [key, value] = result.value;
 
+            let region = '';
+            if (type === 'lifelog') { region = ' (' + value.region + ')'; }
+
             const subject = 
-                '<span class="meta" style="color:#555555;">' 
-                    + key + ' · ' + value.type 
-                + '</span>' 
-                + '<br>'
-                + '<strong class="title">' 
+                '<div class="meta">' 
+                    + key + region + ' · ' + value.type
+                + '</div>'                
+                + '<div class="title">' 
                     + SiteLibrary.truncateText(value.title, title_truncate_length) 
-                + '</strong>' 
-                + '<br>'
-                + '<span class="summary">' 
+                + '</div>'                
+                + '<div class="summary">' 
                     + SiteLibrary.truncateText(value.summary, summary_truncate_length) 
-                + '</span>';
+                + '</div>';
 
             const a =  document.createElement('a');
             a.href = '#';
@@ -325,29 +326,25 @@ export class BlogSection {
         let list_spec = {
             title: '',
             list_viewer_id: '',
-            list_id: ''
+            class_name: 'post-index'
         };
 
         if(type === 'blog') {
             list_spec.title = '라이팅스 (writings) 목록';
-            list_spec.list_viewer_id = 'blog_post_list_all_viewer';
-            list_spec.list_id = 'blog_post_list_all';
+            list_spec.list_viewer_id = 'blog_post_list_all_viewer';            
         } else if (type === 'lifelog') {
             list_spec.title = '라이프로그 (lifelog) 목록';
-            list_spec.list_viewer_id = 'lifelog_post_list_all_viewer';
-            list_spec.list_id = 'lifelog_post_list_all';            
+            list_spec.list_viewer_id = 'lifelog_post_list_all_viewer';                      
         } else if (type === 'archive') {
             list_spec.title = '아카이브 (archive) 목록';
-            list_spec.list_viewer_id = 'archive_post_list_all_viewer';
-            list_spec.list_id = 'archive_post_list_all';
+            list_spec.list_viewer_id = 'archive_post_list_all_viewer';            
         } else if (type === 'reflection') {
             list_spec.title = '리플렉션 (reflection) 목록';
-            list_spec.list_viewer_id = 'reflection_post_list_all_viewer';
-            list_spec.list_id = 'reflection_post_list_all';
+            list_spec.list_viewer_id = 'reflection_post_list_all_viewer';            
         } else {
             list_spec.title = '';
             list_spec.list_viewer_id = '';
-            list_spec.list_id = '';
+            list_spec.class_name = '';
         }
 
         return list_spec;
@@ -356,7 +353,7 @@ export class BlogSection {
     generatePostEvent(type, data, element, id, section_icon, title, header, content_path, footer) {
         element.addEventListener('mouseenter', e => { this.prefetchPost(element, content_path); }); 
         element.addEventListener('click',  e => {            
-            let viewer_width = (window.innerWidth - (window.innerWidth * VIEWER.LIST_RATIO_MIDDLE)) + 'px';
+            let viewer_width = (window.innerWidth - (window.innerWidth * VIEWER.LIST_RATIO_MIDDLE)) + 'px';     
 
             if (type === 'lifelog') { viewer_width = data.get(id)['width']; }
 
@@ -372,7 +369,7 @@ export class BlogSection {
                 spec.list_viewer_id,
                 section_icon,
                 spec.title,
-                this.generateSubjectList(type, spec.list_id, section_icon, data, 26, 44, 0),
+                this.generateSubjectList(type, spec.class_name, section_icon, data, 26, 44, 0),
                 null,
                 COMMON.COPYRIGHT
             );

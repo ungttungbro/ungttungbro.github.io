@@ -49,7 +49,7 @@ body {
     margin-left: 1rem;
     margin-right: 1rem;
 
-    font-weight: 500;
+    font-weight: bold;
     color: #eeeeee;
 
     display: flex;
@@ -78,7 +78,28 @@ body {
     z-index: 1;
 }
 
-#experience {    
+.section-header {
+    font-size: 2rem;
+    font-weight: 500;
+
+    padding-bottom: 1rem;    
+    border-bottom: 3px solid #666666;
+}
+
+#profile-photo {
+    position: absolute;
+    
+    top: 3.5rem;
+    right: 1.5rem;
+    
+    width: 16rem;
+    height: auto;
+    
+    border: 5px solid #ffffff;
+    border-radius: 1.5rem;
+}
+
+#experience {
     width: 100%;
     max-width: 1150px;
 
@@ -90,12 +111,20 @@ body {
     text-decoration: none;
 }
 
-.experience_timeline_item {
+#experience-timeline {
+    position: relative;
+    margin: 0 auto;
+}
+
+.experience-timeline-item {
     display: flex;              /* flex 컨테이너로 설정 */
     position: relative;
 
     align-items: flex-start;    /* 세로 정렬: 위쪽 기준, 필요시 center로 바꿀 수 있음 */
     gap: 1rem;                  /* year와 content 사이 간격 */
+
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .year {

@@ -22,7 +22,7 @@ export class BlogService {
 
             //lifelog meta data DTO
             this.lifelogMetaData = this.metaData(this.buildLifelogListData());
-
+            
              //lifelog meta data DTO
             this.reflectionMetaData = this.metaData(this.buildReflectionListData());
         } catch (error) {
@@ -40,11 +40,12 @@ export class BlogService {
         const dtoMap = new Map();        
         for (const [key, value] of contents_records) {            
             const blog = {
-                type: value[0],
-                title: value[1],
-                summary: value[2],
-                content_path: value[3],
-                width: value[4]
+                region: value[0],
+                type: value[1],
+                title: value[2],
+                summary: value[3],
+                content_path: value[4],
+                width: value[5]
             };
 
             dtoMap.set(key, blog);

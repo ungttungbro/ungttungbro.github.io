@@ -21,6 +21,14 @@ const createNavigationItems = function(logoSrc, siteMap, aboutUrl, galleryUrl, l
     return navigationItemEl;
 };
 
+const createSectionHeader = function(sectionName) {
+    let sectionHeader = '<div class="section-header">' 
+                            + sectionName 
+                        + '</div>';
+
+    return sectionHeader;
+}
+
 const createExperience = function(data) {
     let item = '';
     let url = '';
@@ -38,10 +46,10 @@ const createExperience = function(data) {
             url = data[i][1];
         }
 
-        item += '<div class="experience_timeline_item">'
+        item += '<div class="experience-timeline-item">'
                 + '<div class="year">' + year + '</div>'
                 + '<div class="content">'
-                    + '<b>' + url + '</b>' + data[i][2]
+                    + '<b>' + url + '</b>' + ' ' + data[i][2]
                 + '</div>'
               + '</div>';
     }
@@ -50,4 +58,5 @@ const createExperience = function(data) {
 };
 
 export { createNavigationItems };
+export { createSectionHeader };
 export { createExperience };

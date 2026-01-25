@@ -48,16 +48,19 @@
 }
 
 .header_panel {
-  background-image: url('/assets/icons/viewer-background-medium.gif');
+  background-image: url('/assets/icons/viewer-background-light.gif');
   color: #3d3d3d;
   user-select: none;  
   padding : 0.75rem;  
   /*scroll-snap-align: start;*/
 }
 
-.header_panel a:hover {
-  color: #222222;
-  letter-spacing: 0.0025rem;
+.header_panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.05);
+    pointer-events: none;
 }
 
 .header_panel hr {
@@ -67,7 +70,7 @@
 } 
 
 .content_panel {
-  background-image: url('/assets/icons/viewer-background-medium.gif');
+  background-image: url('/assets/icons/viewer-background-light.gif');
   background-color: #2a2a2a;
   color: #2e2e2e;
   font-size: 1.1rem;

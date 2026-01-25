@@ -104,8 +104,8 @@ footer {
   display: grid;
   grid-template-columns: 1fr 20rem;
   gap: 1rem;
-  border-bottom: 0.1rem dashed #444444;
-  padding-bottom: 1rem;
+  border-bottom: 0px dashed #444444;
+  padding-bottom: 0rem;
 }
 
 .content-secondary {
