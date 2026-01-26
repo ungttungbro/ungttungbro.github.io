@@ -64,7 +64,7 @@
 }
 
 .header_panel hr {
-  border: 0.05rem dashed #676767;
+  border: 1px solid #bababa;
   margin-top: 0.4rem;
   margin-bottom: 0.4rem;
 } 

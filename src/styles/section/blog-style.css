@@ -1,23 +1,25 @@
 @import "../common/base.css";
 
 .meta    { font-size: 0.9rem; color: #888888; }
-.title   { font-size: 1rem; color: #cdcdcd; }
-.summary { font-size: 0.95rem; color: #aaaaaa; }
+.title   { font-size: 1rem; color: #dddddd;}
+.summary { font-size: 0.9rem; color: #aaaaaa; }
 
 .post-index { line-height: 1.35rem; }
-.post-index .meta { font-size: 0.9rem; color: #666666; }
-.post-index .title { font-size: 0.95rem; font-weight: bold; color: #444444; }
-.post-index .summary { font-size: 0.9rem; color: #555555; }
+.post-index .meta { font-size: 0.85rem; color: #666666; }
+.post-index .title { font-size: 0.95rem; font-weight: bold; color: #555555; line-height: 1.5; }
+.post-index .summary { font-size: 0.85rem; color: #444444; }
 
-.post-index a:hover .meta { color: #333333; }
-.post-index a:hover .title { color: #056081; }
-.post-index a:hover .summary { color: #444444; }
+.post-index a:hover .title { color: #176d04; } /*#056081*/
+.post-index a:hover .summary { color: #555555; }
 
 .latest-post { line-height: var(--base_font_line_height); }
-
-.latest-post a:hover .meta { color: #aaaaaa; }
-.latest-post a:hover .title { color: #0aa8e2; }
+.latest-post a:hover .title { color: #ffc900; } /*#0aa8e2*/
 .latest-post a:hover .summary { color: #cdcdcd; }
+
+.blog-post-photo-comment { font-size: 0.85rem; color: #073f3f; }
+.blog-post .meta { color: #555555; font-size: 0.9rem; }
+.blog-post hr { border-color: #777777; }
+.blog-content-panel { padding: 1.5rem; }
 
 .blog-post-photo-medium {
   width: 30rem;
@@ -35,22 +37,8 @@
   border-radius: var(--base_border_radius_large);
 }
 
-.blog-post-photo-comment {
-  font-size: 0.85rem;
-  color: #073f3f;
-}
-
-.blog-post .meta {
-  color: #555555;
-  font-size: 0.9rem;
-}
-
-.blog-post hr {
-  border-color: #777777;
-}
-
-.blog-content-panel {
-  padding: 1.5rem;
+#blog-blog .title {
+  line-height: 2;
 }
 
 #blog-grid {
@@ -67,7 +55,7 @@
 #blog-lifelog .latest-post, 
 #blog-archive .latest-post, 
 #blog-reflection .latest-post {
-  line-height: 1.3;
+  line-height: 1.5;
 }
 
 #reflection-content {

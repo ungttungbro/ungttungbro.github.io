@@ -23,10 +23,14 @@
   padding: 0.5rem;
 }
 
+#profile hr {
+  border: 1px solid #444444;
+}
+
 #thumbnails {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
-  line-height: 0px;
+  line-height: 0;
   margin: auto;
   font-size: 0;
   border: 0px solid #222222;

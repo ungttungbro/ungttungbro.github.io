@@ -22,13 +22,14 @@
     <div id="header-layout">
       <nav id="navigation"></nav>
       <div class="signature-comment">
-        <h3>welcome</h3>       
-        <br>SW 개발과 코딩강의 및 연구 경험을 바탕으로
+        <h3>welcome</h3>     
+        SW 개발과 코딩강의 및 연구 경험을 바탕으로
         <br>진로·직업 컨설턴트로 활동하고 있습니다.
         <br>사람을 돕는 방법을 고민합니다.
-        <br>
-        <br>
-        <br><a href="#scroll-indicator"><img id="scroll-indicator" src="./images/arrow.png" height="60" alt="로고" /></a>     
+        
+        <a href="#about">
+            <img id="scroll-indicator" src="./images/arrow.png" height="50" alt="로고">
+        </a>
       </div>
     </div>
   </header>
@@ -36,11 +37,12 @@
   <main>
     <div id="about">
       <div id="experience"></div>
+      <div id="works"></div>
     </div>
   </main>
 
   <footer>
-     
+      &copy; Made By Jonas
   </footer>
 
   <script 
@@ -59,13 +61,16 @@
     //]]>
   </script>
   <script type="module">    
-    import { createNavigationItemsElement, createExperienceElement } from './js/siteLayout.js';
+    import { createNavigationItemsElement, createExperienceElement, createWorksElement } from './js/siteLayout.js';
     
     const $navigationEl = $('#navigation');
     $navigationEl.append(createNavigationItemsElement());
 
     const $experienceEl = $('#experience');
     $experienceEl.append(createExperienceElement());
+
+    const $worksEl = $('#works');
+    $worksEl.append(createWorksElement());
   </script>
 
 

@@ -70,7 +70,7 @@ export class BlogSection {
             siteMap.blog.blogSectionHeaderIcon,
             siteMap.blog.blogCaptionText,
             siteMap.blog.blogSectionHeaderIconAlt,
-            24, 40, 0
+            24, 56, 0
         );
 
         Templates.createSectionHeaderEvent(blog_section_header, siteMap.blog.blogCaptionId);
@@ -82,7 +82,7 @@ export class BlogSection {
             'latest-post',
             siteMap.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
-            50, 106, 4
+            50, 112, 4
         );
 
         blog_blog.appendChild(post_list);
@@ -118,7 +118,7 @@ export class BlogSection {
             'latest-post', 
             siteMap.blog.lifelogSectionHeaderIcon,
             this.blogService.lifelogMetaData, 
-            32, 0, 5
+            32, 0, 4
         );
 
         blog_lifelog.appendChild(lifelog_list);
@@ -280,16 +280,19 @@ export class BlogSection {
             let region = '';
             if (type === 'lifelog') { region = ' (' + value.region + ')'; }
 
+            const meta_span = document.createElement('span');
+            meta_span.className = 'meta';
+            meta_span.textContent = key + region + ' · ' + value.type;
+
+            frag.appendChild(meta_span);
+
             const subject = 
-                '<div class="meta">' 
-                    + key + region + ' · ' + value.type
-                + '</div>'                
-                + '<div class="title">' 
+                '<div class="title">' 
                     + SiteLibrary.truncateText(value.title, title_truncate_length) 
                 + '</div>'                
-                + '<div class="summary">' 
+                + '<span class="summary">' 
                     + SiteLibrary.truncateText(value.summary, summary_truncate_length) 
-                + '</div>';
+                + '</span>';
 
             const a =  document.createElement('a');
             a.href = '#';
@@ -298,7 +301,7 @@ export class BlogSection {
             this.generatePostEvent(
                 type, data, a, encodeURIComponent(key),section_icon, value.title, 
                 null, value.content_path,COMMON.COPYRIGHT
-            );
+            );            
 
             frag.appendChild(a);
 
@@ -369,7 +372,7 @@ export class BlogSection {
                 spec.list_viewer_id,
                 section_icon,
                 spec.title,
-                this.generateSubjectList(type, spec.class_name, section_icon, data, 26, 44, 0),
+                this.generateSubjectList(type, spec.class_name, section_icon, data, 26, 56, 0),
                 null,
                 COMMON.COPYRIGHT
             );

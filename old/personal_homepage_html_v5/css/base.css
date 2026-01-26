@@ -4,13 +4,17 @@
 
 html, body {
     width: 100%;
-    color: #dddddd;
+    color: #cccccc;
 }
 
 body {
     font-size: 16px;
     font-family: 'Noto Sans KR', sans-serif;
-    line-height: 1.5rem;
+    line-height: 1.6rem;
+}
+
+hr {
+    border: 1px solid #666666;
 }
 
 b {
@@ -18,13 +22,13 @@ b {
 }
 
 a {
-    color: #dddddd;
+    color: #cccccc;
     text-decoration: none;
 }
 
 a:hover {
-    color: #0e9ae0;
-    text-decoration: underline;
+    color: #ffc900;
+    text-decoration: none;
     text-underline-offset: 0.5rem;
 }
 
@@ -32,7 +36,7 @@ h1 {
   font-size: 1.25rem;
   font-weight: 400;
   padding: 0rem;
-  line-height: 1.5rem;
+  line-height: 1.5;
 }
 
 h2 {
@@ -44,8 +48,23 @@ h2 {
 h3 {
   font-size: 5rem;  
   font-weight: 500;
-  padding-top : 0rem;
-  padding-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+ul, ol {
+  margin: 0 0 1em 1em;
+  padding-left: 1em;
+}
+
+ul::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+li {
+  margin: 0.25em 0;
+  list-style: disc;
 }
 
 

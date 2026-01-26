@@ -19,7 +19,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.3);
     z-index: 0;
 }
 
@@ -37,7 +37,7 @@ body {
     justify-content: center;
     word-spacing: 1rem;
     z-index: 1000;
-    border-bottom: 1px solid #222222;
+    border-bottom: 1px solid #333333;
     opacity: 0.9;
 }
 
@@ -50,7 +50,7 @@ body {
     margin-right: 1rem;
 
     font-weight: bold;
-    color: #eeeeee;
+    color: #ffffff;
 
     display: flex;
     align-items: center;             /* 세로 중앙 */
@@ -67,15 +67,37 @@ body {
 
     display: flex;
     flex-direction: column;
+        
     align-items: center;      /* 가로 가운데 */
     justify-content: center;  /* 세로 가운데 */
     text-align: center;
 
-    color: #dddddd;
-    line-height: 1.6rem;
-    border: 0px solid red;
+    color: #cccccc;
+    line-height: 1.6;
+}
 
-    z-index: 1;
+@keyframes scroll-hint {
+    0%, 70%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(6px);
+        opacity: 0.8;
+    }
+    90% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#scroll-indicator {
+    margin-top: 3rem;
+}
+
+#scroll-indicator:hover {    
+    animation: scroll-hint 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    cursor: pointer;
 }
 
 .section-header {
@@ -95,11 +117,12 @@ body {
     width: 16rem;
     height: auto;
     
-    border: 5px solid #ffffff;
+    border: 5px solid #dddddd;
     border-radius: 1.5rem;
 }
 
-#experience {
+#experience,
+#works {
     width: 100%;
     max-width: 1150px;
 
@@ -139,11 +162,97 @@ body {
 }
 
 .content {
-    flex: 1;                    /* 남은 공간 차지 */
+    flex: 1;                            /* 남은 공간 차지 */
 
     border-left: 2px solid #666666;
-    padding-left: 1.5rem;         /* border와 텍스트 간격 */
+    padding-left: 1.5rem;               /* border와 텍스트 간격 */
     margin-left: 0.5rem;
 
     line-height: 2.5rem;
+}
+
+#academic-research-photos,
+#teaching-activity-photos {
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0;
+}
+
+.academic-research-photo,
+.teaching-activity-photo {
+    width: 15rem;
+    height: auto;
+
+    border: 3px solid #dddddd;
+    border-radius: 1rem;
+}
+
+#works-items {
+    padding-top: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.works-item-title {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    font-weight: 500;
+}
+
+.works-content-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+
+    line-height: 2.5rem;
+
+    margin-left: 0.5rem;
+}
+
+.works-toggle-contents {
+    display: none;
+}
+
+.works-personal-project-image {
+    width: 16rem;
+    height: auto;
+
+    float: left;
+    margin-top: 0.5rem; 
+    margin-right: 2rem;
+    margin-left: 0.5rem;
+
+    border: 2px solid #dddddd;
+    border-radius: 1rem;
+}
+
+.works-personal-project-item:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.works-personal-project-item {
+    margin-bottom: 1rem;
+    margin-right: 0.5rem;
+}
+
+footer {
+    width: 100%;
+
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    margin: 0 auto;
+    
+    text-align: center;
+    font-weight: bold;
+    
+    background-color: #111111;
+    border-top : 1px solid #333333;
 }

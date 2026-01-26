@@ -1,6 +1,6 @@
 export const siteMap = Object.freeze({
     menus: Object.freeze({
-        about: 'About',
+        about: 'about',
         experience: 'Experience',
         works: 'Works',
         skills: 'Skills',

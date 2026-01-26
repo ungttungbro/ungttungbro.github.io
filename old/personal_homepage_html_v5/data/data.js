@@ -15,5 +15,52 @@ const experienceData = [
     [ '2006', '(주)혜만테크', '(개발자) - GIS 솔루션 개발 및 유지보수 [VC++, MS-SQL, ASP]' ]
 ];
 
+const worksAcademicResearchData = [
+    '2017년 방송통신대학교에서 학사운영, 2021~2022 한국과학창의재단에서 연구직으로 활동 하였으며 교육활동과 상담, 그리고 실무에서의 선한 영향력에 대한 성취를 경험했던 귀한 시간이었습니다.',
+    './images/works/research/academic_research1.jpg',
+    './images/works/research/academic_research2.jpg',
+    './images/works/research/academic_research3.jpg',
+    './images/works/research/academic_research4.jpg'
+];
+
+
+const worksTeachingActivityData = [
+    '2015년~2016 대건정보처리학원, 2018~2020 코딩플러스학원에서 활동 하였으며, 학생들과의 교류와 친목, 공부하는 즐거움이 좋았던 시간이었습니다.',
+    './images/works/activity/teaching_activity3.jpg',
+    './images/works/activity/teaching_activity5.jpg',
+    './images/works/activity/teaching_activity6.jpg',
+    './images/works/activity/teaching_activity7.jpg'
+];
+
+
+const worksPublishData = [
+    [ '모바일 사용자 상황정보를 이용한 퍼스널 라이프로그 자동태깅 시스템', 'https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=DIKO0013354194', '모바일 환경 기반에서 생성된 사용자의 상황정보를 가공하고 추론하는 방법을 연구하고 실험한 것을 기록한 석사학위논문',  '저자 : 장영완, 김병만', '등재일 : 2014.8', '등재기관 : 금오공과대학교 대학원' ],
+    [ '스마트폰 기반의 이동상황 판별을 위한 유클리디안 거리유사도의 응용', 'https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=JAKO201429765168594', '이동 컴퓨팅 환경에서의 사용자 움직임을 파악하기 위해 유클리디안 거리유사도를 이용하여 스마트폰의 센서를 통해 인식한 사용자의 움직임을 추상화 하는 방법',  '저자 : 장영완, 김병만, 장성봉, 신윤식', '등재일 : 2014.8', '등재기관 : 한국산업정보학회논문지 제19권 제4호' ],
+    [ '모바일 사용자 상황정보를 이용한 퍼스널 라이프로그 자동 태깅 방법', 'https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=JAKO201306464397689', '모바일 환경 기반에서 생성된 사용자의 상황정보를 가공하고 추론하여 일화형태의 레코드를 구성하고 대표값을 추출하여 태깅하는 것으로 일상의 정보를 수집하는 방법', '저자 : 장영완, 김병만, 문창배, 신윤식', '등재일 : 2013.10', '등재기관 : 한국정보과학회논문지 시스템 및 이론 제40권 제5호' ],
+    [ '모바일 사용자 상황정보를 이용한 퍼스널 라이프로그 자동 태깅 시스템', 'https://www.riss.kr/search/detail/DetailView.do?p_mat_type=1a0202e37d52c72d&amp;control_no=c6bef31fce76f2d3ffe0bdc3ef48d419&amp;keyword=', '모바일 환경 기반에서 생성되어 가공된 사용자 상황정보를 추론하여 일화형태이 레코드를 구성하고 대표값을 태깅하는 시스템', '저자 : 장영완, 김병만, 신윤식', '등재일 : 2013.6', '등재기관 : 2013년 한국컴퓨터종합학술대회 논문집' ],
+    [ '음악의 분위기와 폭소노미 태그의 관계 분석', 'https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=JAKO201324161075932', '폭소노미에 사용되는 태그에 대하여 유사어, 태깅 레벨, 신조어 등의 문제를 해결하기 위해 음악의 분위기 강도 (Arousal과 Valence의 강도)를 음악의 내부태그로 활용하는 방법을 분석', '저자 : 문창배, 김현수, 장영완, 김병만', '등재일 : 2013.3', '등재기관 : 감성과학 제16권 제1호' ]
+];
+
+
+const worksProjectsData = [
+    [ 'Sports Pro 21','스포츠 센터 POS및 CRM 관련 어플리케이션 개발 운영 프로젝트 (한국마사회, 한성기업 르네상스휘트니스, 삼부스포렉스등 다수)', '수행역할 : 프로그램 개발 및 유지보수 (VB, MS-SQL)', '참여기간 : 2011.2 ~ 2011.9', '소속기관 : (주)에픽소프트' ],
+    [ 'DMS (Design Management System)','한국전력 고압단가 업체 운영 및 유지보수 설계 프로그램 개발 및 운영 프로젝트','수행역할 : 프로그램 운영 및 유지보수 (VC++, MS-SQL, Oracle)','참여기간 : 2006.12 ~ 2009.2','소속기관 : (주)혜만테크' ]
+];
+
+
+const worksPersonalProjectsData = [
+    [ 'SEED256bit 블록암호 라이브러리', './images/works/projects/console.gif','SEED256bit 블록암호 운영 라이브러리 설계','KISA 알고리즘 기반 5가지 운영모드 구현','프로젝트 완료일 : 2011.3' ],
+    [ 'Lavine Launcher', './images/works/projects/Lavine.gif','독자적 문법 설계 및 인터프리터 기반 구조','개발환경 : VC++','프로젝트 완료일 : 2010.12' ],
+    [ 'groupware', './images/works/projects/groupware.gif','그룹웨어 개발','개발환경 : VC++, ASP, MS-SQL, C#','프로젝트 완료일 : 2010.7' ],
+    [ 'InternetDisk', './images/works/projects/internetdisk.gif','FTP 기반 인터넷디스크','파일 업로드, 다운로드, 탐색기능','프로젝트 완료일 : 2009.12' ],
+    [ 'RockStyleLife', './images/works/projects/rockstylelife.gif','록 스타일 의류 쇼핑몰','ASP, MS-SQL 기반 개발','프로젝트 완료일 : 2006.12' ],
+    [ 'Prent', './images/works/projects/prent.gif','PC 렌탈 쇼핑몰','SP, MS-SQL 기반 개발','프로젝트 완료일 : 2006.6' ]
+];
+
 
 export { experienceData };
+export { worksAcademicResearchData };
+export { worksTeachingActivityData };
+export { worksPublishData };
+export { worksProjectsData };
+export { worksPersonalProjectsData };
