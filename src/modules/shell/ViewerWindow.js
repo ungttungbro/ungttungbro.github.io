@@ -13,8 +13,6 @@ const CONSTANTS = Object.freeze({
 });
 
 export class ViewerWindow {
-    static z_index = 99;
-
     constructor () {
         this.targetId = null;
         this.viewer_wrapper_id = null;        
@@ -48,7 +46,7 @@ export class ViewerWindow {
         this.dragWindow();
         this.resizeWindow();
 
-        this.stateLog(this.viewer_wrapper_element);
+        StateManager.stateLog(this.viewer_wrapper_element);
     }
 
     createViewerWrapperElement() {
@@ -63,7 +61,11 @@ export class ViewerWindow {
         element.style.transform = 'none';
         element.style.left = this.left;
         element.style.top = this.top;
-        element.style.zIndex = ViewerWindow.z_index;
+        element.style.zIndex = StateManager.maxZIndex() + 1;
+        element.addEventListener('click', e => { 
+            element.style.zIndex = StateManager.maxZIndex() + 1; 
+            StateManager.stateLog(element);
+        });
 
         return element;
     }
@@ -76,7 +78,7 @@ export class ViewerWindow {
         element.className = this.className;
         element.style.width = this.width;
         element.style.height = this.height;       
-
+        
         return element;
     }
 
@@ -172,11 +174,12 @@ export class ViewerWindow {
             e.stopPropagation();
             SiteLibrary.elementVisibility(this.viewer_wrapper_id);
 
-            this.stateLog(this.viewer_wrapper_element);
+            StateManager.stateLog(this.viewer_wrapper_element);
         });
 
         maximize_button.addEventListener('click', e => {
             e.stopPropagation();
+
             SiteLibrary.toggleElementMaximize(
                 this.window_element,
                 'taskbar',
@@ -184,15 +187,15 @@ export class ViewerWindow {
                 this.beforeHeight
             );
 
-            this.stateLog(this.viewer_wrapper_element);
+            StateManager.stateLog(this.viewer_wrapper_element);
         });
 
         close_button.addEventListener('click', e => {
             e.stopPropagation();
+
             SiteLibrary.closeElement(this.targetId);            
             SiteLibrary.closeElement(this.viewer_wrapper_id);
 
-            StateManager.removeGroup(this.targetId); 
             StateManager.removeGroup(this.viewer_wrapper_id);        
         });
     }
@@ -268,7 +271,7 @@ export class ViewerWindow {
             document.removeEventListener('pointermove', this.onResizeMove);
             document.removeEventListener('pointerup', this.onResizeEnd);
 
-            this.stateLog(this.viewer_wrapper_element);
+            StateManager.stateLog(this.viewer_wrapper_element);
         };
 
         this.window_element.addEventListener('pointerdown', e => {
@@ -314,14 +317,7 @@ export class ViewerWindow {
     }
 
     dragWindow() {
-        const wrapper = this.viewer_wrapper_element;
-        
-        ViewerWindow.z_index++;
-        wrapper.style.zIndex = ViewerWindow.z_index;
-
-        //state manager input
-        const snapshot = { [ 'max_zIndex' ]: wrapper.style.zIndex++ };
-        StateManager.setGroup('viewerWindow', snapshot);
+        const wrapper = this.viewer_wrapper_element;   
 
         const title_bar = wrapper.querySelector('.title_bar');
 
@@ -333,7 +329,6 @@ export class ViewerWindow {
 
         // 더블 클릭 최대/최소화
         title_bar.addEventListener('dblclick', e => {
-            
             if (!title_bar.isDragging) {
                 SiteLibrary.toggleElementMaximize(
                     this.window_element,
@@ -350,6 +345,9 @@ export class ViewerWindow {
 
             const wrapper = this.viewer_wrapper_element;
             if (wrapper.classList.contains(wrapper.id)) return;
+
+            wrapper.style.zIndex = StateManager.maxZIndex() + 1; 
+            StateManager.stateLog(wrapper);
 
             const rect = wrapper.getBoundingClientRect();
 
@@ -388,7 +386,7 @@ export class ViewerWindow {
         document.addEventListener('pointerup', e => {
             if (!drag_state || e.pointerId !== drag_state.pointerId) return;
 
-            this.stateLog(this.viewer_wrapper_element);
+            StateManager.stateLog(this.viewer_wrapper_element);
             
             title_bar.isDragging = false;
             drag_state = null;
@@ -419,18 +417,5 @@ export class ViewerWindow {
         this.headerContents = header_contents;
         this.mainContents = main_contents;
         this.footerContents = footer_contents;
-    }
-
-    stateLog(element) {
-        const snapshot = {
-            ['width']: element.style.width,
-            ['height']: element.style.height,
-            ['className']: element.className,
-            ['visibility']: element.style.visibility,
-            ['clientRect']: element.getBoundingClientRect(),
-            ['zIndex'] : element.style.zIndex
-        };
-
-        StateManager.setGroup(element.id, snapshot);
     }
 }

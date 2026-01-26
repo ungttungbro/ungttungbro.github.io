@@ -52,4 +52,29 @@ export class StateManager {
     static clearAll() {
         StateManager.state.clear();
     }
+
+    static stateLog(element) {
+        const snapshot = {
+            ['className']: element.className,
+            ['width']: element.getBoundingClientRect().width,
+            ['height']: element.getBoundingClientRect().height,            
+            ['visibility']: getComputedStyle(element).visibility,
+            ['clientRect']: element.getBoundingClientRect(),
+            ['zIndex'] : getComputedStyle(element).zIndex
+        };
+
+        StateManager.setGroup(element.id, snapshot);
+    }
+
+    static maxZIndex() {
+        let max = 0;
+        for (const [key] of StateManager.state) {
+            const zIndex = StateManager.get(key,'zIndex');
+            if (zIndex && !isNaN(zIndex)) {
+                max = Math.max(max, zIndex);
+            }
+        }
+        
+        return max;
+    }
 }

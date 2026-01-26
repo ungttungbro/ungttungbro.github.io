@@ -40,43 +40,36 @@ export class TaskBar {
         element.className = 'task_bar_item';
 
         element.addEventListener ('click', () => {
-            const wrapperId = target_id;
-            SiteLibrary.elementVisibility(wrapperId);
-
-            /*const wrapper_el = document.getElementById(wrapperId);
+            const wrapper_el = document.getElementById(target_id);
             if (!wrapper_el) {
-                console.warn('element not found:', wrapperId);
+                console.warn('element not found:', target_id);
                 return;
             }
-
-            const map = StateManager.state.get('viewerWindow');
-            const currentZ = Number(map.get('max_zIndex')) || 0;
 
             const state = StateManager.state;
             let isOverlap = false;
             for (const [key, value] of state) {
                 if (!value.get('clientRect') || key === wrapper_el.id) continue;
 
-                if (
-                    SiteLibrary.isRectOverap(
-                        wrapper_el.getBoundingClientRect(),
-                        value.get('clientRect')
-                    )
-                ) {
-                    isOverlap = true;
-                    break;
+                if (SiteLibrary.isRectOverlap(wrapper_el.getBoundingClientRect(), value.get('clientRect'))) {
+                    if (value.get('visibility') === 'visible'){
+                        isOverlap = true;
+                        break;
+                    }
                 }
             }
 
-            if (isOverlap) {
-                const nextZ = currentZ + 1;
-                map.set('max_zIndex', nextZ);
+            if (isOverlap && (wrapper_el.style.zIndex < StateManager.maxZIndex())) {
+                wrapper_el.style.zIndex = StateManager.maxZIndex() + 1;
 
-                wrapper_el.style.zIndex = nextZ;
-                console.log(isOverlap);
+                if (getComputedStyle(wrapper_el).visibility === 'hidden') {
+                    SiteLibrary.elementVisibility(wrapper_el.id);
+                }                
             } else {
-                SiteLibrary.elementVisibility(wrapperId);
-            }*/
+                SiteLibrary.elementVisibility(wrapper_el.id);           
+            }
+
+            StateManager.stateLog(wrapper_el);
         });
 
         const title_img = SiteLibrary.createImgElement(TASKBAR_CONSTANTS.TITLE_ICON_TYPE, '', title_icon_path, '');
@@ -85,8 +78,10 @@ export class TaskBar {
         const close_button_icon_path = TASKBAR_CONSTANTS.CLOSE_BUTTON_ICON_PATH;
         const close_img = SiteLibrary.createImgElement('task_item_close', '', close_button_icon_path, '');
 
-        close_img.addEventListener ('click', () => {
+        close_img.addEventListener ('click', (e) => {
+            e.stopPropagation();
             this.unmount(element.id, target_id);
+            StateManager.removeGroup(target_id);
         });
 
         element.appendChild(caption);

@@ -234,13 +234,22 @@ export class SiteLibrary {
       return text.slice(0, limit) + '…';
   }
 
-  static isRectOverap(rect1, rect2) {
+  /*static isRectOverap(rect1, rect2) {
     return !(
-      /* 겹치지 않는 조건을 만들어서 NOT */
+      // 겹치지 않는 조건을 만들어서 NOT
       rect1.right  < rect2.left  ||
       rect1.left   > rect2.right ||
       rect1.bottom < rect2.top   ||
       rect1.top    > rect2.bottom
+    );
+  }*/
+
+  static isRectOverlap(rect1, rect2, tolerance = 1) {
+    return !(
+      rect1.right  <= rect2.left  + tolerance ||
+      rect1.left   >= rect2.right - tolerance ||
+      rect1.bottom <= rect2.top   + tolerance ||
+      rect1.top    >= rect2.bottom - tolerance
     );
   }
 

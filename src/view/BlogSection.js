@@ -82,7 +82,7 @@ export class BlogSection {
             'latest-post',
             siteMap.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
-            50, 112, 4
+            50, 110, 4
         );
 
         blog_blog.appendChild(post_list);
@@ -423,7 +423,7 @@ export class BlogSection {
                     'blog-content-panel', 
                     await this.blogService.loadContentData(content_path)
                 ),
-                this.generateContentPanel('blog-footer-panel', COMMON.COPYRIGHT)
+                this.generateContentPanel('blog-footer-panel', footer)
             );
 
             viewer.targetId = id + '_task_bar_item';
