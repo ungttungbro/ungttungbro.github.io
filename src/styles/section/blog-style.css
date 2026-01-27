@@ -16,7 +16,7 @@
 .latest-post a:hover .title { color: #ffc900; } /*#0aa8e2*/
 .latest-post a:hover .summary { color: #cdcdcd; }
 
-.blog-post { padding: 1rem; }
+.blog-post { padding: 1rem; scroll-snap-align: start; }
 .blog-post-photo-comment { font-size: 0.85rem; color: #073f3f; }
 .blog-post .meta { color: #555555; font-size: 0.9rem; }
 .blog-post hr { border-color: #777777; }
@@ -37,9 +37,10 @@
   width: 100%;
   max-width: 60rem;
   height:auto;
-
-  margin: 0 auto;
-  /*border-radius: var(--base_border_radius_large);*/
+  
+  scroll-snap-align: start;
+  scroll-snap-stop: always;  
+  scroll-margin-bottom: 6vh;
 }
 
 #blog-blog .title {

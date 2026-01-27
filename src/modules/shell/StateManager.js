@@ -1,5 +1,7 @@
 'use strict';
 
+import { SiteLibrary } from "../common/SiteLibrary.js";
+
 export class StateManager {
     static state = new Map();
 
@@ -76,5 +78,32 @@ export class StateManager {
         }
         
         return max;
+    }
+
+    static bringToFront(element) {
+        let isOverlap = false;
+
+        for (const [key, value] of StateManager.state) {
+            if (!value.get('clientRect') || key === element.id) continue;
+
+            if (SiteLibrary.isRectOverlap(element.getBoundingClientRect(), value.get('clientRect'))) {
+                if (value.get('visibility') === 'visible'){
+                    isOverlap = true;
+                    break;
+                }
+            }
+        }
+
+        if (isOverlap && (element.style.zIndex < StateManager.maxZIndex())) {
+            element.style.zIndex = StateManager.maxZIndex() + 1;
+
+            if (getComputedStyle(element).visibility === 'hidden') {
+                SiteLibrary.elementVisibility(element.id);
+            }                
+        } else {
+            SiteLibrary.elementVisibility(element.id);           
+        }
+
+        StateManager.stateLog(element);
     }
 }

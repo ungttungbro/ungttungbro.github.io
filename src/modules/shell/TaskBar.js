@@ -40,36 +40,13 @@ export class TaskBar {
         element.className = 'task_bar_item';
 
         element.addEventListener ('click', () => {
-            const wrapper_el = document.getElementById(target_id);
-            if (!wrapper_el) {
+            const viewer_wrapper_el = document.getElementById(target_id);
+            if (!viewer_wrapper_el) {
                 console.warn('element not found:', target_id);
                 return;
             }
 
-            const state = StateManager.state;
-            let isOverlap = false;
-            for (const [key, value] of state) {
-                if (!value.get('clientRect') || key === wrapper_el.id) continue;
-
-                if (SiteLibrary.isRectOverlap(wrapper_el.getBoundingClientRect(), value.get('clientRect'))) {
-                    if (value.get('visibility') === 'visible'){
-                        isOverlap = true;
-                        break;
-                    }
-                }
-            }
-
-            if (isOverlap && (wrapper_el.style.zIndex < StateManager.maxZIndex())) {
-                wrapper_el.style.zIndex = StateManager.maxZIndex() + 1;
-
-                if (getComputedStyle(wrapper_el).visibility === 'hidden') {
-                    SiteLibrary.elementVisibility(wrapper_el.id);
-                }                
-            } else {
-                SiteLibrary.elementVisibility(wrapper_el.id);           
-            }
-
-            StateManager.stateLog(wrapper_el);
+            StateManager.bringToFront(viewer_wrapper_el);
         });
 
         const title_img = SiteLibrary.createImgElement(TASKBAR_CONSTANTS.TITLE_ICON_TYPE, '', title_icon_path, '');

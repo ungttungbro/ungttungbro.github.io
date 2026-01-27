@@ -6,6 +6,7 @@ import { ViewerWindow } from "../modules/shell/ViewerWindow.js";
 import { Templates } from "../modules/site/Templates.js";
 import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js"
 import { siteMap } from "../modules/site/siteMap.js";
+import { StateManager } from "../modules/shell/StateManager.js";
 
 export class PhotologSection {
     constructor(photolog_service) {
@@ -78,7 +79,7 @@ export class PhotologSection {
 
         const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
 
-        const width = window.innerWidth / 4;
+        const width = window.innerWidth / 3.25;
         const height = window.innerHeight - height_offset;
         const top = height_offset;
         const left = Math.min(window.innerWidth - width, window.innerWidth); // 화면 안쪽으로 제한
@@ -197,7 +198,10 @@ export class PhotologSection {
     }
 
     openPhotologContent(id, title, header_contents, main_contents, footer_contents) {
-        if (document.getElementById(id + '_viewer')) { return; }
+        if (document.getElementById(id + '_viewer')) { 
+            StateManager.bringToFront(document.getElementById(id));
+            return; 
+        }
 
         const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
 
@@ -205,10 +209,10 @@ export class PhotologSection {
             const viewer = new ViewerWindow();
             viewer.configureWindow (
                 id,
-                ((window.innerWidth - (window.innerWidth / 4)) - 80) + 'px',
+                ((window.innerWidth - (window.innerWidth / 3.25))) + 'px',
                 (window.innerHeight - height_offset) + 'px',
                 height_offset + 'px',
-                '80px',
+                0,
                 'viewer',
                 'photolog_photo',
                 siteMap.photolog.sectionHeaderIcon,

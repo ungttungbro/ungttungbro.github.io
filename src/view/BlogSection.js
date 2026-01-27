@@ -6,6 +6,7 @@ import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { ViewerWindow } from "../modules/shell/ViewerWindow.js";
 import { taskbar } from "../modules/shell/TaskBar.js";
 import { Templates } from "../modules/site/Templates.js";
+import { StateManager } from "../modules/shell/StateManager.js";
 
 export class BlogSection {
     constructor(blog_service) {
@@ -394,7 +395,10 @@ export class BlogSection {
     async onPostClick(e, id, blog_type, viewer_width, section_icon, title, header, content_path, footer) {
         e.preventDefault();
        
-        if (document.getElementById(id)) { return; }
+        if (document.getElementById(id)) { 
+            StateManager.bringToFront(document.getElementById(id));
+            return; 
+        }
 
         let left = 0;
         if (blog_type === 'lifelog') {
