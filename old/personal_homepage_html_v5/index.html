@@ -18,19 +18,11 @@
     <link rel="icon" href="/favicon.ico">
   </head>
 <body>
+
   <header>
     <div id="header-layout">
       <nav id="navigation"></nav>
-      <div class="signature-comment">
-        <h3>welcome</h3>     
-        SW 개발과 코딩강의 및 연구 경험을 바탕으로
-        <br>진로·직업 컨설턴트로 활동하고 있습니다.
-        <br>사람을 돕는 방법을 고민합니다.
-        
-        <a href="#about">
-            <img id="scroll-indicator" src="./images/arrow.png" height="50" alt="로고">
-        </a>
-      </div>
+      <div id="signature-comment"></div>
     </div>
   </header>
 
@@ -61,10 +53,18 @@
     //]]>
   </script>
   <script type="module">    
-    import { createNavigationItemsElement, createExperienceElement, createWorksElement } from './js/siteLayout.js';
+    import { 
+      createNavigationItemsElement, 
+      createSignatureCommentElement, 
+      createExperienceElement, 
+      createWorksElement 
+    } from './js/siteLayout.js';
     
     const $navigationEl = $('#navigation');
     $navigationEl.append(createNavigationItemsElement());
+
+    const $signatureCommentEl = $('#signature-comment');
+    $signatureCommentEl.append(createSignatureCommentElement());
 
     const $experienceEl = $('#experience');
     $experienceEl.append(createExperienceElement());
@@ -72,7 +72,6 @@
     const $worksEl = $('#works');
     $worksEl.append(createWorksElement());
   </script>
-
 
 </body>
 </html>

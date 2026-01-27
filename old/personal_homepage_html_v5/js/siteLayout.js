@@ -10,7 +10,9 @@ import {
 import { siteMap } from '../js/siteMap.js';
 import { 
     createNavigationItems, 
-    createSectionHeader, 
+    createSectionHeader,
+    signatureComment,
+    scrollIndicator,
     createExperience,
     createAcademicResearch,
     createTeachingActivity,
@@ -28,6 +30,19 @@ const createNavigationItemsElement = function() {
         '#links', 
         'youngwan.jang@gmail.com'
     );
+}
+
+const createSignatureCommentElement = function() {
+    const signatureCommentHTML = signatureComment();
+    const signatureCommentEl = document.createElement('div');
+
+    signatureCommentEl.id = 'signature-comment';
+    signatureCommentEl.innerHTML = signatureCommentHTML;
+
+    const scrollIndicatorEl = scrollIndicator();
+    signatureCommentEl.appendChild(scrollIndicatorEl);
+
+    return signatureCommentEl;
 }
 
 const createExperienceElement = function() {
@@ -115,9 +130,21 @@ $(function () {
             }
         }
     }
-   
+
     $(window).on('load', function () {
         adjustAnchorOffset();
+        $('#about').hide();
+        $('footer').hide();
+    });
+   
+    $(window).on('scroll', function () {
+        const scrollTop = $(this).scrollTop();
+        
+        if (scrollTop === 0) {
+            $('#about').hide();
+            $('footer').hide();
+            $('#about-link').removeClass('active');
+        }
     });
 
     $(window).on('resize', function () {
@@ -140,11 +167,11 @@ $(function () {
             // 애니메이션 끝난 후 스크롤
             $('html, body').animate({
                 scrollTop: $btn.offset().top - anchor_offset
-            }, 400);
+            }, 800);
         });
     });
 
-    $('#navigation-items a, .signature-comment a').on('click', function (e) {
+    $('#navigation-items a, #signature-comment a').on('click', function (e) {
         let href = $(this).attr('href');
 
         if (!href || href.charAt(0) !== '#') return;
@@ -154,12 +181,17 @@ $(function () {
         let $target = $(href);
         if (!$target.length) return;
 
+        $('#about').show();
+        $('footer').show();
+        $('#about-link').addClass('active');       
+
         $('html, body').animate({
             scrollTop: $target.offset().top - anchor_offset
-        }, 400);
+        }, 800);
     });
 });
 
 export { createNavigationItemsElement };
+export { createSignatureCommentElement };
 export { createExperienceElement };
 export { createWorksElement };
