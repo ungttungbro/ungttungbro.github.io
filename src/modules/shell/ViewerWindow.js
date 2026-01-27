@@ -174,6 +174,7 @@ export class ViewerWindow {
             e.stopPropagation();
             SiteLibrary.elementVisibility(this.viewer_wrapper_id);
 
+            this.viewer_wrapper_element.style.zIndex = StateManager.maxZIndex() + 1; 
             StateManager.stateLog(this.viewer_wrapper_element);
         });
 
@@ -187,6 +188,7 @@ export class ViewerWindow {
                 this.beforeHeight
             );
 
+            this.viewer_wrapper_element.style.zIndex = StateManager.maxZIndex() + 1; 
             StateManager.stateLog(this.viewer_wrapper_element);
         });
 

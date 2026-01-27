@@ -247,9 +247,9 @@ export class BlogSection {
                 'blog',
                 section_icon,
                 title,
-                this.generateContentPanel('blog-header-panel', header),
+                Templates.createContentPanel('blog-header-panel', header),
                 contents,
-                this.generateContentPanel('blog-footer-panel', footer)
+                Templates.createContentPanel('blog-footer-panel', footer)
             );
 
             viewer.targetId = id + '_task_bar_item';
@@ -419,11 +419,11 @@ export class BlogSection {
                 section_icon,
                 title,
                 header,
-                this.generateContentPanel(
+                Templates.createContentPanel(
                     'blog-content-panel', 
                     await this.blogService.loadContentData(content_path)
                 ),
-                this.generateContentPanel('blog-footer-panel', footer)
+                Templates.createContentPanel('blog-footer-panel', footer)
             );
 
             viewer.targetId = id + '_task_bar_item';
@@ -433,20 +433,5 @@ export class BlogSection {
         } catch(error) {
             console.warn('Blog Post Event : ', error);
         }
-    }
-
-    generateContentPanel(className, content) {
-        const panel = document.createElement(ELEMENT_TYPE.DIV);
-        panel.className = className;
-       
-        if (typeof content === 'string') {
-            panel.innerHTML = content;
-        } else if (content instanceof Node) {
-            panel.appendChild(content);
-        } else {
-            console.warn('Unsupported content type : ', content);
-        }
-
-        return panel;
     }
 }

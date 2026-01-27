@@ -1,3 +1,7 @@
+* {    
+    box-sizing: border-box;
+}
+
 :root {
   --base_background_color : #cccccc;
 
@@ -32,7 +36,7 @@
   --base_line-color : #999999;
 }
 
-::-webkit-scrollbar { width: 0.1rem; }
+::-webkit-scrollbar { width: 0; }
 ::-webkit-scrollbar-thumb { background-color: #666666;}
 ::-webkit-scrollbar-track { background-color: #333333;}
 
@@ -101,6 +105,7 @@ h3 {
   color: #222222;
   font-weight: bold;
   padding-top : 0rem;
+  line-height: 1.25;
   padding-bottom : var(--base_margin_size_tiny);
 }
 

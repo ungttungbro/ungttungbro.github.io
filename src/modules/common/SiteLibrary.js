@@ -96,12 +96,12 @@ export class SiteLibrary {
 
   static createImgTitleCaption(image_element, title_text, content_text) {
     const title = document.createElement('figcaption');
+    title.className = 'figure-title';
     title.innerHTML = title_text;
-    title.style.fontWeight = '500';
-    title.style.display = 'block';
-
+  
     const content = document.createElement('figcaption');
-    content.innerHTML = content_text;    
+    content.className = 'figure-content';
+    content.innerHTML = content_text;
 
     const figure = document.createElement('figure');
     figure.appendChild(image_element);

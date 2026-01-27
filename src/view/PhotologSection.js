@@ -31,7 +31,7 @@ export class PhotologSection {
             siteMap.photolog.sectionHeaderId,
             siteMap.photolog.captionImgId,
             siteMap.photolog.captionId,
-            'photolog_list_all_viewer',
+            'photolog-index-viewer',
             siteMap.photolog.className,
             '포토로그 (photolog) 목록',
             siteMap.photolog.sectionHeaderIcon,
@@ -95,9 +95,9 @@ export class PhotologSection {
                 'blog',
                 section_icon,
                 title,
-                this.generateViewerWindowHeaderPanel(header),
-                contents,
-                this.generateViewerWindowFooterPanel(footer)
+                Templates.createContentPanel('photolog-header-panel', header),
+                Templates.createContentPanel('photolog-content-panel', contents),                
+                Templates.createContentPanel('photolog-footer-panel', footer)
             );
 
             viewer.targetId = id + '_task_bar_item';
@@ -164,12 +164,12 @@ export class PhotologSection {
         const teaser = SiteLibrary.createImgTitleCaption(
             thumbnail,
             SiteLibrary.truncateText(title[0], 16),
-            SiteLibrary.truncateText(text[0], 64)
+            SiteLibrary.truncateText(text[0], 74)
         );
         
         teaser.className = siteMap.photolog.teaserClassName;
         
-        this.generateTeaserEvent(teaser, id, title, text.toString(), photos_path, '&copy; Jonas');
+        this.generateTeaserEvent(teaser, id, title, text.toString(), photos_path, COMMON.COPYRIGHT);
         
         return teaser;
     }
@@ -178,7 +178,7 @@ export class PhotologSection {
         element.addEventListener('click', e => {
             this.onSectionHeaderClick (
                 e,
-                'photolog_list_all_viewer',
+                'photolog-index-viewer',
                 siteMap.photolog.sectionHeaderIcon,
                 '포토로그 (photolog) 목록',
                 this.generateTeaserList(0),          
@@ -205,17 +205,17 @@ export class PhotologSection {
             const viewer = new ViewerWindow();
             viewer.configureWindow (
                 id,
-                (window.innerWidth - (window.innerWidth / 4)) + 'px',
+                ((window.innerWidth - (window.innerWidth / 4)) - 80) + 'px',
                 (window.innerHeight - height_offset) + 'px',
                 height_offset + 'px',
-                0,
+                '80px',
                 'viewer',
                 'photolog_photo',
                 siteMap.photolog.sectionHeaderIcon,
                 title,
-                this.generateViewerWindowHeaderPanel(header_contents),
-                this.generateViewerWindowContentsPanel(main_contents),
-                this.generateViewerWindowFooterPanel(footer_contents)
+                Templates.createContentPanel('photolog-header-panel', header_contents),
+                Templates.createContentPanel('photolog-content-panel', this.createPhotoContents(main_contents)),
+                Templates.createContentPanel('photolog-footer-panel', footer_contents)
             );
 
             viewer.targetId = id + '_task_bar_item';
@@ -227,29 +227,12 @@ export class PhotologSection {
         }
     }
 
-    generateViewerWindowHeaderPanel(header_contents) {
-        const header_panel = document.createElement(ELEMENT_TYPE.DIV);
-        header_panel.className = 'header_panel';    
-        header_panel.style.scrollSnapAlign = 'start';   
+    createPhotoContents(data) {
+        const photo_container = document.createElement(ELEMENT_TYPE.DIV);
+        photo_container.className = 'photo-container';
 
-        if (typeof header_contents === 'string') {
-            header_panel.innerHTML = header_contents;
-        } else if (header_contents instanceof Node) {
-            header_panel.style.backgroundColor = '#323232';
-            header_panel.appendChild(header_contents);
-        } else {
-             console.warn('Unsupported header_contents type', header_contents);
-        }
-
-        return header_panel;
-    }
-
-    generateViewerWindowContentsPanel(main_contents) {
-        const contents_panel = document.createElement(ELEMENT_TYPE.DIV);
-        contents_panel.className = 'content_panel';
-
-        const data = main_contents;
-        
+        const frag = document.createDocumentFragment();
+               
         for (const content of data) {
             const image = SiteLibrary.createImgElement(
                 siteMap.photolog.photoClassName,
@@ -258,21 +241,13 @@ export class PhotologSection {
                 siteMap.photolog.photoImgAlt
             );
 
-            image.loading = 'lazy';
-            image.style.display = 'block';
+            image.loading = 'lazy';            
 
-            contents_panel.appendChild(image);
+            frag.appendChild(image);
         }
+
+        photo_container.appendChild(frag);
         
-        return contents_panel;
-    }
-
-    generateViewerWindowFooterPanel(footer_contents) {
-        const footer_panel = document.createElement(ELEMENT_TYPE.DIV);
-
-        footer_panel.className = 'footer_panel';
-        footer_panel.innerHTML = footer_contents;
-      
-        return footer_panel;
+        return photo_container;
     }
 }

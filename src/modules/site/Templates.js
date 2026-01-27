@@ -37,4 +37,19 @@ export class Templates {
             caption_element.innerHTML = content_text;
         });
     }
+
+    static createContentPanel(className, content) {
+        const panel = document.createElement('div');
+        panel.className = className;
+       
+        if (typeof content === 'string') {
+            panel.innerHTML = content;
+        } else if (content instanceof Node) {
+            panel.appendChild(content);
+        } else {
+            console.warn('Unsupported content type : ', content);
+        }
+
+        return panel;
+    }
 }
