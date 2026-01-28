@@ -8,32 +8,50 @@ import {
 } from '../data/data.js';
 
 import { siteMap } from '../js/siteMap.js';
+
 import { 
     createNavigationItems, 
     createSectionHeader,
     signatureComment,
-    scrollIndicator,
+    scrollIndicator
+} from '../js/siteTemplate.js';
+
+import {
     createExperience,
     createAcademicResearch,
     createTeachingActivity,
     createPublish,
     createProjects,
     createPersonalProjects
-} from '../js/siteTemplate.js';
+} from '../sections/about_section_template.js';
+
+const headerLayoutElement = function(titleTextHTML, commentTextHTML) {
+    const el = document.createElement('div');
+
+    el.appendChild(createNavigationItemsElement());
+    el.appendChild(createSignatureCommentElement(titleTextHTML, commentTextHTML));
+
+    return el;
+};
 
 const createNavigationItemsElement = function() {
-    return createNavigationItems(
+    const navigationEl = document.createElement('nav');
+    navigationEl.id = 'navigation';
+
+    navigationEl.appendChild(createNavigationItems(
         './images/logo.png', 
         siteMap, 
-        '#about', 
+        'index.html',
         '#gallery', 
-        '#links', 
+        'links.html', 
         'youngwan.jang@gmail.com'
-    );
-}
+    ));
 
-const createSignatureCommentElement = function() {
-    const signatureCommentHTML = signatureComment();
+    return navigationEl;
+};
+
+const createSignatureCommentElement = function(titleTextHTML, commentTextHTML) {
+    const signatureCommentHTML = signatureComment(titleTextHTML, commentTextHTML);
     const signatureCommentEl = document.createElement('div');
 
     signatureCommentEl.id = 'signature-comment';
@@ -43,7 +61,7 @@ const createSignatureCommentElement = function() {
     signatureCommentEl.appendChild(scrollIndicatorEl);
 
     return signatureCommentEl;
-}
+};
 
 const createExperienceElement = function() {
     const sectionHeaderHTML = createSectionHeader('Experience');
@@ -58,7 +76,7 @@ const createExperienceElement = function() {
     experienceEl.innerHTML += experienceHTML;
 
     return experienceEl;    
-}
+};
 
 const createWorksElement = function() {
     const sectionHeaderHTML = createSectionHeader('Works');
@@ -111,7 +129,7 @@ const createWorksElement = function() {
     worksEl.innerHTML += html;
 
     return worksEl;
-}
+};
 
 /* 기능에 대한 부분은 JQuery로 구현함... */
 $(function () {
@@ -191,7 +209,6 @@ $(function () {
     });
 });
 
-export { createNavigationItemsElement };
-export { createSignatureCommentElement };
+export { headerLayoutElement };
 export { createExperienceElement };
 export { createWorksElement };

@@ -2,10 +2,9 @@ body {
     background-image: url('../images/grey.png');
 }
 
-#header-layout {
+#header-layout, #links-header-layout {
     position: relative;
     
-    background-image: url("../images/signature.jpg");
     background-size: cover;        
     background-position: center;   /* 중앙 기준 */
     background-repeat: no-repeat;  /* 타일 방지 */
@@ -15,11 +14,24 @@ body {
     color: #dddddd;
 }
 
-#header-layout::before {
+#header-layout {
+    background-image: url("../images/signature.jpg");
+}
+
+#links-header-layout {
+    background-image: url("../images/links-signature.jpg");
+}
+
+#links-header-layout #signature-comment {
+    color:#eeeeee;
+}
+
+#header-layout::before,
+#links-header-layout::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.4);
     z-index: 0;
 }
 
