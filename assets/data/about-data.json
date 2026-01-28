@@ -26,8 +26,9 @@
   },
   
   "contacts": {
-    "이메일": ["youngwan.jang@gmail.com", "mailto:youngwan.jang@gmail.com", "/assets/icons/email.png"],
-    "블로그": ["inadrawer.blogspot.com", "https://inadrawer.blogspot.com", "/assets/icons/blog.png"]
+    "github": ["ungttungbro/jonas", "https://github.com/ungttungbro/jonas.git", "/assets/icons/github.png"],
+    "email": ["youngwan.jang@gmail.com", "mailto:youngwan.jang@gmail.com", "/assets/icons/email.png"]
+   
   }  
 
 }

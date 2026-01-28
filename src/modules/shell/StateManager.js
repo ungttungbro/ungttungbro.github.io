@@ -57,6 +57,7 @@ export class StateManager {
 
     static stateLog(element) {
         const snapshot = {
+            ['group']: element.dataset.group,
             ['className']: element.className,
             ['width']: element.getBoundingClientRect().width,
             ['height']: element.getBoundingClientRect().height,            

@@ -22,7 +22,7 @@
 }
 
 .teaser_figure {
-    max-height: calc(1.5em * 3); /* 3줄 */
+    max-height: calc(1.5rem * 3); /* 3줄 */
     overflow: hidden;
 
     word-break: break-all;
@@ -83,7 +83,7 @@
 
     margin: 0;
 
-    scroll-snap-align: start;
+    scroll-snap-align: end;
     scroll-snap-stop: always;  
     scroll-margin-bottom: 6vh;
 }

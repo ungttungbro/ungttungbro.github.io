@@ -47,7 +47,9 @@ export class Templates {
         } else if (content instanceof Node) {
             panel.appendChild(content);
         } else {
-            console.warn('Unsupported content type : ', content);
+            if (content !== null) {
+                console.warn('Unsupported content type : ', content);
+            }
         }
 
         return panel;

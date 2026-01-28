@@ -211,7 +211,7 @@ export class BlogSection {
 
         section_header.addEventListener('click',  e => {
             this.onSectionHeaderClick (
-                e, viewer_id, icon_path, viewer_title_text,
+                e, blog_type, viewer_id, icon_path, viewer_title_text,
                 this.generateSubjectList(
                     blog_type, post_index_class_name, icon_path, data,
                     title_truncate_length, summary_truncate_length, row_count
@@ -224,7 +224,7 @@ export class BlogSection {
         return section_header;
     }
 
-    onSectionHeaderClick(e, id, section_icon, title, header, contents, footer) {
+    onSectionHeaderClick(e, blog_type, id, section_icon, title, header, contents, footer) {
         e.preventDefault();
 
         if (document.getElementById(id)) { return; }
@@ -259,6 +259,11 @@ export class BlogSection {
             taskbar.mount(viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Section Header Event : ', error);
+        } finally {
+            const element = document.getElementById(id);
+            element.dataset.group = blog_type;
+
+            StateManager.stateLog(element);
         }
     }
 
@@ -370,6 +375,7 @@ export class BlogSection {
 
             this.onSectionHeaderClick (
                 e,
+                type,
                 spec.list_viewer_id,
                 section_icon,
                 spec.title,
@@ -403,9 +409,9 @@ export class BlogSection {
         let left = 0;
         if (blog_type === 'lifelog') {
             left = (window.innerWidth 
-                    - ((window.innerWidth * VIEWER.LIST_RATIO_MIDDLE) 
-                    + (SiteLibrary.remToPx(viewer_width))
-                )) + 'px';
+                - ((window.innerWidth * VIEWER.LIST_RATIO_MIDDLE) 
+                + (SiteLibrary.remToPx(viewer_width))
+            )) + 'px';
         }
 
         const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
@@ -436,6 +442,11 @@ export class BlogSection {
             taskbar.mount(viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Blog Post Event : ', error);
+        } finally {
+            const element = document.getElementById(id);
+            element.dataset.group = blog_type;
+
+            StateManager.stateLog(element);
         }
     }
 }

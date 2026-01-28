@@ -107,6 +107,11 @@ export class PhotologSection {
             taskbar.mount(viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.log('Section Header Event : ', error);
+        } finally {
+            const element = document.getElementById(id);
+            element.dataset.group = 'photolog';
+
+            StateManager.stateLog(element);
         }
     }
 
@@ -193,7 +198,7 @@ export class PhotologSection {
                 header_contents,
                 main_contents,
                 footer_contents
-            );
+            );            
         });
     }
 
@@ -228,6 +233,11 @@ export class PhotologSection {
             taskbar.mount(viewer.targetId, viewer.id, siteMap.photolog.sectionHeaderIcon, title);
         } catch (error) {
             console.log('Blog Post Event : ', error);
+        } finally {
+            const element = document.getElementById(id);
+            element.dataset.group = 'photolog';
+
+            StateManager.stateLog(element);
         }
     }
 

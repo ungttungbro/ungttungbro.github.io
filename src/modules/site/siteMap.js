@@ -1,14 +1,14 @@
 export const siteMap = Object.freeze({
     about: Object.freeze({
-        photoZoneId: 'photo_zone',
+        photoZoneId: 'photo-zone',
         profileBoxId: 'profile',
         specsId: 'specs',
         contactsId: 'contacts',
         thumbnailsId: 'thumbnails',
-        photoClassName: 'about_photo',
-        thumbnailClassName: 'profile_thumbnail',
-        photoImgAlt: 'about_photo_image',
-        thumbnailImgAlt: 'profile_thumbnail_image'
+        photoClassName: 'about-photo',
+        thumbnailClassName: 'profile-thumbnail',
+        photoImgAlt: 'about photo image',
+        thumbnailImgAlt: 'profile thumbnail image'
     }),
 
 

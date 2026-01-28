@@ -4,19 +4,19 @@
 .title   { font-size: 1rem; color: #dddddd;}
 .summary { font-size: 0.9rem; color: #aaaaaa; }
 
-.post-index { line-height: 1.35rem; }
+.post-index { line-height: 1rem; }
 .post-index .meta { font-size: 0.85rem; color: #666666; }
 .post-index .title { font-size: 0.95rem; font-weight: bold; color: #444444; line-height: 1.5; }
-.post-index .summary { font-size: 0.85rem; color: #555555; }
+.post-index .summary { font-size: 0.85rem; color: #555555; line-height: 1rem; }
 
 .post-index a:hover .title { color: #106f80; } /*#056081*/
 .post-index a:hover .summary { color: #444444; }
 
-.latest-post { line-height: var(--base_font_line_height); }
+.latest-post { line-height: 1.6 }
 .latest-post a:hover .title { color: #ffc900; } /*#0aa8e2*/
 .latest-post a:hover .summary { color: #cdcdcd; }
 
-.blog-post { padding: 1rem; scroll-snap-align: start; }
+.blog-post { padding: 1rem; }
 .blog-post-photo-comment { font-size: 0.85rem; color: #073f3f; }
 .blog-post .meta { color: #555555; font-size: 0.9rem; }
 .blog-post hr { border-color: #777777; }
@@ -24,7 +24,6 @@
 
 .blog-content-panel { padding: 0; }
 .blog-content-panel hr { border: 1px dashed #999999; }
-
 
 .blog-post-photo-medium {
   width: 30rem;
@@ -37,10 +36,6 @@
   width: 100%;
   max-width: 60rem;
   height:auto;
-  
-  scroll-snap-align: start;
-  scroll-snap-stop: always;  
-  scroll-margin-bottom: 6vh;
 }
 
 #blog-blog .title {
