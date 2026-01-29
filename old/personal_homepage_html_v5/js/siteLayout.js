@@ -4,7 +4,9 @@ import {
     worksTeachingActivityData, 
     worksPublishData, 
     worksProjectsData, 
-    worksPersonalProjectsData 
+    worksPersonalProjectsData,
+    linksOldPageData,
+    linksThanksToData
 } from '../data/data.js';
 
 import { siteMap } from '../js/siteMap.js';
@@ -23,13 +25,18 @@ import {
     createPublish,
     createProjects,
     createPersonalProjects
-} from '../sections/about_section_template.js';
+} from '../sections/aboutSectionTemplate.js';
 
-const headerLayoutElement = function(titleTextHTML, commentTextHTML) {
+import {
+    linksOldMyWeb,
+    linksThanksTo
+} from '../sections/linksSectionTemplate.js';
+
+const headerLayoutElement = function(url, titleTextHTML, commentTextHTML) {
     const el = document.createElement('div');
 
     el.appendChild(createNavigationItemsElement());
-    el.appendChild(createSignatureCommentElement(titleTextHTML, commentTextHTML));
+    el.appendChild(createSignatureCommentElement(url, titleTextHTML, commentTextHTML));
 
     return el;
 };
@@ -50,14 +57,14 @@ const createNavigationItemsElement = function() {
     return navigationEl;
 };
 
-const createSignatureCommentElement = function(titleTextHTML, commentTextHTML) {
+const createSignatureCommentElement = function(url, titleTextHTML, commentTextHTML) {
     const signatureCommentHTML = signatureComment(titleTextHTML, commentTextHTML);
     const signatureCommentEl = document.createElement('div');
 
     signatureCommentEl.id = 'signature-comment';
     signatureCommentEl.innerHTML = signatureCommentHTML;
 
-    const scrollIndicatorEl = scrollIndicator();
+    const scrollIndicatorEl = scrollIndicator(url);
     signatureCommentEl.appendChild(scrollIndicatorEl);
 
     return signatureCommentEl;
@@ -131,6 +138,40 @@ const createWorksElement = function() {
     return worksEl;
 };
 
+const linksLayoutElement = function() {
+    const linksReference = document.createElement('div');
+    linksReference.id = 'links-references';
+
+    const sectionHeaderHTML = createSectionHeader('Links (References)');
+    document.getElementById('links').innerHTML += sectionHeaderHTML;
+
+    const linksEl = document.createElement('div');
+    linksEl.innerHTML = createlinksElement();
+
+    return linksEl;
+}
+
+const createlinksElement = function() {
+    var html = '<div id="links-items">'
+                + '<div class="links-item-title">'
+                    + '<b>Old My Web</b>'
+                + '</div>'
+                + '<hr>'
+                + '<div id="links_item_old_web">'
+                    + linksOldMyWeb(linksOldPageData)
+                + '</div>'            
+                + '<div class="links-item-title">'
+                    + '<b>Thanks to..</b>'
+                + '</div>'
+                + '<hr>'
+                + '<div id="links_item_thanks_to">'
+                    + linksThanksTo(linksThanksToData)          
+                + '</div>'
+            + '</div>';
+            
+    return html;
+};
+
 /* 기능에 대한 부분은 JQuery로 구현함... */
 $(function () {
     let anchor_offset = 0;
@@ -152,6 +193,7 @@ $(function () {
     $(window).on('load', function () {
         adjustAnchorOffset();
         $('#about').hide();
+        $('#links').hide();
         $('footer').hide();
     });
    
@@ -160,6 +202,7 @@ $(function () {
         
         if (scrollTop === 0) {
             $('#about').hide();
+            $('#links').hide();
             $('footer').hide();
             $('#about-link').removeClass('active');
         }
@@ -200,6 +243,7 @@ $(function () {
         if (!$target.length) return;
 
         $('#about').show();
+        $('#links').show();
         $('footer').show();
         $('#about-link').addClass('active');       
 
@@ -212,3 +256,4 @@ $(function () {
 export { headerLayoutElement };
 export { createExperienceElement };
 export { createWorksElement };
+export { linksLayoutElement };

@@ -28,10 +28,10 @@ const signatureComment = function(titleHTML, commentHTML) {
     return comment;
 };
 
-const scrollIndicator = function() {
+const scrollIndicator = function(url) {
     const scrollIndicatorEl = document.createElement('div');
     scrollIndicatorEl.id = 'intro-gate';
-    scrollIndicatorEl.innerHTML = '<a href="#about">'
+    scrollIndicatorEl.innerHTML = '<a href="' + url +'">'
                                     + '▼'
                                 + '</a>';
 

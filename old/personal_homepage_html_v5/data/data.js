@@ -58,9 +58,30 @@ const worksPersonalProjectsData = [
 ];
 
 
+const linksOldPageData = [
+    [ 'old homepage' ,'../personal_homepage_html_v4/index.html' ],
+    [ 'old old homepage' ,'../personal_homepage_html_v3/index.html' ],
+    [ 'old old old homepage' ,'../personal_homepage_html_v2/index.html' ],
+    [ 'old old old old homepage' ,'../personal_homepage_html_v1/index.html' ]
+];
+
+
+const linksThanksToData = [
+    [ 'W3C markup 검증 서비스', 'http://validator.kldp.org' ],
+    [ 'google 학술검색 서비스', 'https://scholar.google.co.kr' ],
+    [ 'Flaticon', 'https://www.flaticon.com' ],
+    [ '국립금오공과대학교', 'https://kumoh.ac.kr' ],
+    [ '동서울대학교', 'https://www.du.ac.kr/main.do' ],
+    [ '한국방송통신대학교', 'https://knou.ac.kr' ],
+    [ '한국과학창의재단', 'https://kosac.re.kr' ]
+];
+
+
 export { experienceData };
 export { worksAcademicResearchData };
 export { worksTeachingActivityData };
 export { worksPublishData };
 export { worksProjectsData };
 export { worksPersonalProjectsData };
+export { linksOldPageData };
+export { linksThanksToData };

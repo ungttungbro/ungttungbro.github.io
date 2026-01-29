@@ -50,8 +50,7 @@
    <script type="module">    
     import { 
       headerLayoutElement, 
-      createExperienceElement, 
-      createWorksElement 
+      linksLayoutElement
     } from './js/siteLayout.js';
 
     const titleTextHTML = '<h3>links</h3>';
@@ -60,7 +59,11 @@
                         + '<p>감사함을 표합니다.</p>';
     
     const $headerLayoutEl = $('#links-header-layout');
-    $headerLayoutEl.append(headerLayoutElement(titleTextHTML.toString(), commentTextHTML.toString()));
+    $headerLayoutEl.append(headerLayoutElement('#links', titleTextHTML.toString(), commentTextHTML.toString()));
+
+    const $linksLayoutEl = $('#links');
+    $linksLayoutEl.append(linksLayoutElement());
+
   </script>
 
 </body>

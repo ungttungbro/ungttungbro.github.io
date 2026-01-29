@@ -146,7 +146,8 @@ body {
 }
 
 #experience,
-#works {
+#works,
+#links {
     width: 100%;
     max-width: 1150px;
 
@@ -218,16 +219,22 @@ body {
     border-radius: 1rem;
 }
 
-#works-items {
+#works-items,
+#links-items {
     padding-top: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
 }
 
-.works-item-title {
+.works-item-title,
+.links-item-title {
     font-size: 1.5rem;
     line-height: 1.25;
     font-weight: 500;
+}
+
+.links-item-title {
+    margin-top: 1rem;
 }
 
 .works-content-title {
