@@ -1,15 +1,15 @@
 @import "../common/base.css";
 
 :root {
-    --photolog_thumbnail_width_size: 6.5rem;
-    --photolog_thumbnail_height_size: 4.5rem;
+    --photolog_thumbnail_width_size: 6rem;
+    --photolog_thumbnail_height_size: 4.25rem;
 }
 
-.photolog_thumbnail {
+.photolog-thumbnail {
     width: var(--photolog_thumbnail_width_size);
     height: var(--photolog_thumbnail_height_size);
 
-    border-radius: var(--base_border_radius_light);
+    border-radius: var(--base_border_radius_medium);
     
     float: left;
     
@@ -21,8 +21,13 @@
     z-index: 1;
 }
 
-.teaser_figure {
-    max-height: calc(1.5rem * 3); /* 3줄 */
+.teaser-list {
+    margin-top: 0.75rem;
+    border: 0px solid red;
+}
+
+.teaser-figure {
+    max-height: calc(1.4rem * 3); /* 3줄 */
     overflow: hidden;
 
     word-break: break-all;
@@ -30,22 +35,22 @@
     cursor: pointer;
     color: inherit;
 
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     
     box-sizing: border-box;
 }
 
-.teaser_figure .figure-title {
+.teaser-figure .figure-title {
     display: block;
 
     color: #dddddd;
     font-size: 1rem;
     font-weight: 500;
 
-    line-height: 1.75;
+    line-height: 1.5;
 }
 
-.teaser_figure .figure-content {
+.teaser-figure .figure-content {
     font-size: 0.9rem;
     color: #aaaaaa;
     
@@ -53,20 +58,20 @@
 }
 
 /* 마지막 요소만 border 제거 */
-.teaser_figure:last-child {
+.teaser-figure:last-child {
     border-bottom: none;
     margin-bottom: 0;
 }
 
-.teaser_figure:hover .figure-title {
+.teaser-figure:hover .figure-title {
     color: #ffc900;
 }
 
-.teaser_figure:hover .figure-content {
+.teaser-figure:hover .figure-content {
     color: #cdcdcd;
 }
 
-.teaser_figure:hover .photolog_thumbnail {
+.teaser-figure:hover, .photolog_thumbnail {
     transform: scale(1.0);
     opacity: 0.8;
 }
@@ -77,7 +82,7 @@
     scroll-margin-top: 3vh;
 }
 
-.photolog_photo {
+.photolog-photo {
     width : 100%;
     height : auto;
 
@@ -93,23 +98,20 @@
     font-weight: bold;
     color: #444444;
 
-    line-height: 1;
-
-    margin-top: 0.3rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.6;
 }
 
 #photolog-index-viewer .figure-content {
     font-size: 0.9rem;
     color: #555555;
 
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
-#photolog-index-viewer .teaser_figure:hover .figure-title { 
+#photolog-index-viewer .teaser-figure:hover .figure-title { 
     color: #106f80; 
 }
 
-#photolog-index-viewer .teaser_figure:hover .figure-content { 
+#photolog-index-viewer .teaser-figure:hover .figure-content { 
     color: #444444; 
 }

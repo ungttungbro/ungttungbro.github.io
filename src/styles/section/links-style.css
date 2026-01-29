@@ -1,0 +1,17 @@
+#links .title_box {
+  cursor: default;
+}
+
+.links_item_list {
+  display: block;
+
+  font-size: 0.9rem;  
+  text-align: left;
+  
+  background-color: #333333;
+  border: var(--base_border_line);
+  border-radius: var(--base_border_radius_medium);
+  
+  padding: var(--base_margin_size_medium);
+  margin-top: 0.75rem;
+}

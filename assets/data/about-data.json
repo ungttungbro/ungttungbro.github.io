@@ -11,12 +11,7 @@
     "/assets/images/about/photo07.jpg",
     "/assets/images/about/photo08.jpg",
     "/assets/images/about/photo09.jpg",
-    "/assets/images/about/photo10.jpg",
-    "/assets/images/about/photo11.jpg",
-    "/assets/images/about/photo12.jpg",
-    "/assets/images/about/photo13.jpg",
-    "/assets/images/about/photo14.jpg",
-    "/assets/images/about/photo15.jpg"
+    "/assets/images/about/photo10.jpg"
   ],
 
   "specs": {
@@ -26,9 +21,8 @@
   },
   
   "contacts": {
-    "github": ["ungttungbro/jonas", "https://github.com/ungttungbro/jonas.git", "/assets/icons/github.png"],
+    "github": ["github.com/ungttungbro/jonas", "https://github.com/ungttungbro/jonas.git", "/assets/icons/github.png"],
     "email": ["youngwan.jang@gmail.com", "mailto:youngwan.jang@gmail.com", "/assets/icons/email.png"]
    
-  }  
-
+  }
 }

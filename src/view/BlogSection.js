@@ -65,7 +65,7 @@ export class BlogSection {
             'blog_post_list_all_viewer',
             'post-index',
             '라이팅스 (writings) 목록',
-            'blog',
+            'writings',
             siteMap.blog.className,
             this.blogService.blogMetaData,
             siteMap.blog.blogSectionHeaderIcon,
@@ -79,7 +79,7 @@ export class BlogSection {
         blog_blog.appendChild(blog_section_header);
 
         const post_list = this.generateSubjectList(
-            'blog',
+            'writings',
             'latest-post',
             siteMap.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
@@ -338,7 +338,7 @@ export class BlogSection {
             class_name: 'post-index'
         };
 
-        if(type === 'blog') {
+        if(type === 'writings') {
             list_spec.title = '라이팅스 (writings) 목록';
             list_spec.list_viewer_id = 'blog_post_list_all_viewer';            
         } else if (type === 'lifelog') {
@@ -401,7 +401,7 @@ export class BlogSection {
     async onPostClick(e, id, blog_type, viewer_width, section_icon, title, header, content_path, footer) {
         e.preventDefault();
        
-        if (document.getElementById(id)) { 
+        if (document.getElementById(id)) {
             StateManager.bringToFront(document.getElementById(id));
             return; 
         }

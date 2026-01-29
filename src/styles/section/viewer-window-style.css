@@ -51,7 +51,7 @@
   background-image: url('/assets/icons/viewer-background-light.gif');
   color: #3d3d3d;
   user-select: none;  
-  padding : 0.75rem;  
+  padding : 0.5rem;  
   /*scroll-snap-align: start;*/
 }
 

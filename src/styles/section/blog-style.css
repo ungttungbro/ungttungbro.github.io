@@ -1,10 +1,10 @@
 @import "../common/base.css";
 
 .meta    { font-size: 0.9rem; color: #888888; }
-.title   { font-size: 1rem; color: #dddddd;}
+.title   { font-size: 1rem; color: #dddddd; }
 .summary { font-size: 0.9rem; color: #aaaaaa; }
 
-.post-index { line-height: 1rem; }
+.post-index { line-height: 1; }
 .post-index .meta { font-size: 0.85rem; color: #666666; }
 .post-index .title { font-size: 0.95rem; font-weight: bold; color: #444444; line-height: 1.5; }
 .post-index .summary { font-size: 0.85rem; color: #555555; line-height: 1rem; }
@@ -12,12 +12,12 @@
 .post-index a:hover .title { color: #106f80; } /*#056081*/
 .post-index a:hover .summary { color: #444444; }
 
-.latest-post { line-height: 1.6 }
+.latest-post { line-height: 1.36; border: 0px solid red; }
 .latest-post a:hover .title { color: #ffc900; } /*#0aa8e2*/
 .latest-post a:hover .summary { color: #cdcdcd; }
 
-.blog-post { padding: 1rem; }
-.blog-post-photo-comment { font-size: 0.85rem; color: #073f3f; }
+.blog-post { padding: 1rem; line-height: 1.75; font-size: 1.1rem; font-weight: 500; }
+.blog-post-photo-comment { font-size: 0.9rem; color: #073f3f; }
 .blog-post .meta { color: #555555; font-size: 0.9rem; }
 .blog-post hr { border-color: #777777; }
 .blog-post a:hover { color: #106f80 }
@@ -29,7 +29,9 @@
   width: 30rem;
   height:auto;
 
-  border-radius: var(--base_border_radius_medium);
+  border-radius: var(--base_border_radius_large);
+
+  filter: drop-shadow(0 0 1.5rem rgba(96, 94, 87, 0.5));
 }
 
 .lifelog-photo-medium {
@@ -54,9 +56,12 @@
 #blog-archive { margin-top: 1rem; }
 
 #blog-lifelog .latest-post, 
-#blog-archive .latest-post, 
+#blog-archive .latest-post {
+  line-height: 1.3;
+}
+
 #blog-reflection .latest-post {
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 #reflection-content {

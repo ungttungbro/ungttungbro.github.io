@@ -53,11 +53,11 @@ export const siteMap = Object.freeze({
         captionId: 'photolog-caption-text',
         className: 'title_box',
         text: '포토로그 (photolog)',
-        teaserListClassName: 'teaser_list',
-        teaserClassName: 'teaser_figure',
-        thumbnailClassName: 'photolog_thumbnail',
-        thumbnailImgAlt: 'photolog_thumbnail_image',
-        photoClassName: 'photolog_photo',
+        teaserListClassName: 'teaser-list',
+        teaserClassName: 'teaser-figure',
+        thumbnailClassName: 'photolog-thumbnail',
+        thumbnailImgAlt: 'photolog-thumbnail-image',
+        photoClassName: 'photolog-photo',
         photoImgAlt: 'photo Image'
     }),
 

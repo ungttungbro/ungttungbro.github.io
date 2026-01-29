@@ -7,16 +7,20 @@
 }
 
 #photo-zone .about-photo { 
+  position: relative;
+
   width: var(--myphoto_width_size); 
   height: var(--myphoto_height_size);
 
-  border: var(--base_border_line);
   border-radius: var(--base_border_radius_medium);
+  filter: drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
 }
 
 #profile {  
   width: var(--myphoto_width_size);
   border: var(--base_border_line);
+
+  font-size: 0.9rem;
 
   background-color: var(--profile_box_background_color);
   border-radius: var(--base_border_radius_medium);
@@ -26,7 +30,7 @@
 }
 
 #profile hr {
-  border: 1px solid #444444;
+  border: 1px dashed #444444;
 }
 
 #thumbnails {

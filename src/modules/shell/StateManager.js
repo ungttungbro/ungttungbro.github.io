@@ -4,6 +4,7 @@ import { SiteLibrary } from "../common/SiteLibrary.js";
 
 export class StateManager {
     static state = new Map();
+    static taskGroup = new Map();    
 
     static set(groupKey, key, value) {
         if (!StateManager.state.has(groupKey)) {
@@ -67,6 +68,25 @@ export class StateManager {
         };
 
         StateManager.setGroup(element.id, snapshot);
+    }
+
+    static setTaskGroup(groupKey, stateObject) {
+        for (const [key, value] of Object.entries(stateObject)) {
+            if (!StateManager.taskGroup.has(groupKey)) {
+                StateManager.taskGroup.set(groupKey, new Map());
+            }
+
+            StateManager.taskGroup.get(groupKey).set(key, value);
+        }
+    }
+
+    static taskMetaInfo(element) {
+        const snapshot = {
+            ['id']: element.id,
+            ['className']: element.className,
+        };
+
+        StateManager.setTaskGroup(element.id, snapshot);
     }
 
     static maxZIndex() {

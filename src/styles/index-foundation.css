@@ -3,6 +3,7 @@
 @import "./section/about-style.css";
 @import "./section/blog-style.css";
 @import "./section/photolog-style.css";
+@import "./section/links-style.css";
 @import "./section/viewer-window-style.css";
 
 :root {
@@ -64,7 +65,7 @@ footer {
   display: flex;
   color: #cdcdcd;
   border: 0px solid #444444;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   padding: 0.5rem;
   font-weight: bold;
   align-items: center;
@@ -138,7 +139,7 @@ footer {
   display: flex;
   background-color: var(--title_bar_background_color);
   border: var(--base_border_line);
-  border-radius: var(--base_border_radius_light);
+  border-radius: var(--base_border_radius_medium);
   font-weight: bold;
   color: var(--title_bar_font_color);
   margin: auto;
@@ -146,22 +147,4 @@ footer {
   padding: var(--base_margin_size_medium);
   transition: background-color 0.3s;
   cursor: pointer;
-}
-
-#links .title_box {
-  cursor: default;
-}
-
-a.old_link:hover {
-  color: #a6caf0;
-}
-
-.links_item_list {
-  display: block;
-  text-align: left;
-  background-color: #333333;
-  border: var(--base_border_line);
-  border-radius: var(--base_border_radius_medium);
-  padding: var(--base_margin_size_medium);
-  margin-top: var(--base_margin_size_medium);
 }

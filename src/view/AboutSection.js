@@ -58,6 +58,8 @@ export class AboutSection {
 
     const specs = this.createSpecsElement();
     profile_box.appendChild(specs);
+
+    profile_box.appendChild(document.createElement('hr'));
     
     const contacts = this.createContactsElement();
     profile_box.appendChild(contacts);

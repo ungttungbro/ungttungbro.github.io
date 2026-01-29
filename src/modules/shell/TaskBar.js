@@ -57,7 +57,8 @@ export class TaskBar {
 
         close_img.addEventListener ('click', (e) => {
             e.stopPropagation();
-            this.unmount(element.id, target_id);
+
+            this.unmount(element.id, target_id);                        
             StateManager.removeGroup(target_id);
         });
 
