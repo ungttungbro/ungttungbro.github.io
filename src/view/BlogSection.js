@@ -6,7 +6,7 @@ import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { ViewerWindow } from "../modules/shell/ViewerWindow.js";
 import { taskbar } from "../modules/shell/TaskBar.js";
 import { Templates } from "../modules/site/Templates.js";
-import { StateManager } from "../modules/shell/StateManager.js";
+import { ViewerStateManager } from "../modules/shell/ViewerStateManager.js";
 
 export class BlogSection {
     constructor(blog_service) {
@@ -256,14 +256,14 @@ export class BlogSection {
             viewer.targetId = id + '_task_bar_item';
             viewer.show();
             
-            taskbar.mount(viewer.targetId, viewer.id, section_icon, title);
+            taskbar.mount(blog_type, viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Section Header Event : ', error);
         } finally {
             const element = document.getElementById(id);
             element.dataset.group = blog_type;
 
-            StateManager.stateLog(element);
+            ViewerStateManager.stateLog(element);
         }
     }
 
@@ -402,7 +402,7 @@ export class BlogSection {
         e.preventDefault();
        
         if (document.getElementById(id)) {
-            StateManager.bringToFront(document.getElementById(id));
+            ViewerStateManager.bringToFront(document.getElementById(id));
             return; 
         }
 
@@ -439,14 +439,14 @@ export class BlogSection {
             viewer.targetId = id + '_task_bar_item';
             viewer.show();
             
-            taskbar.mount(viewer.targetId, viewer.id, section_icon, title);
+            taskbar.mount(blog_type, viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Blog Post Event : ', error);
         } finally {
             const element = document.getElementById(id);
             element.dataset.group = blog_type;
 
-            StateManager.stateLog(element);
+            ViewerStateManager.stateLog(element);
         }
     }
 }

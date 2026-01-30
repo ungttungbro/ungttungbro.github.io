@@ -2,58 +2,57 @@
 
 import { SiteLibrary } from "../common/SiteLibrary.js";
 
-export class StateManager {
-    static state = new Map();
-    static taskGroup = new Map();    
+export class ViewerStateManager {
+    static state = new Map(); 
 
     static set(groupKey, key, value) {
-        if (!StateManager.state.has(groupKey)) {
-            StateManager.state.set(groupKey, new Map());
+        if (!this.state.has(groupKey)) {
+            this.state.set(groupKey, new Map());
         }
-        StateManager.state.get(groupKey).set(key, value);
+        this.state.get(groupKey).set(key, value);
     }
 
     static setGroup(groupKey, stateObject) {
         for (const [key, value] of Object.entries(stateObject)) {
-            StateManager.set(groupKey, key, value);
+            this.set(groupKey, key, value);
     }}
 
     static get(groupKey, key) {
-        if (!StateManager.state.has(groupKey)) return undefined;
-        return StateManager.state.get(groupKey).get(key);
+        if (!this.state.has(groupKey)) return undefined;
+        return this.state.get(groupKey).get(key);
     }
 
     static has(groupKey) {
-        if (!StateManager.state.has(groupKey)) return false;
-        return StateManager.state.get(groupKey).has(key);
+        if (!this.state.has(groupKey)) return false;
+        return this.state.get(groupKey).has(key);
     }
 
     static removeGroup(groupKey) {
-        if (!StateManager.state.has(groupKey)) return;        
-            StateManager.state.delete(groupKey);
+        if (!this.state.has(groupKey)) return;        
+            this.state.delete(groupKey);
     }
 
     static removeItem(groupKey, key) {
-        if (!StateManager.state.has(groupKey)) return;
+        if (!this.state.has(groupKey)) return;
 
-        const innerMap = StateManager.state.get(groupKey);
+        const innerMap = this.state.get(groupKey);
         innerMap.delete(key);
 
         if (innerMap.size === 0) {
-            StateManager.state.delete(groupKey);
+            this.state.delete(groupKey);
         }
     }
 
     static getGroup(groupKey) {
-        return StateManager.state.get(groupKey) ?? new Map();
+        return this.state.get(groupKey) ?? new Map();
     }
 
     static clearGroup(groupKey) {
-        StateManager.state.delete(groupKey);
+        this.state.delete(groupKey);
     }
 
     static clearAll() {
-        StateManager.state.clear();
+        this.state.clear();
     }
 
     static stateLog(element) {
@@ -67,32 +66,13 @@ export class StateManager {
             ['zIndex'] : getComputedStyle(element).zIndex
         };
 
-        StateManager.setGroup(element.id, snapshot);
-    }
-
-    static setTaskGroup(groupKey, stateObject) {
-        for (const [key, value] of Object.entries(stateObject)) {
-            if (!StateManager.taskGroup.has(groupKey)) {
-                StateManager.taskGroup.set(groupKey, new Map());
-            }
-
-            StateManager.taskGroup.get(groupKey).set(key, value);
-        }
-    }
-
-    static taskMetaInfo(element) {
-        const snapshot = {
-            ['id']: element.id,
-            ['className']: element.className,
-        };
-
-        StateManager.setTaskGroup(element.id, snapshot);
+        this.setGroup(element.id, snapshot);
     }
 
     static maxZIndex() {
         let max = 0;
-        for (const [key] of StateManager.state) {
-            const zIndex = StateManager.get(key,'zIndex');
+        for (const [key] of this.state) {
+            const zIndex = this.get(key,'zIndex');
             if (zIndex && !isNaN(zIndex)) {
                 max = Math.max(max, zIndex);
             }
@@ -104,7 +84,7 @@ export class StateManager {
     static bringToFront(element) {
         let isOverlap = false;
 
-        for (const [key, value] of StateManager.state) {
+        for (const [key, value] of this.state) {
             if (!value.get('clientRect') || key === element.id) continue;
 
             if (SiteLibrary.isRectOverlap(element.getBoundingClientRect(), value.get('clientRect'))) {
@@ -115,8 +95,8 @@ export class StateManager {
             }
         }
 
-        if (isOverlap && (element.style.zIndex < StateManager.maxZIndex())) {
-            element.style.zIndex = StateManager.maxZIndex() + 1;
+        if (isOverlap && (element.style.zIndex < this.maxZIndex())) {
+            element.style.zIndex = this.maxZIndex() + 1;
 
             if (getComputedStyle(element).visibility === 'hidden') {
                 SiteLibrary.elementVisibility(element.id);
@@ -125,6 +105,6 @@ export class StateManager {
             SiteLibrary.elementVisibility(element.id);           
         }
 
-        StateManager.stateLog(element);
+        this.stateLog(element);
     }
 }

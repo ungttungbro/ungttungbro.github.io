@@ -200,11 +200,13 @@ $(function () {
     $(window).on('scroll', function () {
         const scrollTop = $(this).scrollTop();
         
-        if (scrollTop === 0) {
+        if (scrollTop === 0) { 
             $('#about').hide();
             $('#links').hide();
             $('footer').hide();
+
             $('#about-link').removeClass('active');
+            $('#links-link').removeClass('active');
         }
     });
 
@@ -242,10 +244,22 @@ $(function () {
         let $target = $(href);
         if (!$target.length) return;
 
-        $('#about').show();
-        $('#links').show();
-        $('footer').show();
-        $('#about-link').addClass('active');       
+        console.log($(this).attr('id'));
+
+        switch ($(this).attr('id')) {
+            case '#about':
+                $('#about-link').addClass('active');
+                $('#about').show();
+                break;
+            case '#links':
+                $('#links-link').addClass('active');
+                $('#links').show(); 
+                break;
+            default:
+                break;
+        }
+
+         $('footer').show();
 
         $('html, body').animate({
             scrollTop: $target.offset().top - anchor_offset

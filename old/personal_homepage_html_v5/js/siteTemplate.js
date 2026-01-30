@@ -14,7 +14,7 @@ const createNavigationItems = function(logoSrc, siteMap, aboutUrl, galleryUrl, l
     navRightEl.id = 'nav-right';
     navRightEl.innerHTML = '<a id="about-link" href="' + aboutUrl + '">' + siteMap.menus.about + '</a>'
                             + '<a href="' + galleryUrl + '">' + siteMap.menus.gallery + '</a>'
-                            + '<a href="' + linksUrl + '">' + siteMap.menus.links + '</a>'
+                            + '<a id="links-link" href="' + linksUrl + '">' + siteMap.menus.links + '</a>'
                             + '<a id="contact-link" href="mailto:' + contactEmail + '">' + siteMap.menus.contact + '</a>';
 
     navigationItemEl.appendChild(navLeftEl);
@@ -31,7 +31,7 @@ const signatureComment = function(titleHTML, commentHTML) {
 const scrollIndicator = function(url) {
     const scrollIndicatorEl = document.createElement('div');
     scrollIndicatorEl.id = 'intro-gate';
-    scrollIndicatorEl.innerHTML = '<a href="' + url +'">'
+    scrollIndicatorEl.innerHTML = '<a id="' + url + '" href="' + url +'">'
                                     + '▼'
                                 + '</a>';
 

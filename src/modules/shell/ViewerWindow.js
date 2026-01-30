@@ -1,7 +1,8 @@
 'use strict';
 
 import { SiteLibrary } from "../common/SiteLibrary.js";
-import { StateManager } from "../shell/StateManager.js";
+import { ViewerStateManager } from "./ViewerStateManager.js";
+import { TaskStateManager } from "./TaskStateManager.js";
 
 const CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE: 'medium_icon',
@@ -46,7 +47,7 @@ export class ViewerWindow {
         this.dragWindow();
         this.resizeWindow();
 
-        StateManager.stateLog(this.viewer_wrapper_element);
+        ViewerStateManager.stateLog(this.viewer_wrapper_element);
     }
 
     createViewerWrapperElement() {
@@ -61,10 +62,10 @@ export class ViewerWindow {
         element.style.transform = 'none';
         element.style.left = this.left;
         element.style.top = this.top;
-        element.style.zIndex = StateManager.maxZIndex() + 1;
+        element.style.zIndex = ViewerStateManager.maxZIndex() + 1;
         element.addEventListener('click', e => { 
-            element.style.zIndex = StateManager.maxZIndex() + 1; 
-            StateManager.stateLog(element);
+            element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(element);
         });
 
         return element;
@@ -174,8 +175,8 @@ export class ViewerWindow {
             e.stopPropagation();
             SiteLibrary.elementVisibility(this.viewer_wrapper_id);
 
-            this.viewer_wrapper_element.style.zIndex = StateManager.maxZIndex() + 1; 
-            StateManager.stateLog(this.viewer_wrapper_element);
+            this.viewer_wrapper_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(this.viewer_wrapper_element);
         });
 
         maximize_button.addEventListener('click', e => {
@@ -188,8 +189,8 @@ export class ViewerWindow {
                 this.beforeHeight
             );
 
-            this.viewer_wrapper_element.style.zIndex = StateManager.maxZIndex() + 1; 
-            StateManager.stateLog(this.viewer_wrapper_element);
+            this.viewer_wrapper_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(this.viewer_wrapper_element);
         });
 
         close_button.addEventListener('click', e => {
@@ -198,7 +199,10 @@ export class ViewerWindow {
             SiteLibrary.closeElement(this.targetId);            
             SiteLibrary.closeElement(this.viewer_wrapper_id);
 
-            StateManager.removeGroup(this.viewer_wrapper_id);        
+            TaskStateManager.removeTask(this.viewer_wrapper_element.dataset.group, this.viewer_wrapper_id  + '_task_bar_item');
+            ViewerStateManager.removeGroup(this.viewer_wrapper_id);
+
+            console.log(TaskStateManager.taskGroupMap);
         });
     }
 
@@ -273,7 +277,7 @@ export class ViewerWindow {
             document.removeEventListener('pointermove', this.onResizeMove);
             document.removeEventListener('pointerup', this.onResizeEnd);
 
-            StateManager.stateLog(this.viewer_wrapper_element);
+            ViewerStateManager.stateLog(this.viewer_wrapper_element);
         };
 
         this.window_element.addEventListener('pointerdown', e => {
@@ -348,8 +352,8 @@ export class ViewerWindow {
             const wrapper = this.viewer_wrapper_element;
             if (wrapper.classList.contains(wrapper.id)) return;
 
-            wrapper.style.zIndex = StateManager.maxZIndex() + 1; 
-            StateManager.stateLog(wrapper);
+            wrapper.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(wrapper);
 
             const rect = wrapper.getBoundingClientRect();
 
@@ -388,7 +392,7 @@ export class ViewerWindow {
         document.addEventListener('pointerup', e => {
             if (!drag_state || e.pointerId !== drag_state.pointerId) return;
 
-            StateManager.stateLog(this.viewer_wrapper_element);
+            ViewerStateManager.stateLog(this.viewer_wrapper_element);
             
             title_bar.isDragging = false;
             drag_state = null;

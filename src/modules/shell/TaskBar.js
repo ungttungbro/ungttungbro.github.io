@@ -1,7 +1,8 @@
 'use strict';
 
 import { SiteLibrary } from "../common/SiteLibrary.js";
-import { StateManager } from "./StateManager.js";
+import { ViewerStateManager } from "./ViewerStateManager.js";
+import { TaskStateManager } from "./TaskStateManager.js";
 
 const TASKBAR_CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE : 'medium_icon',
@@ -23,7 +24,7 @@ export class TaskBar {
         this.taskBarElement.appendChild(logo);
     }
     
-    mount(taskbar_item_id, target_id, title_icon_path, title_text) {
+    mount(group_type, taskbar_item_id, target_id, title_icon_path, title_text) {
         const taskbar_item = this.createTaskBarItem(
             taskbar_item_id, 
             target_id, 
@@ -31,7 +32,22 @@ export class TaskBar {
             SiteLibrary.truncateText(title_text, 12)
         );
 
-        this.taskBarElement.appendChild(taskbar_item);        
+        taskbar_item.dataset.group = group_type;
+
+        const task_bar = this.taskBarElement;
+        task_bar.appendChild(taskbar_item);
+
+        TaskStateManager.addTask( group_type, taskbar_item );
+
+        //ViewerStateManager.taskMetaInfo(taskbar_item);
+        
+        //console.log(ViewerStateManager.taskGroup);
+
+        //const parent = document.getElementById('taskbar_item_id');
+        //const writings_items = parent.querySelectorAll(':scope > .viewer[dataset-group="writings"]');
+        //console.log(writings_items);
+
+        return task_bar;
     }
 
     createTaskBarItem(task_bar_item_id, target_id, title_icon_path, title_text) {
@@ -46,7 +62,7 @@ export class TaskBar {
                 return;
             }
 
-            StateManager.bringToFront(viewer_wrapper_el);
+            ViewerStateManager.bringToFront(viewer_wrapper_el);
         });
 
         const title_img = SiteLibrary.createImgElement(TASKBAR_CONSTANTS.TITLE_ICON_TYPE, '', title_icon_path, '');
@@ -58,8 +74,9 @@ export class TaskBar {
         close_img.addEventListener ('click', (e) => {
             e.stopPropagation();
 
-            this.unmount(element.id, target_id);                        
-            StateManager.removeGroup(target_id);
+            this.unmount(element.id, target_id);                    
+            TaskStateManager.removeTask(element.dataset.group, element.id + '_task_bar_item');
+            ViewerStateManager.removeGroup(target_id);
         });
 
         element.appendChild(caption);

@@ -145,6 +145,7 @@ footer {
   margin: auto;
   margin-bottom: var(--base_margin_size_medium);
   padding: var(--base_margin_size_medium);
+  
   transition: background-color 0.3s;
   cursor: pointer;
 }

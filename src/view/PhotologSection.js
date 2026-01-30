@@ -6,7 +6,7 @@ import { ViewerWindow } from "../modules/shell/ViewerWindow.js";
 import { Templates } from "../modules/site/Templates.js";
 import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js"
 import { siteMap } from "../modules/site/siteMap.js";
-import { StateManager } from "../modules/shell/StateManager.js";
+import { ViewerStateManager } from "../modules/shell/ViewerStateManager.js";
 
 export class PhotologSection {
     constructor(photolog_service) {
@@ -104,14 +104,14 @@ export class PhotologSection {
             viewer.targetId = id + '_task_bar_item';
             viewer.show();
             
-            taskbar.mount(viewer.targetId, viewer.id, section_icon, title);
+            taskbar.mount('photolog', viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.log('Section Header Event : ', error);
         } finally {
             const element = document.getElementById(id);
             element.dataset.group = 'photolog';
 
-            StateManager.stateLog(element);
+            ViewerStateManager.stateLog(element);
         }
     }
 
@@ -204,7 +204,7 @@ export class PhotologSection {
 
     openPhotologContent(id, title, header_contents, main_contents, footer_contents) {
         if (document.getElementById(id + '_viewer')) { 
-            StateManager.bringToFront(document.getElementById(id));
+            ViewerStateManager.bringToFront(document.getElementById(id));
             return; 
         }
 
@@ -230,14 +230,14 @@ export class PhotologSection {
             viewer.targetId = id + '_task_bar_item';
             viewer.show();
 
-            taskbar.mount(viewer.targetId, viewer.id, siteMap.photolog.sectionHeaderIcon, title);
+            taskbar.mount('photolog', viewer.targetId, viewer.id, siteMap.photolog.sectionHeaderIcon, title);
         } catch (error) {
             console.log('Blog Post Event : ', error);
         } finally {
             const element = document.getElementById(id);
             element.dataset.group = 'photolog';
 
-            StateManager.stateLog(element);
+            ViewerStateManager.stateLog(element);
         }
     }
 

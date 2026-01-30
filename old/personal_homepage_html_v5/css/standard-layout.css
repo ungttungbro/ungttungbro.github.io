@@ -73,7 +73,8 @@ body {
     margin-right: 1.5rem;
 }
 
-#about-link.active {
+#about-link.active,
+#links-link.active {
     color: #ffc900;
 
     text-decoration: underline;
@@ -113,13 +114,15 @@ body {
 #intro-gate {
     width: 5rem;
     height: 5rem;
-    font-size: 3rem;;
+
+    font-size: 3rem;
     margin-top: 2rem;
 }
 
 #intro-gate:hover {
     background-color: #222222;
     border-radius: 50%;
+
     animation: scroll-hint 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     cursor: pointer;
 }
