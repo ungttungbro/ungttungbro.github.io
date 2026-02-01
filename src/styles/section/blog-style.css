@@ -12,7 +12,7 @@
 .post-index a:hover .title { color: #106f80; } /*#056081*/
 .post-index a:hover .summary { color: #444444; }
 
-.latest-post { line-height: 1.36; border: 0px solid red; }
+.latest-post { line-height: 1.35; border: 0px solid red; }
 .latest-post a:hover .title { color: #ffc900; } /*#0aa8e2*/
 .latest-post a:hover .summary { color: #cdcdcd; }
 
@@ -61,7 +61,7 @@
 }
 
 #blog-reflection .latest-post {
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 #reflection-content {

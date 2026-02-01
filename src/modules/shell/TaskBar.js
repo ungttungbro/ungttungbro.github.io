@@ -37,22 +37,89 @@ export class TaskBar {
         const task_bar = this.taskBarElement;
         task_bar.appendChild(taskbar_item);
 
-        TaskStateManager.addTask( group_type, taskbar_item );
+        TaskStateManager.addTask(group_type, taskbar_item);
 
-        //ViewerStateManager.taskMetaInfo(taskbar_item);
+        const gorup_length = TaskStateManager.getGroup(group_type).size;
         
-        //console.log(ViewerStateManager.taskGroup);
+        if (gorup_length > 1) {
+            const task_group_item = this.createTaskGroup (                
+                taskbar_item.id, 
+                title_icon_path,
+                this.groupName(taskbar_item.dataset.group)
+            );
 
-        //const parent = document.getElementById('taskbar_item_id');
-        //const writings_items = parent.querySelectorAll(':scope > .viewer[dataset-group="writings"]');
-        //console.log(writings_items);
+            task_group_item.addEventListener ('mouseenter', (e) => {
+                e.stopPropagation();
+
+                const group_items = document.createElement('div');
+                group_items.className = 'task-group-items';
+
+                task_group_item.appendChild(group_items);
+            });
+
+            task_bar.appendChild(task_group_item);
+        } else {
+            console.log('그룹 아이템이 한개 아님 없음');
+        }
 
         return task_bar;
     }
 
-    createTaskBarItem(task_bar_item_id, target_id, title_icon_path, title_text) {
+    groupName(group_type) {
+        let group_name = '';
+        switch(group_type) {
+            case 'writings':
+                group_name = '라이팅스 (writings)';
+                break;
+            case 'lifelog' :
+                group_name = '라이프로그 (lifelog)';
+                break;
+            case 'archive' :
+                group_name = '아카이브 (archive)';
+                break;
+            case 'reflection' :
+                group_name = '리플렉션 (reflection)';
+                break;
+            case 'photolog' :
+                group_name = '포토로그 (photolog)';
+                break;
+            default:
+                group_name = '';
+                break;
+        }
+
+        return group_name;
+    }
+
+    createTaskGroup(taskbar_item_id, title_icon_path, title_text) {
         const element = document.createElement('div');
-        element.id = task_bar_item_id;
+        element.id = taskbar_item_id;
+        element.className = 'task-bar-group';
+
+        const title_img = SiteLibrary.createImgElement(TASKBAR_CONSTANTS.TITLE_ICON_TYPE, '', title_icon_path, '');
+        const caption = SiteLibrary.createImgCaption(title_img, null, title_text);
+
+        const close_button_icon_path = TASKBAR_CONSTANTS.CLOSE_BUTTON_ICON_PATH;
+        const close_img = SiteLibrary.createImgElement('task_item_close', '', close_button_icon_path, '');
+
+        close_img.addEventListener ('click', (e) => {
+            e.stopPropagation();
+
+            this.unmount(element.id, target_id);    
+            TaskStateManager.removeTask(element.dataset.group, element.id + '_task_bar_item');
+            ViewerStateManager.removeGroup(target_id);
+        });
+
+        element.appendChild(title_img);
+        element.appendChild(caption);
+        element.appendChild(close_img);
+
+        return element;
+    }
+
+    createTaskBarItem(taskbar_item_id, target_id, title_icon_path, title_text) {
+        const element = document.createElement('div');
+        element.id = taskbar_item_id;
         element.className = 'task_bar_item';
 
         element.addEventListener ('click', () => {

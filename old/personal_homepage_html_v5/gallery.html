@@ -20,11 +20,11 @@
 <body>
 
   <header id="top">
-    <div id="links-header-layout"></div>
+    <div id="gallery-header-layout"></div>
   </header>
 
   <main>
-    <div id="links"></div>
+    <div id="gallery"></div>
   </main>
 
   <footer>
@@ -49,20 +49,21 @@
 
    <script type="module">    
     import { 
-      headerLayoutElement, 
+      headerLayoutElement,
+      galleryLayoutElement,
       linksLayoutElement
     } from './js/siteLayout.js';
 
-    const titleTextHTML = '<h3>LINKS</h3>';
-    const commentTextHTML =  '<p>홈페이지 제작에 참고가 되었거나 도움을 받은 웹사이트</p>'
-                        + '<p>그리고 저의 활동에 도움을 주었던 기관들에</p>'
-                        + '<p>감사함을 표합니다.</p>';
+    const titleTextHTML = '<h3>GALLERY</h3>';
+    const commentTextHTML =  '<p>활동하는 제 모습을 기록한 것 입니다</p>'
+                        + '<p>의미 있는 시간과, 좋은 동료들</p>'
+                        + '<p>사진으로 남깁니다</p>';
     
-    const $headerLayoutEl = $('#links-header-layout');
-    $headerLayoutEl.append(headerLayoutElement('#links', titleTextHTML.toString(), commentTextHTML.toString()));
+    const $headerLayoutEl = $('#gallery-header-layout');
+    $headerLayoutEl.append(headerLayoutElement('#gallery', titleTextHTML.toString(), commentTextHTML.toString()));
 
-    const $linksLayoutEl = $('#links');
-    $linksLayoutEl.append(linksLayoutElement());
+    const $linksLayoutEl = $('#gallery');
+    $linksLayoutEl.append(galleryLayoutElement());
 
   </script>
 

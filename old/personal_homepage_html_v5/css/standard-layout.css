@@ -2,7 +2,9 @@ body {
     background-image: url('../images/grey.png');
 }
 
-#header-layout, #links-header-layout {
+#header-layout, 
+#links-header-layout, 
+#gallery-header-layout {
     position: relative;
     
     background-size: cover;        
@@ -14,20 +16,17 @@ body {
     color: #dddddd;
 }
 
-#header-layout {
-    background-image: url("../images/signature.jpg");
-}
+#header-layout { background-image: url("../images/signature.jpg"); }
+#links-header-layout { background-image: url("../images/links-signature.jpg"); }
+#gallery-header-layout { background-image: url("../images/gallery-signature.jpg"); }
 
-#links-header-layout {
-    background-image: url("../images/links-signature.jpg");
-}
-
-#links-header-layout #signature-comment {
+#links-header-layout, #signature-comment {
     color:#eeeeee;
 }
 
 #header-layout::before,
-#links-header-layout::before {
+#links-header-layout::before,
+#gallery-header-layout::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -44,13 +43,15 @@ body {
     width: 100%;
     height: 64px;
     
-    background: #000000;   
+    background: #000000;
 
     justify-content: center;
     word-spacing: 1rem;
     z-index: 1000;
-    border-bottom: 1px solid #333333;
-    opacity: 0.9;
+
+    border-bottom: 1px solid #222222;
+
+    opacity: 0.8;
 }
 
 #navigation-items {
@@ -120,7 +121,7 @@ body {
 }
 
 #intro-gate:hover {
-    background-color: #222222;
+    background-color: #666666;
     border-radius: 50%;
 
     animation: scroll-hint 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
@@ -131,7 +132,7 @@ body {
     font-size: 2rem;
     font-weight: 500;
 
-    padding-bottom: 1rem;    
+    padding-bottom: 1rem;
     border-bottom: 3px solid #666666;
 }
 
@@ -150,6 +151,7 @@ body {
 
 #experience,
 #works,
+#gallery,
 #links {
     width: 100%;
     max-width: 1150px;
@@ -197,6 +199,34 @@ body {
     margin-left: 0.5rem;
 
     line-height: 2.5rem;
+}
+
+#gallery-items {
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    border: 0px solid red;
+}
+
+#gallery-moniter {
+    width: 100%;
+    height: 30rem;
+
+    background-color: #666666;
+    border-radius: 1rem;
+
+    filter: drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
+}
+
+#gallery-thumbnail-list {
+    width: 100%;
+    height: 30rem;
+
+    background-color: #111111;
+    border-radius: 1rem;
 }
 
 #academic-research-photos,

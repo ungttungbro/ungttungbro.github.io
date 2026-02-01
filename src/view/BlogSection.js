@@ -307,7 +307,7 @@ export class BlogSection {
             this.generatePostEvent(
                 type, data, a, encodeURIComponent(key),section_icon, value.title, 
                 null, value.content_path,COMMON.COPYRIGHT
-            );            
+            );      
 
             frag.appendChild(a);
 

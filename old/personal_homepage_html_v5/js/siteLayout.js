@@ -28,6 +28,10 @@ import {
 } from '../sections/aboutSectionTemplate.js';
 
 import {
+    createThumbnails
+} from '../sections/gallerySectionTemplate.js';
+
+import {
     linksOldMyWeb,
     linksThanksTo
 } from '../sections/linksSectionTemplate.js';
@@ -46,10 +50,10 @@ const createNavigationItemsElement = function() {
     navigationEl.id = 'navigation';
 
     navigationEl.appendChild(createNavigationItems(
-        './images/logo.png', 
+        './images/logo.png',
         siteMap, 
         'index.html',
-        '#gallery', 
+        'gallery.html',
         'links.html', 
         'youngwan.jang@gmail.com'
     ));
@@ -138,10 +142,32 @@ const createWorksElement = function() {
     return worksEl;
 };
 
-const linksLayoutElement = function() {
-    const linksReference = document.createElement('div');
-    linksReference.id = 'links-references';
+const galleryLayoutElement = function() {
+    const sectionHeaderHTML = createSectionHeader('Gallery');
+    document.getElementById('gallery').innerHTML += sectionHeaderHTML;
 
+    const galleryEl = createGalleryElement();
+    
+    return galleryEl;
+}
+
+const createGalleryElement = function() {
+    const gallery_items =  document.createElement('div');
+    gallery_items.id = 'gallery-items';
+
+    const display = document.createElement('div');
+    display.id = 'gallery-moniter';
+
+    const thumbnail_list = document.createElement('div');
+    thumbnail_list.id = 'gallery-thumbnail-list';
+
+    gallery_items.appendChild(display);
+    gallery_items.appendChild(thumbnail_list);
+
+    return gallery_items;
+}
+
+const linksLayoutElement = function() {
     const sectionHeaderHTML = createSectionHeader('Links (References)');
     document.getElementById('links').innerHTML += sectionHeaderHTML;
 
@@ -152,7 +178,7 @@ const linksLayoutElement = function() {
 }
 
 const createlinksElement = function() {
-    var html = '<div id="links-items">'
+    let html = '<div id="links-items">'
                 + '<div class="links-item-title">'
                     + '<b>Old My Web</b>'
                 + '</div>'
@@ -244,8 +270,6 @@ $(function () {
         let $target = $(href);
         if (!$target.length) return;
 
-        console.log($(this).attr('id'));
-
         switch ($(this).attr('id')) {
             case '#about':
                 $('#about-link').addClass('active');
@@ -270,4 +294,5 @@ $(function () {
 export { headerLayoutElement };
 export { createExperienceElement };
 export { createWorksElement };
+export { galleryLayoutElement };
 export { linksLayoutElement };
