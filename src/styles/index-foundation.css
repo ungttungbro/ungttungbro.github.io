@@ -80,14 +80,14 @@ footer {
 }
 
 .task-group-items {
-  width: 15rem;
-  height: 20rem;
-
+  width: 100%;
   position: absolute;
   left: 0;
   top: 100%;
 
-  border: 1px solid red;
+  z-index: 9999;
+
+  border: 0px solid red;
 }
 
 .task_item_close {

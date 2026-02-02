@@ -58,6 +58,20 @@ const worksPersonalProjectsData = [
 ];
 
 
+const photoGalleryData = [
+    [ '2020-3-4', '장승배기', 'Gallaxy S3', './images/gallery/photos/20200304_photo.jpg', '장영완 선생님' ],
+    [ '2019-11-8', '장승배기', 'Gallaxy S3', './images/gallery/photos/20191108_photo.jpg', '뉘신지?' ],
+    [ '2019-4-1', '장승배기', 'Gallaxy S3', './images/gallery/photos/20190401_photo.jpg', '조화로 데코하기' ],
+    [ '2019-4-1', '장승배기', 'Gallaxy S3', './images/gallery/photos/20190401_photo2.jpg', '조화로 데코하기2' ],
+    [ '2018-12-5', '장승배기', 'Gallaxy S3', './images/gallery/photos/20181205_photo.jpg', '칠판낙서' ],
+    [ '2015-3-15', '서울 혜화동', 'ILCE-7M2', './images/gallery/photos/20150315_photo.jpg', '혜화동에 갔다' ],
+    [ '2013-2-19', '구미','Optimus Q', './images/gallery/photos/20130219_photo.jpg', '강의실 정리 후 한컷' ],
+    [ '2012-12-14', '구미','Optimus Q', './images/gallery/photos/20121214_photo.jpg', '학교 건물' ],
+    [ '2012-11-15', '구미','Optimus Q', './images/gallery/photos/20121115_photo.jpg', '학교 정리' ],
+    [ '2006-6-23', '성남', '필름카메라', './images/gallery/photos/20060623_photo.jpg', '장영완' ]
+];
+
+
 const linksOldPageData = [
     [ 'old homepage' ,'../personal_homepage_xhtml/index.html' ],
     [ 'old old homepage' ,'../personal_homepage_html_v4/index.html' ],
@@ -83,5 +97,6 @@ export { worksTeachingActivityData };
 export { worksPublishData };
 export { worksProjectsData };
 export { worksPersonalProjectsData };
+export { photoGalleryData };
 export { linksOldPageData };
 export { linksThanksToData };

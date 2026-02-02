@@ -5,6 +5,7 @@ import {
     worksPublishData, 
     worksProjectsData, 
     worksPersonalProjectsData,
+    photoGalleryData,
     linksOldPageData,
     linksThanksToData
 } from '../data/data.js';
@@ -160,6 +161,8 @@ const createGalleryElement = function() {
 
     const thumbnail_list = document.createElement('div');
     thumbnail_list.id = 'gallery-thumbnail-list';
+
+    thumbnail_list.innerHTML = createThumbnails(photoGalleryData);
 
     gallery_items.appendChild(display);
     gallery_items.appendChild(thumbnail_list);

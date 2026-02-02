@@ -227,6 +227,8 @@ body {
 
     background-color: #111111;
     border-radius: 1rem;
+
+    overflow-y: auto;
 }
 
 #academic-research-photos,
@@ -305,6 +307,28 @@ body {
 .works-personal-project-item {
     margin-bottom: 1rem;
     margin-right: 0.5rem;
+}
+
+.thumbnail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    border: 0px solid red;
+}
+
+.gallery-thumbnail {
+    width: 100%;
+    line-height: 1;
+}
+
+.gallery-photo {
+    border: 3px solid #333333;
+    border-radius: 0.75rem;
+    height: 5rem;
+    width:100%;
 }
 
 footer {
