@@ -159,10 +159,15 @@ const createGalleryElement = function() {
     const display = document.createElement('div');
     display.id = 'gallery-moniter';
 
+    const signaturePhotoEl = document.createElement('img');
+    signaturePhotoEl.className = 'signature-display-photo';
+    signaturePhotoEl.src = photoGalleryData[0][3];
+
+    display.appendChild(signaturePhotoEl);
+
     const thumbnail_list = document.createElement('div');
     thumbnail_list.id = 'gallery-thumbnail-list';
-
-    thumbnail_list.innerHTML = createThumbnails(photoGalleryData);
+    thumbnail_list.appendChild(createThumbnails(photoGalleryData));
 
     gallery_items.appendChild(display);
     gallery_items.appendChild(thumbnail_list);
@@ -221,20 +226,14 @@ $(function () {
 
     $(window).on('load', function () {
         adjustAnchorOffset();
-        $('#about').hide();
-        $('#links').hide();
-        $('footer').hide();
     });
    
     $(window).on('scroll', function () {
         const scrollTop = $(this).scrollTop();
         
         if (scrollTop === 0) { 
-            $('#about').hide();
-            $('#links').hide();
-            $('footer').hide();
-
             $('#about-link').removeClass('active');
+            $('#gallery-link').removeClass('active');
             $('#links-link').removeClass('active');
         }
     });
@@ -275,18 +274,17 @@ $(function () {
 
         switch ($(this).attr('id')) {
             case '#about':
-                $('#about-link').addClass('active');
-                $('#about').show();
+                $('#about-link').addClass('active');                
+                break;
+            case '#gallery':
+                $('#gallery-link').addClass('active');                
                 break;
             case '#links':
-                $('#links-link').addClass('active');
-                $('#links').show(); 
+                $('#links-link').addClass('active');                 
                 break;
             default:
                 break;
         }
-
-         $('footer').show();
 
         $('html, body').animate({
             scrollTop: $target.offset().top - anchor_offset

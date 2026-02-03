@@ -6,14 +6,14 @@ const createNavigationItems = function(logoSrc, siteMap, aboutUrl, galleryUrl, l
 
     const navLeftEl = document.createElement('div');
     navLeftEl.id = 'nav-left';
-    navLeftEl.innerHTML = '<a href="#top">' 
+    navLeftEl.innerHTML = '<a href="index.html">' 
                             + '<img id="logo" src="' + logoSrc + '" height="60" alt="로고">' 
                         + '</a>';
 
     const navRightEl = document.createElement('div');
     navRightEl.id = 'nav-right';
     navRightEl.innerHTML = '<a id="about-link" href="' + aboutUrl + '">' + siteMap.menus.about + '</a>'
-                            + '<a href="' + galleryUrl + '">' + siteMap.menus.gallery + '</a>'
+                            + '<a id="gallery-link" href="' + galleryUrl + '">' + siteMap.menus.gallery + '</a>'
                             + '<a id="links-link" href="' + linksUrl + '">' + siteMap.menus.links + '</a>'
                             + '<a id="contact-link" href="mailto:' + contactEmail + '">' + siteMap.menus.contact + '</a>';
 

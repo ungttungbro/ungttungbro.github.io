@@ -25,6 +25,126 @@ export class TaskBar {
     }
     
     mount(group_type, taskbar_item_id, target_id, title_icon_path, title_text) {
+        const task_item = this.createSingleTaskItem (
+            group_type, 
+            taskbar_item_id, 
+            target_id, 
+            title_icon_path, 
+            title_text
+        );
+
+        TaskStateManager.addTask(group_type, task_item);
+
+        const task_bar = this.taskBarElement;
+        const task_group = TaskStateManager.getGroup(group_type);
+        const group_length = task_group.size;
+
+        const task_group_root = this.taskGroupRoot(
+            group_type,
+            task_group,
+            title_icon_path
+        );
+
+        if (group_length === 1) { 
+            task_bar.appendChild(task_item);
+            return;
+        } 
+        
+        if (group_length === 2) {
+            task_bar.appendChild(task_group_root);
+            return;
+        } 
+        
+        const groupItems = task_group_root.querySelector('.task-group-items');
+        if (!groupItems) return;
+
+        groupItems.appendChild(task_item);
+
+        return task_bar;
+    }
+
+    taskGroupRoot(group_type, task_group, title_icon_path) {
+        let root = document.getElementById(group_type + '_task_group');
+
+        if (root) return root;
+
+        root = this.createTaskGroupRoot(
+            group_type + '_task_group',
+            title_icon_path,
+            this.groupName(group_type)
+        );
+
+        const group_items = this.createGroupItems(task_group);
+        group_items.style.visibility = 'hidden';
+        root.appendChild(group_items);
+
+        this.groupItemsEvent(root, group_items);
+
+        return root;
+    }
+
+    groupItemsEvent(task_group_item, group_items) {
+        task_group_item.addEventListener ('pointerenter', (e) => {
+            e.stopPropagation();
+            group_items.style.visibility = 'visible';
+        });
+
+        task_group_item.addEventListener ('pointerleave', (e) => {
+            e.stopPropagation();
+            group_items.style.visibility = 'hidden';
+        });
+    }
+
+    createGroupItems(task_group) {
+        const group_items = document.createElement('div');
+        group_items.className = 'task-group-items';
+
+        for (const [key] of task_group) {
+            group_items.appendChild(task_group.get(key).element);
+        }
+
+        return group_items;
+    }
+
+    teardownSingleItems(group_type) {
+        const group = TaskStateManager.getGroup(group_type);
+        if (!group) return;
+
+        for (const task of group.values()) {
+            if (task.element) {
+                task.element.remove();
+                task.element = null;
+            }
+        }
+    }
+
+    createTaskGroupRoot(task_group_id, title_icon_path, title_text) {
+        const element = document.createElement('div');
+        element.id = task_group_id;
+        element.className = 'task-bar-group';
+
+        const title_img = SiteLibrary.createImgElement(TASKBAR_CONSTANTS.TITLE_ICON_TYPE, '', title_icon_path, '');
+        const caption = SiteLibrary.createImgCaption(title_img, null, title_text);
+
+        const close_button_icon_path = TASKBAR_CONSTANTS.CLOSE_BUTTON_ICON_PATH;
+        const close_img = SiteLibrary.createImgElement('task_item_close', '', close_button_icon_path, '');
+
+        close_img.addEventListener ('click', (e) => {
+            e.stopPropagation();
+
+            //this.unmount(element.id, target_id);
+            //TaskStateManager.removeTask(element.dataset.group, element.id);
+            //ViewerStateManager.removeGroup(target_id);
+        });
+
+        element.appendChild(title_img);
+        element.appendChild(caption);
+        element.appendChild(close_img);
+
+        return element;
+    }
+
+    createSingleTaskItem(group_type, taskbar_item_id, target_id, title_icon_path, title_text) {
         const taskbar_item = this.createTaskBarItem (
             taskbar_item_id, 
             target_id, 
@@ -34,49 +154,7 @@ export class TaskBar {
 
         taskbar_item.dataset.group = group_type;
 
-        const task_bar = this.taskBarElement;
-
-        TaskStateManager.addTask(group_type, taskbar_item);
-
-        const task_group = TaskStateManager.getGroup(group_type);
-        const group_length = task_group.size;
-        
-        if (group_length > 1) {
-            const task_group_item = this.createTaskGroup (
-                taskbar_item.dataset.group + 'group', 
-                title_icon_path,
-                this.groupName(taskbar_item.dataset.group)
-            );
-
-            const group_items = document.createElement('div');
-            group_items.className = 'task-group-items';
-
-            //item 입력
-            for (const [key] of task_group) {
-                const el = task_group.get(key);
-                group_items.appendChild(el.element);
-            }
-
-            group_items.style.visibility = 'hidden';
-
-            task_group_item.appendChild(group_items);
-
-            task_group_item.addEventListener ('pointerenter', (e) => {
-                e.stopPropagation();
-                group_items.style.visibility = 'visible';
-            });
-
-            task_group_item.addEventListener ('pointerleave', (e) => {
-                e.stopPropagation();
-                group_items.style.visibility = 'hidden';
-            });
-
-            task_bar.appendChild(task_group_item);
-        } else {            
-            task_bar.appendChild(taskbar_item);
-        }
-
-        return task_bar;
+        return taskbar_item;
     }
 
     groupName(group_type) {
@@ -105,32 +183,6 @@ export class TaskBar {
         return group_name;
     }
 
-    createTaskGroup(taskbar_item_id, title_icon_path, title_text) {
-        const element = document.createElement('div');
-        element.id = taskbar_item_id;
-        element.className = 'task-bar-group';
-
-        const title_img = SiteLibrary.createImgElement(TASKBAR_CONSTANTS.TITLE_ICON_TYPE, '', title_icon_path, '');
-        const caption = SiteLibrary.createImgCaption(title_img, null, title_text);
-
-        const close_button_icon_path = TASKBAR_CONSTANTS.CLOSE_BUTTON_ICON_PATH;
-        const close_img = SiteLibrary.createImgElement('task_item_close', '', close_button_icon_path, '');
-
-        close_img.addEventListener ('click', (e) => {
-            e.stopPropagation();
-
-            //this.unmount(element.id, target_id);
-            //TaskStateManager.removeTask(element.dataset.group, element.id);
-            //ViewerStateManager.removeGroup(target_id);
-        });
-
-        element.appendChild(title_img);
-        element.appendChild(caption);
-        element.appendChild(close_img);
-
-        return element;
-    }
-
     createTaskBarItem(taskbar_item_id, target_id, title_icon_path, title_text) {
         const element = document.createElement('div');
         element.id = taskbar_item_id;
@@ -155,7 +207,7 @@ export class TaskBar {
         close_img.addEventListener ('click', (e) => {
             e.stopPropagation();
 
-            this.unmount(element.id, target_id);   
+            this.unmount(element.id, target_id);
 
             TaskStateManager.removeTask(element.dataset.group, element.id);
             ViewerStateManager.removeGroup(target_id);

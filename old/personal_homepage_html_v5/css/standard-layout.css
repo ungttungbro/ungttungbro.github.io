@@ -49,7 +49,7 @@ body {
     word-spacing: 1rem;
     z-index: 1000;
 
-    border-bottom: 1px solid #222222;
+    border-bottom: 1px solid #333333;
 
     opacity: 0.8;
 }
@@ -75,6 +75,7 @@ body {
 }
 
 #about-link.active,
+#gallery-link.active,
 #links-link.active {
     color: #ffc900;
 
@@ -121,7 +122,7 @@ body {
 }
 
 #intro-gate:hover {
-    background-color: #666666;
+    background-color: #333333;
     border-radius: 50%;
 
     animation: scroll-hint 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
@@ -207,8 +208,6 @@ body {
     gap: 1rem;
 
     padding: 1rem;
-
-    border: 0px solid red;
 }
 
 #gallery-moniter {
@@ -217,8 +216,14 @@ body {
 
     background-color: #666666;
     border-radius: 1rem;
+    overflow: hidden;
 
     filter: drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
+}
+
+.gallery-monitor-photo {
+    width: 100%;
+    height: 100%;
 }
 
 #gallery-thumbnail-list {
@@ -315,20 +320,25 @@ body {
     gap: 1rem;
 
     padding: 1rem;
-
-    border: 0px solid red;
 }
 
 .gallery-thumbnail {
     width: 100%;
     line-height: 1;
+
+    cursor: pointer;
 }
 
 .gallery-photo {
     border: 3px solid #333333;
     border-radius: 0.75rem;
-    height: 5rem;
+    height: 5.25rem;
     width:100%;
+}
+
+.signature-display-photo {
+    width: 100%;
+    height: 100%;
 }
 
 footer {

@@ -42,6 +42,6 @@ export class TaskStateManager {
     }
 
     static getGroup(groupKey) {
-        return this.taskGroupMap.get(groupKey);
+        return this.taskGroupMap.get(groupKey) ?? new Map();
     }
 }
