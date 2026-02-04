@@ -1,0 +1,52 @@
+/* 태블릿 */
+@media (max-width: 1024px) {
+    body { font-size: 16px; }    
+    #profile-photo { display: none; }
+
+    .academic-research-photo,
+    .teaching-activity-photo {
+        width: 12.5rem;
+        height: auto;
+    }
+
+    #gallery-items {    
+        grid-template-columns: 7fr 3fr;       
+    }
+
+    .thumbnail-container {    
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body { font-size: 16px; }    
+    #profile-photo { display: none; }
+
+    .academic-research-photo,
+    .teaching-activity-photo {
+        width: 9rem;
+        height: auto;
+    }
+
+    .works-personal-project-image {
+        width: 14rem;
+    }
+
+    .gallery-photo {
+        height: 6.5rem;
+    }
+
+    #gallery-items {    
+        display: block;       
+    }
+
+    #gallery-items .thumbnail-container {                   
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        height: 10rem;
+    }
+
+    #gallery-thumbnail-list {
+        margin-top: 2rem;
+        height: 22rem;
+    }
+}

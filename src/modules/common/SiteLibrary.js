@@ -229,9 +229,25 @@ export class SiteLibrary {
     });
   }
 
-  static truncateText(text, limit = 50) {
-      if (text.length <= limit) return text;
-      return text.slice(0, limit) + '…';
+  static truncateText(text, limit = 100) {
+    let width = 0;
+    let result = '';
+
+    for (const char of text) {
+      let charWidth = 1;
+
+      if (char === ' ') charWidth = 0.6;
+      else if (char.charCodeAt(0) <= 0x007f) charWidth = 0.8;
+
+      if (width + charWidth > limit) {
+        return result + '…';
+      }
+
+      width += charWidth;
+      result += char;
+    }
+
+    return result;
   }
 
   /*static isRectOverap(rect1, rect2) {

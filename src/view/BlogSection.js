@@ -71,7 +71,7 @@ export class BlogSection {
             siteMap.blog.blogSectionHeaderIcon,
             siteMap.blog.blogCaptionText,
             siteMap.blog.blogSectionHeaderIconAlt,
-            24, 56, 0
+            24, 54, 0
         );
 
         Templates.createSectionHeaderEvent(blog_section_header, siteMap.blog.blogCaptionId);
@@ -83,7 +83,7 @@ export class BlogSection {
             'latest-post',
             siteMap.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
-            50, 110, 4
+            50, 106, 4
         );
 
         blog_blog.appendChild(post_list);
@@ -143,7 +143,7 @@ export class BlogSection {
             siteMap.blog.archiveSectionHeaderIcon,
             siteMap.blog.archiveCaptionText,
             siteMap.blog.archiveSectionHeaderIconAlt,
-            26, 0, 0
+            24, 0, 0
         );
 
         blog_archive.appendChild(archive_section_header);
@@ -379,7 +379,7 @@ export class BlogSection {
                 spec.list_viewer_id,
                 section_icon,
                 spec.title,
-                this.generateSubjectList(type, spec.class_name, section_icon, data, 26, 56, 0),
+                this.generateSubjectList(type, spec.class_name, section_icon, data, 24, 54, 0),
                 null,
                 COMMON.COPYRIGHT
             );

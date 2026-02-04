@@ -149,7 +149,7 @@ export class TaskBar {
             taskbar_item_id, 
             target_id, 
             title_icon_path, 
-            SiteLibrary.truncateText(title_text, 12)
+            SiteLibrary.truncateText(title_text, 11)
         );
 
         taskbar_item.dataset.group = group_type;
