@@ -97,7 +97,7 @@ footer {
 }
 
 .task-bar-group .task_bar_item .medium_icon {
-  width: 0.75rem;
+  width: 0.8rem;
   height: auto;
 }
 
@@ -112,9 +112,7 @@ footer {
   left: 0;
   top: 100%;
 
-  font-size: 0.85rem;
-
-  border: 0px solid red;
+  font-size: 0.8rem;  
 }
 
 .task_item_close {

@@ -33,7 +33,7 @@ export class TaskBar {
             title_text
         );
 
-        TaskStateManager.addTask(group_type, task_item);
+        TaskStateManager.addTask(group_type, task_item, target_id);
 
         const task_bar = this.taskBarElement;
         const task_group = TaskStateManager.getGroup(group_type);
@@ -69,6 +69,7 @@ export class TaskBar {
         if (root) return root;
 
         root = this.createTaskGroupRoot(
+            group_type,
             group_type + '_task_group',
             title_icon_path,
             this.groupName(group_type)
@@ -86,11 +87,22 @@ export class TaskBar {
     groupItemsEvent(task_group_item, group_items) {
         task_group_item.addEventListener ('pointerenter', (e) => {
             e.stopPropagation();
+
+            if (e.pointerType !== 'mouse') return;
+
+            group_items.style.visibility = 'visible';
+        });
+
+        task_group_item.addEventListener ('click', (e) => {
+            e.stopPropagation();
             group_items.style.visibility = 'visible';
         });
 
         task_group_item.addEventListener ('pointerleave', (e) => {
             e.stopPropagation();
+            
+            if (e.pointerType !== 'mouse') return;
+
             group_items.style.visibility = 'hidden';
         });
     }
@@ -118,7 +130,7 @@ export class TaskBar {
         }
     }
 
-    createTaskGroupRoot(task_group_id, title_icon_path, title_text) {
+    createTaskGroupRoot(group_type, task_group_id, title_icon_path, title_text) {
         const element = document.createElement('div');
         element.id = task_group_id;
         element.className = 'task-bar-group';
@@ -132,9 +144,13 @@ export class TaskBar {
         close_img.addEventListener ('click', (e) => {
             e.stopPropagation();
 
-            //this.unmount(element.id, target_id);
-            //TaskStateManager.removeTask(element.dataset.group, element.id);
-            //ViewerStateManager.removeGroup(target_id);
+            const group = TaskStateManager.getGroup(group_type);
+
+            for (const task of group.values()) {
+                this.unmount(task.element.id, task.targetId);
+            }
+
+            console.log(Task);
         });
 
         element.appendChild(title_img);
@@ -149,7 +165,7 @@ export class TaskBar {
             taskbar_item_id, 
             target_id, 
             title_icon_path, 
-            SiteLibrary.truncateText(title_text, 11)
+            SiteLibrary.truncateText(title_text, 13)
         );
 
         taskbar_item.dataset.group = group_type;
@@ -220,8 +236,21 @@ export class TaskBar {
     }
 
     unmount(task_bar_item_id, target_id) {
-        SiteLibrary.closeElement(task_bar_item_id);        
-        SiteLibrary.closeElement(target_id);        
+        let task_element = document.getElementById(task_bar_item_id);
+
+        const group_length = TaskStateManager.getGroup(task_element.dataset.group).size;
+        if (group_length === 1) {
+            let group_root = document.getElementById(task_element.dataset.group + '_task_group');
+            group_root.remove();
+            group_root = null;
+        }
+
+        TaskStateManager.removeTask(task_element.dataset.group, task_element.id);
+
+        SiteLibrary.closeElement(task_element.id);        
+        SiteLibrary.closeElement(target_id);
+
+        task_element = null;
     }
 }
 

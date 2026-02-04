@@ -12,14 +12,15 @@ export class TaskStateManager {
     }
 
     // 태스크 추가
-    static addTask(groupKey, element) {
+    static addTask(groupKey, element, target_id) {
         this.createGroup(groupKey);
 
         const group = this.taskGroupMap.get(groupKey);
 
         group.set(element.id, {
             element,
-            className: element.className
+            className: element.className,
+            targetId: target_id
         });
     }
 

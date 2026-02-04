@@ -196,13 +196,22 @@ export class ViewerWindow {
         close_button.addEventListener('click', e => {
             e.stopPropagation();
 
-            SiteLibrary.closeElement(this.targetId);            
-            SiteLibrary.closeElement(this.viewer_wrapper_id);
+            let task_element = document.getElementById(this.targetId);
+
+            const group_length = TaskStateManager.getGroup(task_element.dataset.group).size;
+            if (group_length === 1) {
+                let group_root = document.getElementById(task_element.dataset.group + '_task_group');
+                group_root.remove();
+                group_root = null;
+            }
+
+            task_element = null;
 
             TaskStateManager.removeTask(this.viewer_wrapper_element.dataset.group, this.viewer_wrapper_id  + '_task_bar_item');
             ViewerStateManager.removeGroup(this.viewer_wrapper_id);
 
-            console.log(TaskStateManager.taskGroupMap);
+            SiteLibrary.closeElement(this.targetId);            
+            SiteLibrary.closeElement(this.viewer_wrapper_id);
         });
     }
 
