@@ -22,9 +22,26 @@
     body { font-size: 16px; }    
     #profile-photo { display: none; }
 
+    .experience-timeline-item {
+        gap: 0.5rem;                  /* year와 content 사이 간격 */
+
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .content {
+        flex: 1;                            /* 남은 공간 차지 */
+
+        border-left: 2px solid #666666;
+        padding-left: 1rem;               /* border와 텍스트 간격 */
+        margin-left: 0.5rem;
+
+        line-height: 2.5rem;
+    }
+
     .academic-research-photo,
     .teaching-activity-photo {
-        width: 9rem;
+        width: 8rem;
         height: auto;
     }
 

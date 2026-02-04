@@ -142,6 +142,8 @@ footer {
 #logo {
   height: 2.5rem;
   margin-right: 0.75rem;
+
+  cursor: pointer;
 }
 
 .content-primary {

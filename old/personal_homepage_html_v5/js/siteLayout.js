@@ -230,11 +230,29 @@ $(function () {
    
     $(window).on('scroll', function () {
         const scrollTop = $(this).scrollTop();
-        
-        if (scrollTop === 0) { 
-            $('#about-link').removeClass('active');
-            $('#gallery-link').removeClass('active');
-            $('#links-link').removeClass('active');
+        const offsetGap = 100; // 상단 여백 (헤더 높이 보정용)
+
+        // 전부 초기화
+        $('#navigation-items a').removeClass('active');
+
+        // 맨 위
+        if (scrollTop === 0) return;
+
+        const sections = [
+            { section: '#about', link: '#about-link' },
+            { section: '#gallery', link: '#gallery-link' },
+            { section: '#links', link: '#links-link' }
+        ];
+
+        for (let i = 0; i < sections.length; i++) {
+            if ($(sections[i].section).length > 0) {            
+                const top = $(sections[i].section).offset().top - offsetGap;
+
+                if (scrollTop >= (top / 2)) {
+                    $(sections[i].link).addClass('active');
+                    break;
+                }
+            }
         }
     });
 
@@ -262,7 +280,7 @@ $(function () {
         });
     });
 
-    $('#navigation-items a, #signature-comment a').on('click', function (e) {
+    $('#signature-comment a').on('click', function (e) {
         let href = $(this).attr('href');
 
         if (!href || href.charAt(0) !== '#') return;
@@ -272,20 +290,7 @@ $(function () {
         let $target = $(href);
         if (!$target.length) return;
 
-        switch ($(this).attr('id')) {
-            case '#about':
-                $('#about-link').addClass('active');                
-                break;
-            case '#gallery':
-                $('#gallery-link').addClass('active');                
-                break;
-            case '#links':
-                $('#links-link').addClass('active');                 
-                break;
-            default:
-                break;
-        }
-
+        
         $('html, body').animate({
             scrollTop: $target.offset().top - anchor_offset
         }, 800);

@@ -197,14 +197,14 @@ export class ViewerWindow {
             e.stopPropagation();
 
             let task_element = document.getElementById(this.targetId);
+            let group_root = document.getElementById(task_element.dataset.group + '_task_group');
 
             const group_length = TaskStateManager.getGroup(task_element.dataset.group).size;
-            if (group_length === 1) {
-                let group_root = document.getElementById(task_element.dataset.group + '_task_group');
+            if (group_root && group_length === 1) {                
                 group_root.remove();
-                group_root = null;
             }
 
+            group_root = null;
             task_element = null;
 
             TaskStateManager.removeTask(this.viewer_wrapper_element.dataset.group, this.viewer_wrapper_id  + '_task_bar_item');
