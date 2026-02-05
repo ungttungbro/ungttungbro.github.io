@@ -1,7 +1,6 @@
 'use strict';
 
 export class TaskStateManager {
-    // taskGroupMap: groupKey -> Map(taskId -> taskData)
     static taskGroupMap = new Map();
 
     // 그룹 생성

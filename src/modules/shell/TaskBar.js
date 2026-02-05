@@ -7,6 +7,7 @@ import { TaskStateManager } from "./TaskStateManager.js";
 const TASKBAR_CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE : 'medium_icon',
     CLOSE_BUTTON_ICON_PATH : './assets/icons/close.png',
+    LOGO_ICON_PATH: '/assets/icons/logo.png'
 });
 
 export class TaskBar {
@@ -20,7 +21,7 @@ export class TaskBar {
     }
 
     layout() {
-        const logo = SiteLibrary.createImgElement('', 'logo', '/assets/icons/logo.png', 'logo');
+        const logo = SiteLibrary.createImgElement('', 'logo', TASKBAR_CONSTANTS.LOGO_ICON_PATH, 'logo');
 
         logo.addEventListener('click', (e) =>{
             const group_map = TaskStateManager.taskGroupMap;
@@ -88,7 +89,6 @@ export class TaskBar {
         );
 
         const group_items = this.createGroupItems(task_group);
-        group_items.style.visibility = 'hidden';
         root.appendChild(group_items);
 
         this.groupItemsEvent(root, group_items);
@@ -159,8 +159,6 @@ export class TaskBar {
             for (const task of group.values()) {
                 this.unmount(task.element.id, task.targetId);
             }
-
-            console.log(Task);
         });
 
         element.appendChild(title_img);

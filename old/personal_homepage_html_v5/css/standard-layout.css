@@ -207,7 +207,7 @@ body {
     grid-template-columns: 6fr 4fr;
     gap: 1rem;
 
-    padding: 1rem;
+    padding-top: 2rem;    
 }
 
 #gallery-moniter {

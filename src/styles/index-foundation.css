@@ -1,10 +1,13 @@
 @import "./common/reset.css";
 @import "./common/base.css";
+
+@import "./shell/task-bar-style.css";
+@import "./shell/viewer-window-style.css";
+
 @import "./section/about-style.css";
 @import "./section/blog-style.css";
 @import "./section/photolog-style.css";
 @import "./section/links-style.css";
-@import "./section/viewer-window-style.css";
 
 :root {
   --index_layout_column_count : 3;
@@ -43,101 +46,6 @@ footer {
   font-weight: bold;
   background-color: #1a1a1a;
   border-top: 0.1rem solid #333333;
-}
-
-#taskbar {
-  display: flex;
-  position : relative;
-  max-width: 100%;
-  height: 3rem;
-  top: 0;
-  padding-left: 1rem;
-  padding-top: var(--base_margin_size_light);
-  padding-bottom: var(--base_margin_size_light);
-  align-items:center;
-  justify-content: left;
-  margin:auto;  
-  border-bottom: 0.1rem solid #333333;
-}
-
-.task_bar_item,
-.task-bar-group {
-  display: flex;
-  max-width: 16rem;
-  position: relative;
-  color: #cdcdcd;
-  border: 0px solid #444444;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  font-weight: bold;
-  align-items: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-left: 0.15rem;
-  background-color: #333333;
-  -webkit-user-select: none; /* Chrome, Safari, Opera */
-  -moz-user-select: none;    /* Firefox */
-  -ms-user-select: none;     /* IE/Edge */
-  user-select: none;
-}
-
-.task-bar-group .task_bar_item {
-  width: 95%;
-  padding-left: 0.5rem;
-  padding-right: 0.4rem;
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
-  
-  background-color: #222222;
-  border: 0px solid #555555;
-  border-radius: 0%;
-  
-  justify-content: space-between;
-  margin: 0 auto;
-}
-
-.task-bar-group .task_bar_item .medium_icon {
-  width: 0.8rem;
-  height: auto;
-}
-
-.task-bar-group .task_bar_item .task_item_close {
-  width: 1rem;
-  height: 1rem;
-}
-
-.task-group-items {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 100%;
-
-  font-size: 0.8rem;  
-}
-
-.task_item_close {
-  display: flex;
-  padding: 0.25rem;
-  border: 0px solid #444444;
-  margin-left: 0.5rem;
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 0.25rem;
-}
-
-.task_item_close:hover {
-  background-color: #777777;
-}
-
-.task_bar_item:hover,
-.task-bar-group:hover {
-  background-color: #444444;
-  cursor: pointer;
-}
-
-.task_bar_item:hover {
-  background-color: #fcd201;
-  color: #222222;
 }
 
 #logo {
