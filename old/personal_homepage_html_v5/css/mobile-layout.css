@@ -1,56 +1,24 @@
 /* 태블릿 */
-@media (max-width: 1024px) {
-    body { font-size: 16px; }    
+@media (max-width: 65rem) {
+    body { font-size: 16px; }
+    
+    .works-personal-project-image { width: 14rem; }
+    .thumbnail-container { grid-template-columns: 1fr 1fr; }
+
     #profile-photo { display: none; }
 
-    .academic-research-photo,
-    .teaching-activity-photo {
-        width: 12.5rem;
-        height: auto;
-    }
+    #academic-research-photos,
+    #teaching-activity-photos { gap: 1rem; }   
 
-    #gallery-items {    
-        grid-template-columns: 7fr 3fr;       
-    }
-
-    .thumbnail-container {    
-        grid-template-columns: 1fr 1fr;
-    }
+    #gallery-items { grid-template-columns: 7fr 3fr; }
 }
 
-@media (max-width: 768px) {
-    body { font-size: 16px; }    
-    #profile-photo { display: none; }
-
-    .experience-timeline-item {
-        gap: 0.5rem;                  /* year와 content 사이 간격 */
-
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-
+@media (max-width: 52rem) {
     .content {
-        flex: 1;                            /* 남은 공간 차지 */
-
-        border-left: 2px solid #666666;
         padding-left: 1rem;               /* border와 텍스트 간격 */
-        margin-left: 0.5rem;
+        margin-left: 0;
 
         line-height: 2.5rem;
-    }
-
-    .academic-research-photo,
-    .teaching-activity-photo {
-        width: 8rem;
-        height: auto;
-    }
-
-    .works-personal-project-image {
-        width: 14rem;
-    }
-
-    .gallery-photo {
-        height: 6.5rem;
     }
 
     #gallery-items {    
@@ -59,11 +27,127 @@
 
     #gallery-items .thumbnail-container {                   
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        height: 10rem;
+        width: 100%;
     }
 
     #gallery-thumbnail-list {
         margin-top: 2rem;
         height: 22rem;
+    }
+
+    .gallery-photo {
+        width: 100%;
+        height: 7rem;
+    }
+}
+
+
+@media (max-width: 48rem) {
+    .experience-timeline-item {
+        gap: 0.5rem;                  /* year와 content 사이 간격 */
+    }
+
+    #academic-research-photos,
+    #teaching-activity-photos {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 0.75rem;
+        padding: 0.75rem;
+    }
+   
+    .works-personal-project-image {
+        width: 16rem;
+    }
+}
+
+@media (max-width: 34rem) {
+    .experience-timeline-item {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .year {
+        flex: 0 0 3rem;           /* 고정 너비 */
+        font-size: 1.25rem;
+    }
+
+    .content {
+        padding-left: 0.5rem;               /* border와 텍스트 간격 */
+        margin-left: 0;
+
+        line-height: 2.5rem;
+
+        border-left: 0px solid #666666;
+    }
+
+    .works-personal-project-image {
+        width: 12rem;
+    }
+
+    .gallery-photo {
+        width: 100%;
+        height: 6.5rem;
+    }
+
+    #gallery-moniter {
+        height: 20rem;
+    }
+
+     #gallery-items .thumbnail-container {                   
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h3 { font-size: 4rem; }
+
+    #nav-right a {
+        margin-right: 0.5rem;
+    }
+
+    #logo {
+        height: 40px;
+    }
+
+    .experience-timeline-item {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .year {
+        flex: 0 0 2.5rem;           /* 고정 너비 */
+        font-size: 1rem;
+        line-height: 2.25rem;
+    }
+
+    .content {
+        padding-left: 0.5rem;               /* border와 텍스트 간격 */
+        margin-left: 0;
+
+        line-height: 2.25rem;
+
+        border-left: 0px solid #666666;
+    }
+
+    .works-personal-project-image {
+        width: 100%;
+    }
+
+     .gallery-photo {
+        width: 100%;
+        height: 6rem;
+    }
+
+     #gallery-items .thumbnail-container {                   
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #gallery-moniter {
+        height: 15rem;
+    }
+
+    #gallery-thumbnail-list {
+        height: 21rem;
     }
 }

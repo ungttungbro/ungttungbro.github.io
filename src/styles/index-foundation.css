@@ -136,7 +136,8 @@ footer {
 }
 
 .task_bar_item:hover {
-  background-color: #444444;
+  background-color: #fcd201;
+  color: #222222;
 }
 
 #logo {
