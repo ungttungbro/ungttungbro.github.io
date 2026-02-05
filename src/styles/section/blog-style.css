@@ -13,7 +13,7 @@
 .post-index a:hover .summary { color: #444444; }
 
 .latest-post { line-height: 1.35; border: 0px solid red; }
-.latest-post a:hover .title { color: #ffc900; } /*#0aa8e2*/
+.latest-post a:hover .title { color: #ffc900; } /*#ffc900*/
 .latest-post a:hover .summary { color: #cdcdcd; }
 
 .blog-post { padding: 1rem; line-height: 1.75; font-size: 1.1rem; font-weight: 500; }

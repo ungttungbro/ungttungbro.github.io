@@ -7,7 +7,8 @@ import { TaskStateManager } from "./TaskStateManager.js";
 const TASKBAR_CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE : 'medium_icon',
     CLOSE_BUTTON_ICON_PATH : './assets/icons/close.png',
-    LOGO_ICON_PATH: '/assets/icons/logo.png'
+    LOGO_ICON_PATH: '/assets/icons/logo.png',
+    COLOR_ICON_PATH: '/assets/icons/color.png'
 });
 
 export class TaskBar {
@@ -16,12 +17,14 @@ export class TaskBar {
             throw new Error('taskbar element required');
 
         this.taskBarElement = task_bar_element;
+        this.taskItemsElement = document.createElement('div');
+        this.taskItemsElement.id = 'task-items';
 
         this.layout();
     }
 
     layout() {
-        const logo = SiteLibrary.createImgElement('', 'logo', TASKBAR_CONSTANTS.LOGO_ICON_PATH, 'logo');
+        const logo = SiteLibrary.createImgElement('', 'logo', TASKBAR_CONSTANTS.LOGO_ICON_PATH, 'logo');        
 
         logo.addEventListener('click', (e) =>{
             const group_map = TaskStateManager.taskGroupMap;
@@ -34,7 +37,12 @@ export class TaskBar {
             }
         });
 
+        
+        const color = SiteLibrary.createImgElement('', 'color-theme', TASKBAR_CONSTANTS.COLOR_ICON_PATH, 'color');
+
         this.taskBarElement.appendChild(logo);
+        this.taskBarElement.appendChild(this.taskItemsElement);
+        this.taskBarElement.appendChild(color);
     }
     
     mount(group_type, taskbar_item_id, target_id, title_icon_path, title_text) {
@@ -48,7 +56,7 @@ export class TaskBar {
 
         TaskStateManager.addTask(group_type, task_item, target_id);
 
-        const task_bar = this.taskBarElement;
+        const task_bar = this.taskItemsElement;
         const task_group = TaskStateManager.getGroup(group_type);
         const group_length = task_group.size;
 

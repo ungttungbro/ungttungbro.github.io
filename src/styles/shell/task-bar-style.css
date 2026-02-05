@@ -1,9 +1,12 @@
 #taskbar {
-    display: flex;
+    display: grid;
     position : relative;
 
+    flex-direction: column;
+    grid-template-columns: 6.5rem 1fr 3rem;
+    
     max-width: 100%;
-    height: 3rem;
+    height: 3.25rem;
 
     top: 0;
 
@@ -11,11 +14,20 @@
     padding-top: var(--base_margin_size_light);
     padding-bottom: var(--base_margin_size_light);
 
-    align-items:center;
-    justify-content: left;
-    margin:auto;  
+    align-items: center;
+    margin: auto;
 
-    border-bottom: 0.1rem solid #333333;
+    border-bottom: 1px solid #333333;
+}
+
+#task-items {
+    display: flex;
+    position: relative;
+
+    width: 99%;
+    border: 0px solid red;
+
+    margin-right: 1rem;
 }
 
 .task_bar_item,
@@ -24,6 +36,7 @@
     position: relative;
 
     max-width: 16rem;
+    height: auto;
     
     border-radius: 0.5rem;
     padding: 0.5rem;
@@ -105,6 +118,10 @@
 }
 
 .task_bar_item:hover {
-    background-color: #fcd201;
-    color: #222222;
+    background-color: #444444;
+}
+
+#color-theme {
+    width: 1.5rem;
+    height: auto;
 }
