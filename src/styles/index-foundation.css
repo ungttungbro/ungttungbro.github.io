@@ -12,13 +12,11 @@
 :root {
   --index_layout_column_count : 3;
   --index_layout_column_gap : 1rem;
-  --title_bar_background_color : #333333; /*b0c4de*/
-  --title_bar_font_color : #bababa; /*#2F2F4F*/
 }
 
 header {  
   position:fixed;
-  background-color: #1a1a1a;
+  background-color: var(--base_header_background_color);
   top: 0;
   left: 0;
   right: 0;
@@ -91,11 +89,14 @@ footer {
 
 .title_box {
   display: flex;
-  background-color: var(--title_bar_background_color);
+  background-color: var(--base_title_bar_background_color);
+
   border: var(--base_border_line);
   border-radius: var(--base_border_radius_medium);
+  
   font-weight: bold;
   color: var(--title_bar_font_color);
+  
   margin: auto;
   margin-bottom: var(--base_margin_size_medium);
   padding: var(--base_margin_size_medium);

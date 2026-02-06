@@ -135,12 +135,26 @@
 @media (max-width: 30rem) {
     h3 { font-size: 4rem; }
 
+    #navigation-items {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
     #nav-right a {
+        font-weight: 500;
         margin-right: 0.5rem;
     }
 
     #logo {
         height: 40px;
+    }
+
+    #experience,
+    #works,
+    #gallery,
+    #links {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     .experience-timeline-item {

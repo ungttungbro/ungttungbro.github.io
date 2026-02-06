@@ -8,7 +8,7 @@
   font-size: 0.9rem;  
   text-align: left;
   
-  background-color: #333333;
+  background-color: var(--base_box_background_color);
   border: var(--base_border_line);
   border-radius: var(--base_border_radius_medium);
   

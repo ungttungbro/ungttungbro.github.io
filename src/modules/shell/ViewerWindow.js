@@ -196,22 +196,25 @@ export class ViewerWindow {
         close_button.addEventListener('click', e => {
             e.stopPropagation();
 
-            let task_element = document.getElementById(this.targetId);
-            let group_root = document.getElementById(task_element.dataset.group + '_task_group');
-
-            const group_length = TaskStateManager.getGroup(task_element.dataset.group).size;
-            if (group_root && group_length === 1) {                
-                group_root.remove();
-            }
-
-            group_root = null;
-            task_element = null;
-
             TaskStateManager.removeTask(this.viewer_wrapper_element.dataset.group, this.viewer_wrapper_id  + '_task_bar_item');
             ViewerStateManager.removeGroup(this.viewer_wrapper_id);
 
+            let task_element = document.getElementById(this.targetId);
+            let task_container = document.getElementById('task-items');
+            let group_root = document.getElementById(task_element.dataset.group + '_task_group');
+
+            const group_items = TaskStateManager.getGroup(task_element.dataset.group);
+            if (group_root && group_items.size === 1) {
+                task_container.appendChild(group_items.values().next().value.element);           
+                group_root.remove();
+            }
+
             SiteLibrary.closeElement(this.targetId);            
             SiteLibrary.closeElement(this.viewer_wrapper_id);
+
+            group_root = null;
+            task_container = null;
+            task_element = null;
         });
     }
 

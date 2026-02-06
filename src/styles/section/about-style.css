@@ -3,7 +3,6 @@
 :root {  
   --myphoto_width_size: 20rem;
   --myphoto_height_size: 15rem;
-  --profile_box_background_color: #333333;
 }
 
 #photo-zone .about-photo { 
@@ -13,7 +12,7 @@
   height: var(--myphoto_height_size);
 
   border-radius: var(--base_border_radius_medium);
-  filter: drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
+  filter: var(--base_drop_shadow);
 }
 
 #profile {  
@@ -22,7 +21,7 @@
 
   font-size: 0.9rem;
 
-  background-color: var(--profile_box_background_color);
+  background-color: var(--base_box_background_color);
   border-radius: var(--base_border_radius_medium);
 
   margin-top: var(--base_margin_size_medium);

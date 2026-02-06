@@ -25,7 +25,6 @@
     position: relative;
 
     width: 99%;
-    border: 0px solid red;
 
     margin-right: 1rem;
 }
@@ -124,4 +123,8 @@
 #color-theme {
     width: 1.5rem;
     height: auto;
+}
+
+#color-theme:hover {
+    cursor: pointer;
 }

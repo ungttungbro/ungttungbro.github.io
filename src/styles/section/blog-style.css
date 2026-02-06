@@ -1,8 +1,8 @@
 @import "../common/base.css";
 
-.meta    { font-size: 0.9rem; color: #888888; }
-.title   { font-size: 1rem; color: #dddddd; }
-.summary { font-size: 0.9rem; color: #aaaaaa; }
+.meta    { font-size: 0.9rem; color: var(--base_font_color_c); }
+.title   { font-size: 1rem; color: var(--base_font_color); font-weight: var(--base_font_weight); }
+.summary { font-size: 0.9rem; color: var(--base_font_color_b); font-weight: var(--base_font_weight); }
 
 .post-index { line-height: 1; }
 .post-index .meta { font-size: 0.85rem; color: #666666; }
@@ -26,7 +26,7 @@
 .blog-content-panel hr { border: 1px dashed #999999; }
 
 .blog-post-photo-medium {
-  width: 30rem;
+  width: 20rem;
   height:auto;
 
   border-radius: var(--base_border_radius_large);
@@ -36,7 +36,6 @@
 
 .lifelog-photo-medium {
   width: 100%;
-  max-width: 60rem;
   height:auto;
 }
 

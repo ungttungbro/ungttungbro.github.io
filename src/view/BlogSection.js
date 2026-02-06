@@ -331,7 +331,7 @@ export class BlogSection {
         return subject_list;
     }
 
-    subjectListSpec(type) {
+    /*subjectListSpec(type) {
         let list_spec = {
             title: '',
             list_viewer_id: '',
@@ -357,23 +357,23 @@ export class BlogSection {
         }
 
         return list_spec;
-    }
+    }*/
 
     generatePostEvent(type, data, element, id, section_icon, title, header, content_path, footer) {
         element.addEventListener('mouseenter', e => { this.prefetchPost(element, content_path); }); 
         element.addEventListener('click',  e => {            
-            let viewer_width = (window.innerWidth - (window.innerWidth * VIEWER.LIST_RATIO_MIDDLE)) + 'px';     
+            let viewer_width = (window.innerWidth - ((window.innerWidth * VIEWER.LIST_RATIO_MIDDLE)) * 2) + 'px';     
 
             if (type === 'lifelog') { viewer_width = data.get(id)['width']; }
 
-            const spec = this.subjectListSpec(type);
+            //const spec = this.subjectListSpec(type);
 
             this.onPostClick (
                 e, id, type, viewer_width, section_icon,
                 title, header,content_path, footer
             );
 
-            this.onSectionHeaderClick (
+            /*this.onSectionHeaderClick (
                 e,
                 type,
                 spec.list_viewer_id,
@@ -382,7 +382,7 @@ export class BlogSection {
                 this.generateSubjectList(type, spec.class_name, section_icon, data, 24, 54, 0),
                 null,
                 COMMON.COPYRIGHT
-            );
+            );*/
         });
     }
     
@@ -406,12 +406,12 @@ export class BlogSection {
             return; 
         }
 
-        let left = 0;
+        let left = (window.innerWidth * VIEWER.LIST_RATIO_MIDDLE);
         if (blog_type === 'lifelog') {
             left = (window.innerWidth 
                 - ((window.innerWidth * VIEWER.LIST_RATIO_MIDDLE) 
                 + (SiteLibrary.remToPx(viewer_width))
-            )) + 'px';
+            ));
         }
 
         const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
@@ -421,9 +421,10 @@ export class BlogSection {
             viewer.configureWindow(
                 id,
                 viewer_width,
-                (window.innerHeight - height_offset) + 'px',
-                height_offset + 'px',
-                left,
+                (window.innerHeight  / 1.15) + 'px',
+                /*(window.innerHeight - height_offset) + 'px',*/
+                height_offset + (height_offset / 2) + 'px',
+                left +'px',
                 'viewer',
                 'blog',
                 section_icon,

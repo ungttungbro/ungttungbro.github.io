@@ -79,7 +79,7 @@ export class PhotologSection {
 
         const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
 
-        const width = window.innerWidth / 3.25;
+        const width = window.innerWidth / 4;
         const height = window.innerHeight - height_offset;
         const top = height_offset;
         const left = Math.min(window.innerWidth - width, window.innerWidth); // 화면 안쪽으로 제한
@@ -182,16 +182,6 @@ export class PhotologSection {
 
     generateTeaserEvent(element, id, title, header_contents, main_contents, footer_contents) {        
         element.addEventListener('click', e => {
-            this.onSectionHeaderClick (
-                e,
-                'photolog-index-viewer',
-                siteMap.photolog.sectionHeaderIcon,
-                '포토로그 (photolog) 목록',
-                this.generateTeaserList(0),          
-                null,                
-                COMMON.COPYRIGHT
-            );
-
             this.openPhotologContent(
                 id,
                 title,
@@ -214,10 +204,10 @@ export class PhotologSection {
             const viewer = new ViewerWindow();
             viewer.configureWindow (
                 id,
-                ((window.innerWidth - (window.innerWidth / 3.25))) + 'px',
-                (window.innerHeight - height_offset) + 'px',
-                height_offset + 'px',
-                0,
+                (window.innerWidth - ((window.innerWidth / 4) * 2)) + 'px',
+                (window.innerHeight - (height_offset * 4.5)) + 'px',
+                height_offset + (height_offset / 2) + 'px',
+                (window.innerWidth / 4) + 'px',
                 'viewer',
                 'photolog_photo',
                 siteMap.photolog.sectionHeaderIcon,

@@ -26,7 +26,7 @@ export class TaskBar {
     layout() {
         const logo = SiteLibrary.createImgElement('', 'logo', TASKBAR_CONSTANTS.LOGO_ICON_PATH, 'logo');        
 
-        logo.addEventListener('click', (e) =>{
+        logo.addEventListener('click', () =>{
             const group_map = TaskStateManager.taskGroupMap;
 
             for (const taskMap of group_map.values()) {
@@ -39,6 +39,13 @@ export class TaskBar {
 
         
         const color = SiteLibrary.createImgElement('', 'color-theme', TASKBAR_CONSTANTS.COLOR_ICON_PATH, 'color');
+        color.addEventListener('click', () =>{
+            const theme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute(
+                'data-theme',
+                theme === 'dark' ? 'light' : 'dark'
+            );
+        });
 
         this.taskBarElement.appendChild(logo);
         this.taskBarElement.appendChild(this.taskItemsElement);
@@ -253,17 +260,19 @@ export class TaskBar {
 
     unmount(task_bar_item_id, target_id) {
         let task_element = document.getElementById(task_bar_item_id);
-        let group_root = document.getElementById(task_element.dataset.group + '_task_group');
-
-        const group_length = TaskStateManager.getGroup(task_element.dataset.group).size;
-        if (group_root && group_length === 1) {
-            group_root.remove();
-        }
 
         TaskStateManager.removeTask(task_element.dataset.group, task_element.id);
 
         SiteLibrary.closeElement(task_element.id);        
         SiteLibrary.closeElement(target_id);
+        
+        const group_items = TaskStateManager.getGroup(task_element.dataset.group);
+        let group_root = document.getElementById(task_element.dataset.group + '_task_group');
+
+        if (group_root && group_items.size === 1) {
+            this.taskItemsElement.appendChild(group_items.values().next().value.element);
+            group_root.remove();
+        }
 
         group_root = null;
         task_element = null;

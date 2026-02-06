@@ -43,16 +43,17 @@
 .teaser-figure .figure-title {
     display: block;
 
-    color: #dddddd;
+    color: var(--base_font_color);
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: var(--base_font_weight);
 
     line-height: 1.5;
 }
 
 .teaser-figure .figure-content {
     font-size: 0.9rem;
-    color: #aaaaaa;
+    color: var(--base_font_color_b);
+    font-weight: var(--base_font_weight);
     
     line-height: 1.4;
 }

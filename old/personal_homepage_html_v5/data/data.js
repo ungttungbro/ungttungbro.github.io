@@ -49,9 +49,9 @@ const worksProjectsData = [
 
 
 const worksPersonalProjectsData = [
-    [ 'SEED256bit 블록암호 라이브러리', './images/works/projects/console.gif','SEED256bit 블록암호 운영 라이브러리 설계','KISA 알고리즘 기반 5가지 운영모드 구현','프로젝트 완료일 : 2011.3' ],
+    [ 'SEED256bit 블록암호 라이브러리', './images/works/projects/console.gif','SEED 블록암호 기반 운영 라이브러리 설계','KISA 알고리즘 기반 5가지 운영모드 구현','프로젝트 완료일 : 2011.3' ],
     [ 'Lavine Launcher', './images/works/projects/Lavine.gif','독자적 문법 설계 및 인터프리터 기반 구조','개발환경 : VC++','프로젝트 완료일 : 2010.12' ],
-    [ 'groupware', './images/works/projects/groupware.gif','그룹웨어 개발','개발환경 : VC++, ASP, MS-SQL, C#','프로젝트 완료일 : 2010.7' ],
+    [ 'Groupware', './images/works/projects/groupware.gif','그룹웨어 개발','개발환경 : VC++, ASP, MS-SQL, C#','프로젝트 완료일 : 2010.7' ],
     [ 'InternetDisk', './images/works/projects/internetdisk.gif','FTP 기반 인터넷디스크','파일 업로드, 다운로드, 탐색기능','프로젝트 완료일 : 2009.12' ],
     [ 'RockStyleLife', './images/works/projects/rockstylelife.gif','록 스타일 의류 쇼핑몰','ASP, MS-SQL 기반 개발','프로젝트 완료일 : 2006.12' ],
     [ 'Prent', './images/works/projects/prent.gif','PC 렌탈 쇼핑몰','SP, MS-SQL 기반 개발','프로젝트 완료일 : 2006.6' ]
