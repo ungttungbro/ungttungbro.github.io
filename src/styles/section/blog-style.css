@@ -13,14 +13,14 @@
 .post-index a:hover .summary { color: #444444; }
 
 .latest-post { line-height: 1.35; border: 0px solid red; }
-.latest-post a:hover .title { color: #ffc900; } /*#ffc900*/
-.latest-post a:hover .summary { color: #cdcdcd; }
+.latest-post a:hover .title { color: var(--base_anchor_tag_hover_color); } /*#ffc900*/
+.latest-post a:hover .summary { color: var(--base_anchor_tag_hover_color_b); }
 
 .blog-post { padding: 1rem; line-height: 1.75; font-size: 1.1rem; font-weight: 500; }
 .blog-post-photo-comment { font-size: 0.9rem; color: #073f3f; }
 .blog-post .meta { color: #555555; font-size: 0.9rem; }
 .blog-post hr { border-color: #777777; }
-.blog-post a:hover { color: #106f80 }
+.blog-post a:hover { color: #106f80; }
 
 .blog-content-panel { padding: 0; }
 .blog-content-panel hr { border: 1px dashed #999999; }

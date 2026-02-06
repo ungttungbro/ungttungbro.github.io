@@ -17,7 +17,9 @@
     align-items: center;
     margin: auto;
 
-    border-bottom: 1px solid #333333;
+    background-image: url('/assets/icons/viewer-background.gif');
+
+    border-bottom: 1px solid #444444;
 }
 
 #task-items {
@@ -48,7 +50,7 @@
     
     margin-left: 0.15rem;
 
-    background-color: #333333;
+    background-color: #444444;
     
     -webkit-user-select: none; /* Chrome, Safari, Opera */
     -moz-user-select: none;    /* Firefox */
@@ -112,12 +114,12 @@
 
 .task_bar_item:hover,
 .task-bar-group:hover {
-    background-color: #444444;
+    background-color: #555555;
     cursor: pointer;
 }
 
 .task_bar_item:hover {
-    background-color: #444444;
+    background-color: #555555;
 }
 
 #color-theme {

@@ -29,7 +29,7 @@
 }
 
 #profile hr {
-  border: 1px dashed #444444;
+  border: var(--base_dash_border);
 }
 
 #thumbnails {

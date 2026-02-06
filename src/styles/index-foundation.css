@@ -42,8 +42,9 @@ footer {
   right : 0;
   bottom : 0;
   font-weight: bold;
-  background-color: #1a1a1a;
-  border-top: 1px solid #333333;
+  background-color: var(--base_footer_background_color);
+  background-image: url('/assets/icons/viewer-background.gif');
+  border-top: 1px solid #444444;
 }
 
 #logo {
@@ -77,7 +78,7 @@ footer {
 #site-copyright {
   display:flex;
   align-items: center;
-  height: 3.5rem;
+  height: 3rem;
   color: #cdcdcd;
   justify-content: center;
   margin: auto;
@@ -85,6 +86,10 @@ footer {
 
 #site-copyright a {
   text-decoration: none;
+}
+
+#site-copyright a:hover {
+  color: #cdcdcd;
 }
 
 .title_box {
@@ -103,4 +108,8 @@ footer {
   
   transition: background-color 0.3s;
   cursor: pointer;
+}
+
+.title_box:hover {
+  background-color: var(--base_title_bar_background_color_b);
 }

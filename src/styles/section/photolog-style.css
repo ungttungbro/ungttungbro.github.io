@@ -64,15 +64,10 @@
     margin-bottom: 0;
 }
 
-.teaser-figure:hover .figure-title {
-    color: #ffc900;
-}
+.teaser-figure:hover .figure-title { color: var(--base_anchor_tag_hover_color); }
+.teaser-figure:hover .figure-content { color: var(--base_anchor_tag_hover_color_b); }
 
-.teaser-figure:hover .figure-content {
-    color: #cdcdcd;
-}
-
-.teaser-figure:hover, .photolog_thumbnail {
+.teaser-figure:hover .photolog-thumbnail {
     transform: scale(1.0);
     opacity: 0.8;
 }
@@ -109,10 +104,5 @@
     line-height: 1.4;
 }
 
-#photolog-index-viewer .teaser-figure:hover .figure-title { 
-    color: #106f80; 
-}
-
-#photolog-index-viewer .teaser-figure:hover .figure-content { 
-    color: #444444; 
-}
+#photolog-index-viewer .teaser-figure:hover .figure-title { color: #106f80; }
+#photolog-index-viewer .teaser-figure:hover .figure-content { color: #444444; }

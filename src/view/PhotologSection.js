@@ -205,7 +205,7 @@ export class PhotologSection {
             viewer.configureWindow (
                 id,
                 (window.innerWidth - ((window.innerWidth / 4) * 2)) + 'px',
-                (window.innerHeight - (height_offset * 4.5)) + 'px',
+                (window.innerHeight - (height_offset * 5)) + 'px',
                 height_offset + (height_offset / 2) + 'px',
                 (window.innerWidth / 4) + 'px',
                 'viewer',

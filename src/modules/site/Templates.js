@@ -28,7 +28,6 @@ export class Templates {
         const content_text = caption_element.innerHTML;
 
         section_header.addEventListener('mouseenter', e => {
-            section_header.style.backgroundColor = '#444444';
             caption_element.innerHTML = content_text + '<div class="north-east-arrow">' + '&nbsp;' + ' ↗ ' + '</div>';
         });
 
