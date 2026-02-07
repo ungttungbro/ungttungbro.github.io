@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.classList.add('font-loaded');
   });
 
+  const theme = localStorage.getItem('color-theme');
+  if (theme) { document.documentElement.setAttribute('data-theme', theme); }
+  else { document.documentElement.setAttribute('data-theme', 'dark'); }
+
   const taskbar_element = document.getElementById('taskbar');
   taskbar.initialize(taskbar_element);
 

@@ -37,14 +37,18 @@ export class TaskBar {
             }
         });
 
-        
-        const color = SiteLibrary.createImgElement('', 'color-theme', TASKBAR_CONSTANTS.COLOR_ICON_PATH, 'color');
+        const color = document.createElement('div');
+        color.id = 'color-theme';
         color.addEventListener('click', () =>{
             const theme = document.documentElement.getAttribute('data-theme');
-            document.documentElement.setAttribute(
-                'data-theme',
-                theme === 'dark' ? 'light' : 'dark'
-            );
+            let mode = '';
+
+            if (theme === 'dark') { mode = 'light'; }
+            else { mode = 'dark'; }
+
+            document.documentElement.setAttribute('data-theme', mode);
+
+            localStorage.setItem('color-theme', mode);
         });
 
         this.taskBarElement.appendChild(logo);

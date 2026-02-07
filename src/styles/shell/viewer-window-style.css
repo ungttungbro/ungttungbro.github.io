@@ -59,7 +59,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.05);
+    /*background: rgba(0,0,0,0.05);*/
     pointer-events: none;
 }
 
@@ -110,6 +110,6 @@
 }
 
 .window_button:hover {
-  background-color: #555555;
+  background-color: #666666;
   border-radius: 25%;
 }
