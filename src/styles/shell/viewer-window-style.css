@@ -3,7 +3,7 @@
   flex-direction: column;
   max-height: 45rem;
   position: absolute;
-  background-color: #1a1a1a;
+  /*background-color: #1a1a1a;*/
   border: 0px solid #222222;
   color: #cdcdcd;  
   border-radius: 0.5rem;
@@ -19,7 +19,7 @@
   position: relative;
   top: 0;  
   background-color: #333333;
-  color: #cdcdcd;
+  color: #dddddd;
   user-select: none;
   padding: 0.75rem;
   font-weight: bold;
@@ -41,17 +41,35 @@
   font-weight: 500;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
-  background-color: #1a1a1a;
+  /*background-color: #1a1a1a;*/
   overflow-y: auto;
-  scroll-snap-type: none;
+  scroll-snap-type: y mandatory;
   scroll-behavior: auto;
 }
 
 .header_panel {
-  background-image: url('/assets/icons/viewer-background-light.gif');
-  color: #3d3d3d;
+  background:
+    /*repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.04) 2px,
+      transparent 2px,
+      transparent 6px
+    ),
+    rgba(255,255,255,0.12);*/
+
+  linear-gradient(
+      135deg,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.04) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+
+  backdrop-filter: blur(10px) saturate(110%) brightness(90%);
+    
   user-select: none;  
-  padding : 0.5rem;  
+  padding : 0.5rem; 
   /*scroll-snap-align: start;*/
 }
 
@@ -70,14 +88,27 @@
 } 
 
 .content_panel {
-  background-image: url('/assets/icons/viewer-background-light.gif');
-  background-color: #2a2a2a;
-  color: #2e2e2e;
+  /*background-image: url('/assets/icons/viewer-background-light.gif');
+  background-color: #2a2a2a;*/
+  color: var(--base_font_color);
   font-size: 1.1rem;
   line-height: 1.75;
   text-align: justify;
   overflow-wrap: anywhere;
   user-select: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.04) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+
+  /*backdrop-filter: blur(10px);*/
+
+  backdrop-filter: blur(10px) saturate(110%) brightness(90%);
 }
 
 .footer_panel {
@@ -90,7 +121,7 @@
   color: #dedede;
   font-weight: bold;
   margin: auto;
-  /*scroll-snap-align : center;*/
+  scroll-snap-align : end;
   border-top: 1px solid #444444;
 }
 

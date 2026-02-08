@@ -9,6 +9,7 @@
   --base_footer_background_image : url(/assets/icons/dark-mode-img/mid-dark-background.gif);
   --base_viewer_title_bar_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
   --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_background_image : url(/assets/icons/light-mode-img/viewer-background.gif);
   --base_dark_light_toggle_button : url(/assets/icons/dark-mode-img/light-toggle.png);
 
   --base_title_bar_background_color : #333333; /*b0c4de*/
@@ -58,6 +59,8 @@
 
   --base_drop_shadow :  drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
   --base_close_icon_filter_invert : none;
+
+  --base_backdrop_filter: blur(10px);
 }
 
 
@@ -67,6 +70,7 @@
   --base_footer_background_image: url(/assets/icons/dark-mode-img/mid-dark-background.gif);
   --base_viewer_title_bar_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
   --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_background_image : none;
   --base_dark_light_toggle_button : url(/assets/icons/dark-mode-img/light-toggle.png);
 
   --base_background_color : #cccccc;
@@ -93,9 +97,11 @@
   --base_hr_border : 1px solid #333333;
   --base_dash_border : 1px dashed #444444; 
   --base_border_line : 1px solid #444444;
+ 
   --base_close_icon_filter_invert : none;
 
   --base_drop_shadow :  drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
+  --base_backdrop_filter: blur(10px) saturate(110%) brightness(90%);
 
   --base_task_item_close_background_color_b : #777777;
 }
@@ -107,6 +113,7 @@
   --base_footer_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
   --base_viewer_title_bar_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
   --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_background_image : url(/assets/icons/light-mode-img/viewer-background.gif);
   --base_dark_light_toggle_button : url(/assets/icons/light-mode-img/dark-toggle.png);
 
   --base_background_color : #eeeeee;
@@ -127,15 +134,16 @@
   --base_font_color_c : #555555;
   --base_font_weight : 500;
 
-  --base_anchor_tag_hover_color : #0d738f;
+  --base_anchor_tag_hover_color : #056739;
   --base_anchor_tag_hover_color_b : #555555;
 
-  --base_hr_border : 1px solid #cccccc;
+  --base_hr_border : 1px solid #aaaaaa;
   --base_dash_border : 1px dashed #bbbbbb;
   --base_border_line : 1px solid #999999;
   --base_close_icon_filter_invert : invert(1);
 
   --base_drop_shadow : none;
+  --base_backdrop_filter: blur(10px);
 
   --base_task_item_close_background_color_b : #222222;
 }
@@ -165,6 +173,11 @@ body {
   visibility: hidden;
   font-family: var(--base_fonts);
   user-select: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
 body.font-loaded {
@@ -199,7 +212,7 @@ h1 {
 
 h2 {
   font-size: var(--base_font_medium);
-  color: #222222;
+  color: var(--base_font_color);
   font-weight: bold;
   padding-top : 0rem;
   padding-bottom : var(--base_margin_size_light);
@@ -207,7 +220,7 @@ h2 {
 
 h3 {
   font-size: var(--base_font_large);
-  color: #222222;
+  color: var(--base_font_color);
   font-weight: bold;
   padding-top : 0rem;
   line-height: 1.25;

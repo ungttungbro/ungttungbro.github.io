@@ -83,7 +83,7 @@ export class BlogSection {
             'latest-post',
             siteMap.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
-            50, 106, 4
+            50, 120, 4
         );
 
         blog_blog.appendChild(post_list);
@@ -423,7 +423,7 @@ export class BlogSection {
                 viewer_width,
                 (window.innerHeight  / 1.15) + 'px',
                 /*(window.innerHeight - height_offset) + 'px',*/
-                height_offset + (height_offset / 2) + 'px',
+                height_offset + 'px',
                 left +'px',
                 'viewer',
                 'blog',

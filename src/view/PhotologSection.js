@@ -170,7 +170,7 @@ export class PhotologSection {
         const teaser = SiteLibrary.createImgTitleCaption(
             thumbnail,
             SiteLibrary.truncateText(title[0], 16),
-            SiteLibrary.truncateText(text[0], 68)
+            SiteLibrary.truncateText(text[0], 76)
         );
         
         teaser.className = siteMap.photolog.teaserClassName;
@@ -204,9 +204,9 @@ export class PhotologSection {
             const viewer = new ViewerWindow();
             viewer.configureWindow (
                 id,
-                (window.innerWidth - ((window.innerWidth / 4) * 2)) + 'px',
-                (window.innerHeight - (height_offset * 5)) + 'px',
-                height_offset + (height_offset / 2) + 'px',
+                (window.innerWidth - ((window.innerWidth / 4) * 1.5)) + 'px',
+                (window.innerHeight - (height_offset * 3)) + 'px',
+                height_offset + 'px',
                 (window.innerWidth / 4) + 'px',
                 'viewer',
                 'photolog_photo',

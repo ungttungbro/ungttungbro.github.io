@@ -85,24 +85,28 @@
     margin: 0;
 
     scroll-snap-align: end;
-    scroll-snap-stop: always;  
-    scroll-margin-bottom: 6vh;
+    scroll-snap-stop: always;
+    /*scroll-margin-bottom: 6vh;*/
+}
+
+#photolog-index-viewer .teaser-list {
+    margin-top: 0;
 }
 
 #photolog-index-viewer .figure-title {
     font-size: 0.95rem;
     font-weight: bold;
-    color: #444444;
+    color: var(--base_font_color);
 
     line-height: 1.6;
 }
 
 #photolog-index-viewer .figure-content {
     font-size: 0.9rem;
-    color: #555555;
+    color: var(--base_font_color_b);
 
     line-height: 1.4;
 }
 
-#photolog-index-viewer .teaser-figure:hover .figure-title { color: #106f80; }
-#photolog-index-viewer .teaser-figure:hover .figure-content { color: #444444; }
+#photolog-index-viewer .teaser-figure:hover .figure-title { color: var(--base_anchor_tag_hover_color); }
+#photolog-index-viewer .teaser-figure:hover .figure-content { color: var(--base_anchor_tag_hover_color_b); }

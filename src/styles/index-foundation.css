@@ -46,13 +46,6 @@ footer {
   border-top: var(--base_border_line);
 }
 
-#logo {
-  width: 6rem;
-  margin-right: 0.75rem;
-
-  cursor: pointer;
-}
-
 .content-primary {
   display: grid;
   grid-template-columns: 1fr 20rem;
@@ -120,8 +113,8 @@ footer {
 
 
 #taskbar {
-  padding-top: var(--base_margin_size_light);
-  padding-bottom: var(--base_margin_size_light);
+  padding-top: var(--base_margin_size_tiny);
+  padding-bottom: var(--base_margin_size_tiny);
 
   background-image: var(--base_task_bar_background_image);
   
@@ -165,4 +158,16 @@ footer {
 
 #color-theme {
   background-image: var(--base_dark_light_toggle_button);
+}
+
+.header_panel,
+.content_panel {
+  background-image: var(--base_viewer_background_image);
+  backdrop-filter: var(--base_backdrop_filter);
+  color: var(--base_font_color);
+}
+
+.header_panel hr {
+   border: var( --base_hr_border);
+   opacity: 0.4;
 }
