@@ -1,6 +1,6 @@
 @import "../common/base.css";
 
-.meta    { font-size: 0.9rem; color: var(--base_font_color_c); }
+.meta    { font-size: 0.9rem; color: var(--base_font_meta_color); }
 .title   { font-size: 1rem; color: var(--base_font_color); font-weight: var(--base_font_weight); }
 .summary { font-size: 0.9rem; color: var(--base_font_color_b); font-weight: var(--base_font_weight); }
 

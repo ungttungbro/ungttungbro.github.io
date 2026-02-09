@@ -26,6 +26,7 @@
   --base_font_color : #dddddd;
   --base_font_color_b : #aaaaaa;
   --base_font_color_c : #888888;
+  --base_font_meta_color : #7FAFB2;
   --base_font_weight : 400;
 
   --base_layout_background_color: #BFA27A;
@@ -89,6 +90,7 @@
   --base_font_color : #dddddd;
   --base_font_color_b : #aaaaaa;
   --base_font_color_c : #888888;
+  --base_font_meta_color : #7d8b99;
   --base_font_weight : 400;
 
   --base_anchor_tag_hover_color : #ffc900;
@@ -132,6 +134,7 @@
   --base_font_color : #333333;
   --base_font_color_b : #444444;
   --base_font_color_c : #555555;
+  --base_font_meta_color : #536056;
   --base_font_weight : 500;
 
   --base_anchor_tag_hover_color : #056739;
@@ -143,7 +146,7 @@
   --base_close_icon_filter_invert : invert(1);
 
   --base_drop_shadow : none;
-  --base_backdrop_filter: blur(10px);
+  --base_backdrop_filter: blur(5px);
 
   --base_task_item_close_background_color_b : #222222;
 }

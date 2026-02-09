@@ -16,15 +16,6 @@
     border-bottom: var(--base_border_line);
 }
 
-#logo {
-    height: auto;    
-
-    margin-right: 0.75rem;
-    align-self: stretch;
-
-    cursor: pointer;
-}
-
 #task-items {
     display: flex;
     flex-direction: row;
@@ -135,9 +126,33 @@
     background-image: url(/assets/icons/dark-mode-img/light-toggle.png);
     background-size: cover;
     background-position: center;
+
+    
+}
+
+#logo {
+    height: auto;    
+
+    margin-right: 0.75rem;
+    align-self: stretch;
+
+    cursor: pointer;
+}
+
+#logo:hover {
+    animation: hover-blink 1000ms ease-in-out 1;
 }
 
 #color-theme:hover {
     margin: 0;
     cursor: pointer;
+
+    animation: hover-blink 700ms ease-in-out 2;
+}
+
+@keyframes hover-blink {
+  0%   { opacity: 1; }
+  30%  { opacity: 0.5; }
+  55%  { opacity: 0.8; }
+  100% { opacity: 1; }
 }
