@@ -12,7 +12,9 @@
     line-height: 1;
 
     background-image: var(--base_task_bar_background_image);
-
+    background-repeat: repeat;
+    background-size: 5.35rem;
+  
     border-bottom: var(--base_border_line);
 }
 
@@ -109,11 +111,14 @@
 
 .task_item_close:hover {
     background-color: #777777;
+    transition: background-color 0.3s;
 }
 
 .task_bar_item:hover,
 .task-bar-group:hover {
     background-color: #555555;
+    transition: background-color 0.3s;
+
     cursor: pointer;
 }
 

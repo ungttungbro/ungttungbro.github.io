@@ -128,7 +128,8 @@ export class SiteLibrary {
 
     const target = document.getElementById(target_id);
     const rect = target.getBoundingClientRect();
-    const vh = window.innerHeight;
+
+    const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
    
     const isMaximized = element.classList.contains(element.id);
 
@@ -144,11 +145,14 @@ export class SiteLibrary {
         element.style.borderRadius = '0.5rem';
     } else {
         element.classList.add(element.id);
+
         element.style.position = 'fixed';
-        element.style.left = '0px';
+        element.style.left = '0';
         element.style.top = rect.bottom + 'px';
-        element.style.width = '100vw';
-        element.style.height = (vh - rect.bottom) + 'px';
+
+        element.style.width = '100%';
+        element.style.height = (viewportHeight - rect.bottom) + 'px';
+
         element.style.transform = 'none';
         element.style.borderRadius = '0';
     }

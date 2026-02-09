@@ -83,7 +83,7 @@ export class BlogSection {
             'latest-post',
             siteMap.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
-            50, 120, 4
+            50, 118, 4
         );
 
         blog_blog.appendChild(post_list);
@@ -288,7 +288,7 @@ export class BlogSection {
 
             const meta_span = document.createElement('span');
             meta_span.className = 'meta';
-            meta_span.textContent = key + region + ' · ' + value.type;
+            meta_span.textContent = value.type + ' · ' + key + region;
 
             frag.appendChild(meta_span);
 

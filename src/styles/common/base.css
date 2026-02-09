@@ -12,6 +12,8 @@
   --base_viewer_background_image : url(/assets/icons/light-mode-img/viewer-background.gif);
   --base_dark_light_toggle_button : url(/assets/icons/dark-mode-img/light-toggle.png);
 
+  --base_background_size : 12.25rem;
+
   --base_title_bar_background_color : #333333; /*b0c4de*/
   --base_title_bar_background_color_b : #444444;
   --base_title_bar_font_color : #bababa; /*#2F2F4F*/
@@ -46,11 +48,11 @@
 
   --base_anchor_tag_hover_color : #ffc900;
   --base_anchor_tag_hover_color_b : #cdcdcd;
-  --base_border_line : 1px solid #444444;
+  --base_border_line : 0.075rem solid #444444;
   --base_line-color : #999999;
 
-  --base_hr_border : 1px solid #333333;
-  --base_dash_border : 1px dashed #444444; 
+  --base_hr_border : 0.075rem solid #333333;
+  --base_dash_border : 0.075rem dashed #444444; 
   --base_box_background_color : #333333;
   --base_header_background_color: #1a1a1a;
   --base_footer_background_color: #1a1a1a;
@@ -58,10 +60,21 @@
   --base_task_item_background_color_b : #555555;
   --base_task_item_close_background_color_b : #777777;
 
+  --base_blog_content_panel_hr : rgba(255,255,255,0.15);
+
   --base_drop_shadow :  drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
   --base_close_icon_filter_invert : none;
 
   --base_backdrop_filter: blur(10px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 
@@ -73,6 +86,8 @@
   --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
   --base_viewer_background_image : none;
   --base_dark_light_toggle_button : url(/assets/icons/dark-mode-img/light-toggle.png);
+
+  --base_background_size : 12.25rem;
 
   --base_background_color : #cccccc;
 
@@ -96,9 +111,10 @@
   --base_anchor_tag_hover_color : #ffc900;
   --base_anchor_tag_hover_color_b : #cdcdcd;
 
-  --base_hr_border : 1px solid #333333;
-  --base_dash_border : 1px dashed #444444; 
-  --base_border_line : 1px solid #444444;
+  --base_hr_border : 0.075rem solid #333333;
+  --base_dash_border : 0.075rem dashed #444444; 
+  --base_border_line : 0.075rem solid #444444;
+  --base_blog_content_panel_hr : rgba(255,255,255,0.15);
  
   --base_close_icon_filter_invert : none;
 
@@ -117,6 +133,8 @@
   --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
   --base_viewer_background_image : url(/assets/icons/light-mode-img/viewer-background.gif);
   --base_dark_light_toggle_button : url(/assets/icons/light-mode-img/dark-toggle.png);
+
+  --base_background_size : 5.35rem;
 
   --base_background_color : #eeeeee;
 
@@ -137,18 +155,19 @@
   --base_font_meta_color : #536056;
   --base_font_weight : 500;
 
-  --base_anchor_tag_hover_color : #056739;
+  --base_anchor_tag_hover_color : #926e02;
   --base_anchor_tag_hover_color_b : #555555;
 
-  --base_hr_border : 1px solid #aaaaaa;
-  --base_dash_border : 1px dashed #bbbbbb;
-  --base_border_line : 1px solid #999999;
+  --base_hr_border : 0.075rem solid #cccccc;
+  --base_dash_border : 0.075rem dashed #bbbbbb;
+  --base_border_line : 0.075rem solid #999999;
+  --base_blog_content_panel_hr : rgba(19, 19, 19, 0.25);
   --base_close_icon_filter_invert : invert(1);
 
   --base_drop_shadow : none;
-  --base_backdrop_filter: blur(5px);
+  --base_backdrop_filter: none;
 
-  --base_task_item_close_background_color_b : #222222;
+  --base_task_item_close_background_color_b : #111111;
 }
 
 
@@ -158,12 +177,13 @@
 
 html {
   display : block;
+
   background-color: var(--base_background_color);
   background-image: var(--base_background_image);
   background-repeat: repeat;
-  /*background-size: 86px;*/
+  background-size: var(--base_background_size);
+  
   font-size: var(--base_font_size);
-  /*font-size: clamp(14px, 2.2vw, 22px);*/
   font-family : var(--base_fonts);
   color: var(--base_font_color);
 }
@@ -176,11 +196,6 @@ body {
   visibility: hidden;
   font-family: var(--base_fonts);
   user-select: none;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
 }
 
 body.font-loaded {

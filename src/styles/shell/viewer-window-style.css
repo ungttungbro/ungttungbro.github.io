@@ -2,7 +2,8 @@
   display: flex;
 
   flex-direction: column;
-  max-height: 45rem;
+  
+  box-sizing: border-box;
   position: absolute;
   
   color: #cdcdcd;  
@@ -10,18 +11,22 @@
   border-radius: 0.5rem;
   
   pointer-events: auto;
+  touch-action: none;
   
   overflow: hidden;
-  
+
   box-shadow:
-    0 0 0 1px rgba(255,255,255,0.04),
-    0 4px 8px rgba(0,0,0,0.45);
+    0 0 0 0.075rem rgba(255,255,255,0.04),
+    0 0.3rem 0.6rem rgba(0,0,0,0.45);
 }
 
 .title_bar {
   background-image: url('/assets/icons/viewer-background.gif');
-  position: relative;  
+  background-repeat: repeat;
+  background-size: 5.35rem;
   
+  position: relative;  
+    
   height: 3rem;
 
   color: #dddddd;
@@ -30,15 +35,15 @@
   user-select: none;
   padding: 0.75rem;
   
-  justify-content: center;  
-  
+  justify-content: center; 
+    
   white-space: nowrap;      /* 줄바꿈 금지 */
   overflow: hidden;         /* 넘치는 부분 숨김 */
   text-overflow: clip;      /* 그냥 잘라냄 */
   cursor: move;
   
   background-color: #333333;
-  border-bottom: 1px solid #444444;
+  border-bottom: 0.075rem solid #444444;
 }
 
 #content_area {
@@ -55,22 +60,11 @@
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   scroll-behavior: auto;
-
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.08) 2px,
-    transparent 2px,
-    transparent 6px
-  );
-
-  /*background-size: 5px 5px;*/
-  backdrop-filter: blur(10px) saturate(110%) brightness(90%);
 }
 
 .header_panel {    
   user-select: none;  
-  padding : 0.5rem; 
+  padding : 0.5rem;
 }
 
 .header_panel::before {
@@ -82,7 +76,7 @@
 }
 
 .header_panel hr {
-  border: 1px solid #bababa;
+  border: 0.075rem solid #bababa;
   margin-top: 0.4rem;
   margin-bottom: 0.4rem;
 } 
@@ -100,6 +94,9 @@
 
 .footer_panel {
   background-image: url('/assets/icons/viewer-background.gif');
+  background-repeat: repeat;
+  background-size: 5.35rem;
+  
   background-color: #222222;
 
   width: 100%;
@@ -112,7 +109,7 @@
   font-weight: bold;
   margin: auto;
   
-  border-top: 1px solid #444444;
+  border-top: 0.075rem solid #444444;
 }
 
 #window_button_container {

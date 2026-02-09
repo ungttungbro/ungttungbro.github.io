@@ -36,15 +36,22 @@ export class TaskBar {
                 }
             }
         });
+        
+        const color_theme = localStorage.getItem('color-theme');
+        if (color_theme) { document.documentElement.setAttribute('data-theme', color_theme); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); }
 
         const color = document.createElement('div');
         color.id = 'color-theme';
+        color.title = (color_theme === 'dark' ? 'light mode' : 'dark mode');
+        
         color.addEventListener('click', () =>{
             const theme = document.documentElement.getAttribute('data-theme');
+            
             let mode = '';
 
-            if (theme === 'dark') { mode = 'light'; }
-            else { mode = 'dark'; }
+            if (theme === 'dark') { mode = 'light'; color.title = theme + ' mode'; }
+            else { mode = 'dark'; color.title = theme + ' mode'; }
 
             document.documentElement.setAttribute('data-theme', mode);
 
@@ -192,7 +199,7 @@ export class TaskBar {
             taskbar_item_id, 
             target_id, 
             title_icon_path, 
-            SiteLibrary.truncateText(title_text, 13)
+            SiteLibrary.truncateText(title_text, 12)
         );
 
         taskbar_item.dataset.group = group_type;
