@@ -64,7 +64,7 @@
     transparent 6px
   );
 
-  background-size: 5px 5px;
+  /*background-size: 5px 5px;*/
   backdrop-filter: blur(10px) saturate(110%) brightness(90%);
 }
 
