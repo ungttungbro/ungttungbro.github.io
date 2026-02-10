@@ -24,7 +24,8 @@ export class TaskBar {
     }
 
     layout() {
-        const logo = SiteLibrary.createImgElement('', 'logo', TASKBAR_CONSTANTS.LOGO_ICON_PATH, 'logo');        
+        const logo = SiteLibrary.createImgElement('', 'logo', TASKBAR_CONSTANTS.LOGO_ICON_PATH, 'logo'); 
+        logo.title = '화면정리 (clean view)';       
 
         logo.addEventListener('click', () =>{
             const group_map = TaskStateManager.taskGroupMap;
@@ -34,6 +35,11 @@ export class TaskBar {
                     const mounted_element = document.getElementById(taskData.targetId);
                     mounted_element.style.visibility = 'hidden';
                 }
+            }
+
+            const clarity_filter = document.getElementById('shade-panel');
+            if (clarity_filter) {
+                clarity_filter.remove(); 
             }
         });
         
@@ -58,8 +64,28 @@ export class TaskBar {
             localStorage.setItem('color-theme', mode);
         });
 
+        const main_layout = document.querySelector('main');
+
+        const screen_shade = document.createElement('div');
+        screen_shade.id = 'screen-shade';
+        screen_shade.title = '선명도 필터 (clarity filter)';
+
+        screen_shade.addEventListener('click', () => {
+            const el = document.getElementById('shade-panel');
+            if (el) {
+                el.remove();
+                return; 
+            }
+            
+            const shade_panel = document.createElement('div');
+            shade_panel.id = 'shade-panel';
+            
+            main_layout.appendChild(shade_panel);                        
+        });
+
         this.taskBarElement.appendChild(logo);
         this.taskBarElement.appendChild(this.taskItemsElement);
+        this.taskBarElement.appendChild(screen_shade);
         this.taskBarElement.appendChild(color);
     }
     

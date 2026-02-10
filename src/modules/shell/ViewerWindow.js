@@ -220,7 +220,7 @@ export class ViewerWindow {
 
     resizeWindow() {        
         const resizeDirection = (e) => {
-            const EDGE = 16; // 모서리 감지 영역(px)
+            const EDGE = 12; // 모서리 감지 영역(px)
 
             const rect = this.window_element.getBoundingClientRect();
             

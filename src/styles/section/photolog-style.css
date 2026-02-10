@@ -89,6 +89,11 @@
     /*scroll-margin-bottom: 6vh;*/
 }
 
+.photolog-footer-panel {
+    scroll-snap-align: end;
+    scroll-margin-bottom: 3vh;
+}
+
 #photolog-index-viewer .teaser-list {
     margin-top: 0;
 }
