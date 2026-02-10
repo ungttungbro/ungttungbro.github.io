@@ -150,7 +150,7 @@ const galleryLayoutElement = function() {
     const galleryEl = createGalleryElement();
     
     return galleryEl;
-}
+};
 
 const createGalleryElement = function() {
     const gallery_items =  document.createElement('div');
@@ -173,19 +173,19 @@ const createGalleryElement = function() {
     gallery_items.appendChild(thumbnail_list);
 
     return gallery_items;
-}
+};
 
 const linksLayoutElement = function() {
     const sectionHeaderHTML = createSectionHeader('Links (References)');
     document.getElementById('links').innerHTML += sectionHeaderHTML;
 
     const linksEl = document.createElement('div');
-    linksEl.innerHTML = createlinksElement();
+    linksEl.innerHTML = createLinksElement();
 
     return linksEl;
-}
+};
 
-const createlinksElement = function() {
+const createLinksElement = function() {
     let html = '<div id="links-items">'
                 + '<div class="links-item-title">'
                     + '<b>Old My Web</b>'
@@ -204,6 +204,13 @@ const createlinksElement = function() {
             + '</div>';
             
     return html;
+};
+
+const createFooterElement = function() {
+    const footerEl = document.createElement('div');
+    footerEl.innerHTML = '&copy; Made By Jonas';
+
+    return footerEl;
 };
 
 /* 기능에 대한 부분은 JQuery로 구현함... */
@@ -302,3 +309,4 @@ export { createExperienceElement };
 export { createWorksElement };
 export { galleryLayoutElement };
 export { linksLayoutElement };
+export { createFooterElement };

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title>Jonas</title>
+    <title>Jonas - SW 교육·진로·직업 컨설턴트 (links)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="페이지 설명">
-    <meta name="keywords" content="keyword1, keyword2">
+    <meta name="description" content="SW 교육·진로·직업 컨설턴트 Jonas의 연관 site link">
+    <meta name="keywords" content="Jonas, 포트폴리오, 개인 홈페이지, SW 교육, 진로·직업, 직업상담사, link">
     <meta name="author" content="Jonas">
     <meta name="robots" content="index, follow">
 
@@ -28,7 +28,6 @@
   </main>
 
   <footer>
-      &copy; Made By Jonas
   </footer>
 
   <script 
@@ -50,7 +49,8 @@
    <script type="module">    
     import { 
       headerLayoutElement, 
-      linksLayoutElement
+      linksLayoutElement,
+      createFooterElement
     } from './js/siteLayout.js';
 
     const titleTextHTML = '<h3>LINKS</h3>';
@@ -64,6 +64,8 @@
     const $linksLayoutEl = $('#links');
     $linksLayoutEl.append(linksLayoutElement());
 
+    const $footerEl = $('footer');
+    $footerEl.append(createFooterElement());
   </script>
 
 </body>

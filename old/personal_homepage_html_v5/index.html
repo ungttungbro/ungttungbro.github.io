@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title>Jonas</title>
+    <title>Jonas - SW 교육·진로·직업 컨설턴트 (about)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="페이지 설명">
-    <meta name="keywords" content="keyword1, keyword2">
+    <meta name="description" content="SW 교육·진로·직업 컨설턴트 Jonas의 활동 이력과 작업 성과물 등을 소개합니다.">
+    <meta name="keywords" content="Jonas, 포트폴리오, 개인 홈페이지, SW 교육, 진로·직업, 직업상담사">
     <meta name="author" content="Jonas">
     <meta name="robots" content="index, follow">
 
@@ -31,7 +31,6 @@
   </main>
 
   <footer>
-      &copy; Made By Jonas
   </footer>
 
   <script 
@@ -53,7 +52,8 @@
     import { 
       headerLayoutElement, 
       createExperienceElement, 
-      createWorksElement 
+      createWorksElement,
+      createFooterElement
     } from './js/siteLayout.js';
 
     const titleTextHTML = '<h3>WELCOME</h3>';
@@ -69,6 +69,9 @@
 
     const $worksEl = $('#works');
     $worksEl.append(createWorksElement());
+
+    const $footerEl = $('footer');
+    $footerEl.append(createFooterElement());
   </script>
 
 </body>

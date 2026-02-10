@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title>Jonas</title>
+    <title>Jonas - SW 교육·진로·직업 컨설턴트 (gallery)</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="페이지 설명">
-    <meta name="keywords" content="keyword1, keyword2">
+    <meta name="description" content="SW 교육·진로·직업 컨설턴트 Jonas의 활동 모습을 담은 포토 갤러리">
+    <meta name="keywords" content="Jonas, 포트폴리오, 개인 홈페이지, SW 교육, 진로·직업, 직업상담사, 포토 갤러리">
     <meta name="author" content="Jonas">
     <meta name="robots" content="index, follow">
 
@@ -28,7 +28,6 @@
   </main>
 
   <footer>
-      &copy; Made By Jonas
   </footer>
 
   <script 
@@ -51,7 +50,8 @@
     import { 
       headerLayoutElement,
       galleryLayoutElement,
-      linksLayoutElement
+      linksLayoutElement,
+      createFooterElement
     } from './js/siteLayout.js';
 
     const titleTextHTML = '<h3>GALLERY</h3>';
@@ -65,6 +65,8 @@
     const $linksLayoutEl = $('#gallery');
     $linksLayoutEl.append(galleryLayoutElement());
 
+    const $footerEl = $('footer');
+    $footerEl.append(createFooterElement());
   </script>
 
 </body>
