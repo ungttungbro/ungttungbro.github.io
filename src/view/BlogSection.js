@@ -362,8 +362,9 @@ export class BlogSection {
     generatePostEvent(type, data, element, id, section_icon, title, header, content_path, footer) {
         element.addEventListener('mouseenter', e => { this.prefetchPost(element, content_path); }); 
         element.addEventListener('click',  e => {            
-            let viewer_width = (window.innerWidth - ((window.innerWidth * VIEWER.LIST_RATIO_MIDDLE)) * 2) + 'px';     
+            //let viewer_width = (window.innerWidth - ((window.innerWidth * VIEWER.LIST_RATIO_MIDDLE)) * 2) + 'px';     
 
+            let viewer_width = '38rem';
             if (type === 'lifelog') { viewer_width = data.get(id)['width']; }
 
             //const spec = this.subjectListSpec(type);
@@ -421,10 +422,10 @@ export class BlogSection {
             viewer.configureWindow(
                 id,
                 viewer_width,
-                (window.innerHeight  / 1.15) + 'px',
+                /*(window.innerHeight  / 1.15) + 'px'*/'32rem',
                 /*(window.innerHeight - height_offset) + 'px',*/
-                height_offset + 'px',
-                left +'px',
+                /*height_offset + 3 + 'px'*/ SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('32')) / 2)) + 'rem',
+                /*left +'px'*/ SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('38')) / 2)) + 'rem',
                 'viewer',
                 'blog',
                 section_icon,

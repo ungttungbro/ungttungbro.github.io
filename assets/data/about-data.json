@@ -21,8 +21,8 @@
   },
   
   "contacts": {
+    "homepage": ["works.jonas.kr", "https://works.jonas.kr", "assets/icons/homepage.png"],
     "github": ["github.com/ungttungbro/jonas", "https://github.com/ungttungbro/jonas.git", "/assets/icons/github.png"],
     "email": ["youngwan.jang@gmail.com", "mailto:youngwan.jang@gmail.com", "/assets/icons/email.png"]
-   
   }
 }

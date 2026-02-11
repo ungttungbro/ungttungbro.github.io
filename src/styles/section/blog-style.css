@@ -51,7 +51,7 @@
 }
 
 .blog-post-photo-medium {
-  width: 25rem;
+  width: 30rem;
   height:auto;
 
   border-radius: var(--base_border_radius_large);

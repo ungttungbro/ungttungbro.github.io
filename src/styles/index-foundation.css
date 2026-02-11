@@ -17,6 +17,9 @@
 header {  
   position:fixed;
   background-color: var(--base_header_background_color);
+  background-image: var(--base_footer_background_image);
+  background-repeat: repeat;
+  background-size: 5.35rem;
   top: 0;
   left: 0;
   right: 0;
@@ -117,10 +120,7 @@ footer {
 
 #taskbar {
   padding-top: var(--base_margin_size_tiny);
-  padding-bottom: var(--base_margin_size_tiny);
-
-  background-image: var(--base_task_bar_background_image);
-  
+  padding-bottom: var(--base_margin_size_tiny);  
   border-bottom: var(--base_border_line);
 }
 
@@ -152,11 +152,51 @@ footer {
 
 
 .title_bar {
+  position: relative;
   background-image: var(--base_viewer_title_bar_background_image);
+  backdrop-filter: blur(0px) saturate(110%) brightness(60%);
+}
+
+/*.title_bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  z-index: 0;
+}*/
+
+.title_bar * {
+  position: relative;
+  z-index: 1; /* 글씨/아이콘이 overlay 위로 올라오게 */
 }
 
 .footer_panel {
-  background-image: var(--base_viewer_footer_background_image);
+  position: relative;
+  backdrop-filter: var(--base_backdrop_filter);
+  background: rgba(255, 255, 255, 0.025);
+  background-image: var(--base_viewer_footer_background_image);  
+}
+
+/** .footer_panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  z-index: 0;
+}*/
+
+.footer_panel * {
+  position: relative;
+  z-index: 1; /* 글씨/아이콘이 overlay 위로 올라오게 */
+
 }
 
 #color-theme {
@@ -198,12 +238,40 @@ footer {
 .viewer {
   opacity: 0;
   animation: fadeIn 500ms ease forwards;
-  
+
+  overflow: hidden; /* 하이라이트가 밖으로 튀지 않게 */
+
   backdrop-filter: var(--base_backdrop_filter);
   background:
     linear-gradient(
       to bottom,
-      rgba(255,255,255,0.06),
-      rgba(255,255,255,0.01)
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.015)
     );
+
+  border: var(--base_viewer_border);
+
+  box-shadow: var(--base_viewer_shadow);
+
+  transform: translateY(-4px);
+}
+
+.viewer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    120% 60% at 50% 0%,
+    rgba(255,255,255,0.4),
+    rgba(255,255,255,0.1) 60%,
+    transparent 100%
+  );
+
+  opacity: 0.6;
 }

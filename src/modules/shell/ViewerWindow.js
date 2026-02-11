@@ -69,8 +69,7 @@ export class ViewerWindow {
         });
 
         return element;
-    }
-    
+    }    
 
     createWindowElement() {
         const element = document.createElement('div');
@@ -276,8 +275,13 @@ export class ViewerWindow {
 
             this.window_element.style.width  = newWidth + 'px';
             this.window_element.style.height = newHeight + 'px';
-            this.viewer_wrapper_element.style.left = newLeft + 'px';
-            this.viewer_wrapper_element.style.top = newTop + 'px';
+            this.window_element.style.left = newLeft + 'px';
+            this.window_element.style.top = newTop + 'px';
+
+            this.viewer_wrapper_element.style.width  = this.window_element.style.width;
+            this.viewer_wrapper_element.style.height = this.window_element.style.height;
+            this.viewer_wrapper_element.style.left = this.window_element.style.left;
+            this.viewer_wrapper_element.style.top = this.window_element.style.top;
         };
 
         this.onResizeEnd = () => {

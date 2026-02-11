@@ -11,6 +11,7 @@
   --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
   --base_viewer_background_image : url(/assets/icons/light-mode-img/viewer-background.gif);
   --base_dark_light_toggle_button : url(/assets/icons/dark-mode-img/light-toggle.png);
+  --base_clarity_filter_background_image : url(/assets/icons/dark-mode-img/dark-background.png);
 
   --base_background_size : 12.25rem;
 
@@ -53,6 +54,8 @@
 
   --base_hr_border : 0.075rem solid #333333;
   --base_dash_border : 0.075rem dashed #444444; 
+  --base_viewer_border : 0.075rem solid rgba(255,255,255,0.25);
+ 
   --base_box_background_color : #333333;
   --base_header_background_color: #1a1a1a;
   --base_footer_background_color: #1a1a1a;
@@ -63,6 +66,12 @@
   --base_blog_content_panel_hr : rgba(255,255,255,0.15);
 
   --base_drop_shadow :  drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
+  --base_viewer_shadow : 0 25px 60px rgba(0,0,0,0.35),   /* 아래로 깊이 */
+                              0 5px 15px rgba(0,0,0,0.15),    /* 근접 그림자 */
+                              0 0 30px rgba(255,255,255,0.08), /* 은은한 광번짐 */
+                              inset 0 1px 0 rgba(255,255,255,0.4),
+                              inset 0 -1px 0 rgba(255,255,255,0.05);
+
   --base_close_icon_filter_invert : none;
 
   --base_backdrop_filter: blur(10px);
@@ -82,10 +91,11 @@
   --base_background_image : url(/assets/icons/dark-mode-img/dark-background.png);
   --base_task_bar_background_image : url(/assets/icons/dark-mode-img/mid-dark-background.gif);
   --base_footer_background_image: url(/assets/icons/dark-mode-img/mid-dark-background.gif);
-  --base_viewer_title_bar_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
-  --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_title_bar_background_image : none;
+  --base_viewer_footer_background_image : none;
   --base_viewer_background_image : none;
   --base_dark_light_toggle_button : url(/assets/icons/dark-mode-img/light-toggle.png);
+  --base_clarity_filter_background_image : none;
 
   --base_background_size : 12.25rem;
 
@@ -115,11 +125,17 @@
   --base_dash_border : 0.075rem dashed #444444; 
   --base_border_line : 0.075rem solid #444444;
   --base_blog_content_panel_hr : rgba(255,255,255,0.15);
+  --base_viewer_border : 0.075rem solid rgba(255,255,255,0.25);
  
   --base_close_icon_filter_invert : none;
 
   --base_drop_shadow :  drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
-  --base_backdrop_filter: blur(10px) saturate(110%) brightness(90%);
+  --base_viewer_shadow : 0 25px 60px rgba(0,0,0,0.35),   /* 아래로 깊이 */
+                              0 5px 15px rgba(0,0,0,0.15),    /* 근접 그림자 */
+                              0 0 30px rgba(255,255,255,0.08), /* 은은한 광번짐 */
+                              inset 0 1px 0 rgba(255,255,255,0.4),
+                              inset 0 -1px 0 rgba(255,255,255,0.05);
+  --base_backdrop_filter: blur(12px) saturate(110%) brightness(80%);
 
   --base_task_item_close_background_color_b : #777777;
 }
@@ -133,6 +149,7 @@
   --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
   --base_viewer_background_image : url(/assets/icons/light-mode-img/viewer-background.gif);
   --base_dark_light_toggle_button : url(/assets/icons/light-mode-img/dark-toggle.png);
+  --base_clarity_filter_background_image : url(/assets/icons/light-mode-img/light-background.gif);
 
   --base_background_size : 5.35rem;
 
@@ -161,10 +178,14 @@
   --base_hr_border : 0.075rem solid #cccccc;
   --base_dash_border : 0.075rem dashed #bbbbbb;
   --base_border_line : 0.075rem solid #999999;
+  --base_viewer_border : 0px solid rgba(255,255,255,0.25);
+ 
   --base_blog_content_panel_hr : rgba(19, 19, 19, 0.25);
   --base_close_icon_filter_invert : invert(1);
 
   --base_drop_shadow : none;
+  --base_viewer_shadow :  0 0 0 0.075rem rgba(255,255,255,0.04),
+                          0 0.3rem 0.6rem rgba(0,0,0,0.45);
   --base_backdrop_filter: none;
 
   --base_task_item_close_background_color_b : #111111;

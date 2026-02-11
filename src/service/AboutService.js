@@ -49,7 +49,7 @@ export class AboutService {
         const dtoMap = new Map();
         dtoMap.set('닉네임', spec_records['닉네임']);
         //dtoMap.set('전공', spec_records['전공']);
-        dtoMap.set('직업', spec_records['직업']);
+        //dtoMap.set('직업', spec_records['직업']);
 
         return dtoMap;
     }
@@ -58,9 +58,10 @@ export class AboutService {
         const contact_records = this.dao.findContacts();
 
         const dtoMap = new Map();
+        dtoMap.set('이메일', contact_records['email']);
+        dtoMap.set('홈페이지', contact_records['homepage']); 
         dtoMap.set('깃허브', contact_records['github']); 
-        dtoMap.set('이메일', contact_records['email']);     
-
+          
         return dtoMap;
     }
 }

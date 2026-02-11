@@ -142,7 +142,7 @@ export class SiteLibrary {
         element.style.left = '';
         element.style.top = '';
         element.style.transform = 'none';
-        element.style.borderRadius = '0.5rem';
+        element.style.borderRadius = '0.75rem';
     } else {
         element.classList.add(element.id);
 
