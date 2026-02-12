@@ -39,7 +39,8 @@ export class TaskBar {
 
             const clarity_filter = document.getElementById('shade-panel');
             if (clarity_filter) {
-                clarity_filter.remove(); 
+                clarity_filter.remove();
+                document.body.style.overflow = 'auto';
             }
         });
         
@@ -74,13 +75,16 @@ export class TaskBar {
             const el = document.getElementById('shade-panel');
             if (el) {
                 el.remove();
+                document.body.style.overflow = 'auto';
                 return; 
             }
             
             const shade_panel = document.createElement('div');
             shade_panel.id = 'shade-panel';
             
-            main_layout.appendChild(shade_panel);                        
+            main_layout.appendChild(shade_panel);
+
+            document.body.style.overflow = 'hidden';
         });
 
         this.taskBarElement.appendChild(logo);
@@ -149,23 +153,19 @@ export class TaskBar {
     }
 
     groupItemsEvent(task_group_item, group_items) {
-        task_group_item.addEventListener ('pointerenter', (e) => {
-            e.stopPropagation();
-
-            if (e.pointerType !== 'mouse') return;
-
-            group_items.style.visibility = 'visible';
+        document.addEventListener('pointerdown', (e) => {
+            if (!group_items.contains(e.target)) {
+                group_items.style.visibility = 'hidden';
+            }
         });
 
         task_group_item.addEventListener ('click', (e) => {
             e.stopPropagation();
-            group_items.style.visibility = 'visible';
-        });
-
-        task_group_item.addEventListener ('pointerleave', (e) => {
-            e.stopPropagation();
-
-            group_items.style.visibility = 'hidden';
+            if (group_items.style.visibility === 'visible') {
+                group_items.style.visibility = 'hidden';
+            } else {
+                group_items.style.visibility = 'visible';
+            }            
         });
     }
 
@@ -201,7 +201,7 @@ export class TaskBar {
         const caption = SiteLibrary.createImgCaption(title_img, null, title_text);
 
         const close_button_icon_path = TASKBAR_CONSTANTS.CLOSE_BUTTON_ICON_PATH;
-        const close_img = SiteLibrary.createImgElement('task_item_close', '', close_button_icon_path, '');
+        const close_img = SiteLibrary.createImgElement('task-item-close', '', close_button_icon_path, '');
 
         close_img.addEventListener ('click', (e) => {
             e.stopPropagation();
@@ -262,7 +262,7 @@ export class TaskBar {
     createTaskBarItem(taskbar_item_id, target_id, title_icon_path, title_text) {
         const element = document.createElement('div');
         element.id = taskbar_item_id;
-        element.className = 'task_bar_item';
+        element.className = 'task-bar-item';
 
         element.addEventListener ('click', () => {
             const viewer_wrapper_el = document.getElementById(target_id);
@@ -278,7 +278,7 @@ export class TaskBar {
         const caption = SiteLibrary.createImgCaption(title_img, null, title_text);
 
         const close_button_icon_path = TASKBAR_CONSTANTS.CLOSE_BUTTON_ICON_PATH;
-        const close_img = SiteLibrary.createImgElement('task_item_close', '', close_button_icon_path, '');
+        const close_img = SiteLibrary.createImgElement('task-item-close', '', close_button_icon_path, '');
 
         close_img.addEventListener ('click', (e) => {
             e.stopPropagation();
@@ -309,6 +309,14 @@ export class TaskBar {
         if (group_root && group_items.size === 1) {
             this.taskItemsElement.appendChild(group_items.values().next().value.element);
             group_root.remove();
+        }
+
+        if(!TaskStateManager.getElementsSize()) {
+            const clarity_filter = document.getElementById('shade-panel');
+            if (clarity_filter) {
+                clarity_filter.remove();
+                document.body.style.overflow = 'auto';
+            }
         }
 
         group_root = null;

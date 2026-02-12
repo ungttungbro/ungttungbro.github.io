@@ -51,7 +51,7 @@ body {
 
     border-bottom: 1px solid #333333;
 
-    opacity: 0.8;
+    background: rgba(0, 0, 0, 0.8);
 }
 
 #navigation-items {

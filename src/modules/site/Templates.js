@@ -18,7 +18,12 @@ export class Templates {
             icon_alt
         );
 
+        const more_button = document.createElement('div');
+        more_button.className = 'title-box-more-button';
+        more_button.textContent = '···';
+
         section_header_box.appendChild(section_img_caption);
+        section_header_box.appendChild(more_button);
 
         return section_header_box;
     }

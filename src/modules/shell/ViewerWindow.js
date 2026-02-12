@@ -9,18 +9,14 @@ const CONSTANTS = Object.freeze({
     CLOSE_BUTTON_ICON_PATH: './assets/icons/close.png',
     MAXIMIZE_BUTTON_ICON_PATH: './assets/icons/screen.png',
     MINIMIZE_BUTTON_ICON_PATH: './assets/icons/minimize.png',
-    VIEWER_WRAPPER_NAME: '_viewer_wrapper',
     WINDOW_BUTTON_NAME: 'window_button'
 });
 
 export class ViewerWindow {
     constructor () {
         this.targetId = null;
-        this.viewer_wrapper_id = null;        
-        this.viewer_wrapper_element = null;
+        this.viewerId = null;        
         this.window_element = null;
-        this.beforeWidth = null;
-        this.beforeHeight = null;
     }
 
     /*  this 멤버필드
@@ -28,11 +24,11 @@ export class ViewerWindow {
         titleText, headerContents, mainContents, footerContents
     */
     show() {
-        this.viewer_wrapper_id = this.id;
-        const isViewerWrapper = document.querySelector(`#${CSS.escape(this.viewer_wrapper_id)}`);
-        if (isViewerWrapper) { return; }
+        this.viewerId = this.id;
 
-        this.viewer_wrapper_element = this.createViewerWrapperElement();
+        const is_viewer = document.querySelector(`#${CSS.escape(this.viewerId)}`);
+        if (is_viewer) { return; }
+
         this.window_element = this.createWindowElement();
         
         const title_bar = this.createTitleBar();
@@ -41,23 +37,21 @@ export class ViewerWindow {
         const contents = this.createContentArea();
         this.window_element.appendChild(contents);
 
-        this.viewer_wrapper_element.appendChild(this.window_element);
-        document.body.appendChild(this.viewer_wrapper_element);
+        document.body.appendChild(this.window_element);
 
         this.dragWindow();
         this.resizeWindow();
 
-        ViewerStateManager.stateLog(this.viewer_wrapper_element);
+        ViewerStateManager.stateLog(this.window_element);
     }
 
-    createViewerWrapperElement() {
+    createWindowElement() {
         const element = document.createElement('div');
 
-        element.id = this.viewer_wrapper_id;
-        element.className = 'viewer_wrapper';
+        element.id = this.id;
+        element.className = this.className;
         element.style.width = this.width;
-        element.style.height = this.height;   
-        element.style.pointerEvents = 'none';
+        element.style.height = this.height;
         element.style.position = 'fixed';
         element.style.transform = 'none';
         element.style.left = this.left;
@@ -66,18 +60,7 @@ export class ViewerWindow {
         element.addEventListener('click', e => { 
             element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
             ViewerStateManager.stateLog(element);
-        });
-
-        return element;
-    }    
-
-    createWindowElement() {
-        const element = document.createElement('div');
-
-        element.id = this.id + '_viewer';
-        element.className = this.className;
-        element.style.width = this.width;
-        element.style.height = this.height;       
+        });     
         
         return element;
     }
@@ -85,13 +68,6 @@ export class ViewerWindow {
     createContentArea() {       
         const contents = document.createElement('div');
         contents.id = 'content_area';
-        contents.scrollTop = 0;
-
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                contents.style.scrollSnapType = 'y mandatory';
-            });
-        });
 
         if(this.headerContents !== null) { 
             const header_panel = document.createElement('div'); header_panel.className = 'header_panel';
@@ -120,6 +96,9 @@ export class ViewerWindow {
         
         title_bar.appendChild(this.createTitleIcon());
         title_bar.appendChild(this.createWindowButtons());
+
+        title_bar.addEventListener('pointerdown', e => { title_bar.style.cursor = 'move'; });
+        title_bar.addEventListener('pointerup', e => { title_bar.style.cursor = ''; });
 
         return title_bar;
     }
@@ -172,31 +151,26 @@ export class ViewerWindow {
     generateWindowsButtonsEvent(minimize_button, maximize_button, close_button) {
         minimize_button.addEventListener('click', e => {
             e.stopPropagation();
-            SiteLibrary.elementVisibility(this.viewer_wrapper_id);
+            SiteLibrary.elementVisibility(this.viewerId);
 
-            this.viewer_wrapper_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
-            ViewerStateManager.stateLog(this.viewer_wrapper_element);
+            this.window_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(this.window_element);
         });
 
         maximize_button.addEventListener('click', e => {
             e.stopPropagation();
 
-            SiteLibrary.toggleElementMaximize(
-                this.window_element,
-                'taskbar',
-                this.beforeWidth, 
-                this.beforeHeight
-            );
+            SiteLibrary.toggleElementMaximize(this.window_element, 'taskbar');
 
-            this.viewer_wrapper_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
-            ViewerStateManager.stateLog(this.viewer_wrapper_element);
+            this.window_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(this.window_element);
         });
 
         close_button.addEventListener('click', e => {
-            e.stopPropagation();
+            e.stopPropagation();            
 
-            TaskStateManager.removeTask(this.viewer_wrapper_element.dataset.group, this.viewer_wrapper_id  + '_task_bar_item');
-            ViewerStateManager.removeGroup(this.viewer_wrapper_id);
+            TaskStateManager.removeTask(this.window_element.dataset.group, this.viewerId  + '_task_bar_item');
+            ViewerStateManager.removeGroup(this.viewerId);
 
             let task_element = document.getElementById(this.targetId);
             let task_container = document.getElementById('task-items');
@@ -208,8 +182,16 @@ export class ViewerWindow {
                 group_root.remove();
             }
 
+            if (!TaskStateManager.getElementsSize()) {
+                const clarity_filter = document.getElementById('shade-panel');
+                if (clarity_filter) {
+                    clarity_filter.remove();
+                    document.body.style.overflow = 'auto';
+                }
+            }
+
             SiteLibrary.closeElement(this.targetId);            
-            SiteLibrary.closeElement(this.viewer_wrapper_id);
+            SiteLibrary.closeElement(this.viewerId);
 
             group_root = null;
             task_container = null;
@@ -277,11 +259,6 @@ export class ViewerWindow {
             this.window_element.style.height = newHeight + 'px';
             this.window_element.style.left = newLeft + 'px';
             this.window_element.style.top = newTop + 'px';
-
-            this.viewer_wrapper_element.style.width  = this.window_element.style.width;
-            this.viewer_wrapper_element.style.height = this.window_element.style.height;
-            this.viewer_wrapper_element.style.left = this.window_element.style.left;
-            this.viewer_wrapper_element.style.top = this.window_element.style.top;
         };
 
         this.onResizeEnd = () => {
@@ -293,7 +270,7 @@ export class ViewerWindow {
             document.removeEventListener('pointermove', this.onResizeMove);
             document.removeEventListener('pointerup', this.onResizeEnd);
 
-            ViewerStateManager.stateLog(this.viewer_wrapper_element);
+            ViewerStateManager.stateLog(this.window_element);
         };
 
         this.window_element.addEventListener('pointerdown', e => {
@@ -339,7 +316,7 @@ export class ViewerWindow {
     }
 
     dragWindow() {
-        const wrapper = this.viewer_wrapper_element;   
+        const wrapper = this.window_element;   
 
         const title_bar = wrapper.querySelector('.title_bar');
 
@@ -352,12 +329,7 @@ export class ViewerWindow {
         // 더블 클릭 최대/최소화
         title_bar.addEventListener('dblclick', e => {
             if (!title_bar.isDragging) {
-                SiteLibrary.toggleElementMaximize(
-                    this.window_element,
-                    'taskbar',
-                    this.beforeWidth,
-                    this.beforeHeight
-                );
+                SiteLibrary.toggleElementMaximize(this.window_element, 'taskbar');
             }
         });
 
@@ -365,7 +337,7 @@ export class ViewerWindow {
         title_bar.addEventListener('pointerdown', e => {
             if (e.target.closest('.window_button')) return;
 
-            const wrapper = this.viewer_wrapper_element;
+            const wrapper = this.window_element;
             if (wrapper.classList.contains(wrapper.id)) return;
 
             wrapper.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
@@ -399,7 +371,7 @@ export class ViewerWindow {
 
             if (!drag_state.dragging) return;
 
-            const wrapper = this.viewer_wrapper_element;
+            const wrapper = this.window_element;
             wrapper.style.left = (e.clientX - drag_state.offsetX) + 'px';
             wrapper.style.top  = (e.clientY - drag_state.offsetY) + 'px';
         });
@@ -408,7 +380,9 @@ export class ViewerWindow {
         document.addEventListener('pointerup', e => {
             if (!drag_state || e.pointerId !== drag_state.pointerId) return;
 
-            ViewerStateManager.stateLog(this.viewer_wrapper_element);
+            this.window_element.style.pointerEvents = 'auto';
+
+            ViewerStateManager.stateLog(this.window_element);
             
             title_bar.isDragging = false;
             drag_state = null;

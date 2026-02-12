@@ -123,35 +123,46 @@ export class SiteLibrary {
     }
   }
 
-  static toggleElementMaximize(element, target_id, default_width, default_height) {
+  static toggleElementMaximize(element, target_id) {
     if (element.isDragging) return; // 드래그 중이면 최소/최대화 방지
 
-    const target = document.getElementById(target_id);
-    const rect = target.getBoundingClientRect();
+    const element_rect = element.getBoundingClientRect();
 
-    const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-   
-    const isMaximized = element.classList.contains(element.id);
-
+    const isMaximized = element.classList.contains('is-maximized');
     if (isMaximized) {
-        element.classList.remove(element.id);
+        const prev = element._prevState;
 
-        element.style.width = default_width;
-        element.style.height = default_height;
-        element.style.position = '';
-        element.style.left = '';
-        element.style.top = '';
+        element.classList.remove('is-maximized');
+
+        element.style.width = prev.width + 'px';
+        element.style.height = prev.height + 'px';
+
+        element.style.position = prev.position;
+        element.style.top = prev.top + 'px';
+        element.style.left = prev.left + 'px';
+
         element.style.transform = 'none';
-        element.style.borderRadius = '0.75rem';
+        element.style.borderRadius = '0.5rem';
     } else {
-        element.classList.add(element.id);
+        element._prevState = {
+          top: element_rect.top + window.scrollY,
+          left: element_rect.left + window.scrollX,
+          width: element.offsetWidth,
+          height: element.offsetHeight,
+          position: getComputedStyle(element).position
+        };
+
+        const target_element_rect = document.getElementById(target_id).getBoundingClientRect();
+        const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+
+        element.classList.add('is-maximized');
 
         element.style.position = 'fixed';
-        element.style.left = '0';
-        element.style.top = rect.bottom + 'px';
+        element.style.top = target_element_rect.bottom + 'px';
+        element.style.left = '0';       
 
         element.style.width = '100%';
-        element.style.height = (viewportHeight - rect.bottom) + 'px';
+        element.style.height = (viewportHeight - target_element_rect.bottom) + 'px';
 
         element.style.transform = 'none';
         element.style.borderRadius = '0';

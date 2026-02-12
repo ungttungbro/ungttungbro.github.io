@@ -2,6 +2,10 @@
   cursor: default;
 }
 
+#links .title-box-more-button {
+  display: none;
+}
+
 #links .title_box:hover {
   background-color: var(--base_title_bar_background_color);
 }

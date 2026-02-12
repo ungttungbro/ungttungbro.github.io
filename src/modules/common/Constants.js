@@ -19,5 +19,5 @@ export const COMMON = Object.freeze({
 
 export const VIEWER = Object.freeze({
     LSIT_RATIO_SMALL: 0.2,
-    LIST_RATIO_MIDDLE: 0.235
+    LIST_RATIO_MIDDLE: 0.25
 });

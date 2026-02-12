@@ -108,6 +108,8 @@ footer {
   margin: auto;
   margin-bottom: var(--base_margin_size_medium);
   padding: var(--base_margin_size_medium);
+
+  justify-content: space-between;
   
   transition: background-color 0.3s;
   cursor: pointer;
@@ -117,6 +119,11 @@ footer {
   background-color: var(--base_title_bar_background_color_b);
 }
 
+.title-box-more-button {
+  font-weight: bold;
+  letter-spacing: 0.15rem;
+}
+
 
 #taskbar {
   padding-top: var(--base_margin_size_tiny);
@@ -124,29 +131,52 @@ footer {
   border-bottom: var(--base_border_line);
 }
 
-.task_bar_item,
+.task-group-items {
+  border-radius: 0.5rem;
+  backdrop-filter: blur(14px) saturate(110%) brightness(100%);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.015)
+    );
+
+  border: var(--base_viewer_border);
+
+  box-shadow: var(--base_viewer_shadow);
+
+  transform: translateY(-4px);
+}
+
+ 
+.task-group-items .task-bar-item {
+  background-color: transparent;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.task-group-items .task-bar-item:hover {
+  color: #ffc900;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.task-bar-item,
 .task-bar-group {
   color: var(--base_font_color);
   background-color: var(--base_task_item_background_color);
   border: var( --base_border_line);
 }
 
-.task-bar-group .task_bar_item {
-  background-color: var(--base_task_item_background_color);
-}
-
-
-.task_bar_item:hover,
+.task-bar-item:hover,
 .task-bar-group:hover {
   background-color: var(--base_task_item_background_color_b);
 }
 
-
-.task_item_close {
+.task-item-close {
   filter: var(--base_close_icon_filter_invert);
 }
 
-.task_item_close:hover {
+.task-item-close:hover {
   background-color: var(--base_task_item_close_background_color_b);
 }
 
@@ -156,18 +186,6 @@ footer {
   background-image: var(--base_viewer_title_bar_background_image);
   backdrop-filter: blur(0px) saturate(110%) brightness(60%);
 }
-
-/*.title_bar::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.25);
-  pointer-events: none;
-  z-index: 0;
-}*/
 
 .title_bar * {
   position: relative;
@@ -181,30 +199,17 @@ footer {
   background-image: var(--base_viewer_footer_background_image);  
 }
 
-/** .footer_panel::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.25);
-  pointer-events: none;
-  z-index: 0;
-}*/
-
 .footer_panel * {
   position: relative;
   z-index: 1; /* 글씨/아이콘이 overlay 위로 올라오게 */
-
 }
 
 #color-theme {
   background-image: var(--base_dark_light_toggle_button);
 }
 
-.viewer_wrapper .viewer .header_panel,
-.viewer_wrapper .viewer .content_panel {
+.viewer .header_panel,
+.viewer .content_panel {
   background-image: var(--base_viewer_background_image);
   background-repeat: repeat;
   background-size: 5.35rem;
@@ -230,13 +235,7 @@ footer {
   opacity: 0.3;
 }
 
-.viewer_wrapper {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .viewer {
-  opacity: 0;
   animation: fadeIn 500ms ease forwards;
 
   overflow: hidden; /* 하이라이트가 밖으로 튀지 않게 */
@@ -264,8 +263,6 @@ footer {
   width: 100%;
   height: 35%;
 
-  pointer-events: none;
-
   background: radial-gradient(
     120% 60% at 50% 0%,
     rgba(255,255,255,0.4),
@@ -274,4 +271,6 @@ footer {
   );
 
   opacity: 0.6;
+
+  pointer-events: none;
 }

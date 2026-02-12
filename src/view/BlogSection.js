@@ -229,21 +229,17 @@ export class BlogSection {
 
         if (document.getElementById(id)) { return; }
 
-        const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
-
-        const width = window.innerWidth * VIEWER.LIST_RATIO_MIDDLE;
-        const height = window.innerHeight - height_offset;
-        const top = height_offset;
+        const width = window.innerWidth * VIEWER.LIST_RATIO_MIDDLE;        
         const left = Math.min(window.innerWidth - width, window.innerWidth); // 화면 안쪽으로 제한
 
         try {
             const viewer = new ViewerWindow();
             viewer.configureWindow(
                 id,
-                width + 'px',
-                height + 'px',
-                top + 'px',
-                left + 'px',
+                22 + 'rem',
+                44 + 'rem',
+                SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('44')) / 2)) + 'rem',
+                SiteLibrary.pxToRem(left) + 'rem',
                 'viewer',
                 'blog',
                 section_icon,
@@ -257,6 +253,15 @@ export class BlogSection {
             viewer.show();
             
             taskbar.mount(blog_type, viewer.targetId, viewer.id, section_icon, title);
+
+            const main_layout = document.querySelector('main');
+            
+            const shade_panel = document.createElement('div');
+            shade_panel.id = 'shade-panel';
+            
+            main_layout.appendChild(shade_panel);
+
+            document.body.style.overflow = 'hidden';
         } catch(error) {
             console.warn('Section Header Event : ', error);
         } finally {
@@ -331,59 +336,16 @@ export class BlogSection {
         return subject_list;
     }
 
-    /*subjectListSpec(type) {
-        let list_spec = {
-            title: '',
-            list_viewer_id: '',
-            class_name: 'post-index'
-        };
-
-        if(type === 'writings') {
-            list_spec.title = '라이팅스 (writings) 목록';
-            list_spec.list_viewer_id = 'blog_post_list_all_viewer';            
-        } else if (type === 'lifelog') {
-            list_spec.title = '라이프로그 (lifelog) 목록';
-            list_spec.list_viewer_id = 'lifelog_post_list_all_viewer';                      
-        } else if (type === 'archive') {
-            list_spec.title = '아카이브 (archive) 목록';
-            list_spec.list_viewer_id = 'archive_post_list_all_viewer';            
-        } else if (type === 'reflection') {
-            list_spec.title = '리플렉션 (reflection) 목록';
-            list_spec.list_viewer_id = 'reflection_post_list_all_viewer';            
-        } else {
-            list_spec.title = '';
-            list_spec.list_viewer_id = '';
-            list_spec.class_name = '';
-        }
-
-        return list_spec;
-    }*/
-
     generatePostEvent(type, data, element, id, section_icon, title, header, content_path, footer) {
         element.addEventListener('mouseenter', e => { this.prefetchPost(element, content_path); }); 
-        element.addEventListener('click',  e => {            
-            //let viewer_width = (window.innerWidth - ((window.innerWidth * VIEWER.LIST_RATIO_MIDDLE)) * 2) + 'px';     
-
-            let viewer_width = '38rem';
+        element.addEventListener('click',  e => {
+            let viewer_width = '44rem';
             if (type === 'lifelog') { viewer_width = data.get(id)['width']; }
-
-            //const spec = this.subjectListSpec(type);
 
             this.onPostClick (
                 e, id, type, viewer_width, section_icon,
                 title, header,content_path, footer
             );
-
-            /*this.onSectionHeaderClick (
-                e,
-                type,
-                spec.list_viewer_id,
-                section_icon,
-                spec.title,
-                this.generateSubjectList(type, spec.class_name, section_icon, data, 24, 54, 0),
-                null,
-                COMMON.COPYRIGHT
-            );*/
         });
     }
     
@@ -415,17 +377,14 @@ export class BlogSection {
             ));
         }
 
-        const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
-
         try {
             const viewer = new ViewerWindow();
             viewer.configureWindow(
                 id,
                 viewer_width,
-                /*(window.innerHeight  / 1.15) + 'px'*/'32rem',
-                /*(window.innerHeight - height_offset) + 'px',*/
-                /*height_offset + 3 + 'px'*/ SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('32')) / 2)) + 'rem',
-                /*left +'px'*/ SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('38')) / 2)) + 'rem',
+                '36rem',
+                SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('36')) / 2)) + 'rem',
+                SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('44')) / 2)) + 'rem',
                 'viewer',
                 'blog',
                 section_icon,
