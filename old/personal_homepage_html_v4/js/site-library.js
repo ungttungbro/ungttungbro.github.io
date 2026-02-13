@@ -24,7 +24,7 @@ var images = [
 function randomSignature(){
     if(document.images && document.images['signature_image']){
         var randIndex = Math.floor(Math.random() * images.length);
-        document.images['signature_image'].src='../images/signature/' + images[randIndex];
+        document.images['signature_image'].src='/old-site/works-site-html401/images/signature/' + images[randIndex];
     }
 }
 

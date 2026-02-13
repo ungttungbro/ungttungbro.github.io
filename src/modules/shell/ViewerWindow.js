@@ -70,7 +70,9 @@ export class ViewerWindow {
         element.addEventListener('click', e => { 
             element.style.zIndex = ViewerStateManager.maxZIndex() + 1;
             ViewerStateManager.stateLog(element);
-
+        });
+        
+        element.addEventListener('pointerenter', e => {
             const group_map = TaskStateManager.taskGroupMap;
 
             for (const taskMap of group_map.values()) {
@@ -81,7 +83,7 @@ export class ViewerWindow {
             }
 
             element.classList.add("active");
-        });     
+        });
         
         return element;
     }
