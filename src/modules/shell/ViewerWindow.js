@@ -16,7 +16,7 @@ export class ViewerWindow {
     constructor () {
         this.targetId = null;
         this.viewerId = null;        
-        this.window_element = null;
+        this.windowElement = null;
     }
 
     /*  this 멤버필드
@@ -29,20 +29,30 @@ export class ViewerWindow {
         const is_viewer = document.querySelector(`#${CSS.escape(this.viewerId)}`);
         if (is_viewer) { return; }
 
-        this.window_element = this.createWindowElement();
+        this.windowElement = this.createWindowElement();
         
         const title_bar = this.createTitleBar();
-        this.window_element.appendChild(title_bar);
+        this.windowElement.appendChild(title_bar);
 
         const contents = this.createContentArea();
-        this.window_element.appendChild(contents);
+        this.windowElement.appendChild(contents);
 
-        document.body.appendChild(this.window_element);
+        const group_map = TaskStateManager.taskGroupMap;
+
+        for (const taskMap of group_map.values()) {
+            for (const taskData of taskMap.values()) {
+                const mounted_element = document.getElementById(taskData.targetId);
+                mounted_element.classList.remove("active");
+            }
+        }
+
+        this.windowElement.classList.add("active");
+        document.body.appendChild(this.windowElement);
 
         this.dragWindow();
         this.resizeWindow();
 
-        ViewerStateManager.stateLog(this.window_element);
+        ViewerStateManager.stateLog(this.windowElement);
     }
 
     createWindowElement() {
@@ -58,8 +68,19 @@ export class ViewerWindow {
         element.style.top = this.top;
         element.style.zIndex = ViewerStateManager.maxZIndex() + 1;
         element.addEventListener('click', e => { 
-            element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            element.style.zIndex = ViewerStateManager.maxZIndex() + 1;
             ViewerStateManager.stateLog(element);
+
+            const group_map = TaskStateManager.taskGroupMap;
+
+            for (const taskMap of group_map.values()) {
+                for (const taskData of taskMap.values()) {
+                    const mounted_element = document.getElementById(taskData.targetId);
+                    mounted_element.classList.remove("active");
+                }
+            }
+
+            element.classList.add("active");
         });     
         
         return element;
@@ -149,27 +170,29 @@ export class ViewerWindow {
     }
 
     generateWindowsButtonsEvent(minimize_button, maximize_button, close_button) {
+        const window_element = this.windowElement;
+
         minimize_button.addEventListener('click', e => {
             e.stopPropagation();
             SiteLibrary.elementVisibility(this.viewerId);
 
-            this.window_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
-            ViewerStateManager.stateLog(this.window_element);
+            window_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(window_element);
         });
 
         maximize_button.addEventListener('click', e => {
             e.stopPropagation();
 
-            SiteLibrary.toggleElementMaximize(this.window_element, 'taskbar');
+            SiteLibrary.toggleElementMaximize(window_element, 'taskbar');
 
-            this.window_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
-            ViewerStateManager.stateLog(this.window_element);
+            window_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(window_element);
         });
 
         close_button.addEventListener('click', e => {
             e.stopPropagation();            
 
-            TaskStateManager.removeTask(this.window_element.dataset.group, this.viewerId  + '_task_bar_item');
+            TaskStateManager.removeTask(window_element.dataset.group, this.viewerId  + '_task_bar_item');
             ViewerStateManager.removeGroup(this.viewerId);
 
             let task_element = document.getElementById(this.targetId);
@@ -203,7 +226,7 @@ export class ViewerWindow {
         const resizeDirection = (e) => {
             const EDGE = 12; // 모서리 감지 영역(px)
 
-            const rect = this.window_element.getBoundingClientRect();
+            const rect = this.windowElement.getBoundingClientRect();
             
             const left   = rect.left;
             const right  = rect.right;
@@ -255,29 +278,29 @@ export class ViewerWindow {
                 newTop    = this.startTop + dy;
             }
 
-            this.window_element.style.width  = newWidth + 'px';
-            this.window_element.style.height = newHeight + 'px';
-            this.window_element.style.left = newLeft + 'px';
-            this.window_element.style.top = newTop + 'px';
+            this.windowElement.style.width  = newWidth + 'px';
+            this.windowElement.style.height = newHeight + 'px';
+            this.windowElement.style.left = newLeft + 'px';
+            this.windowElement.style.top = newTop + 'px';
         };
 
         this.onResizeEnd = () => {
             this.isResizing = false;
 
-            this.beforeWidth = this.window_element.style.width;
-            this.beforeHeight = this.window_element.style.height;
+            this.beforeWidth = this.windowElement.style.width;
+            this.beforeHeight = this.windowElement.style.height;
 
             document.removeEventListener('pointermove', this.onResizeMove);
             document.removeEventListener('pointerup', this.onResizeEnd);
 
-            ViewerStateManager.stateLog(this.window_element);
+            ViewerStateManager.stateLog(this.windowElement);
         };
 
-        this.window_element.addEventListener('pointerdown', e => {
+        this.windowElement.addEventListener('pointerdown', e => {
             const direction = resizeDirection(e);
             if (!direction) return;
 
-            const rect = this.window_element.getBoundingClientRect();
+            const rect = this.windowElement.getBoundingClientRect();
 
             this.isResizing = true;
             this.resizeDirection = direction;
@@ -294,7 +317,7 @@ export class ViewerWindow {
             document.addEventListener('pointerup', this.onResizeEnd);
         });
 
-        this.window_element.addEventListener('pointermove', e => {            
+        this.windowElement.addEventListener('pointermove', e => {            
             const direction = resizeDirection(e);
             const cursorMap = {
                 e: 'e-resize',
@@ -308,17 +331,17 @@ export class ViewerWindow {
             };
 
             if (cursorMap[direction]) {
-                this.window_element.style.cursor = cursorMap[direction];
+                this.windowElement.style.cursor = cursorMap[direction];
             } else {
-                this.window_element.style.cursor = 'default';
+                this.windowElement.style.cursor = 'default';
             }                
         });
     }
 
     dragWindow() {
-        const wrapper = this.window_element;   
+        const window_element = this.windowElement;   
 
-        const title_bar = wrapper.querySelector('.title_bar');
+        const title_bar = window_element.querySelector('.title_bar');
 
         this.generateDragEvent(title_bar);
     }
@@ -329,7 +352,7 @@ export class ViewerWindow {
         // 더블 클릭 최대/최소화
         title_bar.addEventListener('dblclick', e => {
             if (!title_bar.isDragging) {
-                SiteLibrary.toggleElementMaximize(this.window_element, 'taskbar');
+                SiteLibrary.toggleElementMaximize(this.windowElement, 'taskbar');
             }
         });
 
@@ -337,13 +360,13 @@ export class ViewerWindow {
         title_bar.addEventListener('pointerdown', e => {
             if (e.target.closest('.window_button')) return;
 
-            const wrapper = this.window_element;
-            if (wrapper.classList.contains(wrapper.id)) return;
+            const window_element = this.windowElement;
+            if (window_element.classList.contains(window_element.id)) return;
+            
+            window_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
+            ViewerStateManager.stateLog(window_element);
 
-            wrapper.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
-            ViewerStateManager.stateLog(wrapper);
-
-            const rect = wrapper.getBoundingClientRect();
+            const rect = window_element.getBoundingClientRect();
 
             drag_state = {
                 pointerId: e.pointerId,
@@ -371,18 +394,18 @@ export class ViewerWindow {
 
             if (!drag_state.dragging) return;
 
-            const wrapper = this.window_element;
-            wrapper.style.left = (e.clientX - drag_state.offsetX) + 'px';
-            wrapper.style.top  = (e.clientY - drag_state.offsetY) + 'px';
+            const window_element = this.windowElement;
+            window_element.style.left = (e.clientX - drag_state.offsetX) + 'px';
+            window_element.style.top  = (e.clientY - drag_state.offsetY) + 'px';
         });
 
         // 드래그 종료
         document.addEventListener('pointerup', e => {
             if (!drag_state || e.pointerId !== drag_state.pointerId) return;
 
-            this.window_element.style.pointerEvents = 'auto';
+            this.windowElement.style.pointerEvents = 'auto';
 
-            ViewerStateManager.stateLog(this.window_element);
+            ViewerStateManager.stateLog(this.windowElement);
             
             title_bar.isDragging = false;
             drag_state = null;
@@ -402,8 +425,8 @@ export class ViewerWindow {
         header_contents, main_contents, footer_contents
     ) {        
         this.id = id;
-        this.width = this.beforeWidth = width;
-        this.height = this.beforeHeight = height;
+        this.width = width;
+        this.height = height;
         this.top = top;
         this.left = left;
         this.className = class_name;

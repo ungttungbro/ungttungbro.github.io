@@ -71,7 +71,7 @@ export class BlogSection {
             siteMap.blog.blogSectionHeaderIcon,
             siteMap.blog.blogCaptionText,
             siteMap.blog.blogSectionHeaderIconAlt,
-            24, 54, 0
+            24, 56, 0
         );
 
         Templates.createSectionHeaderEvent(blog_section_header, siteMap.blog.blogCaptionId);
@@ -253,15 +253,6 @@ export class BlogSection {
             viewer.show();
             
             taskbar.mount(blog_type, viewer.targetId, viewer.id, section_icon, title);
-
-            const main_layout = document.querySelector('main');
-            
-            const shade_panel = document.createElement('div');
-            shade_panel.id = 'shade-panel';
-            
-            main_layout.appendChild(shade_panel);
-
-            document.body.style.overflow = 'hidden';
         } catch(error) {
             console.warn('Section Header Event : ', error);
         } finally {

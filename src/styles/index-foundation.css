@@ -133,7 +133,7 @@ footer {
 
 .task-group-items {
   border-radius: 0.5rem;
-  backdrop-filter: blur(14px) saturate(110%) brightness(100%);
+  backdrop-filter: blur(6px) saturate(100%) brightness(100%);
 
   background:
     linear-gradient(
@@ -157,7 +157,7 @@ footer {
 
 .task-group-items .task-bar-item:hover {
   color: #ffc900;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.01);
 }
 
 .task-bar-item,
@@ -184,7 +184,7 @@ footer {
 .title_bar {
   position: relative;
   background-image: var(--base_viewer_title_bar_background_image);
-  backdrop-filter: blur(0px) saturate(110%) brightness(60%);
+  backdrop-filter: var(--base_backdrop_filter);
 }
 
 .title_bar * {
@@ -241,6 +241,7 @@ footer {
   overflow: hidden; /* 하이라이트가 밖으로 튀지 않게 */
 
   backdrop-filter: var(--base_backdrop_filter);
+
   background:
     linear-gradient(
       to bottom,
@@ -253,6 +254,14 @@ footer {
   box-shadow: var(--base_viewer_shadow);
 
   transform: translateY(-4px);
+  transition: background 0.1s ease, backdrop-filter 0.1s ease;
+
+  contain: layout paint;
+}
+
+.viewer.active {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(6px);
 }
 
 .viewer::before {

@@ -135,7 +135,7 @@
                               0 0 30px rgba(255,255,255,0.08), /* 은은한 광번짐 */
                               inset 0 1px 0 rgba(255,255,255,0.4),
                               inset 0 -1px 0 rgba(255,255,255,0.05);
-  --base_backdrop_filter: blur(12px) saturate(110%) brightness(80%);
+  --base_backdrop_filter: blur(12px) saturate(100%) brightness(90%);
 
   --base_task_item_close_background_color_b : #777777;
 }

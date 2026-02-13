@@ -10,7 +10,7 @@
 .post-index .summary { font-size: 0.85rem; color: var(--base_font_color_b); line-height: 1.25rem; }
 
 .post-index a:hover .title { color: var(--base_anchor_tag_hover_color); } /*#056081*/
-.post-index a:hover .summary { color: var(--base_font_color_c); }
+.post-index a:hover .summary { color: var(--base_font_color); }
 
 .latest-post { line-height: 1.35; }
 .latest-post a:hover .title { color: var(--base_anchor_tag_hover_color); } /*#ffc900*/
@@ -29,7 +29,7 @@
 .blog-post hr { 
   border-color: #777777; 
 }
-.blog-post a:hover { color: #106f80; }
+.blog-post a:hover { color: #ffc900; }
 
 .blog-content-panel { padding: 0; }
 .blog-content-panel hr { 

@@ -265,14 +265,27 @@ export class TaskBar {
         element.className = 'task-bar-item';
 
         element.addEventListener ('click', () => {
-            const viewer_wrapper_el = document.getElementById(target_id);
-            if (!viewer_wrapper_el) {
+            const viewer = document.getElementById(target_id);
+            if (!viewer) {
                 console.warn('element not found:', target_id);
                 return;
             }
 
-            ViewerStateManager.bringToFront(viewer_wrapper_el);
+            ViewerStateManager.bringToFront(viewer);
+
+            const group_map = TaskStateManager.taskGroupMap;
+
+            for (const taskMap of group_map.values()) {
+                for (const taskData of taskMap.values()) {
+                    const mounted_element = document.getElementById(taskData.targetId);
+                    mounted_element.classList.remove("active");
+                }
+            }
+
+            viewer.classList.add("active");
+            ViewerStateManager.stateLog(viewer);
         });
+            
 
         const title_img = SiteLibrary.createImgElement(TASKBAR_CONSTANTS.TITLE_ICON_TYPE, '', title_icon_path, '');
         const caption = SiteLibrary.createImgCaption(title_img, null, title_text);

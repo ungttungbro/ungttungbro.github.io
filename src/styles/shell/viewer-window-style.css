@@ -56,7 +56,7 @@
   scroll-behavior: auto;
 }
 
-.header_panel {    
+.header_panel {
   user-select: none;  
   padding : 0.5rem;
 }
@@ -91,7 +91,7 @@
   height: 100%;
   
   text-align: center;
-  padding: 0.5em;
+  padding: 0.5rem;
   
   color: #dddddd;
   font-weight: bold;
@@ -121,6 +121,7 @@
 }
 
 .window_button:hover {
-  background-color: #666666;
+  background: rgba(200, 200, 200, 0.25);
   border-radius: 25%;
+  border: 0.075rem solid #cccccc;
 }
