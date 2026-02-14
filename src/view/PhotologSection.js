@@ -204,8 +204,8 @@ export class PhotologSection {
             const viewer = new ViewerWindow();
             viewer.configureWindow (
                 id,
-                (window.innerWidth - ((window.innerWidth / 4) * 1.5)) + 'px',
-                (window.innerHeight - (height_offset * 3)) + 'px',
+                '44rem'/*(window.innerWidth - ((window.innerWidth / 4) * 1.5)) + 'px'*/,
+                '32rem'/*(window.innerHeight - (height_offset * 3)) + 'px'*/,
                 height_offset + 'px',
                 (window.innerWidth / 4) + 'px',
                 'viewer',

@@ -16,12 +16,14 @@
 .latest-post a:hover .title { color: var(--base_anchor_tag_hover_color); } /*#ffc900*/
 .latest-post a:hover .summary { color: var(--base_anchor_tag_hover_color_b); }
 
-.blog-post { 
-  padding: 1rem; 
-  line-height: 2; 
+.blog-post {
+  padding: 1rem;
+  line-height: 2;
 
-  font-size: 1rem; 
+  font-size: 1rem;
   font-weight: var(--base_font_weight);
+
+  backdrop-filter: blur(6px);
 }
 
 .blog-post-photo-comment { font-size: 0.9rem; color: var(--base_font_color_b); }
@@ -51,7 +53,7 @@
 }
 
 .blog-post-photo-medium {
-  width: 30rem;
+  width: 40%;
   height:auto;
 
   border-radius: var(--base_border_radius_large);

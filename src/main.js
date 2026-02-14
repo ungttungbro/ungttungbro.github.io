@@ -1,5 +1,6 @@
 'use strict';
 
+import { shell } from './modules/shell/Shell.js';
 import { taskbar } from './modules/shell/TaskBar.js';
 
 import { AboutService } from './service/AboutService.js';
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   const taskbar_element = document.getElementById('taskbar');
-  taskbar.initialize(taskbar_element);
+  shell.initialize(taskbar_element);
 
   const about_service = new AboutService();
   await about_service.initialize();

@@ -48,4 +48,18 @@ export class TaskStateManager {
     static getElementsSize() {
         return this.taskGroupMap.size;
     }
+
+
+    static enforceSingle(class_name, element) {
+        const group_map = this.taskGroupMap;
+
+        for (const taskMap of group_map.values()) {
+            for (const taskData of taskMap.values()) {
+                const mounted_element = document.getElementById(taskData.targetId);
+                mounted_element.classList.remove(class_name);
+            }
+        }
+
+        element.classList.add(class_name);
+    }   
 }

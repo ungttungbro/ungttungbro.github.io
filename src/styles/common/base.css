@@ -115,7 +115,7 @@
   --base_font_color : #dddddd;
   --base_font_color_b : #aaaaaa;
   --base_font_color_c : #888888;
-  --base_font_meta_color : #7d8b99;
+  --base_font_meta_color : #888888;
   --base_font_weight : 400;
 
   --base_anchor_tag_hover_color : #ffc900;
@@ -135,7 +135,7 @@
                               0 0 30px rgba(255,255,255,0.08), /* 은은한 광번짐 */
                               inset 0 1px 0 rgba(255,255,255,0.4),
                               inset 0 -1px 0 rgba(255,255,255,0.05);
-  --base_backdrop_filter: blur(12px) saturate(100%) brightness(90%);
+  --base_backdrop_filter: blur(6px) saturate(100%) brightness(90%);
 
   --base_task_item_close_background_color_b : #777777;
 }

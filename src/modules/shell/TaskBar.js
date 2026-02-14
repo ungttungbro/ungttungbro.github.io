@@ -6,91 +6,27 @@ import { TaskStateManager } from "./TaskStateManager.js";
 
 const TASKBAR_CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE : 'medium_icon',
-    CLOSE_BUTTON_ICON_PATH : './assets/icons/close.png',
-    LOGO_ICON_PATH: '/assets/icons/logo.png',
-    COLOR_ICON_PATH: '/assets/icons/color.png'
+    CLOSE_BUTTON_ICON_PATH : './assets/icons/close.png'
 });
 
 export class TaskBar {
-    initialize(task_bar_element) {
+    async initialize(task_bar_element) {
         if (!task_bar_element) 
             throw new Error('taskbar element required');
 
         this.taskBarElement = task_bar_element;
         this.taskItemsElement = document.createElement('div');
         this.taskItemsElement.id = 'task-items';
-
-        this.layout();
     }
 
-    layout() {
-        const logo = SiteLibrary.createImgElement('', 'logo', TASKBAR_CONSTANTS.LOGO_ICON_PATH, 'logo'); 
-        logo.title = '화면정리 (clean view)';       
-
-        logo.addEventListener('click', () =>{
-            const group_map = TaskStateManager.taskGroupMap;
-
-            for (const taskMap of group_map.values()) {
-                for (const taskData of taskMap.values()) {
-                    const mounted_element = document.getElementById(taskData.targetId);
-                    mounted_element.style.visibility = 'hidden';
-                }
-            }
-
-            const clarity_filter = document.getElementById('shade-panel');
-            if (clarity_filter) {
-                clarity_filter.remove();
-                document.body.style.overflow = 'auto';
-            }
+    layout(logo_button, screen_shade_button, theme_mode_button) {
+        return new Promise(resolve => {
+            this.taskBarElement.appendChild(logo_button);
+            this.taskBarElement.appendChild(this.taskItemsElement);
+            this.taskBarElement.appendChild(screen_shade_button);
+            this.taskBarElement.appendChild(theme_mode_button);
+            resolve();
         });
-        
-        const color_theme = localStorage.getItem('color-theme');
-        if (color_theme) { document.documentElement.setAttribute('data-theme', color_theme); }
-        else { document.documentElement.setAttribute('data-theme', 'dark'); }
-
-        const color = document.createElement('div');
-        color.id = 'color-theme';
-        color.title = (color_theme === 'dark' ? 'light mode' : 'dark mode');
-        
-        color.addEventListener('click', () =>{
-            const theme = document.documentElement.getAttribute('data-theme');
-            
-            let mode = '';
-
-            if (theme === 'dark') { mode = 'light'; color.title = theme + ' mode'; }
-            else { mode = 'dark'; color.title = theme + ' mode'; }
-
-            document.documentElement.setAttribute('data-theme', mode);
-
-            localStorage.setItem('color-theme', mode);
-        });
-
-        const main_layout = document.querySelector('main');
-
-        const screen_shade = document.createElement('div');
-        screen_shade.id = 'screen-shade';
-        screen_shade.title = '선명도 필터 (clarity filter)';
-
-        screen_shade.addEventListener('click', () => {
-            const el = document.getElementById('shade-panel');
-            if (el) {
-                el.remove();
-                document.body.style.overflow = 'auto';
-                return; 
-            }
-            
-            const shade_panel = document.createElement('div');
-            shade_panel.id = 'shade-panel';
-            
-            main_layout.appendChild(shade_panel);
-
-            document.body.style.overflow = 'hidden';
-        });
-
-        this.taskBarElement.appendChild(logo);
-        this.taskBarElement.appendChild(this.taskItemsElement);
-        this.taskBarElement.appendChild(screen_shade);
-        this.taskBarElement.appendChild(color);
     }
     
     mount(group_type, taskbar_item_id, target_id, title_icon_path, title_text) {
@@ -225,7 +161,7 @@ export class TaskBar {
             taskbar_item_id, 
             target_id, 
             title_icon_path, 
-            SiteLibrary.truncateText(title_text, 12)
+            SiteLibrary.truncateText(title_text, 26)
         );
 
         taskbar_item.dataset.group = group_type;
@@ -272,17 +208,7 @@ export class TaskBar {
             }
 
             ViewerStateManager.bringToFront(viewer);
-
-            const group_map = TaskStateManager.taskGroupMap;
-
-            for (const taskMap of group_map.values()) {
-                for (const taskData of taskMap.values()) {
-                    const mounted_element = document.getElementById(taskData.targetId);
-                    mounted_element.classList.remove("active");
-                }
-            }
-
-            viewer.classList.add("active");
+            TaskStateManager.enforceSingle('active', viewer);
             ViewerStateManager.stateLog(viewer);
         });
             

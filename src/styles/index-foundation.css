@@ -132,32 +132,36 @@ footer {
 }
 
 .task-group-items {
+  min-width: 100%;
+  position: absolute;
   border-radius: 0.5rem;
-  backdrop-filter: blur(6px) saturate(100%) brightness(100%);
 
+  background-color: #222222;
+
+  /*backdrop-filter: blur(6px) saturate(100%) brightness(100%);
   background:
     linear-gradient(
       to bottom,
       rgba(255,255,255,0.08),
       rgba(255,255,255,0.015)
-    );
+    );*/
 
-  border: var(--base_viewer_border);
+  border: 2px solid #444444; /*var(--base_viewer_border);*/
 
-  box-shadow: var(--base_viewer_shadow);
+  /*box-shadow: var(--base_viewer_shadow);*/
 
-  transform: translateY(-4px);
+  /*transform: translateY(-4px);*/
 }
 
  
 .task-group-items .task-bar-item {
   background-color: transparent;
-  background: rgba(255, 255, 255, 0.1);
+  /*background: rgba(255, 255, 255, 0.1);*/
 }
 
 .task-group-items .task-bar-item:hover {
   color: #ffc900;
-  background: rgba(0, 0, 0, 0.01);
+  /*background: rgba(0, 0, 0, 0.01);*/
 }
 
 .task-bar-item,
@@ -185,6 +189,8 @@ footer {
   position: relative;
   background-image: var(--base_viewer_title_bar_background_image);
   backdrop-filter: var(--base_backdrop_filter);
+
+  background: rgba(0,0,0,0.5);
 }
 
 .title_bar * {

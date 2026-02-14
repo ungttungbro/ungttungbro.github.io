@@ -37,21 +37,12 @@ export class ViewerWindow {
         const contents = this.createContentArea();
         this.windowElement.appendChild(contents);
 
-        const group_map = TaskStateManager.taskGroupMap;
-
-        for (const taskMap of group_map.values()) {
-            for (const taskData of taskMap.values()) {
-                const mounted_element = document.getElementById(taskData.targetId);
-                mounted_element.classList.remove("active");
-            }
-        }
-
-        this.windowElement.classList.add("active");
         document.body.appendChild(this.windowElement);
 
         this.dragWindow();
         this.resizeWindow();
 
+        TaskStateManager.enforceSingle('active', this.windowElement);
         ViewerStateManager.stateLog(this.windowElement);
     }
 
@@ -73,16 +64,7 @@ export class ViewerWindow {
         });
         
         element.addEventListener('pointerenter', e => {
-            const group_map = TaskStateManager.taskGroupMap;
-
-            for (const taskMap of group_map.values()) {
-                for (const taskData of taskMap.values()) {
-                    const mounted_element = document.getElementById(taskData.targetId);
-                    mounted_element.classList.remove("active");
-                }
-            }
-
-            element.classList.add("active");
+            TaskStateManager.enforceSingle('active', this.windowElement);
         });
         
         return element;
