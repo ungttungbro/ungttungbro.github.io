@@ -145,8 +145,8 @@ export class SiteLibrary {
         element.style.borderRadius = '0.5rem';
     } else {
         element._prevState = {
-          top: element_rect.top + window.scrollY,
-          left: element_rect.left + window.scrollX,
+          top: element_rect.top,
+          left: element_rect.left,
           width: element.offsetWidth,
           height: element.offsetHeight,
           position: getComputedStyle(element).position

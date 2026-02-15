@@ -2,12 +2,12 @@
 
 .meta    { font-size: 0.9rem; color: var(--base_font_meta_color); }
 .title   { font-size: 1rem; color: var(--base_font_color); font-weight: var(--base_font_weight); }
-.summary { font-size: 0.9rem; color: var(--base_font_color_b); font-weight: var(--base_font_weight); line-height: 1.4rem;}
+.summary { font-size: 0.9rem; color: var(--base_font_color_b); font-weight: var(--base_font_weight); line-height: 1.4;}
 
 .post-index { line-height: 1; }
 .post-index .meta { font-size: 0.85rem; color: var(--base_font_color_c); }
-.post-index .title { font-size: 0.95rem; font-weight: 500; color: var(--base_font_color); line-height: 2; }
-.post-index .summary { font-size: 0.85rem; color: var(--base_font_color_b); line-height: 1.25rem; }
+.post-index .title { font-size: 0.95rem; font-weight: 500; color: var(--base_font_color); line-height: 1.75; }
+.post-index .summary { font-size: 0.85rem; color: var(--base_font_color_b); line-height: 1.25; }
 
 .post-index a:hover .title { color: var(--base_anchor_tag_hover_color); } /*#056081*/
 .post-index a:hover .summary { color: var(--base_font_color); }
@@ -68,6 +68,10 @@
 
 #blog-blog .title {
   line-height: 2;
+}
+
+#blog-blog .summary {
+  line-height: 1.6;
 }
 
 #blog-grid {

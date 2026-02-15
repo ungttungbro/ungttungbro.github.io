@@ -25,6 +25,30 @@ export class Shell {
         await taskbar.initialize(task_bar_element);
         taskbar.groupTypeData = GROUP_CONFIG;
         this.showTaskBar();
+        this.createPortlateLayout();
+    }
+
+    createPortlateLayout() {
+        if (window.innerHeight > window.innerWidth) {
+            const primary_contents = document.getElementById('content-primary');
+            const secondary_contents = document.getElementById('content-secondary');
+            const tertiary_contents = document.createElement('div');
+            tertiary_contents.id = 'content-tertiary';
+
+            const content_primary_items = Array.from(primary_contents.children);
+            const content_secondary_items = Array.from(secondary_contents.children);
+
+            const new_primary_contents = [content_secondary_items[0], content_primary_items[1]];
+            const new_secondary_contents = [content_primary_items[0]];
+            const new_tertiary_contents = [content_secondary_items[1], content_secondary_items[2]];
+            
+            new_primary_contents.forEach(item => primary_contents.appendChild(item));
+            new_secondary_contents.forEach(item => secondary_contents.appendChild(item));
+            new_tertiary_contents.forEach(item => tertiary_contents.appendChild(item));
+
+            const main = document.querySelector('main');
+            main.appendChild(tertiary_contents);
+        }
     }
 
     showTaskBar() {
@@ -132,3 +156,42 @@ export class Shell {
 }
 
 export const shell = new Shell();
+
+/*
+import { TaskBarProcRegistry } from './TaskBarProcRegistry.js';
+import { TaskBar } from './TaskBar.js';
+
+const taskbarProcRegistry = new TaskBarProcRegistry();
+const shell = {
+  hideShadePanel: () => console.log('Shade panel hidden')
+};
+
+// 예상 프로세스 등록
+taskbarProcRegistry.register('unmount', (taskbar, element) => {
+  console.log('TaskBar unmount snap 실행', element);
+  if (taskbar.isEmpty()) {
+    shell.hideShadePanel();
+  }
+});
+
+taskbarProcRegistry.register('mount', (taskbar, element) => {
+  console.log('TaskBar mount snap 실행', element);
+});
+
+taskbarProcRegistry.register('eventCode', (taskbar, code) => {
+  console.log('TaskBar eventCode snap 실행', code);
+});
+
+// TaskBar 생성
+const taskbar = new TaskBar(taskbarProcRegistry);
+
+// 테스트
+const itemA = { id: 'viewer1' };
+const itemB = { id: 'viewer2' };
+
+taskbar.mount(itemA); // mount snap 실행
+taskbar.mount(itemB); 
+taskbar.unmount(itemA); // unmount snap 실행
+taskbar.unmount(itemB); // unmount snap 실행 → Shade panel 숨김
+taskbar.triggerEvent('click-123'); // eventCode snap 실행
+*/

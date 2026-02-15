@@ -244,3 +244,37 @@ export class TaskBar {
 }
 
 export const taskbar = new TaskBar();
+
+
+
+/*
+export class TaskBar {
+  constructor(procRegistry) {
+    this.procRegistry = procRegistry;
+    this.items = []; // TaskBar 내부 아이템
+  }
+
+  mount(element) {
+    this.items.push(element);
+
+    // 등록된 mount 프로세스 실행
+    this.procRegistry.execute('mount', this, element);
+  }
+
+  unmount(element) {
+    const idx = this.items.indexOf(element);
+    if (idx !== -1) this.items.splice(idx, 1);
+
+    // 등록된 unmount 프로세스 실행
+    this.procRegistry.execute('unmount', this, element);
+  }
+
+  triggerEvent(code) {
+    // 등록된 eventCode 프로세스 실행
+    this.procRegistry.execute('eventCode', this, code);
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
+  }
+}*/
