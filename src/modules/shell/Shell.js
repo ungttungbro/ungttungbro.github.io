@@ -12,9 +12,18 @@ const TASKBAR_CONSTANTS = Object.freeze({
     COLOR_ICON_PATH: '/assets/icons/color.png'
 });
 
+const GROUP_CONFIG = {
+    writings: { label: '라이팅스 (writings)' },
+    lifelog: { label: '라이프로그 (lifelog)' },
+    archive: { label: '아카이브 (archive)' },
+    reflection: { label: '리플렉션 (reflection)' },
+    photolog: { label: '포토로그 (photolog)' }
+};
+
 export class Shell {
     async initialize(task_bar_element) {
         await taskbar.initialize(task_bar_element);
+        taskbar.groupTypeData = GROUP_CONFIG;
         this.showTaskBar();
     }
 
@@ -31,11 +40,19 @@ export class Shell {
         color_theme_element.id = 'color-theme';
         color_theme_element.title = (color_theme_data === 'dark' ? 'light mode' : 'dark mode');
 
-        taskbar.layout(
+        taskbar.createLayout(
             this.toggleLogo(logo_element),
             this.toggleScreenShade(screen_shade_button, 'click', 'main'),
             this.toggleThemeMode(color_theme_data, color_theme_element)
         );
+    }
+
+    mountTaskItem(group_type, taskbar_item_id, target_id, title_icon_path, title_text) {
+        taskbar.mount(group_type, taskbar_item_id, target_id, title_icon_path, title_text);
+    }
+
+    unmountTaskItem(task_bar_item_id, target_id) {
+        taskbar.unmount(task_bar_item_id, target_id);
     }
 
     toggleLogo(logo_element) {

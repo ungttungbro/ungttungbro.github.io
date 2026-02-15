@@ -23,7 +23,6 @@
 
 .teaser-list {
     margin-top: 0.75rem;
-    border: 0px solid red;
 }
 
 .teaser-figure {
@@ -38,6 +37,8 @@
     margin-bottom: 0.25rem;
     
     box-sizing: border-box;
+
+    border: 0px solid red;
 }
 
 .teaser-figure .figure-title {
@@ -47,7 +48,7 @@
     font-size: 1rem;
     font-weight: var(--base_font_weight);
 
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .teaser-figure .figure-content {
@@ -96,6 +97,9 @@
 
 #photolog-index-viewer .teaser-list {
     margin-top: 0;
+    padding: 0.5rem;
+
+    border: 0px solid red;
 }
 
 #photolog-index-viewer .figure-title {
@@ -103,7 +107,7 @@
     font-weight: bold;
     color: var(--base_font_color);
 
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
 #photolog-index-viewer .figure-content {

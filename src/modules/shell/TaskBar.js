@@ -19,7 +19,15 @@ export class TaskBar {
         this.taskItemsElement.id = 'task-items';
     }
 
-    layout(logo_button, screen_shade_button, theme_mode_button) {
+    set groupTypeData(group_type_data) {
+        this._groupTypeData = group_type_data;
+    }
+
+    get groupTypeData() {
+        return this._groupTypeData;
+    }
+
+    createLayout(logo_button, screen_shade_button, theme_mode_button) {
         return new Promise(resolve => {
             this.taskBarElement.appendChild(logo_button);
             this.taskBarElement.appendChild(this.taskItemsElement);
@@ -44,7 +52,7 @@ export class TaskBar {
         const task_group = TaskStateManager.getGroup(group_type);
         const group_length = task_group.size;
 
-        const task_group_root = this.taskGroupRoot(
+        const task_group_root = this.createTaskGroup(
             group_type,
             task_group,
             title_icon_path
@@ -60,72 +68,58 @@ export class TaskBar {
             return;
         } 
         
-        const groupItems = task_group_root.querySelector('.task-group-items');
-        if (!groupItems) return;
+        const group_items = task_group_root.querySelector('.task-group-items');
+        if (!group_items) return;
 
-        groupItems.appendChild(task_item);
-
-        return task_bar;
+        group_items.appendChild(task_item);
     }
 
-    taskGroupRoot(group_type, task_group, title_icon_path) {
-        let root = document.getElementById(group_type + '_task_group');
+    unmount(task_bar_item_id, target_id) {
+        const task_element = document.getElementById(task_bar_item_id);
 
-        if (root) return root;
+        TaskStateManager.removeTask(task_element.dataset.group, task_element.id);
 
-        root = this.createTaskGroupRoot(
+        SiteLibrary.closeElement(task_element.id);        
+        SiteLibrary.closeElement(target_id);
+        
+        const group_items = TaskStateManager.getGroup(task_element.dataset.group);
+        const group_root = document.getElementById(task_element.dataset.group + '_task_group');
+
+        if (group_root && group_items.size === 1) {
+            this.taskItemsElement.appendChild(group_items.values().next().value.element);
+            group_root.remove();
+        }
+
+        if(!TaskStateManager.getElementsSize()) {
+            const shade_panel = document.getElementById('shade-panel');                     
+            const isActive = shade_panel.dataset.active === 'true';        
+            console.log(isActive);   
+            if (isActive) {                
+                shade_panel.style.display = 'none';
+                shade_panel.dataset.active = 'false';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    }
+
+    createTaskGroup(group_type, task_group_items, title_icon_path) {
+        let task_group = document.getElementById(group_type + '_task_group');
+
+        if (task_group) return task_group;
+
+        task_group = this.createTaskGroupRoot(
             group_type,
             group_type + '_task_group',
             title_icon_path,
-            this.groupName(group_type)
+            this.groupTypeData[group_type]?.label ?? ''
         );
 
-        const group_items = this.createGroupItems(task_group);
-        root.appendChild(group_items);
+        const group_items = this.createTaskGroupItems(task_group_items);
+        task_group.appendChild(group_items);
 
-        this.groupItemsEvent(root, group_items);
+        this.groupItemsEvent(task_group, group_items);
 
-        return root;
-    }
-
-    groupItemsEvent(task_group_item, group_items) {
-        document.addEventListener('pointerdown', (e) => {
-            if (!group_items.contains(e.target)) {
-                group_items.style.visibility = 'hidden';
-            }
-        });
-
-        task_group_item.addEventListener ('click', (e) => {
-            e.stopPropagation();
-            if (group_items.style.visibility === 'visible') {
-                group_items.style.visibility = 'hidden';
-            } else {
-                group_items.style.visibility = 'visible';
-            }            
-        });
-    }
-
-    createGroupItems(task_group) {
-        const group_items = document.createElement('div');
-        group_items.className = 'task-group-items';
-
-        for (const [key] of task_group) {
-            group_items.appendChild(task_group.get(key).element);
-        }
-
-        return group_items;
-    }
-
-    teardownSingleItems(group_type) {
-        const group = TaskStateManager.getGroup(group_type);
-        if (!group) return;
-
-        for (const task of group.values()) {
-            if (task.element) {
-                task.element.remove();
-                task.element = null;
-            }
-        }
+        return task_group;
     }
 
     createTaskGroupRoot(group_type, task_group_id, title_icon_path, title_text) {
@@ -156,6 +150,34 @@ export class TaskBar {
         return element;
     }
 
+    createTaskGroupItems(task_group_items) {
+        const group_items = document.createElement('div');
+        group_items.className = 'task-group-items';
+
+        for (const [key] of task_group_items) {
+            group_items.appendChild(task_group_items.get(key).element);
+        }
+
+        return group_items;
+    } 
+
+    groupItemsEvent(task_group_item, group_items) {
+        document.addEventListener('pointerdown', (e) => {
+            if (!group_items.contains(e.target)) {
+                group_items.style.visibility = 'hidden';
+            }
+        });
+
+        task_group_item.addEventListener ('click', (e) => {
+            e.stopPropagation();
+            if (group_items.style.visibility === 'visible') {
+                group_items.style.visibility = 'hidden';
+            } else {
+                group_items.style.visibility = 'visible';
+            }            
+        });
+    }
+
     createSingleTaskItem(group_type, taskbar_item_id, target_id, title_icon_path, title_text) {
         const taskbar_item = this.createTaskBarItem (
             taskbar_item_id, 
@@ -167,32 +189,6 @@ export class TaskBar {
         taskbar_item.dataset.group = group_type;
 
         return taskbar_item;
-    }
-
-    groupName(group_type) {
-        let group_name = '';
-        switch(group_type) {
-            case 'writings':
-                group_name = '라이팅스 (writings)';
-                break;
-            case 'lifelog' :
-                group_name = '라이프로그 (lifelog)';
-                break;
-            case 'archive' :
-                group_name = '아카이브 (archive)';
-                break;
-            case 'reflection' :
-                group_name = '리플렉션 (reflection)';
-                break;
-            case 'photolog' :
-                group_name = '포토로그 (photolog)';
-                break;
-            default:
-                group_name = '';
-                break;
-        }
-
-        return group_name;
     }
 
     createTaskBarItem(taskbar_item_id, target_id, title_icon_path, title_text) {
@@ -234,32 +230,16 @@ export class TaskBar {
         return element;
     }
 
-    unmount(task_bar_item_id, target_id) {
-        let task_element = document.getElementById(task_bar_item_id);
+    teardownSingleItems(group_type) {
+        const group = TaskStateManager.getGroup(group_type);
+        if (!group) return;
 
-        TaskStateManager.removeTask(task_element.dataset.group, task_element.id);
-
-        SiteLibrary.closeElement(task_element.id);        
-        SiteLibrary.closeElement(target_id);
-        
-        const group_items = TaskStateManager.getGroup(task_element.dataset.group);
-        let group_root = document.getElementById(task_element.dataset.group + '_task_group');
-
-        if (group_root && group_items.size === 1) {
-            this.taskItemsElement.appendChild(group_items.values().next().value.element);
-            group_root.remove();
-        }
-
-        if(!TaskStateManager.getElementsSize()) {
-            const clarity_filter = document.getElementById('shade-panel');
-            if (clarity_filter) {
-                clarity_filter.remove();
-                document.body.style.overflow = 'auto';
+        for (const task of group.values()) {
+            if (task.element) {
+                task.element.remove();
+                task.element = null;
             }
         }
-
-        group_root = null;
-        task_element = null;
     }
 }
 

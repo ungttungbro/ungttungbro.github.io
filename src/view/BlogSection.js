@@ -4,7 +4,7 @@ import { ELEMENT_TYPE, COMMON, VIEWER } from "../modules/common/Constants.js";
 import { siteMap } from "../modules/site/siteMap.js";
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { ViewerWindow } from "../modules/shell/ViewerWindow.js";
-import { taskbar } from "../modules/shell/TaskBar.js";
+import { shell } from "../modules/shell/Shell.js";
 import { Templates } from "../modules/site/Templates.js";
 import { ViewerStateManager } from "../modules/shell/ViewerStateManager.js";
 
@@ -252,7 +252,7 @@ export class BlogSection {
             viewer.targetId = id + '_task_bar_item';
             viewer.show();
             
-            taskbar.mount(blog_type, viewer.targetId, viewer.id, section_icon, title);
+            shell.mountTaskItem(blog_type, viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Section Header Event : ', error);
         } finally {
@@ -391,7 +391,7 @@ export class BlogSection {
             viewer.targetId = id + '_task_bar_item';
             viewer.show();
             
-            taskbar.mount(blog_type, viewer.targetId, viewer.id, section_icon, title);
+            shell.mountTaskItem(blog_type, viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Blog Post Event : ', error);
         } finally {

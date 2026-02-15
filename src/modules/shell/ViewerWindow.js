@@ -3,6 +3,7 @@
 import { SiteLibrary } from "../common/SiteLibrary.js";
 import { ViewerStateManager } from "./ViewerStateManager.js";
 import { TaskStateManager } from "./TaskStateManager.js";
+import { shell } from "./Shell.js";
 
 const CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE: 'medium_icon',
@@ -179,30 +180,7 @@ export class ViewerWindow {
             TaskStateManager.removeTask(window_element.dataset.group, this.viewerId  + '_task_bar_item');
             ViewerStateManager.removeGroup(this.viewerId);
 
-            let task_element = document.getElementById(this.targetId);
-            let task_container = document.getElementById('task-items');
-            let group_root = document.getElementById(task_element.dataset.group + '_task_group');
-
-            const group_items = TaskStateManager.getGroup(task_element.dataset.group);
-            if (group_root && group_items.size === 1) {
-                task_container.appendChild(group_items.values().next().value.element);           
-                group_root.remove();
-            }
-
-            if (!TaskStateManager.getElementsSize()) {
-                const clarity_filter = document.getElementById('shade-panel');
-                if (clarity_filter) {
-                    clarity_filter.remove();
-                    document.body.style.overflow = 'auto';
-                }
-            }
-
-            SiteLibrary.closeElement(this.targetId);            
-            SiteLibrary.closeElement(this.viewerId);
-
-            group_root = null;
-            task_container = null;
-            task_element = null;
+            shell.unmountTaskItem(this.viewerId  + '_task_bar_item', this.viewerId);
         });
     }
 

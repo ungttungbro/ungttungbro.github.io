@@ -55,7 +55,7 @@ footer {
 .content-primary {
   display: grid;
   grid-template-columns: 1fr 20rem;
-  gap: 1rem;
+  gap: 1.5rem;
   border-bottom: 0px dashed #444444;
   padding-bottom: 0rem;
 }
@@ -63,7 +63,7 @@ footer {
 .content-secondary {
   display: grid;
   grid-template-columns:  1fr 1.5fr 20rem;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .section-block {  
@@ -135,8 +135,9 @@ footer {
   min-width: 100%;
   position: absolute;
   border-radius: 0.5rem;
+  padding: 0.25rem;
 
-  background-color: #222222;
+  background-color: rgba(0, 0, 0, 0.8);
 
   /*backdrop-filter: blur(6px) saturate(100%) brightness(100%);
   background:
@@ -146,7 +147,7 @@ footer {
       rgba(255,255,255,0.015)
     );*/
 
-  border: 2px solid #444444; /*var(--base_viewer_border);*/
+  border: 0px solid #444444; /*var(--base_viewer_border);*/
 
   /*box-shadow: var(--base_viewer_shadow);*/
 
@@ -188,7 +189,9 @@ footer {
 .title_bar {
   position: relative;
   background-image: var(--base_viewer_title_bar_background_image);
-  backdrop-filter: var(--base_backdrop_filter);
+  /*backdrop-filter: var(--base_backdrop_filter);*/
+
+  border-bottom: 0.075rem solid rgba(255, 255, 255, 0.2);
 
   background: rgba(0,0,0,0.5);
 }
@@ -200,9 +203,10 @@ footer {
 
 .footer_panel {
   position: relative;
-  backdrop-filter: var(--base_backdrop_filter);
-  background: rgba(255, 255, 255, 0.025);
+  /*backdrop-filter: var(--base_backdrop_filter);*/
+  background: rgba(0,0,0,0.25);
   background-image: var(--base_viewer_footer_background_image);  
+  border-top: 0.075rem solid rgba(255, 255, 255, 0.1);
 }
 
 .footer_panel * {
@@ -251,8 +255,8 @@ footer {
   background:
     linear-gradient(
       to bottom,
-      rgba(255,255,255,0.08),
-      rgba(255,255,255,0.015)
+      rgba(200, 200, 200, 0.08),
+      rgba(150, 150, 150, 0.015)
     );
 
   border: var(--base_viewer_border);
@@ -266,7 +270,7 @@ footer {
 }
 
 .viewer.active {
-  background: rgba(20, 20, 20, 0.6);
+  background: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(6px);
 }
 

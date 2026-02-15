@@ -49,7 +49,6 @@ export class TaskStateManager {
         return this.taskGroupMap.size;
     }
 
-
     static enforceSingle(class_name, element) {
         const group_map = this.taskGroupMap;
 
@@ -61,5 +60,5 @@ export class TaskStateManager {
         }
 
         element.classList.add(class_name);
-    }   
+    }
 }
