@@ -24,28 +24,31 @@ const GROUP_CONFIG = {
 export class Shell {
     async initialize(task_bar_element) {
         this.isPortraitLayout = null;
+        this.currentMode = null;
 
         await taskbar.initialize(task_bar_element);
         taskbar.groupTypeData = GROUP_CONFIG;
         
         this.showTaskBar();
-        this.registTaskBarFunction();        
+        this.registTaskBarFunction();
+        
+        this.updateLayout = this.updateLayout.bind(this);
+        window.addEventListener("resize", this.updateLayout);
         this.updateLayout();
     }
 
     updateLayout() {
-        const portraitQuery = window.matchMedia("(orientation: portrait)");
+        const isPortrait = window.innerHeight > window.innerWidth;
+        const newMode = isPortrait ? "portrait" : "landscape";
 
-        portraitQuery.addEventListener("change", e => {
-            if (e.matches) {
-                this.applyPortraitLayout();
-            } else {
-                this.applyLandscapeLayout();
-            }
-        });
+        if (this.currentMode === newMode) return; // 변화 없으면 중단
 
-        if (portraitQuery.matches) {
-            applyPortraitLayout();
+        this.currentMode = newMode;
+
+        if (isPortrait) {
+            this.applyPortraitLayout();
+        } else {
+            this.applyLandscapeLayout();
         }
     }
 

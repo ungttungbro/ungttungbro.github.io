@@ -18,6 +18,8 @@ export class ViewerWindow {
         this.targetId = null;
         this.viewerId = null;        
         this.windowElement = null;
+        this.isMaximized = false;
+        this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     }
 
     /*  this 멤버필드
@@ -140,7 +142,7 @@ export class ViewerWindow {
 
         const minimize_button = SiteLibrary.createImgElement(
             CONSTANTS.WINDOW_BUTTON_NAME, 
-            '', 
+            'viewer-minimize-button', 
             CONSTANTS.MINIMIZE_BUTTON_ICON_PATH, 
             'minimize button'
         );
@@ -169,6 +171,8 @@ export class ViewerWindow {
             e.stopPropagation();
 
             SiteLibrary.toggleElementMaximize(window_element, 'taskbar');
+            if (this.isMaximized) this.isMaximized = false;
+            else this.isMaximized = true;
 
             window_element.style.zIndex = ViewerStateManager.maxZIndex() + 1; 
             ViewerStateManager.stateLog(window_element);
@@ -259,6 +263,8 @@ export class ViewerWindow {
         };
 
         this.windowElement.addEventListener('pointerdown', e => {
+            if (this.isTouchDevice) return; // 터치면 resize 무시
+
             const direction = resizeDirection(e);
             if (!direction) return;
 
@@ -301,8 +307,7 @@ export class ViewerWindow {
     }
 
     dragWindow() {
-        const window_element = this.windowElement;   
-
+        const window_element = this.windowElement;
         const title_bar = window_element.querySelector('.title_bar');
 
         this.generateDragEvent(title_bar);
@@ -315,11 +320,14 @@ export class ViewerWindow {
         title_bar.addEventListener('dblclick', e => {
             if (!title_bar.isDragging) {
                 SiteLibrary.toggleElementMaximize(this.windowElement, 'taskbar');
+                if (this.isMaximized) this.isMaximized = false;
+                else this.isMaximized = true;
             }
         });
 
         // 드래그 시작
         title_bar.addEventListener('pointerdown', e => {
+            if (this.isMaximized) return;
             if (e.target.closest('.window_button')) return;
 
             const window_element = this.windowElement;

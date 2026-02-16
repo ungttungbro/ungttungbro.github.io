@@ -122,9 +122,9 @@
   --base_anchor_tag_hover_color : #ffc900;
   --base_anchor_tag_hover_color_b : #cdcdcd;
 
-  --base_hr_border : 0 solid #2a2a2a;
+  --base_hr_border : 0.075rem solid rgba(255, 255, 255, 0.04);
   --base_dash_border : 0.075rem dashed #444444; 
-  --base_border_line : 0 solid #444444;
+  --base_border_line : 0.075rem solid  rgba(255, 255, 255, 0.04);
   --base_blog_content_panel_hr : rgba(255,255,255,0.15);
   --base_viewer_border : 0.05rem solid rgba(255,255,255,0.25);
  
@@ -245,7 +245,7 @@ code {
 hr {
   border: var(--base_hr_border);
   margin-top: 0.4rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.1rem;
 }
 
 h1 {

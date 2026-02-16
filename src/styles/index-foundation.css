@@ -294,7 +294,7 @@ footer {
 /* 세로 모드 (portrait) */
 @media (max-aspect-ratio: 1/1) {
   html {
-    font-size: 1.75vw;
+    font-size: 2vw;
   }
 
   #content-primary {
@@ -343,5 +343,9 @@ footer {
 
   #blog-grid {
     grid-template-columns: 1fr 20rem;
+  }
+
+  #viewer-minimize-button {
+    display: none;
   }
 }
