@@ -38,19 +38,27 @@ main {
   padding-left: 1rem;
   padding-right: 1rem;
   margin: auto;
+
+  background-image: var(--base_background_image);
+  background-repeat: repeat;
+  background-size: var(--base_background_size);
 }
 
 footer {
+  
+
   left : 0;
   right : 0;
   bottom : 0;
-  background-color: var(--base_footer_background_color);
+
+  /*background-color: var(--base_footer_background_color);
   background-image: var(--base_footer_background_image);
   background-repeat: repeat;
-  background-size: 5.35rem;
+  background-size: 5.35rem;*/
 
   border-top: var(--base_border_line);
 }
+
 
 #content-primary {
   display: grid;
@@ -139,19 +147,7 @@ footer {
 
   background-color: rgba(0, 0, 0, 0.8);
 
-  /*backdrop-filter: blur(6px) saturate(100%) brightness(100%);
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.08),
-      rgba(255,255,255,0.015)
-    );*/
-
-  border: 0px solid #444444; /*var(--base_viewer_border);*/
-
-  /*box-shadow: var(--base_viewer_shadow);*/
-
-  /*transform: translateY(-4px);*/
+  border: 0px solid #444444; 
 }
 
  
@@ -296,25 +292,38 @@ footer {
 
 
 /* 세로 모드 (portrait) */
-@media (orientation: portrait) {
+@media (max-aspect-ratio: 1/1) {
   html {
-    font-size: 1.5vw;
+    font-size: 1.75vw;
   }
 
   #content-primary {
+    display: grid;
     grid-template-columns: 1fr 20rem;
+    gap: 1.5rem;
   }
 
   #content-secondary {
     display: block;
+    gap: 1.5rem;
   }
 
   #content-tertiary {
     display: grid;
-
     grid-template-columns: 1fr 20rem;
-    
     gap: 1.5rem;
+  }
+
+  #logo {
+    width: 6rem;
+  }
+
+  #taskbar {
+    grid-template-columns: 1fr 2.5rem 2rem;
+  }
+
+  #task-items {
+    display: none;
   }
 
   #photo-zone .about-photo {
@@ -327,7 +336,7 @@ footer {
     font-size: 0.9rem;
   }
 
-  #profile  .profile-thumbnail {
+  #profile .profile-thumbnail {
     width: 3.77rem;
     height: 2.8rem;
   }

@@ -23,34 +23,82 @@ const GROUP_CONFIG = {
 
 export class Shell {
     async initialize(task_bar_element) {
+        this.isPortraitLayout = null;
+
         await taskbar.initialize(task_bar_element);
         taskbar.groupTypeData = GROUP_CONFIG;
+        
         this.showTaskBar();
-        this.registTaskBarFunction();
-        this.createPortlateLayout();
+        this.registTaskBarFunction();        
+        this.updateLayout();
     }
 
-    createPortlateLayout() {
-        if (window.innerHeight > window.innerWidth) {
+    updateLayout() {
+        const portraitQuery = window.matchMedia("(orientation: portrait)");
+
+        portraitQuery.addEventListener("change", e => {
+            if (e.matches) {
+                this.applyPortraitLayout();
+            } else {
+                this.applyLandscapeLayout();
+            }
+        });
+
+        if (portraitQuery.matches) {
+            applyPortraitLayout();
+        }
+    }
+
+    applyLandscapeLayout() {
+        if (this.isPortraitLayout) {
             const primary_contents = document.getElementById('content-primary');
             const secondary_contents = document.getElementById('content-secondary');
-            const tertiary_contents = document.createElement('div');
-            tertiary_contents.id = 'content-tertiary';
-
+            const tertiary_contents = document.getElementById('content-tertiary');
+            
             const content_primary_items = Array.from(primary_contents.children);
             const content_secondary_items = Array.from(secondary_contents.children);
+            const content_tertiary_items = Array.from(tertiary_contents.children);            
 
             const new_primary_contents = [content_secondary_items[0], content_primary_items[1]];
-            const new_secondary_contents = [content_primary_items[0]];
-            const new_tertiary_contents = [content_secondary_items[1], content_secondary_items[2]];
-            
+            const new_secondary_contents = [content_primary_items[0], content_tertiary_items[0], content_tertiary_items[1]];
+                       
             new_primary_contents.forEach(item => primary_contents.appendChild(item));
             new_secondary_contents.forEach(item => secondary_contents.appendChild(item));
-            new_tertiary_contents.forEach(item => tertiary_contents.appendChild(item));
 
-            const main = document.querySelector('main');
-            main.appendChild(tertiary_contents);
+            tertiary_contents.style.display = 'none';
         }
+
+        this.isPortraitLayout = false;
+    }
+
+    applyPortraitLayout() {
+        const portrait = window.innerHeight > window.innerWidth;
+
+        if (portrait === this.isPortraitLayout) return;
+        this.isPortraitLayout = portrait;
+
+        const primary_contents = document.getElementById('content-primary');
+        const secondary_contents = document.getElementById('content-secondary');
+
+        const tertiary_contents = document.getElementById('content-tertiary') ?? document.createElement('div');
+        tertiary_contents.style.display = 'grid';
+        if (!tertiary_contents.id) {
+            tertiary_contents.id = 'content-tertiary';
+            document.querySelector('main').appendChild(tertiary_contents);
+        }
+
+        tertiary_contents.innerHTML = "";               
+
+        const content_primary_items = Array.from(primary_contents.children);
+        const content_secondary_items = Array.from(secondary_contents.children);
+
+        const new_primary_contents = [content_secondary_items[0], content_primary_items[1]];
+        const new_secondary_contents = [content_primary_items[0]];
+        const new_tertiary_contents = [content_secondary_items[1], content_secondary_items[2]];
+        
+        new_primary_contents.forEach(item => primary_contents.appendChild(item));
+        new_secondary_contents.forEach(item => secondary_contents.appendChild(item));
+        new_tertiary_contents.forEach(item => tertiary_contents.appendChild(item));
     }
 
     showTaskBar() {

@@ -98,6 +98,7 @@
   --base_clarity_filter_background_image : none;
 
   --base_background_size : 12.25rem;
+  --base_footer_background_size: 5.35rem;
 
   --base_background_color : #cccccc;
 
@@ -198,11 +199,12 @@
 
 html {
   display : block;
-
-  background-color: var(--base_background_color);
-  background-image: var(--base_background_image);
+  
+  background-image: var(--base_footer_background_image);
   background-repeat: repeat;
-  background-size: var(--base_background_size);
+  background-size: 5.35rem;
+  background-color: var(--base_background_color);
+  
   
   font-size: var(--base_font_size);
   font-family : var(--base_fonts);
@@ -210,6 +212,10 @@ html {
 }
 
 body {
+  /*background-image: var(--base_background_image);
+  background-repeat: repeat;
+  background-size: var(--base_background_size);*/
+
   width: 100%;
 
   line-height: var(--base_font_line_height);
