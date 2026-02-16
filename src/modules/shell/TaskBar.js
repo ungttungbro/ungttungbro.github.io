@@ -1,8 +1,8 @@
 'use strict';
 
 import { SiteLibrary } from "../common/SiteLibrary.js";
-import { ViewerStateManager } from "./ViewerStateManager.js";
 import { TaskStateManager } from "./TaskStateManager.js";
+import { ProcessRegistry } from "./ProcessRegistry.js";
 
 const TASKBAR_CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE : 'medium_icon',
@@ -90,16 +90,7 @@ export class TaskBar {
             group_root.remove();
         }
 
-        if(!TaskStateManager.getElementsSize()) {
-            const shade_panel = document.getElementById('shade-panel');                     
-            const isActive = shade_panel.dataset.active === 'true';        
-            console.log(isActive);   
-            if (isActive) {                
-                shade_panel.style.display = 'none';
-                shade_panel.dataset.active = 'false';
-                document.body.style.overflow = 'auto';
-            }
-        }
+        ProcessRegistry.get('unmount', 'function')?.();
     }
 
     createTaskGroup(group_type, task_group_items, title_icon_path) {
@@ -197,15 +188,7 @@ export class TaskBar {
         element.className = 'task-bar-item';
 
         element.addEventListener ('click', () => {
-            const viewer = document.getElementById(target_id);
-            if (!viewer) {
-                console.warn('element not found:', target_id);
-                return;
-            }
-
-            ViewerStateManager.bringToFront(viewer);
-            TaskStateManager.enforceSingle('active', viewer);
-            ViewerStateManager.stateLog(viewer);
+            ProcessRegistry.get('taskBarItemClick', 'function')?.(target_id);
         });
             
 
@@ -221,7 +204,7 @@ export class TaskBar {
             this.unmount(element.id, target_id);
 
             TaskStateManager.removeTask(element.dataset.group, element.id);
-            ViewerStateManager.removeGroup(target_id);
+            ProcessRegistry.get('taskBarItemCloseButtonClick', 'function')?.(target_id);
         });
 
         element.appendChild(caption);
@@ -244,37 +227,3 @@ export class TaskBar {
 }
 
 export const taskbar = new TaskBar();
-
-
-
-/*
-export class TaskBar {
-  constructor(procRegistry) {
-    this.procRegistry = procRegistry;
-    this.items = []; // TaskBar 내부 아이템
-  }
-
-  mount(element) {
-    this.items.push(element);
-
-    // 등록된 mount 프로세스 실행
-    this.procRegistry.execute('mount', this, element);
-  }
-
-  unmount(element) {
-    const idx = this.items.indexOf(element);
-    if (idx !== -1) this.items.splice(idx, 1);
-
-    // 등록된 unmount 프로세스 실행
-    this.procRegistry.execute('unmount', this, element);
-  }
-
-  triggerEvent(code) {
-    // 등록된 eventCode 프로세스 실행
-    this.procRegistry.execute('eventCode', this, code);
-  }
-
-  isEmpty() {
-    return this.items.length === 0;
-  }
-}*/

@@ -3,6 +3,7 @@
 import { SiteLibrary } from "../common/SiteLibrary.js";
 import { ViewerStateManager } from "./ViewerStateManager.js";
 import { TaskStateManager } from "./TaskStateManager.js";
+import { ProcessRegistry  } from "./ProcessRegistry.js";
 import { taskbar } from "./TaskBar.js";
 
 const TASKBAR_CONSTANTS = Object.freeze({
@@ -25,6 +26,7 @@ export class Shell {
         await taskbar.initialize(task_bar_element);
         taskbar.groupTypeData = GROUP_CONFIG;
         this.showTaskBar();
+        this.registTaskBarFunction();
         this.createPortlateLayout();
     }
 
@@ -153,45 +155,66 @@ export class Shell {
 
         return color_theme_element;
     }
+
+    /*
+        사이트의 레지스트리 등록
+        registTaskBarFunction : 태스크바의 확장 기능을 레지스트리에 등록
+    */
+    registTaskBarFunction() {
+        ProcessRegistry.register('unmount', this.closeTaskBarScreenShadeSnapshot());
+        ProcessRegistry.register('taskBarItemClick', this.clickTaskBarItem());
+        ProcessRegistry.register('taskBarItemCloseButtonClick', this.clickTaskBarItemCloseButton());        
+    }
+
+    closeTaskBarScreenShadeSnapshot() {
+        const snapshot = {
+            ['process-name']: 'screen-shade',
+            ['function']: () => {
+                if(!TaskStateManager.getElementsSize()) {
+                    const shade_panel = document.getElementById('shade-panel');                     
+                    const isActive = shade_panel.dataset.active === 'true';        
+                    
+                    if (isActive) {                
+                        shade_panel.style.display = 'none';
+                        shade_panel.dataset.active = 'false';
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            }
+        };
+
+        return snapshot;
+    }
+
+    clickTaskBarItem() {
+        const snapshot = {
+            ['process-name']: 'task-bar-item-click-event',
+            ['function']: (viewer_id) => {
+                const viewer = document.getElementById(viewer_id);
+                if (!viewer) {
+                    console.warn('element not found:', viewer_id);
+                    return;
+                }
+
+                ViewerStateManager.bringToFront(viewer);
+                TaskStateManager.enforceSingle('active', viewer);
+                ViewerStateManager.stateLog(viewer);
+            }
+        };
+
+        return snapshot;
+    }
+
+    clickTaskBarItemCloseButton() {
+        const snapshot = {
+            ['process-name']: 'task-bar-item-close-click-event',
+            ['function']: (viewer_id) => {
+                ViewerStateManager.removeGroup(viewer_id);
+            }
+        };
+
+        return snapshot;
+    }
 }
 
 export const shell = new Shell();
-
-/*
-import { TaskBarProcRegistry } from './TaskBarProcRegistry.js';
-import { TaskBar } from './TaskBar.js';
-
-const taskbarProcRegistry = new TaskBarProcRegistry();
-const shell = {
-  hideShadePanel: () => console.log('Shade panel hidden')
-};
-
-// 예상 프로세스 등록
-taskbarProcRegistry.register('unmount', (taskbar, element) => {
-  console.log('TaskBar unmount snap 실행', element);
-  if (taskbar.isEmpty()) {
-    shell.hideShadePanel();
-  }
-});
-
-taskbarProcRegistry.register('mount', (taskbar, element) => {
-  console.log('TaskBar mount snap 실행', element);
-});
-
-taskbarProcRegistry.register('eventCode', (taskbar, code) => {
-  console.log('TaskBar eventCode snap 실행', code);
-});
-
-// TaskBar 생성
-const taskbar = new TaskBar(taskbarProcRegistry);
-
-// 테스트
-const itemA = { id: 'viewer1' };
-const itemB = { id: 'viewer2' };
-
-taskbar.mount(itemA); // mount snap 실행
-taskbar.mount(itemB); 
-taskbar.unmount(itemA); // unmount snap 실행
-taskbar.unmount(itemB); // unmount snap 실행 → Shade panel 숨김
-taskbar.triggerEvent('click-123'); // eventCode snap 실행
-*/
