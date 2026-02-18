@@ -1,6 +1,6 @@
 'use strict';
 
-export class ProcessRegistry {
+export class ViewerWindowProcessRegistry {
   static registry = new Map(); // key: snapName, value: 함수
 
   // 스냅 등록

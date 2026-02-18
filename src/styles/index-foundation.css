@@ -1,8 +1,8 @@
 @import "./common/reset.css";
 @import "./common/base.css";
 
-@import "./shell/task-bar-style.css";
-@import "./shell/viewer-window-style.css";
+@import "../modules/taskbar/taskBar.css";
+@import "../modules/viewerWindow/viewerWindow.css";
 
 @import "./section/about-style.css";
 @import "./section/blog-style.css";
@@ -127,7 +127,7 @@ footer {
 
 .title-box-more-button {
   font-weight: bold;
-  letter-spacing: 0.15rem;
+  letter-spacing: 0.1rem;
 }
 
 

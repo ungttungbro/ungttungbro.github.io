@@ -39,13 +39,12 @@
 
     color: #cdcdcd;
     font-weight: bold;
+
     align-items: center;
     white-space: nowrap;
     text-overflow: ellipsis;
     
     margin-left: 0.1rem;
-
-    /*background-color: #444444;*/
     
     -webkit-user-select: none; /* Chrome, Safari, Opera */
     -moz-user-select: none;    /* Firefox */
@@ -62,8 +61,6 @@
     
     justify-content: space-between;
     margin: 0 auto;
-
-    border: 0px solid #222222;
 }
 
 .task-bar-group .task-bar-item .medium_icon {

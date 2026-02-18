@@ -2,7 +2,7 @@
 
 import { SiteLibrary } from "../common/SiteLibrary.js";
 import { ViewerStateManager } from "./ViewerStateManager.js";
-import { ProcessRegistry } from "./ProcessRegistry.js";
+import { ViewerWindowProcessRegistry } from "./ViewerWindowProcessRegistry.js";
 
 const CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE: 'medium_icon',
@@ -44,7 +44,7 @@ export class ViewerWindow {
         this.dragWindow();
         this.resizeWindow();
 
-        ProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement);
+        ViewerWindowProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement);
         ViewerStateManager.stateLog(this.windowElement);
     }
 
@@ -66,7 +66,7 @@ export class ViewerWindow {
         });
         
         element.addEventListener('pointerenter', e => {
-            ProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement);
+            ViewerWindowProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement);
         });
         
         return element;
@@ -180,7 +180,7 @@ export class ViewerWindow {
         close_button.addEventListener('click', e => {
             e.stopPropagation();
             
-            ProcessRegistry.get('unmount', 'function')?.(
+            ViewerWindowProcessRegistry.get('unmount', 'function')?.(
                 window_element.dataset.group, 
                 this.viewerId  + '_task_bar_item',
                 this.viewerId

@@ -3,7 +3,7 @@
 import { SiteLibrary } from "../common/SiteLibrary.js";
 import { ViewerStateManager } from "../viewerWindow/ViewerStateManager.js";
 import { TaskStateManager } from "../taskbar/TaskStateManager.js";
-import { ProcessRegistry  } from "../viewerWindow/ProcessRegistry.js";
+import { ViewerWindowProcessRegistry  } from "../viewerWindow/ViewerWindowProcessRegistry.js";
 import { TaskBarProcessRegistry  } from "../taskbar/TaskBarProcessRegistry.js";
 import { taskbar } from "../taskbar/TaskBar.js";
 
@@ -270,8 +270,8 @@ export class Shell {
     }
 
     registViewerFunction() {
-        ProcessRegistry.register('enforceSingle', this.enforceSingleViewerSnapshot());
-        ProcessRegistry.register('unmount', this.unmountViewerSnapshot());
+        ViewerWindowProcessRegistry.register('enforceSingle', this.enforceSingleViewerSnapshot());
+        ViewerWindowProcessRegistry.register('unmount', this.unmountViewerSnapshot());
     }
 
     enforceSingleViewerSnapshot() {
