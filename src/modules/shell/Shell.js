@@ -1,10 +1,11 @@
 'use strict';
 
 import { SiteLibrary } from "../common/SiteLibrary.js";
-import { ViewerStateManager } from "./ViewerStateManager.js";
-import { TaskStateManager } from "./TaskStateManager.js";
-import { ProcessRegistry  } from "./ProcessRegistry.js";
-import { taskbar } from "./TaskBar.js";
+import { ViewerStateManager } from "../viewerWindow/ViewerStateManager.js";
+import { TaskStateManager } from "../taskbar/TaskStateManager.js";
+import { ProcessRegistry  } from "../viewerWindow/ProcessRegistry.js";
+import { TaskBarProcessRegistry  } from "../taskbar/TaskBarProcessRegistry.js";
+import { taskbar } from "../taskbar/TaskBar.js";
 
 const TASKBAR_CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE : 'medium_icon',
@@ -31,6 +32,7 @@ export class Shell {
         
         this.showTaskBar();
         this.registTaskBarFunction();
+        this.registViewerFunction();
         
         this.updateLayout = this.updateLayout.bind(this);
         window.addEventListener("resize", this.updateLayout);
@@ -212,9 +214,9 @@ export class Shell {
         registTaskBarFunction : 태스크바의 확장 기능을 레지스트리에 등록
     */
     registTaskBarFunction() {
-        ProcessRegistry.register('unmount', this.closeTaskBarScreenShadeSnapshot());
-        ProcessRegistry.register('taskBarItemClick', this.clickTaskBarItem());
-        ProcessRegistry.register('taskBarItemCloseButtonClick', this.clickTaskBarItemCloseButton());        
+        TaskBarProcessRegistry.register('unmount', this.closeTaskBarScreenShadeSnapshot());
+        TaskBarProcessRegistry.register('taskBarItemClick', this.clickTaskBarItemSnapshot());
+        TaskBarProcessRegistry.register('taskBarItemCloseButtonClick', this.clickTaskBarItemCloseButtonSnapshot());        
     }
 
     closeTaskBarScreenShadeSnapshot() {
@@ -237,7 +239,7 @@ export class Shell {
         return snapshot;
     }
 
-    clickTaskBarItem() {
+    clickTaskBarItemSnapshot() {
         const snapshot = {
             ['process-name']: 'task-bar-item-click-event',
             ['function']: (viewer_id) => {
@@ -256,11 +258,40 @@ export class Shell {
         return snapshot;
     }
 
-    clickTaskBarItemCloseButton() {
+    clickTaskBarItemCloseButtonSnapshot() {
         const snapshot = {
             ['process-name']: 'task-bar-item-close-click-event',
             ['function']: (viewer_id) => {
                 ViewerStateManager.removeGroup(viewer_id);
+            }
+        };
+
+        return snapshot;
+    }
+
+    registViewerFunction() {
+        ProcessRegistry.register('enforceSingle', this.enforceSingleViewerSnapshot());
+        ProcessRegistry.register('unmount', this.unmountViewerSnapshot());
+    }
+
+    enforceSingleViewerSnapshot() {
+        const snapshot = {
+            ['process-name']: 'viewer-enforce-single',
+            ['function']: (element) => {
+                TaskStateManager.enforceSingle('active', element);
+            }
+        };
+
+        return snapshot;
+    }
+
+    unmountViewerSnapshot() {
+        const snapshot = {
+            ['process-name']: 'unmount-viewer',
+            ['function']: (group_key, task_item_id, viewer_id) => {
+                TaskStateManager.removeTask(group_key, task_item_id);
+                ViewerStateManager.removeGroup(viewer_id);
+                taskbar.unmount(task_item_id, viewer_id);
             }
         };
 

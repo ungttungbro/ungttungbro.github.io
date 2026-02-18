@@ -11,6 +11,7 @@
     },
 
     "archive": {
+        "2018.09.28." : ["", "lecture-note", "C언어 기초 강의교안 (실습)", "", "/assets/data/archive/20180928A/20180928A.html"],
         "2014.09.28." : ["", "code", "블록암호 운용 라이브러리", "", "/assets/data/archive/20140928A/20140928A.html"],
         "2014.09.24." : ["", "code", "의사난수생성기 (Psuedorandom Number Generator)", "", "/assets/data/archive/20140924A/20140924A.html"],
         "2014.08.27." : ["", "code", "파일 암호화 라이브러리",  "", "/assets/data/archive/20140827A/20140827A.html"]

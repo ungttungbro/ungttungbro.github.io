@@ -1,12 +1,12 @@
 'use strict';
 
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { taskbar } from "../modules/shell/TaskBar.js";
-import { ViewerWindow } from "../modules/shell/ViewerWindow.js";
+import { taskbar } from "../modules/taskbar/TaskBar.js";
+import { ViewerWindow } from "../modules/viewerWindow/ViewerWindow.js";
 import { Templates } from "../modules/site/Templates.js";
 import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js"
 import { siteMap } from "../modules/site/siteMap.js";
-import { ViewerStateManager } from "../modules/shell/ViewerStateManager.js";
+import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
 
 export class PhotologSection {
     constructor(photolog_service) {

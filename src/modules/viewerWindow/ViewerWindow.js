@@ -2,8 +2,7 @@
 
 import { SiteLibrary } from "../common/SiteLibrary.js";
 import { ViewerStateManager } from "./ViewerStateManager.js";
-import { TaskStateManager } from "./TaskStateManager.js";
-import { shell } from "./Shell.js";
+import { ProcessRegistry } from "./ProcessRegistry.js";
 
 const CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE: 'medium_icon',
@@ -45,7 +44,7 @@ export class ViewerWindow {
         this.dragWindow();
         this.resizeWindow();
 
-        TaskStateManager.enforceSingle('active', this.windowElement);
+        ProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement);
         ViewerStateManager.stateLog(this.windowElement);
     }
 
@@ -61,23 +60,23 @@ export class ViewerWindow {
         element.style.left = this.left;
         element.style.top = this.top;
         element.style.zIndex = ViewerStateManager.maxZIndex() + 1;
-        element.addEventListener('click', e => { 
+        element.addEventListener('click', e => {
             element.style.zIndex = ViewerStateManager.maxZIndex() + 1;
             ViewerStateManager.stateLog(element);
         });
         
         element.addEventListener('pointerenter', e => {
-            TaskStateManager.enforceSingle('active', this.windowElement);
+            ProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement);
         });
         
         return element;
     }
 
-    createContentArea() {       
+    createContentArea() {
         const contents = document.createElement('div');
         contents.id = 'content_area';
 
-        if(this.headerContents !== null) { 
+        if(this.headerContents !== null) {
             const header_panel = document.createElement('div'); header_panel.className = 'header_panel';
             header_panel.appendChild(this.headerContents);
             contents.appendChild(header_panel); 
@@ -179,12 +178,13 @@ export class ViewerWindow {
         });
 
         close_button.addEventListener('click', e => {
-            e.stopPropagation();            
-
-            TaskStateManager.removeTask(window_element.dataset.group, this.viewerId  + '_task_bar_item');
-            ViewerStateManager.removeGroup(this.viewerId);
-
-            shell.unmountTaskItem(this.viewerId  + '_task_bar_item', this.viewerId);
+            e.stopPropagation();
+            
+            ProcessRegistry.get('unmount', 'function')?.(
+                window_element.dataset.group, 
+                this.viewerId  + '_task_bar_item',
+                this.viewerId
+            );
         });
     }
 

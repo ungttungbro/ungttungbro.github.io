@@ -45,8 +45,6 @@ main {
 }
 
 footer {
-  
-
   left : 0;
   right : 0;
   bottom : 0;
@@ -202,7 +200,7 @@ footer {
   /*backdrop-filter: var(--base_backdrop_filter);*/
   background: rgba(0,0,0,0.25);
   background-image: var(--base_viewer_footer_background_image);  
-  border-top: 0.075rem solid rgba(255, 255, 255, 0.1);
+  border-top: 0.075rem solid rgba(255, 255, 255, 0.2);
 }
 
 .footer_panel * {

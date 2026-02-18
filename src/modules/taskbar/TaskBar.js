@@ -2,7 +2,7 @@
 
 import { SiteLibrary } from "../common/SiteLibrary.js";
 import { TaskStateManager } from "./TaskStateManager.js";
-import { ProcessRegistry } from "./ProcessRegistry.js";
+import { TaskBarProcessRegistry } from "./TaskBarProcessRegistry.js";
 
 const TASKBAR_CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE : 'medium_icon',
@@ -11,7 +11,7 @@ const TASKBAR_CONSTANTS = Object.freeze({
 
 export class TaskBar {
     async initialize(task_bar_element) {
-        if (!task_bar_element) 
+        if (!task_bar_element)
             throw new Error('taskbar element required');
 
         this.taskBarElement = task_bar_element;
@@ -61,12 +61,12 @@ export class TaskBar {
         if (group_length === 1) { 
             task_bar.appendChild(task_item);
             return;
-        } 
+        }
         
         if (group_length === 2) {
             task_bar.appendChild(task_group_root);
             return;
-        } 
+        }
         
         const group_items = task_group_root.querySelector('.task-group-items');
         if (!group_items) return;
@@ -90,7 +90,7 @@ export class TaskBar {
             group_root.remove();
         }
 
-        ProcessRegistry.get('unmount', 'function')?.();
+        TaskBarProcessRegistry.get('unmount', 'function')?.();
     }
 
     createTaskGroup(group_type, task_group_items, title_icon_path) {
@@ -188,7 +188,7 @@ export class TaskBar {
         element.className = 'task-bar-item';
 
         element.addEventListener ('click', () => {
-            ProcessRegistry.get('taskBarItemClick', 'function')?.(target_id);
+            TaskBarProcessRegistry.get('taskBarItemClick', 'function')?.(target_id);
         });
             
 
@@ -204,7 +204,7 @@ export class TaskBar {
             this.unmount(element.id, target_id);
 
             TaskStateManager.removeTask(element.dataset.group, element.id);
-            ProcessRegistry.get('taskBarItemCloseButtonClick', 'function')?.(target_id);
+            TaskBarProcessRegistry.get('taskBarItemCloseButtonClick', 'function')?.(target_id);
         });
 
         element.appendChild(caption);

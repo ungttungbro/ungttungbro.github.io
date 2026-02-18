@@ -3,10 +3,10 @@
 import { ELEMENT_TYPE, COMMON, VIEWER } from "../modules/common/Constants.js";
 import { siteMap } from "../modules/site/siteMap.js";
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { ViewerWindow } from "../modules/shell/ViewerWindow.js";
+import { ViewerWindow } from "../modules/viewerWindow/ViewerWindow.js";
 import { shell } from "../modules/shell/Shell.js";
 import { Templates } from "../modules/site/Templates.js";
-import { ViewerStateManager } from "../modules/shell/ViewerStateManager.js";
+import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
 
 export class BlogSection {
     constructor(blog_service) {

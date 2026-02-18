@@ -24,15 +24,15 @@ body {
     color:#eeeeee;
 }
 
-#header-layout::before,
-#links-header-layout::before,
-#gallery-header-layout::before {
+/*#header-layout::before,*/
+/*#links-header-layout::before,*/
+/*#gallery-header-layout::before {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.3);
     z-index: 0;
-}
+}*/
 
 #navigation {
     display: flex; 
