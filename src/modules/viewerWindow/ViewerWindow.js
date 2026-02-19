@@ -182,7 +182,7 @@ export class ViewerWindow {
             
             ViewerWindowProcessRegistry.get('unmount', 'function')?.(
                 window_element.dataset.group, 
-                this.viewerId  + '_task_bar_item',
+                this.targetId,
                 this.viewerId
             );
         });

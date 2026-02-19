@@ -75,7 +75,12 @@ export class PhotologSection {
     onSectionHeaderClick(e, id, section_icon, title, header, contents, footer) {
         e.preventDefault();
 
-        if (document.getElementById(id)) { return; }
+        const contents_id = COMMON.VIEWER_PREFIX + id;
+       
+        if (document.getElementById(contents_id)) {
+            ViewerStateManager.bringToFront(document.getElementById(contents_id));
+            return; 
+        }
 
         const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
 
@@ -87,7 +92,7 @@ export class PhotologSection {
         try {
             const viewer = new ViewerWindow();
             viewer.configureWindow(
-                id,
+                contents_id,
                 width + 'px',
                 height + 'px',
                 top + 'px',
@@ -101,14 +106,14 @@ export class PhotologSection {
                 Templates.createContentPanel('photolog-footer-panel', footer)
             );
 
-            viewer.targetId = id + '_task_bar_item';
+            viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
             
             taskbar.mount('photolog', viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.log('Section Header Event : ', error);
         } finally {
-            const element = document.getElementById(id);
+            const element = document.getElementById(contents_id);
             element.dataset.group = 'photolog';
 
             ViewerStateManager.stateLog(element);
@@ -129,7 +134,7 @@ export class PhotologSection {
             const [key, value] = result.value;
 
             const teaser_figure = this.generateTeaser(
-                key,
+                value.content_id,
                 value.thumbnail,
                 Object.keys(value.content),
                 Object.values(value.content),
@@ -193,8 +198,10 @@ export class PhotologSection {
     }
 
     openPhotologContent(id, title, header_contents, main_contents, footer_contents) {
-        if (document.getElementById(id + '_viewer')) { 
-            ViewerStateManager.bringToFront(document.getElementById(id));
+        const contents_id = COMMON.VIEWER_PREFIX + id;
+       
+        if (document.getElementById(contents_id)) {
+            ViewerStateManager.bringToFront(document.getElementById(contents_id));
             return; 
         }
 
@@ -203,11 +210,11 @@ export class PhotologSection {
         try {
             const viewer = new ViewerWindow();
             viewer.configureWindow (
-                id,
+                contents_id,
                 '44rem'/*(window.innerWidth - ((window.innerWidth / 4) * 1.5)) + 'px'*/,
                 '32rem'/*(window.innerHeight - (height_offset * 3)) + 'px'*/,
-                height_offset + 'px',
-                (window.innerWidth / 4) + 'px',
+                SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('32')) / 2)) + 'rem',
+                SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('44')) / 2)) + 'rem',
                 'viewer',
                 'photolog_photo',
                 siteMap.photolog.sectionHeaderIcon,
@@ -217,14 +224,14 @@ export class PhotologSection {
                 Templates.createContentPanel('photolog-footer-panel', footer_contents)
             );
 
-            viewer.targetId = id + '_task_bar_item';
+            viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
 
             taskbar.mount('photolog', viewer.targetId, viewer.id, siteMap.photolog.sectionHeaderIcon, title);
         } catch (error) {
             console.log('Blog Post Event : ', error);
         } finally {
-            const element = document.getElementById(id);
+            const element = document.getElementById(contents_id);
             element.dataset.group = 'photolog';
 
             ViewerStateManager.stateLog(element);
@@ -245,7 +252,7 @@ export class PhotologSection {
                 siteMap.photolog.photoImgAlt
             );
 
-            image.loading = 'lazy';            
+            image.loading = 'lazy';
 
             frag.appendChild(image);
         }

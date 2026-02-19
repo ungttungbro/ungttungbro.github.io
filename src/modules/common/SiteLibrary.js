@@ -22,6 +22,20 @@ export class SiteLibrary {
     return await response.text();
   }
 
+  static async hashString(str) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(str);
+
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    const hashHex = hashArray
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+
+    return hashHex;
+  }
+
   static generateRandomNumber(max) {
     return Math.floor(Math.random() * max);
   }
@@ -61,11 +75,12 @@ export class SiteLibrary {
 
   static createImgElement(class_name, id, src, alt) {
     const img = document.createElement('img');
+     
     img.className = class_name;
     img.id = id;
     img.src =  src;
     img.alt = alt;
-
+       
     return img;
   }
 

@@ -1,7 +1,6 @@
 'use strict';
 
 import { shell } from './modules/shell/Shell.js';
-import { taskbar } from './modules/taskbar/TaskBar.js';
 
 import { AboutService } from './service/AboutService.js';
 import { BlogService } from './service/BlogService.js';

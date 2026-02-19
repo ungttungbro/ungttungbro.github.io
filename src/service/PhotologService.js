@@ -1,6 +1,7 @@
 'use strict';
 
 import { PhotologDAO } from '../dao/PhotologDAO.js';
+import { SiteLibrary } from '../modules/common/SiteLibrary.js';
 
 export class PhotologService {
     constructor() {}
@@ -14,20 +15,21 @@ export class PhotologService {
             this.serviceName = this.dao.findTitle();
 
             //photolog data
-            this.photologData = this.buildPhotologData();
+            this.photologData = await this.buildPhotologData();
         } catch (error) {
             console.log('Photolog Service : ', error);
         }
     }    
 
-    buildPhotologData() {
+    async buildPhotologData() {
         const contents_records = this.buildContentsData();
         const thumbnail_records = this.buildThumbnailsData();
         const photo_records = this.buildPhotosData();
         
         const dtoMap = new Map();        
-        for (const [key, value] of contents_records) {            
+        for (const [key, value] of contents_records) {
             const photolog = {
+                content_id: await SiteLibrary.hashString(key),
                 content: value,
                 thumbnail: thumbnail_records.get(key),
                 photos: photo_records.get(key)

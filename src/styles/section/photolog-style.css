@@ -78,6 +78,10 @@
     scroll-snap-align: start;
     scroll-snap-stop: always;
     scroll-margin-top: 3vh;
+
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    padding-bottom: 0.6rem;
 }
 
 .photolog-photo {
@@ -99,8 +103,6 @@
 #photolog-index-viewer .teaser-list {
     margin-top: 0;
     padding: 0.5rem;
-
-    border: 0px solid red;
 }
 
 #photolog-index-viewer .figure-title {

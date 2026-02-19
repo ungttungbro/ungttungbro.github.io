@@ -14,7 +14,7 @@
   --index_layout_column_gap : 1rem;
 }
 
-header {  
+header {
   position:fixed;
   background-color: var(--base_header_background_color);
   background-image: var(--base_footer_background_image);
@@ -129,7 +129,6 @@ footer {
   font-weight: bold;
   letter-spacing: 0.1rem;
 }
-
 
 #taskbar {
   padding-top: var(--base_margin_size_tiny);

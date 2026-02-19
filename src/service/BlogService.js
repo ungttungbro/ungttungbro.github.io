@@ -15,31 +15,32 @@ export class BlogService {
             this.serviceName = this.dao.findTitle();
             
             //blogmetadata DTO 생성
-            this.blogMetaData = this.metaData(this.buildPostListData());
-
+            this.blogMetaData = await this.metaData(this.buildPostListData());
+            
             //archive meta data DTO
-            this.archiveMetaData = this.metaData(this.buildArchiveListData());
+            this.archiveMetaData = await this.metaData(this.buildArchiveListData());
 
             //lifelog meta data DTO
-            this.lifelogMetaData = this.metaData(this.buildLifelogListData());
+            this.lifelogMetaData = await this.metaData(this.buildLifelogListData());
             
              //lifelog meta data DTO
-            this.reflectionMetaData = this.metaData(this.buildReflectionListData());
+            this.reflectionMetaData = await this.metaData(this.buildReflectionListData());
         } catch (error) {
             console.log ('Blog Service : ', error);
         }
     }
 
     async loadContentData(content_path) {        
-        return await SiteLibrary.loadText(content_path);
+        return SiteLibrary.loadText(content_path);
     }
 
-    metaData(data) {
+    async metaData(data) {
         const contents_records = data;
         
         const dtoMap = new Map();        
         for (const [key, value] of contents_records) {            
             const blog = {
+                content_id: await SiteLibrary.hashString(key + value[1] + value[2]),
                 region: value[0],
                 type: value[1],
                 title: value[2],

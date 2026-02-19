@@ -227,7 +227,12 @@ export class BlogSection {
     onSectionHeaderClick(e, blog_type, id, section_icon, title, header, contents, footer) {
         e.preventDefault();
 
-        if (document.getElementById(id)) { return; }
+        const contents_id = COMMON.VIEWER_PREFIX + id;
+       
+        if (document.getElementById(contents_id)) {
+            ViewerStateManager.bringToFront(document.getElementById(contents_id));
+            return; 
+        }
 
         const width = window.innerWidth * VIEWER.LIST_RATIO_MIDDLE;        
         const left = Math.min(window.innerWidth - width, window.innerWidth); // 화면 안쪽으로 제한
@@ -235,7 +240,7 @@ export class BlogSection {
         try {
             const viewer = new ViewerWindow();
             viewer.configureWindow(
-                id,
+                contents_id,
                 22 + 'rem',
                 44 + 'rem',
                 SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('44')) / 2)) + 'rem',
@@ -249,14 +254,14 @@ export class BlogSection {
                 Templates.createContentPanel('blog-footer-panel', footer)
             );
 
-            viewer.targetId = id + '_task_bar_item';
+            viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
             
             shell.mountTaskItem(blog_type, viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Section Header Event : ', error);
         } finally {
-            const element = document.getElementById(id);
+            const element = document.getElementById(contents_id);
             element.dataset.group = blog_type;
 
             ViewerStateManager.stateLog(element);
@@ -301,7 +306,7 @@ export class BlogSection {
             a.innerHTML = subject;
             
             this.generatePostEvent(
-                type, data, a, encodeURIComponent(key),section_icon, value.title, 
+                type, data, a, key, section_icon, value.title, 
                 null, value.content_path,COMMON.COPYRIGHT
             );      
 
@@ -334,7 +339,7 @@ export class BlogSection {
             if (type === 'lifelog') { viewer_width = data.get(id)['width']; }
 
             this.onPostClick (
-                e, id, type, viewer_width, section_icon,
+                e, data.get(id)['content_id'], type, viewer_width, section_icon,
                 title, header,content_path, footer
             );
         });
@@ -354,9 +359,11 @@ export class BlogSection {
 
     async onPostClick(e, id, blog_type, viewer_width, section_icon, title, header, content_path, footer) {
         e.preventDefault();
+
+        const contents_id = COMMON.VIEWER_PREFIX + id;
        
-        if (document.getElementById(id)) {
-            ViewerStateManager.bringToFront(document.getElementById(id));
+        if (document.getElementById(contents_id)) {
+            ViewerStateManager.bringToFront(document.getElementById(contents_id));
             return; 
         }
 
@@ -371,7 +378,7 @@ export class BlogSection {
         try {
             const viewer = new ViewerWindow();
             viewer.configureWindow(
-                id,
+                contents_id,
                 viewer_width,
                 '36rem',
                 SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('36')) / 2)) + 'rem',
@@ -388,14 +395,14 @@ export class BlogSection {
                 Templates.createContentPanel('blog-footer-panel', footer)
             );
 
-            viewer.targetId = id + '_task_bar_item';
+            viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
             
             shell.mountTaskItem(blog_type, viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Blog Post Event : ', error);
         } finally {
-            const element = document.getElementById(id);
+            const element = document.getElementById(contents_id);
             element.dataset.group = blog_type;
 
             ViewerStateManager.stateLog(element);

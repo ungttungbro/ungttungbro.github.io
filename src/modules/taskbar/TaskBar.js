@@ -191,7 +191,6 @@ export class TaskBar {
             TaskBarProcessRegistry.get('taskBarItemClick', 'function')?.(target_id);
         });
             
-
         const title_img = SiteLibrary.createImgElement(TASKBAR_CONSTANTS.TITLE_ICON_TYPE, '', title_icon_path, '');
         const caption = SiteLibrary.createImgCaption(title_img, null, title_text);
 
