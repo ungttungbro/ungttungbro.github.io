@@ -69,12 +69,12 @@ export class AboutSection {
   }
 
   createSpecsElement() {
-    const specs_element = document.createElement(ELEMENT_TYPE.DIV)
+    const specs_element = document.createElement(ELEMENT_TYPE.DIV);
     specs_element.id = siteMap.about.specsId;
 
     const data = this.aboutService.aboutData.specs;
     for (const [key, value] of data) {
-      const img = SiteLibrary.createImgElement('small_icon', '',  value[1], '');
+      const img = SiteLibrary.createImgElement('small-icon', '',  value[1], '');
       const figure = SiteLibrary.createImgCaption(img, null, key + ' : ' + value[0]);
       specs_element.appendChild(figure);
     }
@@ -92,7 +92,7 @@ export class AboutSection {
       link.href = value[1];
       link.target = '_blank';
 
-      const img = SiteLibrary.createImgElement('small_icon', '',  value[2], '');
+      const img = SiteLibrary.createImgElement('small-icon', '',  value[2], '');
       img.style.marginRight = '0.4rem';
 
       const text_line = document.createElement('p');
@@ -124,8 +124,8 @@ export class AboutSection {
     const thumbnail_element = document.createElement(ELEMENT_TYPE.DIV);
     thumbnail_element.id = siteMap.about.thumbnailsId;
     
-    const data = this.aboutService.aboutData.photos.get('photos_data');      
-    for (const path of data) {      
+    const data = this.aboutService.aboutData.photos.get('photos_data');
+    for (const path of data) {
       const thumbnail_img = SiteLibrary.createImgElement(
         siteMap.about.thumbnailClassName,
         siteMap.about.thumbnailsId + '_' + path, 
@@ -133,7 +133,7 @@ export class AboutSection {
         siteMap.about.thumbnailImgAlt
       );
 
-      this.generateThumbnailEvent(thumbnail_img, path);      
+      this.generateThumbnailEvent(thumbnail_img, path);
       frag.appendChild(thumbnail_img);
     }
 
@@ -152,7 +152,7 @@ export class AboutSection {
     const photo = SiteLibrary.createImgElement(
       siteMap.about.photoClassName, 
       '', 
-      src, 
+      src,
       siteMap.about.photoImgAlt
     );
       

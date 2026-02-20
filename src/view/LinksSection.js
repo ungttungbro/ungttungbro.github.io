@@ -70,7 +70,7 @@ export class LinksSection {
         element.className = siteMap.links.linkItemListClassName;
 
         const title_icon = SiteLibrary.createImgElement(
-            'medium_icon',
+            'medium-icon',
             null,
             icon_path,
             'research links title icon'

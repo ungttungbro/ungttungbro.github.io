@@ -10,7 +10,7 @@ export class Templates {
         section_header_box.className = class_name;
 
         const section_img_caption = SiteLibrary.createImgTitle(
-            'medium_icon', 
+            'medium-icon', 
             img_id,
             caption_id,
             icon_path, 

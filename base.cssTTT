@@ -1,0 +1,343 @@
+* {    
+    box-sizing: border-box;
+}
+
+:root {
+  --base_background_color : #cccccc;
+  --base_background_image : url(/assets/icons/dark-mode-img/dark-background.png);
+  --base_task_bar_background_image : url(/assets/icons/dark-mode-img/mid-dark-background.gif);
+  --base_footer_background_image : url(/assets/icons/dark-mode-img/mid-dark-background.gif);
+  --base_viewer_title_bar_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_background_image : url(/assets/icons/light-mode-img/viewer-background.gif);
+  --base_dark_light_toggle_button : url(/assets/icons/dark-mode-img/light-toggle.png);
+  --base_clarity_filter_background_image : url(/assets/icons/dark-mode-img/dark-background.png);
+
+  --base_background_size : 12.25rem;
+
+  --base_title_bar_background_color : #333333; /*b0c4de*/
+  --base_title_bar_background_color_b : #444444;
+  --base_title_bar_font_color : #bababa; /*#2F2F4F*/
+
+  --base_fonts : Roboto, sans-serif, 나눔고딕, Arial;
+  --base_font_size : 1vw;
+  --base_font_light : 1rem;
+  --base_font_medium : 1.25rem;
+  --base_font_large : 1.5rem;
+  --base_font_line_height_light : 1.25;
+  --base_font_line_height : 1.6;
+  --base_font_color : #dddddd;
+  --base_font_color_b : #aaaaaa;
+  --base_font_color_c : #888888;
+  --base_font_meta_color : #7FAFB2;
+  --base_font_weight : 400;
+
+  --base_layout_background_color: #BFA27A;
+
+  --base_border_line_size : 0.01rem;
+  --base_border_radius_light : 0.25rem;
+  --base_border_radius_medium : 0.5rem;
+  --base_border_radius_large : 1rem;
+
+  --base_margin_size_tiny : 0.15rem;
+  --base_margin_size_light : 0.25rem;
+  --base_margin_size_medium : 0.5rem;
+
+  --base_small_icon_size : 1rem;
+  --base_medium_icon_size : 1.25rem;
+  --base_large_icon_size : 1.5rem;
+
+  --base_anchor_tag_hover_color : #ffc900;
+  --base_anchor_tag_hover_color_b : #cdcdcd;
+  --base_border_line : 0.075rem solid #444444;
+  --base_line-color : #999999;
+
+  --base_hr_border : 0.075rem solid #333333;
+  --base_dash_border : 0.075rem dashed #444444; 
+  --base_viewer_border : 0.075rem solid rgba(255,255,255,0.25);
+ 
+  --base_box_background_color : #333333;
+  --base_header_background_color: #1a1a1a;
+  --base_footer_background_color: #1a1a1a;
+  --base_task_item_background_color : #444444;
+  --base_task_item_background_color_b : #555555;
+  --base_task_item_close_background_color_b : #777777;
+
+  --base_blog_content_panel_hr : rgba(255,255,255,0.15);
+
+  --base_drop_shadow :  drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
+  --base_viewer_shadow : 0 25px 60px rgba(0,0,0,0.35),   /* 아래로 깊이 */
+                              0 5px 15px rgba(0,0,0,0.15),    /* 근접 그림자 */
+                              0 0 30px rgba(255,255,255,0.08), /* 은은한 광번짐 */
+                              inset 0 1px 0 rgba(255,255,255,0.4),
+                              inset 0 -1px 0 rgba(255,255,255,0.05);
+
+  --base_close_icon_filter_invert : none;
+
+  --base_backdrop_filter: blur(10px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+[ data-theme = "dark" ] { 
+  --base_background_image : url(/assets/icons/dark-mode-img/dark-background.png);
+  --base_task_bar_background_image : url(/assets/icons/dark-mode-img/mid-dark-background.gif);
+  --base_footer_background_image: url(/assets/icons/dark-mode-img/mid-dark-background.gif);
+  --base_viewer_title_bar_background_image : none;
+  --base_viewer_footer_background_image : none;
+  --base_viewer_background_image : none;
+  --base_dark_light_toggle_button : url(/assets/icons/dark-mode-img/light-toggle.png);
+  --base_clarity_filter_background_image : none;
+
+  --base_background_size : 12.25rem;
+  --base_footer_background_size: 5.35rem;
+
+  --base_background_color : #cccccc;
+
+  --base_box_background_color : #333333;
+  --base_task_item_background_color : #444444;
+  --base_task_item_background_color_b : #555555;
+
+  --base_header_background_color : #1a1a1a;
+  --base_footer_background_color : #1a1a1a;
+
+  --base_title_bar_background_color : #333333;
+  --base_title_bar_background_color_b : #444444;
+  --base_title_bar_font_color : #bababa;
+
+  --base_font_color : #dddddd;
+  --base_font_color_b : #aaaaaa;
+  --base_font_color_c : #888888;
+  --base_font_meta_color : #888888;
+  --base_font_weight : 400;
+
+  --base_anchor_tag_hover_color : #ffc900;
+  --base_anchor_tag_hover_color_b : #cdcdcd;
+
+  --base_hr_border : 0.075rem solid rgba(255, 255, 255, 0.04);
+  --base_dash_border : 0.075rem dashed #444444; 
+  --base_border_line : 0.075rem solid  rgba(255, 255, 255, 0.04);
+  --base_blog_content_panel_hr : rgba(255,255,255,0.15);
+  --base_viewer_border : 0.05rem solid rgba(255,255,255,0.1);
+ 
+  --base_close_icon_filter_invert : none;
+
+  --base_drop_shadow :  drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5));
+  --base_viewer_shadow : 0 25px 60px rgba(0,0,0,0.35),   /* 아래로 깊이 */
+                              0 5px 15px rgba(0,0,0,0.15),    /* 근접 그림자 */
+                              0 0 30px rgba(255,255,255,0.08), /* 은은한 광번짐 */
+                              inset 0 1px 0 rgba(255,255,255,0.4),
+                              inset 0 -1px 0 rgba(255,255,255,0.05);
+  --base_backdrop_filter: blur(6px) saturate(100%) brightness(90%);
+
+  --base_task_item_close_background_color_b : #777777;
+}
+
+
+[ data-theme = "light" ] { 
+  --base_background_image : url(/assets/icons/light-mode-img/light-background.gif);
+  --base_task_bar_background_image : url(/assets/icons/light-mode-img/grey-background.gif);
+  --base_footer_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
+  --base_viewer_title_bar_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_footer_background_image : url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_background_image : url(/assets/icons/light-mode-img/viewer-background.gif);
+  --base_dark_light_toggle_button : url(/assets/icons/light-mode-img/dark-toggle.png);
+  --base_clarity_filter_background_image : url(/assets/icons/light-mode-img/light-background.gif);
+
+  --base_background_size : 5.35rem;
+
+  --base_background_color : #eeeeee;
+
+  --base_box_background_color : #ededed;
+  --base_task_item_background_color : #cccccc;
+  --base_task_item_background_color_b : #dddddd;
+
+  --base_header_background_color : #333333;
+  --base_footer_background_color : #333333;
+
+  --base_title_bar_background_color : #cfcfce;
+  --base_title_bar_background_color_b : #bbbbbb;
+  --base_title_bar_font_color : #2f2f4f;
+
+  --base_font_color : #333333;
+  --base_font_color_b : #444444;
+  --base_font_color_c : #555555;
+  --base_font_meta_color : #536056;
+  --base_font_weight : 500;
+
+  --base_anchor_tag_hover_color : #926e02;
+  --base_anchor_tag_hover_color_b : #555555;
+
+  --base_hr_border : 0.075rem solid #cccccc;
+  --base_dash_border : 0.075rem dashed #bbbbbb;
+  --base_border_line : 0.075rem solid #999999;
+  --base_viewer_border : 0px solid rgba(255,255,255,0.25);
+ 
+  --base_blog_content_panel_hr : rgba(19, 19, 19, 0.25);
+  --base_close_icon_filter_invert : invert(1);
+
+  --base_drop_shadow : none;
+  --base_viewer_shadow :  0 0 0 0.075rem rgba(255,255,255,0.04),
+                          0 0.3rem 0.6rem rgba(0,0,0,0.45);
+  --base_backdrop_filter: none;
+
+  --base_task_item_close_background_color_b : #111111;
+}
+
+
+::-webkit-scrollbar { width: 0px; }
+::-webkit-scrollbar-thumb { background-color: #666666;}
+::-webkit-scrollbar-track { background-color: #333333;}
+
+html {
+  display : block;
+  
+  background-image: var(--base_footer_background_image);
+  background-repeat: repeat;
+  background-size: 5.35rem;
+  background-color: var(--base_background_color);
+  
+  
+  font-size: var(--base_font_size);
+  font-family : var(--base_fonts);
+  color: var(--base_font_color);
+}
+
+body {
+  /*background-image: var(--base_background_image);
+  background-repeat: repeat;
+  background-size: var(--base_background_size);*/
+
+  width: 100%;
+
+  line-height: var(--base_font_line_height);
+  font-family: var(--base_fonts);
+  
+  user-select: none;
+
+  /*opacity: 1;
+  transform: translateY(0);*/
+}
+
+body.font-loaded {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+body.ready {
+  visibility: visible;
+}
+
+input,
+textarea,
+pre,
+code {
+  user-select: text;
+}
+
+hr {
+  border: var(--base_hr_border);
+  margin-top: 0.4rem;
+  margin-bottom: 0.1rem;
+}
+
+h1 {
+  display:flex;
+  font-size: var(--base_font_light);
+  font-weight: bold;
+  padding: 0rem;
+  line-height: 1.5rem;
+  padding-bottom : var(--base_margin_size_tiny);
+}
+
+h2 {
+  font-size: var(--base_font_medium);
+  color: var(--base_font_color);
+  font-weight: bold;
+  padding-top : 0rem;
+  padding-bottom : var(--base_margin_size_light);
+}
+
+h3 {
+  font-size: var(--base_font_large);
+  color: var(--base_font_color);
+  font-weight: bold;
+  padding-top : 0rem;
+  line-height: 1.25;
+  padding-bottom : var(--base_margin_size_tiny);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  white-space: pre-line;
+}
+
+a:link {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color : var(--base_anchor_tag_hover_color);
+  text-decoration: none;
+  transition-duration: 250ms;
+}
+
+figcaption {
+  display: inline;
+}
+
+ul, ol {
+  margin-left: 1.5rem;
+}
+
+li {
+  list-style: disc;
+}
+
+.small_icon {
+  width: var(--base_small_icon_size);
+  height: var(--base_small_icon_size);
+  float: left;
+  margin-right: 0.1rem;
+  margin-top: 0.25rem;
+}
+
+.medium_icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: var(--base_medium_icon_size);
+  height: var(--base_medium_icon_size);
+  margin-right: 0.1rem;
+  margin-bottom: 0.1rem;;
+}
+
+.north-east-arrow {
+  float:right;
+  font-size: 0.9rem;
+  vertical-align: super;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}

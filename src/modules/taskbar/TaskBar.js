@@ -5,7 +5,7 @@ import { TaskStateManager } from "./TaskStateManager.js";
 import { TaskBarProcessRegistry } from "./TaskBarProcessRegistry.js";
 
 const TASKBAR_CONSTANTS = Object.freeze({
-    TITLE_ICON_TYPE : 'medium_icon',
+    TITLE_ICON_TYPE : 'medium-icon',
     CLOSE_BUTTON_ICON_PATH : './assets/icons/close.png'
 });
 
@@ -174,7 +174,7 @@ export class TaskBar {
             taskbar_item_id, 
             target_id, 
             title_icon_path, 
-            SiteLibrary.truncateText(title_text, 16)
+            SiteLibrary.truncateText(title_text, 14)
         );
 
         taskbar_item.dataset.group = group_type;

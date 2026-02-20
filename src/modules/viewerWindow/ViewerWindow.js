@@ -5,7 +5,7 @@ import { ViewerStateManager } from "./ViewerStateManager.js";
 import { ViewerWindowProcessRegistry } from "./ViewerWindowProcessRegistry.js";
 
 const CONSTANTS = Object.freeze({
-    TITLE_ICON_TYPE: 'medium_icon',
+    TITLE_ICON_TYPE: 'medium-icon',
     CLOSE_BUTTON_ICON_PATH: './assets/icons/close.png',
     MAXIMIZE_BUTTON_ICON_PATH: './assets/icons/screen.png',
     MINIMIZE_BUTTON_ICON_PATH: './assets/icons/minimize.png',
@@ -112,7 +112,7 @@ export class ViewerWindow {
 
     createTitleIcon() {
         const icon = document.createElement('img');
-        icon.className = 'small_icon';
+        icon.className = 'small-icon';
         icon.src =  this.titleIconPath;
 
         const title_figure = SiteLibrary.createImgCaption(icon, null, SiteLibrary.truncateText(this.titleText, 45));

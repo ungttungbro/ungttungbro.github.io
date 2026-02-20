@@ -2,7 +2,7 @@
 
 .meta    { font-size: 0.9rem; color: var(--base_font_meta_color); }
 .title   { font-size: 1rem; color: var(--base_font_color); font-weight: var(--base_font_weight); }
-.summary { font-size: 0.9rem; color: var(--base_font_color_b); font-weight: var(--base_font_weight); line-height: 1.4;}
+.summary { font-size: 0.95rem; color: var(--base_font_color_b); font-weight: var(--base_font_weight); line-height: 1.4;}
 
 .post-index { line-height: 1; }
 .post-index .meta { font-size: 0.85rem; color: var(--base_font_color_c); }
@@ -87,11 +87,11 @@
 
 #blog-lifelog .latest-post, 
 #blog-archive .latest-post {
-  line-height: 1.35;
+  line-height: 1.425;
 }
 
 #blog-reflection .latest-post {
-  line-height: 1.35;
+  line-height: 1.5;
 }
 
 #reflection-content {

@@ -175,7 +175,7 @@ export class PhotologSection {
         const teaser = SiteLibrary.createImgTitleCaption(
             thumbnail,
             SiteLibrary.truncateText(title[0], 16),
-            SiteLibrary.truncateText(text[0], 80)
+            SiteLibrary.truncateText(text[0], 70)
         );
         
         teaser.className = siteMap.photolog.teaserClassName;

@@ -1,3 +1,5 @@
+@import "../common/base.css";
+
 #links .title_box {
   cursor: default;
 }
@@ -7,7 +9,7 @@
 }
 
 #links .title_box:hover {
-  background-color: var(--base_title_bar_background_color);
+  background: var(--base_section_header_box_background_color);
 }
 
 .links_item_list {
@@ -15,8 +17,9 @@
 
   font-size: 0.9rem;  
   text-align: left;
+  color: var(--base_font_color);
   
-  background-color: var(--base_box_background_color);
+  background: var(--base_box_background_color);
   border: var(--base_border_line);
   border-radius: var(--base_border_radius_medium);
   

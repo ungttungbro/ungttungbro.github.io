@@ -16,32 +16,38 @@
 
 header {
   position:fixed;
-  background-color: var(--base_header_background_color);
-  background-image: var(--base_footer_background_image);
+
+  background-image: var(--base_task_bar_background_image);
   background-repeat: repeat;
   background-size: 5.35rem;
+    
   top: 0;
   left: 0;
   right: 0;
+  
   z-index: 99999;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  gap: var(--index_layout_column_gap);
-  width: 100%;
-  border : 0px solid #778899;
-  text-align: initial;  
-  padding-bottom: 1rem;
-  padding-top: 4rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin: auto;
 
-  background-image: var(--base_background_image);
-  background-repeat: repeat;
+  gap: var(--index_layout_column_gap);
+  
+  width: 100%;
+  
+  text-align: initial;
+  padding: 4rem 1rem 1rem 1rem;
+  margin: auto;
+  
+  position: relative; /* pseudo-element 기준 */
+  
+  border: 0;
+  z-index: 0;
+
+  background-image: var(--base_background_image);  
   background-size: var(--base_background_size);
+  background-repeat: repeat;
 }
 
 footer {
@@ -49,14 +55,18 @@ footer {
   right : 0;
   bottom : 0;
 
-  /*background-color: var(--base_footer_background_color);
   background-image: var(--base_footer_background_image);
   background-repeat: repeat;
-  background-size: 5.35rem;*/
+  background-size: 5.35rem;
 
   border-top: var(--base_border_line);
 }
 
+#taskbar {
+  padding-top: var(--base_margin_size_tiny);
+  padding-bottom: var(--base_margin_size_tiny);  
+  border-bottom: var(--base_taskbar_border_line);
+}
 
 #content-primary {
   display: grid;
@@ -103,37 +113,39 @@ footer {
 
 .title_box {
   display: flex;
-  background-color: var(--base_title_bar_background_color);
+  background: var(--base_section_header_box_background_color);
 
   border: var(--base_border_line);
   border-radius: var(--base_border_radius_medium);
   
   font-weight: bold;
-  color: var(--title_bar_font_color);
+  color: var(--base_section_header_box_font_color);
   
   margin: auto;
   margin-bottom: var(--base_margin_size_medium);
   padding: var(--base_margin_size_medium);
 
   justify-content: space-between;
-  
+  align-items: center;
+    
   transition: background-color 0.3s;
   cursor: pointer;
 }
 
+.title_box figure {
+  display: flex;
+  align-items: center;
+  margin: 0; /* 기본 margin 제거 중요 */
+}
+
 .title_box:hover {
-  background-color: var(--base_title_bar_background_color_b);
+  background: var(--base_section_header_box_background_color_b);
 }
 
 .title-box-more-button {
   font-weight: bold;
-  letter-spacing: 0.1rem;
-}
-
-#taskbar {
-  padding-top: var(--base_margin_size_tiny);
-  padding-bottom: var(--base_margin_size_tiny);  
-  border-bottom: var(--base_border_line);
+  letter-spacing: 0.075rem;
+  margin-right: 0.25rem;
 }
 
 .task-group-items {
@@ -146,7 +158,6 @@ footer {
 
   border: 0px solid #444444; 
 }
-
  
 .task-group-items .task-bar-item {
   background-color: transparent;
@@ -165,6 +176,13 @@ footer {
   border: var( --base_border_line);
 }
 
+.task-bar-item figure,
+.task-bar-group figure {
+  display: flex;
+  align-items: center;
+  margin: 0; /* 기본 margin 제거 중요 */
+}
+
 .task-bar-item:hover,
 .task-bar-group:hover {
   background-color: var(--base_task_item_background_color_b);
@@ -181,7 +199,7 @@ footer {
 
 .title_bar {
   position: relative;
-  background-image: var(--base_viewer_title_bar_background_image);
+  /*background-image: var(--base_viewer_title_bar_background_image);*/
   /*backdrop-filter: var(--base_backdrop_filter);*/
 
   border-bottom: 0.075rem solid rgba(255, 255, 255, 0.2);

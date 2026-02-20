@@ -1,8 +1,8 @@
 @import "../common/base.css";
 
 :root {
-    --photolog_thumbnail_width_size: 6rem;
-    --photolog_thumbnail_height_size: 4.25rem;
+    --photolog_thumbnail_width_size: 6.5rem;
+    --photolog_thumbnail_height_size: 4.4rem;
 }
 
 .photolog-thumbnail {
@@ -26,7 +26,7 @@
 }
 
 .teaser-figure {
-    max-height: calc(1.4rem * 3); /* 3줄 */
+    max-height: calc(1.45rem * 3); /* 3줄 */
     overflow: hidden;
 
     word-break: break-all;
@@ -53,7 +53,7 @@
 }
 
 .teaser-figure .figure-content {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--base_font_color_b);
     font-weight: var(--base_font_weight);
     

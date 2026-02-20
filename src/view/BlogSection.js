@@ -83,7 +83,7 @@ export class BlogSection {
             'latest-post',
             siteMap.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
-            50, 118, 4
+            50, 112, 4
         );
 
         blog_blog.appendChild(post_list);
@@ -191,7 +191,7 @@ export class BlogSection {
             'latest-post',
             siteMap.blog.reflectionSectionHeaderIcon, 
             this.blogService.reflectionMetaData, 
-            40, 0, 7
+            40, 34, 5
         );
 
         blog_reflection.appendChild(reflection_list);
