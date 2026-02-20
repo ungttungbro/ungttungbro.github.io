@@ -62,11 +62,11 @@
 }
 
 .header_panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-  
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
 }
 
 .header_panel hr {

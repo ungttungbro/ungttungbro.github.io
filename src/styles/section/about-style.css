@@ -54,8 +54,7 @@
   margin: 0.5rem auto;
   
   font-size: 0;
-  
-  border: 0px solid red;
+
   border-radius: var(--base_border_radius_medium);
 }
 

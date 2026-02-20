@@ -22,8 +22,6 @@
 
   font-size: 1rem;
   font-weight: var(--base_font_weight);
-
-  backdrop-filter: blur(6px);
 }
 
 .blog-post-photo-comment { font-size: 0.9rem; color: var(--base_font_color_b); }

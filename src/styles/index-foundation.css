@@ -150,20 +150,24 @@ footer {
   min-width: 100%;
   position: absolute;
   border-radius: 0.5rem;
-  padding: 0.25rem;
-
+  
   background-color: rgba(0, 0, 0, 0.8);
+  background: var(--base_box_background_color);
 
   border: 0px solid #444444; 
 }
  
 .task-group-items .task-bar-item {
   background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  
   /*background: rgba(255, 255, 255, 0.1);*/
+  
 }
 
 .task-group-items .task-bar-item:hover {
-  color: #ffc900;
+  color: var(--base_anchor_tag_hover_color);
   /*background: rgba(0, 0, 0, 0.01);*/
 }
 
@@ -194,20 +198,11 @@ footer {
   background-color: var(--base_task_item_close_background_color_b);
 }
 
-
 .title_bar {
   position: relative;
-  background-image: var(--base_viewer_title_bar_background_image);
-  /*backdrop-filter: var(--base_backdrop_filter);*/
-
   border-bottom: 0.075rem solid rgba(255, 255, 255, 0.2);
-
-  background: rgba(0,0,0,0.5);
-}
-
-.title_bar * {
-  position: relative;
-  z-index: 1; /* 글씨/아이콘이 overlay 위로 올라오게 */
+  background: var(--base_viewer_title_bar_background);
+  background-image: var(--base_viewer_title_bar_background_image);
 }
 
 .footer_panel {
@@ -218,22 +213,8 @@ footer {
   border-top: 0.075rem solid rgba(255, 255, 255, 0.2);
 }
 
-.footer_panel * {
-  position: relative;
-  z-index: 1; /* 글씨/아이콘이 overlay 위로 올라오게 */
-}
-
 #color-theme {
   background-image: var(--base_dark_light_toggle_button);
-}
-
-.viewer .header_panel,
-.viewer .content_panel {
-  background-image: var(--base_viewer_background_image);
-  background-repeat: repeat;
-  background-size: 5.35rem;
-  
-  color: var(--base_font_color);
 }
 
 .header_panel hr {
@@ -254,33 +235,26 @@ footer {
   opacity: 0.3;
 }
 
+.viewer .header_panel,
+.viewer .content_panel {
+  background-image: var(--base_viewer_background_image);
+  background-size: var(--base_background_size);
+  background-repeat: repeat;
+}
+
 .viewer {
   animation: fadeIn 500ms ease forwards;
 
   overflow: hidden; /* 하이라이트가 밖으로 튀지 않게 */
 
   backdrop-filter: var(--base_backdrop_filter);
-
-  background:
-   linear-gradient(
-        to bottom,
-        rgba(200, 210, 220, 0.1), /* 연한 회색 + 파랑 살짝 */
-        rgba(180, 190, 210, 0.05)   /* 조금 더 푸른 회색 */
-    );
-
-  border: var(--base_viewer_border);
+  background: var(--base_viewer_background_gradient);
 
   box-shadow: var(--base_viewer_shadow);
-
-  transform: translateY(-4px);
-  transition: background 0.1s ease, backdrop-filter 0.1s ease;
-
-  contain: layout paint;
 }
 
 .viewer.active {
-  background: rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(6px);
+  background: var(--base_viewer_active_overay);
 }
 
 .viewer::before {
@@ -291,12 +265,7 @@ footer {
   width: 100%;
   height: 35%;
 
-  background: radial-gradient(
-    120% 60% at 50% 0%,
-    rgba(255,255,255,0.4),
-    rgba(255,255,255,0.1) 60%,
-    transparent 100%
-  );
+  background: var(--base_viewer_overay);
 
   opacity: 0.6;
 
