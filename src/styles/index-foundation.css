@@ -71,15 +71,13 @@ footer {
 #content-primary {
   display: grid;
   grid-template-columns: 1fr 20rem;
-  gap: 1.5rem;
-  border-bottom: 0px dashed #444444;
-  padding-bottom: 0rem;
+  gap: 1.25rem;
 }
 
 #content-secondary {
   display: grid;
   grid-template-columns:  1fr 1.5fr 20rem;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .section-block {  
@@ -199,7 +197,7 @@ footer {
 
 .title_bar {
   position: relative;
-  /*background-image: var(--base_viewer_title_bar_background_image);*/
+  background-image: var(--base_viewer_title_bar_background_image);
   /*backdrop-filter: var(--base_backdrop_filter);*/
 
   border-bottom: 0.075rem solid rgba(255, 255, 255, 0.2);

@@ -26,3 +26,14 @@
   padding: var(--base_margin_size_medium);
   margin-top: 0.75rem;
 }
+
+.links_item_list figure {
+  display: flex;
+  align-items: center;
+  margin: 0; /* 기본 margin 제거 중요 */
+}
+
+.links_item_list a:hover {
+  text-decoration: var(--base_anchor_tag_hover_text_decoration);
+  text-underline-offset: 0.3rem;
+}

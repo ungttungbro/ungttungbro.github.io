@@ -15,7 +15,6 @@
   animation: fadeIn 500ms ease forwards;
 }
 
-
 #photo-zone .about-photo { 
   position: relative;
 
@@ -64,6 +63,11 @@
   margin-top: 0.25rem;
 }
 
+#contacts a:hover {
+  text-decoration: var(--base_anchor_tag_hover_text_decoration);
+  text-underline-offset: 0.3rem;
+}
+
 .profile-thumbnail {
   display: inline-block;
 
@@ -82,10 +86,4 @@
 
 .profile-thumbnail:hover {  
   opacity: 0.75;
-}
-
-.links_item_list figure {
-  display: flex;
-  align-items: center;
-  margin: 0; /* 기본 margin 제거 중요 */
 }

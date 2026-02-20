@@ -179,7 +179,7 @@ export class BlogSection {
             siteMap.blog.reflectionSectionHeaderIcon,
             siteMap.blog.reflectionCaptionText,
             siteMap.blog.reflectionSectionHeaderIconAlt,
-            24, 0, 0
+            24, 24, 0
         );
 
         blog_reflection.appendChild(reflection_section_header);
@@ -303,6 +303,7 @@ export class BlogSection {
 
             const a =  document.createElement('a');
             a.href = '#';
+            a.classList.add('card');
             a.innerHTML = subject;
             
             this.generatePostEvent(
