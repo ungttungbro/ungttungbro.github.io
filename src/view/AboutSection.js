@@ -1,7 +1,7 @@
 'use strict';
 
 import { ELEMENT_TYPE } from "../modules/common/Constants.js"
-import { siteMap } from "../modules/site/siteMap.js";
+import { siteMeta } from "../modules/site/siteMeta.js";
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 
 export class AboutSection {
@@ -29,7 +29,7 @@ export class AboutSection {
     this.aboutPhotoElement = SiteLibrary.addChildElement(
       ELEMENT_TYPE.DIV, 
       this.aboutSectionElement, 
-      siteMap.about.photoZoneId
+      siteMeta.about.photoZoneId
     );
 
     const photo_element = this.createPhotoElement();
@@ -40,10 +40,10 @@ export class AboutSection {
   createPhotoElement() {
     const photo_path = this.aboutService.aboutData.photos.get('featured_photo_path');    
     const element = SiteLibrary.createImgElement(
-      siteMap.about.photoClassName,
+      siteMeta.about.photoClassName,
       '', 
       photo_path, 
-      siteMap.about.photoImgAlt
+      siteMeta.about.photoImgAlt
     );
 
     return element;
@@ -53,7 +53,7 @@ export class AboutSection {
     const profile_box = SiteLibrary.addChildElement(
       ELEMENT_TYPE.DIV,
       this.aboutSectionElement,
-      siteMap.about.profileBoxId
+      siteMeta.about.profileBoxId
     );
 
     const specs = this.createSpecsElement();
@@ -70,7 +70,7 @@ export class AboutSection {
 
   createSpecsElement() {
     const specs_element = document.createElement(ELEMENT_TYPE.DIV);
-    specs_element.id = siteMap.about.specsId;
+    specs_element.id = siteMeta.about.specsId;
 
     const data = this.aboutService.aboutData.specs;
     for (const [key, value] of data) {
@@ -84,7 +84,7 @@ export class AboutSection {
 
   createContactsElement() {
     const contacts_element = document.createElement(ELEMENT_TYPE.DIV);
-    contacts_element.id = siteMap.about.contactsId;
+    contacts_element.id = siteMeta.about.contactsId;
 
     const data = this.aboutService.aboutData.contacts;
     for (const [key, value] of data) {
@@ -122,15 +122,15 @@ export class AboutSection {
     const frag = document.createDocumentFragment();
 
     const thumbnail_element = document.createElement(ELEMENT_TYPE.DIV);
-    thumbnail_element.id = siteMap.about.thumbnailsId;
+    thumbnail_element.id = siteMeta.about.thumbnailsId;
     
     const data = this.aboutService.aboutData.photos.get('photos_data');
     for (const path of data) {
       const thumbnail_img = SiteLibrary.createImgElement(
-        siteMap.about.thumbnailClassName,
-        siteMap.about.thumbnailsId + '_' + path, 
+        siteMeta.about.thumbnailClassName,
+        siteMeta.about.thumbnailsId + '_' + path, 
         path, 
-        siteMap.about.thumbnailImgAlt
+        siteMeta.about.thumbnailImgAlt
       );
 
       this.generateThumbnailEvent(thumbnail_img, path);
@@ -150,10 +150,10 @@ export class AboutSection {
     this.aboutPhotoElement.innerHTML = '';
 
     const photo = SiteLibrary.createImgElement(
-      siteMap.about.photoClassName, 
+      siteMeta.about.photoClassName, 
       '', 
       src,
-      siteMap.about.photoImgAlt
+      siteMeta.about.photoImgAlt
     );
       
     this.aboutPhotoElement.appendChild(photo);

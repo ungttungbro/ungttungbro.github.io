@@ -269,6 +269,7 @@ export class Shell {
         return snapshot;
     }
 
+    /*Viewer Registry 등록*/
     registViewerFunction() {
         ViewerWindowProcessRegistry.register('enforceSingle', this.enforceSingleViewerSnapshot());
         ViewerWindowProcessRegistry.register('unmount', this.unmountViewerSnapshot());

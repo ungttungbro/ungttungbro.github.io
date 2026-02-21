@@ -1,7 +1,7 @@
 'use strict';
 
 import { ELEMENT_TYPE, COMMON, VIEWER } from "../modules/common/Constants.js";
-import { siteMap } from "../modules/site/siteMap.js";
+import { siteMeta } from "../modules/site/siteMeta.js";
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { ViewerWindow } from "../modules/viewerWindow/ViewerWindow.js";
 import { shell } from "../modules/shell/Shell.js";
@@ -59,31 +59,32 @@ export class BlogSection {
         const blog_blog = document.createElement(ELEMENT_TYPE.DIV); blog_blog.id = 'blog-blog';
 
         const blog_section_header = this.generateSectionHeader(
-            siteMap.blog.blogSectionHeaderId,
-            siteMap.blog.blogCaptionImgId,
-            siteMap.blog.blogCaptionId,
+            siteMeta.blog.blogSectionHeaderId,
+            siteMeta.blog.blogCaptionImgId,
+            siteMeta.blog.blogCaptionId,
             'blog_post_list_all_viewer',
             'post-index',
             '라이팅스 (writings) 목록',
             'writings',
-            siteMap.blog.className,
+            siteMeta.blog.className,
             this.blogService.blogMetaData,
-            siteMap.blog.blogSectionHeaderIcon,
-            siteMap.blog.blogCaptionText,
-            siteMap.blog.blogSectionHeaderIconAlt,
-            24, 56, 0
+            siteMeta.blog.blogSectionHeaderIcon,
+            siteMeta.blog.blogCaptionText,
+            siteMeta.blog.blogSectionHeaderIconAlt,
+            siteMeta.viewer.writingsListWidth,
+            1, 2, 0
         );
 
-        Templates.createSectionHeaderEvent(blog_section_header, siteMap.blog.blogCaptionId);
+        Templates.createSectionHeaderEvent(blog_section_header, siteMeta.blog.blogCaptionId);
 
         blog_blog.appendChild(blog_section_header);
 
         const post_list = this.generateSubjectList(
             'writings',
             'latest-post',
-            siteMap.blog.blogSectionHeaderIcon,
+            siteMeta.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
-            50, 112, 4
+            670, 1, 2, 4
         );
 
         blog_blog.appendChild(post_list);
@@ -95,31 +96,31 @@ export class BlogSection {
         const blog_lifelog = document.createElement(ELEMENT_TYPE.DIV); blog_lifelog.id = 'blog-lifelog';
 
         const lifelog_section_header = this.generateSectionHeader(
-            siteMap.blog.lifelogSectionHeaderId,
-            siteMap.blog.lifelogCaptionImgId,
-            siteMap.blog.lifelogCaptionId,
+            siteMeta.blog.lifelogSectionHeaderId,
+            siteMeta.blog.lifelogCaptionImgId,
+            siteMeta.blog.lifelogCaptionId,
             'lifelog_post_list_all_viewer',
             'post-index',
             '라이프로그 (lifelog) 목록',
             'lifelog',
-            siteMap.blog.className,
+            siteMeta.blog.className,
             this.blogService.lifelogMetaData,
-            siteMap.blog.lifelogSectionHeaderIcon,
-            siteMap.blog.lifelogCaptionText,
-            siteMap.blog.lifelogSectionHeaderIconAlt,
-            26, 0, 0
+            siteMeta.blog.lifelogSectionHeaderIcon,
+            siteMeta.blog.lifelogCaptionText,
+            siteMeta.blog.lifelogSectionHeaderIconAlt,
+            300, 1, 0, 0
         );
 
         blog_lifelog.appendChild(lifelog_section_header);
 
-        Templates.createSectionHeaderEvent(lifelog_section_header, siteMap.blog.lifelogCaptionId);
+        Templates.createSectionHeaderEvent(lifelog_section_header, siteMeta.blog.lifelogCaptionId);
 
         const lifelog_list = this.generateSubjectList(
             'lifelog',
             'latest-post', 
-            siteMap.blog.lifelogSectionHeaderIcon,
+            siteMeta.blog.lifelogSectionHeaderIcon,
             this.blogService.lifelogMetaData, 
-            32, 0, 4
+            350, 1, 0, 4
         );
 
         blog_lifelog.appendChild(lifelog_list);
@@ -131,31 +132,31 @@ export class BlogSection {
         const blog_archive = document.createElement(ELEMENT_TYPE.DIV); blog_archive.id = 'blog-archive';
 
         const archive_section_header = this.generateSectionHeader(
-            siteMap.blog.archiveSectionHeaderId,
-            siteMap.blog.archiveCaptionImgId,
-            siteMap.blog.archiveCaptionId,
+            siteMeta.blog.archiveSectionHeaderId,
+            siteMeta.blog.archiveCaptionImgId,
+            siteMeta.blog.archiveCaptionId,
             'archive_list_all_viewer',
             'post-index',
             '아카이브 (archive) 목록',
             'archive',
-            siteMap.blog.className,
+            siteMeta.blog.className,
             this.blogService.archiveMetaData,
-            siteMap.blog.archiveSectionHeaderIcon,
-            siteMap.blog.archiveCaptionText,
-            siteMap.blog.archiveSectionHeaderIconAlt,
-            24, 0, 0
+            siteMeta.blog.archiveSectionHeaderIcon,
+            siteMeta.blog.archiveCaptionText,
+            siteMeta.blog.archiveSectionHeaderIconAlt,
+            290, 1, 0, 0
         );
 
         blog_archive.appendChild(archive_section_header);
         
-        Templates.createSectionHeaderEvent(archive_section_header, siteMap.blog.archiveCaptionId);
+        Templates.createSectionHeaderEvent(archive_section_header, siteMeta.blog.archiveCaptionId);
         
         const archive_list = this.generateSubjectList(
             'archive',
             'latest-post', 
-            siteMap.blog.archiveSectionHeaderIcon, 
+            siteMeta.blog.archiveSectionHeaderIcon, 
             this.blogService.archiveMetaData, 
-            40, 0, 3
+            350, 1, 0, 3
         );
 
         blog_archive.appendChild(archive_list);
@@ -167,31 +168,31 @@ export class BlogSection {
         const blog_reflection = document.createElement(ELEMENT_TYPE.DIV); blog_reflection.id = 'blog-reflection';
 
         const reflection_section_header = this.generateSectionHeader(
-            siteMap.blog.reflectionSectionHeaderId,
-            siteMap.blog.reflectionCaptionImgId,
-            siteMap.blog.reflectionCaptionId,
+            siteMeta.blog.reflectionSectionHeaderId,
+            siteMeta.blog.reflectionCaptionImgId,
+            siteMeta.blog.reflectionCaptionId,
             'reflection_post_list_all_viewer',
             'post-index',
             '리플렉션 (reflection) 목록',
             'reflection',
-            siteMap.blog.className,
+            siteMeta.blog.className,
             this.blogService.reflectionMetaData,
-            siteMap.blog.reflectionSectionHeaderIcon,
-            siteMap.blog.reflectionCaptionText,
-            siteMap.blog.reflectionSectionHeaderIconAlt,
-            24, 24, 0
+            siteMeta.blog.reflectionSectionHeaderIcon,
+            siteMeta.blog.reflectionCaptionText,
+            siteMeta.blog.reflectionSectionHeaderIconAlt,
+            290, 1, 0, 0
         );
 
         blog_reflection.appendChild(reflection_section_header);
 
-        Templates.createSectionHeaderEvent(reflection_section_header, siteMap.blog.reflectionCaptionId);
+        Templates.createSectionHeaderEvent(reflection_section_header, siteMeta.blog.reflectionCaptionId);
 
         const reflection_list = this.generateSubjectList(
             'reflection',
             'latest-post',
-            siteMap.blog.reflectionSectionHeaderIcon, 
+            siteMeta.blog.reflectionSectionHeaderIcon, 
             this.blogService.reflectionMetaData, 
-            40, 34, 5
+            420, 1, 1, 5
         );
 
         blog_reflection.appendChild(reflection_list);
@@ -202,7 +203,7 @@ export class BlogSection {
     generateSectionHeader(
         section_header_id, img_id, caption_id, viewer_id, post_index_class_name,
         viewer_title_text, blog_type, section_header_class_name, data, icon_path, text, icon_alt,
-        title_truncate_length, summary_truncate_length, row_count
+        width, title_line_count, summary_line_count, row_count
     ) {
         const section_header = Templates.createSectionHeader(
             section_header_id, img_id, caption_id,
@@ -214,7 +215,7 @@ export class BlogSection {
                 e, blog_type, viewer_id, icon_path, viewer_title_text,
                 this.generateSubjectList(
                     blog_type, post_index_class_name, icon_path, data,
-                    title_truncate_length, summary_truncate_length, row_count
+                    width, title_line_count, summary_line_count, row_count
                 ),
                 null,
                 COMMON.COPYRIGHT
@@ -270,7 +271,7 @@ export class BlogSection {
 
     generateSubjectList(
         type, class_name, section_icon, data, 
-        title_truncate_length, summary_truncate_length, row_count
+        width, title_line_count, summary_line_count, row_count
     ) {
         const frag = document.createDocumentFragment();
 
@@ -293,19 +294,19 @@ export class BlogSection {
 
             frag.appendChild(meta_span);
 
-            const subject = 
-                '<div class="title">' 
-                    + SiteLibrary.truncateText(value.title, title_truncate_length) 
-                + '</div>'                
-                + '<span class="summary">' 
-                    + SiteLibrary.truncateText(value.summary, summary_truncate_length) 
-                + '</span>';
+            const title = document.createElement('div');
+            title.className = 'title';
+            title.textContent = SiteLibrary.truncateTextLine(width, value.title, 1, 0, title_line_count);
+
+            const summary = document.createElement('span');
+            summary.className = 'summary';
+            summary.textContent = SiteLibrary.truncateTextLine(width, value.summary, 1, 0, summary_line_count);
 
             const a =  document.createElement('a');
             a.href = '#';
-            a.classList.add('card');
-            a.innerHTML = subject;
-            
+            a.appendChild(title);
+            a.appendChild(summary);
+                        
             this.generatePostEvent(
                 type, data, a, key, section_icon, value.title, 
                 null, value.content_path,COMMON.COPYRIGHT

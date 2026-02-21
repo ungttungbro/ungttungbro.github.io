@@ -1,7 +1,7 @@
 'use strict';
 
 import { ELEMENT_TYPE } from "../modules/common/Constants.js";
-import { siteMap } from "../modules/site/siteMap.js";
+import { siteMeta } from "../modules/site/siteMeta.js";
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { Templates } from "../modules/site/Templates.js";
 
@@ -26,13 +26,13 @@ export class LinksSection {
 
     renderLinks() {
         const links_section_header = Templates.createSectionHeader(
-            siteMap.links.sectionHeaderId,
-            siteMap.links.captionImgId,
-            siteMap.links.captionId,
-            siteMap.links.className,
-            siteMap.links.sectionHeaderIcon,
-            siteMap.links.text,
-            siteMap.links.sectionHeaderIconAlt
+            siteMeta.links.sectionHeaderId,
+            siteMeta.links.captionImgId,
+            siteMeta.links.captionId,
+            siteMeta.links.className,
+            siteMeta.links.sectionHeaderIcon,
+            siteMeta.links.text,
+            siteMeta.links.sectionHeaderIconAlt
         );
 
         this.linksSectionElement.appendChild(links_section_header);
@@ -43,7 +43,7 @@ export class LinksSection {
 
     renderLinksList() {
         const links_list = document.createElement(ELEMENT_TYPE.DIV);
-        links_list.id = siteMap.links.linkListId;
+        links_list.id = siteMeta.links.linkListId;
 
         const oldMyWeb = this.generateLinksItem(
             this.linksService.linksData.oldMyWeb,
@@ -67,7 +67,7 @@ export class LinksSection {
         const frag = document.createDocumentFragment();
 
         const element = document.createElement(ELEMENT_TYPE.DIV);
-        element.className = siteMap.links.linkItemListClassName;
+        element.className = siteMeta.links.linkItemListClassName;
 
         const title_icon = SiteLibrary.createImgElement(
             'medium-icon',

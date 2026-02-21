@@ -280,15 +280,37 @@ export class SiteLibrary {
     return result;
   }
 
-  /*static isRectOverap(rect1, rect2) {
-    return !(
-      // 겹치지 않는 조건을 만들어서 NOT
-      rect1.right  < rect2.left  ||
-      rect1.left   > rect2.right ||
-      rect1.bottom < rect2.top   ||
-      rect1.top    > rect2.bottom
-    );
-  }*/
+  static truncateTextLine(width, text, gridFraction = 1, padding = 0, line = 1) {
+    if (!text) return '';
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // element의 현재 font 적용
+    const element = document.body;
+    const computedStyle = getComputedStyle(element);
+    ctx.font = `${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+        
+    // 실제 사용할 수 있는 가로 폭
+    const gridWidth = width * gridFraction;
+    const usableWidth = (gridWidth - padding) * line;
+
+    let truncated = '';
+    let currentWidth = 0;
+
+    for (const char of text) {
+      const charWidth = ctx.measureText(char).width;
+      if (currentWidth + charWidth > usableWidth) {
+        truncated += '…';
+        break;
+      }
+      truncated += char;
+      currentWidth += charWidth;
+    }
+
+    return truncated;
+  }
+
 
   static isRectOverlap(rect1, rect2, tolerance = 1) {
     return !(

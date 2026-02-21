@@ -5,7 +5,7 @@ import { taskbar } from "../modules/taskbar/TaskBar.js";
 import { ViewerWindow } from "../modules/viewerWindow/ViewerWindow.js";
 import { Templates } from "../modules/site/Templates.js";
 import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js"
-import { siteMap } from "../modules/site/siteMap.js";
+import { siteMeta } from "../modules/site/siteMeta.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
 
 export class PhotologSection {
@@ -29,20 +29,20 @@ export class PhotologSection {
 
     renderTeasers() {
         const photolog_section_header = this.generateSectionHeader(
-            siteMap.photolog.sectionHeaderId,
-            siteMap.photolog.captionImgId,
-            siteMap.photolog.captionId,
+            siteMeta.photolog.sectionHeaderId,
+            siteMeta.photolog.captionImgId,
+            siteMeta.photolog.captionId,
             'photolog-index-viewer',
-            siteMap.photolog.className,
+            siteMeta.photolog.className,
             '포토로그 (photolog) 목록',
-            siteMap.photolog.sectionHeaderIcon,
-            siteMap.photolog.text,
-            siteMap.photolog.sectionHeaderIconAlt
+            siteMeta.photolog.sectionHeaderIcon,
+            siteMeta.photolog.text,
+            siteMeta.photolog.sectionHeaderIconAlt
         );
 
         this.photologSectionElement.appendChild(photolog_section_header);
         
-        Templates.createSectionHeaderEvent(photolog_section_header, siteMap.photolog.captionId);
+        Templates.createSectionHeaderEvent(photolog_section_header, siteMeta.photolog.captionId);
         
         const teasers = this.generateTeaserList(5);
         this.photologSectionElement.appendChild(teasers);
@@ -124,7 +124,7 @@ export class PhotologSection {
         const frag = document.createDocumentFragment();
 
         const teasers_element = document.createElement(ELEMENT_TYPE.DIV);
-        teasers_element.className = siteMap.photolog.teaserListClassName;
+        teasers_element.className = siteMeta.photolog.teaserListClassName;
 
         const iterator = this.photologService.photologData.entries();
         let result = iterator.next();
@@ -166,10 +166,10 @@ export class PhotologSection {
 
     generateTeaser(id, thumbnail_path, title, text, photos_path) {
         const thumbnail = SiteLibrary.createImgElement(
-            siteMap.photolog.thumbnailClassName,
+            siteMeta.photolog.thumbnailClassName,
             null,
             thumbnail_path,
-            siteMap.photolog.thumbnailImgAlt
+            siteMeta.photolog.thumbnailImgAlt
         );
 
         const teaser = SiteLibrary.createImgTitleCaption(
@@ -178,7 +178,7 @@ export class PhotologSection {
             SiteLibrary.truncateText(text[0], 70)
         );
         
-        teaser.className = siteMap.photolog.teaserClassName;
+        teaser.className = siteMeta.photolog.teaserClassName;
         
         this.generateTeaserEvent(teaser, id, title, text.toString(), photos_path, COMMON.COPYRIGHT);
         
@@ -217,7 +217,7 @@ export class PhotologSection {
                 SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('44')) / 2)) + 'rem',
                 'viewer',
                 'photolog_photo',
-                siteMap.photolog.sectionHeaderIcon,
+                siteMeta.photolog.sectionHeaderIcon,
                 title,
                 Templates.createContentPanel('photolog-header-panel', header_contents),
                 Templates.createContentPanel('photolog-content-panel', this.createPhotoContents(main_contents)),
@@ -227,7 +227,7 @@ export class PhotologSection {
             viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
 
-            taskbar.mount('photolog', viewer.targetId, viewer.id, siteMap.photolog.sectionHeaderIcon, title);
+            taskbar.mount('photolog', viewer.targetId, viewer.id, siteMeta.photolog.sectionHeaderIcon, title);
         } catch (error) {
             console.log('Blog Post Event : ', error);
         } finally {
@@ -246,10 +246,10 @@ export class PhotologSection {
                
         for (const content of data) {
             const image = SiteLibrary.createImgElement(
-                siteMap.photolog.photoClassName,
+                siteMeta.photolog.photoClassName,
                 '',
                 content,
-                siteMap.photolog.photoImgAlt
+                siteMeta.photolog.photoImgAlt
             );
 
             image.loading = 'lazy';

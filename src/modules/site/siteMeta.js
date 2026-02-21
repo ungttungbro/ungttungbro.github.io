@@ -1,4 +1,4 @@
-export const siteMap = Object.freeze({
+export const siteMeta = Object.freeze({
     about: Object.freeze({
         photoZoneId: 'photo-zone',
         profileBoxId: 'profile',
@@ -72,5 +72,23 @@ export const siteMap = Object.freeze({
         text: '링크 (references)',
         linkListId: 'links_list',
         linkItemListClassName: 'links_item_list'
+    }),
+
+    viewer: Object.freeze({
+        writingsWidth: 650,
+        writingsListWidth: 290,
+        writingsPortraitWidth: 500,
+
+        lifelogWidth: 450,
+        lifelogListWidth: 290,
+        lifelogPortraitWidth: 500,
+
+        archiveWidth: 450,
+        archiveListWidth: 290,
+        archivePortraitWidth: 500,
+
+        reflectionWidth: 450,
+        reflectionListWidth: 290,
+        reflectionPortraitWidth: 500
     })
 });

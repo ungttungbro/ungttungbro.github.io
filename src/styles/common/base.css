@@ -35,7 +35,8 @@
   --base_task_bar_background_image : url(/assets/icons/dark-mode-img/mid-dark-background.gif);
   --base_footer_background_image: url(/assets/icons/dark-mode-img/mid-dark-background.gif);
   --base_background_size: 12.25rem;
-  --base_background: none;
+
+  --base_background: linear-gradient(to left, #1a1a1a, #222222);
 
   --base_font_color: #eeeeee;
   --base_font_color_b: #aaaaaa;
@@ -102,10 +103,10 @@
   --base_footer_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
   --base_viewer_title_bar_background_image: url(/assets/icons/light-mode-img/mid-background.gif);
   --base_viewer_footer_background_image: url(/assets/icons/light-mode-img/mid-background.gif);
-  --base_viewer_background_image: url(/assets/icons/light-mode-img/viewer-background.gif);
+  --base_viewer_background_image: url(/assets/icons/light-mode-img/light-background.gif);
 
   --base_background_size: 5.35rem;
-  --base_background: none;
+  --base_background: linear-gradient(to left, #eeeeee, #dddddd);
 
   --base_font_color: rgba(0, 0, 0, 0.8);
   --base_font_color_b: #444444;
@@ -130,7 +131,7 @@
   --base_section_header_box_background_color_b: linear-gradient(45deg, #cacaca, #cccccc);
   --base_section_header_box_font_color: #333333;
 
-  --base_anchor_tag_hover_color: rgba(0, 0, 0, 0.8);
+  --base_anchor_tag_hover_color: #006231;
   --base_anchor_tag_hover_color_b: rgba(0, 0, 0, 0.88);
   --base_anchor_tag_hover_text_decoration: underline;
 
@@ -161,6 +162,8 @@ html {
   color: var(--base_font_color);
   text-shadow: var(--base_font_shadow);
   letter-spacing: var(--base_letter-spacing);
+
+  background: var(--base_background);
 }
 
 body {

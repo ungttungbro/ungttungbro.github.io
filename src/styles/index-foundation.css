@@ -2,7 +2,9 @@
 @import "./common/base.css";
 
 @import "../modules/taskbar/taskBar.css";
+@import "./component/taskbar-style.css";
 @import "../modules/viewerWindow/viewerWindow.css";
+@import "./component/viewer-style.css";
 
 @import "./section/about-style.css";
 @import "./section/blog-style.css";
@@ -44,10 +46,21 @@ main {
   
   border: 0;
   z-index: 0;
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
 
   background-image: var(--base_background_image);  
   background-size: var(--base_background_size);
   background-repeat: repeat;
+
+  opacity: 0.5; /* 원하는 투명도 */
+  z-index: -1; /* 컨텐츠 뒤로 */
 }
 
 footer {
@@ -60,12 +73,6 @@ footer {
   background-size: 5.35rem;
 
   border-top: var(--base_border_line);
-}
-
-#taskbar {
-  padding-top: var(--base_margin_size_tiny);
-  padding-bottom: var(--base_margin_size_tiny);  
-  border-bottom: var(--base_taskbar_border_line);
 }
 
 #content-primary {
@@ -136,140 +143,14 @@ footer {
   margin: 0; /* 기본 margin 제거 중요 */
 }
 
-.title_box:hover {
-  background: var(--base_section_header_box_background_color_b);
-}
-
 .title-box-more-button {
   font-weight: bold;
   letter-spacing: 0.075rem;
   margin-right: 0.25rem;
 }
 
-.task-group-items {
-  min-width: 100%;
-  position: absolute;
-  border-radius: 0.5rem;
-  
-  background-color: rgba(0, 0, 0, 0.8);
-  background: var(--base_box_background_color);
-
-  border: 0px solid #444444; 
-}
- 
-.task-group-items .task-bar-item {
-  background-color: transparent;
-  border-radius: 0;
-  border: 0;
-  
-  /*background: rgba(255, 255, 255, 0.1);*/
-  
-}
-
-.task-group-items .task-bar-item:hover {
-  color: var(--base_anchor_tag_hover_color);
-  /*background: rgba(0, 0, 0, 0.01);*/
-}
-
-.task-bar-item,
-.task-bar-group {
-  color: var(--base_font_color);
-  background-color: var(--base_task_item_background_color);
-  border: var( --base_border_line);
-}
-
-.task-bar-item figure,
-.task-bar-group figure {
-  display: flex;
-  align-items: center;
-  margin: 0; /* 기본 margin 제거 중요 */
-}
-
-.task-bar-item:hover,
-.task-bar-group:hover {
-  background-color: var(--base_task_item_background_color_b);
-}
-
-.task-item-close {
-  filter: var(--base_close_icon_filter_invert);
-}
-
-.task-item-close:hover {
-  background-color: var(--base_task_item_close_background_color_b);
-}
-
-.title_bar {
-  position: relative;
-  border-bottom: 0.075rem solid rgba(255, 255, 255, 0.2);
-  background: var(--base_viewer_title_bar_background);
-  background-image: var(--base_viewer_title_bar_background_image);
-}
-
-.footer_panel {
-  position: relative;
-  /*backdrop-filter: var(--base_backdrop_filter);*/
-  background: rgba(0,0,0,0.25);
-  background-image: var(--base_viewer_footer_background_image);  
-  border-top: 0.075rem solid rgba(255, 255, 255, 0.2);
-}
-
-#color-theme {
-  background-image: var(--base_dark_light_toggle_button);
-}
-
-.header_panel hr {
-  position: relative;
-  border: none;
-  height: 0.075rem;
-  background: var(--base_blog_content_panel_hr);
-}
-
-.header_panel hr::after {
-  content: "";
-  position: absolute;
-  top: 0.075rem;
-  left: 0;
-  right: 0;
-  height: 0.075rem;
-  background: rgba(0,0,0,0.1);
-  opacity: 0.3;
-}
-
-.viewer .header_panel,
-.viewer .content_panel {
-  background-image: var(--base_viewer_background_image);
-  background-size: var(--base_background_size);
-  background-repeat: repeat;
-}
-
-.viewer {
-  animation: fadeIn 500ms ease forwards;
-
-  overflow: hidden; /* 하이라이트가 밖으로 튀지 않게 */
-
-  backdrop-filter: var(--base_backdrop_filter);
-  background: var(--base_viewer_background_gradient);
-
-  box-shadow: var(--base_viewer_shadow);
-}
-
-.viewer.active {
-  background: var(--base_viewer_active_overay);
-}
-
-.viewer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 35%;
-
-  background: var(--base_viewer_overay);
-
-  opacity: 0.6;
-
-  pointer-events: none;
+.title_box:hover {
+  background: var(--base_section_header_box_background_color_b);
 }
 
 
@@ -309,8 +190,8 @@ footer {
   }
 
   #photo-zone .about-photo {
-    width: 100%; 
-    height: auto;
+    width: var(--myphoto_width_size); 
+    height: var(--myphoto_height_size); ;
   }
 
   #profile {  
