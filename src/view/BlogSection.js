@@ -71,7 +71,6 @@ export class BlogSection {
             siteMeta.blog.blogSectionHeaderIcon,
             siteMeta.blog.blogCaptionText,
             siteMeta.blog.blogSectionHeaderIconAlt,
-            siteMeta.viewer.writingsListWidth,
             1, 2, 0
         );
 
@@ -84,7 +83,9 @@ export class BlogSection {
             'latest-post',
             siteMeta.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
-            670, 1, 2, 4
+            siteMeta.blog.writringsTitleCharLength, 
+            siteMeta.blog.writingsSummaryCharLength, 
+            4
         );
 
         blog_blog.appendChild(post_list);
@@ -108,7 +109,7 @@ export class BlogSection {
             siteMeta.blog.lifelogSectionHeaderIcon,
             siteMeta.blog.lifelogCaptionText,
             siteMeta.blog.lifelogSectionHeaderIconAlt,
-            300, 1, 0, 0
+            1, 0, 0
         );
 
         blog_lifelog.appendChild(lifelog_section_header);
@@ -120,7 +121,9 @@ export class BlogSection {
             'latest-post', 
             siteMeta.blog.lifelogSectionHeaderIcon,
             this.blogService.lifelogMetaData, 
-            350, 1, 0, 4
+            siteMeta.blog.lifelogTitleCharLength, 
+            siteMeta.blog.lifelogSummaryCharLength,
+            4
         );
 
         blog_lifelog.appendChild(lifelog_list);
@@ -144,7 +147,7 @@ export class BlogSection {
             siteMeta.blog.archiveSectionHeaderIcon,
             siteMeta.blog.archiveCaptionText,
             siteMeta.blog.archiveSectionHeaderIconAlt,
-            290, 1, 0, 0
+            1, 0, 0
         );
 
         blog_archive.appendChild(archive_section_header);
@@ -156,7 +159,9 @@ export class BlogSection {
             'latest-post', 
             siteMeta.blog.archiveSectionHeaderIcon, 
             this.blogService.archiveMetaData, 
-            350, 1, 0, 3
+            siteMeta.blog.archiveTitleCharLength, 
+            siteMeta.blog.archiveSummaryCharLength,
+            3
         );
 
         blog_archive.appendChild(archive_list);
@@ -180,7 +185,7 @@ export class BlogSection {
             siteMeta.blog.reflectionSectionHeaderIcon,
             siteMeta.blog.reflectionCaptionText,
             siteMeta.blog.reflectionSectionHeaderIconAlt,
-            290, 1, 0, 0
+            1, 0, 0
         );
 
         blog_reflection.appendChild(reflection_section_header);
@@ -192,7 +197,9 @@ export class BlogSection {
             'latest-post',
             siteMeta.blog.reflectionSectionHeaderIcon, 
             this.blogService.reflectionMetaData, 
-            420, 1, 1, 5
+            siteMeta.blog.reflectionTitleCharLength, 
+            siteMeta.blog.reflectionSummaryCharLength,
+            5
         );
 
         blog_reflection.appendChild(reflection_list);
@@ -203,7 +210,7 @@ export class BlogSection {
     generateSectionHeader(
         section_header_id, img_id, caption_id, viewer_id, post_index_class_name,
         viewer_title_text, blog_type, section_header_class_name, data, icon_path, text, icon_alt,
-        width, title_line_count, summary_line_count, row_count
+        title_char_count, summary_char_count, row_count
     ) {
         const section_header = Templates.createSectionHeader(
             section_header_id, img_id, caption_id,
@@ -215,7 +222,7 @@ export class BlogSection {
                 e, blog_type, viewer_id, icon_path, viewer_title_text,
                 this.generateSubjectList(
                     blog_type, post_index_class_name, icon_path, data,
-                    width, title_line_count, summary_line_count, row_count
+                    title_char_count, summary_char_count, row_count
                 ),
                 null,
                 COMMON.COPYRIGHT
@@ -271,7 +278,7 @@ export class BlogSection {
 
     generateSubjectList(
         type, class_name, section_icon, data, 
-        width, title_line_count, summary_line_count, row_count
+        title_char_count, summary_char_count, row_count
     ) {
         const frag = document.createDocumentFragment();
 
@@ -296,11 +303,11 @@ export class BlogSection {
 
             const title = document.createElement('div');
             title.className = 'title';
-            title.textContent = SiteLibrary.truncateTextLine(width, value.title, 1, 0, title_line_count);
+            title.textContent = SiteLibrary.truncateText(value.title, title_char_count);
 
             const summary = document.createElement('span');
             summary.className = 'summary';
-            summary.textContent = SiteLibrary.truncateTextLine(width, value.summary, 1, 0, summary_line_count);
+            summary.textContent = SiteLibrary.truncateText(value.summary, summary_char_count);
 
             const a =  document.createElement('a');
             a.href = '#';

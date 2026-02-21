@@ -3,9 +3,11 @@
 import { SiteLibrary } from "../common/SiteLibrary.js";
 import { ViewerStateManager } from "../viewerWindow/ViewerStateManager.js";
 import { TaskStateManager } from "../taskbar/TaskStateManager.js";
+import { ProcessRegistry } from "./ProcessRegistry.js";
 import { ViewerWindowProcessRegistry  } from "../viewerWindow/ViewerWindowProcessRegistry.js";
 import { TaskBarProcessRegistry  } from "../taskbar/TaskBarProcessRegistry.js";
 import { taskbar } from "../taskbar/TaskBar.js";
+import { siteMeta } from "../site/siteMeta.js";
 
 const TASKBAR_CONSTANTS = Object.freeze({
     TITLE_ICON_TYPE : 'medium_icon',
@@ -31,27 +33,31 @@ export class Shell {
         taskbar.groupTypeData = GROUP_CONFIG;
         
         this.showTaskBar();
+        this.registSiteFunction();
         this.registTaskBarFunction();
-        this.registViewerFunction();
+        this.registViewerFunction();        
         
         this.updateLayout = this.updateLayout.bind(this);
         window.addEventListener("resize", this.updateLayout);
-        this.updateLayout();
+        window.addEventListener("load", this.updateLayout);
     }
 
     updateLayout() {
         const isPortrait = window.innerHeight > window.innerWidth;
-        const newMode = isPortrait ? "portrait" : "landscape";
-
-        if (this.currentMode === newMode) return; // 변화 없으면 중단
-
-        this.currentMode = newMode;
 
         if (isPortrait) {
             this.applyPortraitLayout();
         } else {
             this.applyLandscapeLayout();
         }
+
+        requestAnimationFrame(() => {
+            ProcessRegistry.get('updateSection', 'function')?.(
+                siteMeta.getSectionTitleCharLengths(),
+                siteMeta.getSectionSummaryCharLengths(), 
+                siteMeta.getSectionWeights()
+            );
+        });        
     }
 
     applyLandscapeLayout() {
@@ -293,6 +299,54 @@ export class Shell {
                 TaskStateManager.removeTask(group_key, task_item_id);
                 ViewerStateManager.removeGroup(viewer_id);
                 taskbar.unmount(task_item_id, viewer_id);
+            }
+        };
+
+        return snapshot;
+    }
+     
+    registSiteFunction() {
+        ProcessRegistry.register('updateSection', this.registUpdateSectionSnapshot());
+    }
+
+    registUpdateSectionSnapshot() {
+        const snapshot = {
+            ['process-name']: 'update-section',
+            ['function']: (section_title_char_lengths, section_summary_char_lengths, weights) => {
+                
+                Object.entries(section_summary_char_lengths).forEach(([section, length]) => {
+                    const element = document.getElementById('blog-' + section);                    
+                    if (!element) return;
+
+                    const summaries = element.querySelectorAll('.summary');               
+                    summaries.forEach(summary => {
+                        if (!summary.dataset.original) {
+                            summary.dataset.original = summary.textContent; // 최초 한 번만 저장
+                        }
+
+                        summary.textContent = SiteLibrary.truncateText(
+                            summary.dataset.original, 
+                            (length * (this.isPortraitLayout ? weights[section] : 1))
+                        );               
+                    });
+                });    
+                
+                Object.entries(section_title_char_lengths).forEach(([section, length]) => {
+                    const element = document.getElementById('blog-' + section);                    
+                    if (!element) return;
+
+                    const titles = element.querySelectorAll('.title');               
+                    titles.forEach(title => {
+                        if (!title.dataset.original) {
+                            title.dataset.original = title.textContent; // 최초 한 번만 저장
+                        }
+
+                        title.textContent = SiteLibrary.truncateText(
+                            title.dataset.original, 
+                            (length * (this.isPortraitLayout ? weights[section] : 1))
+                        );               
+                    });
+                });         
             }
         };
 
