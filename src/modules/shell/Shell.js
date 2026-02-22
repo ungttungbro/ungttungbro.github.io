@@ -45,7 +45,7 @@ export class Shell {
     updateLayout() {
         const isPortrait = window.innerHeight > window.innerWidth;
 
-        if (isPortrait) {
+        if (isPortrait || (window.innerWidth <= 1280 && !isPortrait)) {
             this.applyPortraitLayout();
         } else {
             this.applyLandscapeLayout();
@@ -68,7 +68,7 @@ export class Shell {
             const content_secondary_items = Array.from(secondary_contents.children);
             const content_tertiary_items = Array.from(tertiary_contents.children);            
 
-            const new_primary_contents = [content_secondary_items[0], content_primary_items[1]];
+            const new_primary_contents = [content_secondary_items[0], content_secondary_items[1], content_primary_items[1]];
             const new_secondary_contents = [content_primary_items[0], content_tertiary_items[0], content_tertiary_items[1]];
                        
             new_primary_contents.forEach(item => primary_contents.appendChild(item));
@@ -81,7 +81,8 @@ export class Shell {
     }
 
     applyPortraitLayout() {
-        const portrait = window.innerHeight > window.innerWidth;
+        const portrait = (window.innerHeight > window.innerWidth) || 
+            (window.innerWidth <= 1280 && window.innerWidth > window.innerHeight);
 
         if (portrait === this.isPortraitLayout) return;
         this.isPortraitLayout = portrait;
@@ -101,8 +102,8 @@ export class Shell {
         const content_primary_items = Array.from(primary_contents.children);
         const content_secondary_items = Array.from(secondary_contents.children);
 
-        const new_primary_contents = [content_secondary_items[0], content_primary_items[1]];
-        const new_secondary_contents = [content_primary_items[0]];
+        const new_primary_contents = [content_secondary_items[0], content_primary_items[2]];
+        const new_secondary_contents = [content_primary_items[0], content_primary_items[1]];
         const new_tertiary_contents = [content_secondary_items[1], content_secondary_items[2]];
         
         new_primary_contents.forEach(item => primary_contents.appendChild(item));
@@ -313,6 +314,7 @@ export class Shell {
             ['function']: (section_title_char_lengths, section_summary_char_lengths, weights) => {                
                 Object.entries(section_summary_char_lengths).forEach(([section, length]) => {                    
                     const element = document.getElementById('blog-' + section);
+                    console.log(element);
                     if (!element) return;
                     
                     const summaries = element.querySelectorAll('.summary');               

@@ -13,6 +13,7 @@ export const siteMeta = Object.freeze({
 
 
     blog: Object.freeze({
+        writingsBlogTypeName: 'writings',
         blogSectionHeaderId: 'blog_title',
         blogCaptionImgId: 'blog-caption-img',
         blogCaptionId: 'blog-caption-text',
@@ -20,8 +21,10 @@ export const siteMeta = Object.freeze({
         blogSectionHeaderIcon: './assets/icons/blog.png',
         blogSectionHeaderIconAlt: 'blog Section Header Icon',
         writingsTitleCharLength: 35,
-        writingsSummaryCharLength: 114,
+        writingsSummaryCharLength: 112,
+        writingsSubjectListRowCount: 4,
 
+        lifelogBlogTypeName: 'lifelog',
         lifelogSectionHeaderId: 'lifelog_title',
         lifelogCaptionImgId: 'lifelog-caption-img',
         lifelogCaptionId: 'lifelog-caption-text',
@@ -30,7 +33,9 @@ export const siteMeta = Object.freeze({
         lifelogSectionHeaderIconAlt: 'lifelog Section Header Icon',
         lifelogTitleCharLength: 34,
         lifelogSummaryCharLength: 0,
+        lifelogSubjectListRowCount: 4,
 
+        archiveBlogTypeName: 'archive',
         archiveSectionHeaderId: 'archive_title',
         archiveCaptionImgId: 'archive-caption-img',
         archiveCaptionId: 'archive-caption-text',
@@ -39,7 +44,9 @@ export const siteMeta = Object.freeze({
         archiveSectionHeaderIconAlt: 'archive Section Header Icon',
         archiveTitleCharLength: 34,
         archiveSummaryCharLength: 0,
+        archiveSubjectListRowCount: 3,
 
+        reflectionBlogTypeName: 'reflection',
         reflectionSectionHeaderId: 'reflection_title',        
         reflectionCaptionImgId: 'reflection-caption-img',
         reflectionCaptionId: 'reflection-caption-text',
@@ -48,8 +55,12 @@ export const siteMeta = Object.freeze({
         reflectionSectionHeaderIconAlt: 'reflection Section Header Icon',
         reflectionTitleCharLength: 30,
         reflectionSummaryCharLength: 34,
+        reflectionSubjectListRowCount: 5,
         
+        latestPostClassName: 'latest-post',
+        postIndexClassName: 'post-index',
         className: 'title_box',
+        sectionHeaderItemListRowCount: 0
     }),
 
 
@@ -82,26 +93,53 @@ export const siteMeta = Object.freeze({
         linkItemListClassName: 'links_item_list'
     }),
 
-    viewer: {
-        writingsListWidth: 290,
-        writingsPortraitWidth: 500,
+    viewer: Object.freeze({
+        writingsListSummaryCharLength: 54,
+        writingsListTitleCharLength: 26,
+        lifelogListSummaryCharLength: 0,
+        lifelogListTitleCharLength: 26,
+        archiveListSummaryCharLength: 0,
+        archiveListTitleCharLength: 26,
+        reflectionSummaryListCharLength: 26,
+        reflectionTitleListCharLength: 24,
+        
+        writingsListViewerId: 'blog_post_list_all_viewer',
+        lifelogListViewerId: 'lifelog_post_list_all_viewer',
+        archiveListViewerId: 'archive_list_all_viewer',
+        reflectionListViewerId: 'reflection_post_list_all_viewer',
 
-        lifelogWidth: 450,
-        lifelogListWidth: 290,
-        lifelogPortraitWidth: 500,
+        writingsSectionListName: '라이팅스 (writings) 목록',
+        lifelogSectionListName: '라이프로그 (lifelog) 목록',
+        archiveSectionListName: '아카이브 (archive) 목록',
+        reflectionSectionListName: '리플렉션 (reflection) 목록'
+    }),
 
-        archiveWidth: 450,
-        archiveListWidth: 290,
-        archivePortraitWidth: 500,
-
-        reflectionWidth: 450,
-        reflectionListWidth: 290,
-        reflectionPortraitWidth: 500
+    getWritingsSectionConfig() {
+        return {
+            sectionHeaderId: this.blog.blogSectionHeaderId,
+            captionImgId: this.blog.blogCaptionImgId,
+            captionId: this.blog.blogCaptionId,
+            listViewerId: this.viewer.writingsListViewerId,
+            postIndexClassName: this.blog.postIndexClassName,
+            sectionListName: this.viewer.writingsSectionListName,
+            blogTypeName: this.blog.writingsBlogTypeName,
+            className: this.blog.className,            
+            sectionHeaderIcon: this.blog.blogSectionHeaderIcon,
+            captionText: this.blog.blogCaptionText,
+            blogSectionHeaderIconAlt: this.blog.blogSectionHeaderIconAlt,
+            latestPostClassName: this.blog.latestPostClassName,
+            listTitleCharLength: this.viewer.writingsListTitleCharLength,
+            listSummaryCharLength: this.viewer.writingsListSummaryCharLength, 
+            headerItemListRowCount: this.blog.sectionHeaderItemListRowCount,
+            titleCharLength: this.blog.writringsTitleCharLength, 
+            summaryCharLength: this.blog.writingsSummaryCharLength, 
+            subjectListRowCount: this.blog.writingsSubjectListRowCount
+        };
     },
 
     getSectionSummaryCharLengths() {
         return {
-            blog: this.blog.writingsSummaryCharLength,
+            writings: this.blog.writingsSummaryCharLength,
             lifelog: this.blog.lifelogSummaryCharLength,
             archive: this.blog.archiveSummaryCharLength,
             reflection: this.blog.reflectionSummaryCharLength
@@ -110,7 +148,7 @@ export const siteMeta = Object.freeze({
 
     getSectionTitleCharLengths() {
         return {
-            blog: this.blog.writingsTitleCharLength,
+            writings: this.blog.writingsTitleCharLength,
             lifelog: this.blog.lifelogTitleCharLength,
             archive: this.blog.archiveTitleCharLength,
             reflection: this.blog.reflectionTitleCharLength
@@ -119,10 +157,12 @@ export const siteMeta = Object.freeze({
 
     getSectionWeights() {
         return {
-            blog: [0.56],
+            writings: [0.56],
             lifelog: [0.66],
             archive: [0.66],
             reflection: [0.9]
         };
     }
+
+    
 });

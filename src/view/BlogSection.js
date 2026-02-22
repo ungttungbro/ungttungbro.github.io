@@ -16,38 +16,30 @@ export class BlogSection {
 
     async initialize() {
         const section_id = this.blogService.serviceName;
-        this.blogSectionElement = document.getElementById(section_id);
+        this.blogSectionElement = document.getElementById('content-primary');
         this.reflectionSectionElement = document.getElementById('reflection');
     }
 
     show() {
         try {
-            this.renderBlogGrid();
+            this.renderBlog();
             this.renderReflection();
         } catch (error) {
             console.log('[ Blog Section ] : ', error);
         }
     }
     
-    renderBlogGrid() {
-        const blog_grid = SiteLibrary.addChildElement(ELEMENT_TYPE.DIV, this.blogSectionElement, 'blog-grid');
+    renderBlog() {
+        const writings = document.getElementById('writings');
+        writings.appendChild(this.createWritings());
 
-        const blog_blog = this.createBlog();
-        blog_grid.appendChild(blog_blog);
-
-        const blog_section_container = SiteLibrary.addChildElement(
-            ELEMENT_TYPE.DIV, 
-            blog_grid, 
-            'blog_section_container'
-        );
+        const lifelog_and_archive = document.getElementById('lifelog-and-archive');
 
         const blog_lifelog = this.createLifelog();
         const blog_archive = this.createArchive();
 
-        blog_section_container.appendChild(blog_lifelog);
-        blog_section_container.appendChild(blog_archive);
-
-        blog_grid.appendChild(blog_section_container);
+        lifelog_and_archive.appendChild(blog_lifelog);
+        lifelog_and_archive.appendChild(blog_archive);
     }
 
     renderReflection() {
@@ -55,42 +47,44 @@ export class BlogSection {
         this.reflectionSectionElement.appendChild(reflection);
     }
 
-    createBlog() {
-        const blog_blog = document.createElement(ELEMENT_TYPE.DIV); blog_blog.id = 'blog-blog';
+    createWritings() {
+        const blog_writings = document.createElement(ELEMENT_TYPE.DIV); blog_writings.id = 'blog-writings';
 
         const blog_section_header = this.generateSectionHeader(
             siteMeta.blog.blogSectionHeaderId,
             siteMeta.blog.blogCaptionImgId,
             siteMeta.blog.blogCaptionId,
-            'blog_post_list_all_viewer',
-            'post-index',
-            '라이팅스 (writings) 목록',
-            'writings',
+            siteMeta.viewer.writingsListViewerId,
+            siteMeta.blog.postIndexClassName,
+            siteMeta.viewer.writingsSectionListName,
+            siteMeta.blog.writingsBlogTypeName,
             siteMeta.blog.className,
             this.blogService.blogMetaData,
             siteMeta.blog.blogSectionHeaderIcon,
             siteMeta.blog.blogCaptionText,
             siteMeta.blog.blogSectionHeaderIconAlt,
-            1, 2, 0
+            siteMeta.viewer.writingsListTitleCharLength,
+            siteMeta.viewer.writingsListSummaryCharLength, 
+            siteMeta.blog.sectionHeaderItemListRowCount
         );
 
         Templates.createSectionHeaderEvent(blog_section_header, siteMeta.blog.blogCaptionId);
 
-        blog_blog.appendChild(blog_section_header);
+        blog_writings.appendChild(blog_section_header);
 
         const post_list = this.generateSubjectList(
-            'writings',
-            'latest-post',
+            siteMeta.blog.writingsBlogTypeName,
+            siteMeta.blog.latestPostClassName,
             siteMeta.blog.blogSectionHeaderIcon,
             this.blogService.blogMetaData,
             siteMeta.blog.writringsTitleCharLength, 
             siteMeta.blog.writingsSummaryCharLength, 
-            4
+            siteMeta.blog.writingsSubjectListRowCount
         );
 
-        blog_blog.appendChild(post_list);
+        blog_writings.appendChild(post_list);
 
-        return blog_blog;
+        return blog_writings;
     }
 
     createLifelog() {
@@ -100,16 +94,18 @@ export class BlogSection {
             siteMeta.blog.lifelogSectionHeaderId,
             siteMeta.blog.lifelogCaptionImgId,
             siteMeta.blog.lifelogCaptionId,
-            'lifelog_post_list_all_viewer',
-            'post-index',
-            '라이프로그 (lifelog) 목록',
-            'lifelog',
+            siteMeta.viewer.lifelogListViewerId,
+            siteMeta.blog.postIndexClassName,
+            siteMeta.viewer.lifelogSectionListName,
+            siteMeta.blog.lifelogBlogTypeName,
             siteMeta.blog.className,
             this.blogService.lifelogMetaData,
             siteMeta.blog.lifelogSectionHeaderIcon,
             siteMeta.blog.lifelogCaptionText,
             siteMeta.blog.lifelogSectionHeaderIconAlt,
-            1, 0, 0
+            siteMeta.viewer.lifelogListTitleCharLength, 
+            siteMeta.viewer.lifelogListSummaryCharLength,
+            siteMeta.blog.sectionHeaderItemListRowCount
         );
 
         blog_lifelog.appendChild(lifelog_section_header);
@@ -117,13 +113,13 @@ export class BlogSection {
         Templates.createSectionHeaderEvent(lifelog_section_header, siteMeta.blog.lifelogCaptionId);
 
         const lifelog_list = this.generateSubjectList(
-            'lifelog',
-            'latest-post', 
+            siteMeta.blog.lifelogBlogTypeName,
+            siteMeta.blog.latestPostClassName, 
             siteMeta.blog.lifelogSectionHeaderIcon,
             this.blogService.lifelogMetaData, 
             siteMeta.blog.lifelogTitleCharLength, 
             siteMeta.blog.lifelogSummaryCharLength,
-            4
+            siteMeta.blog.lifelogSubjectListRowCount
         );
 
         blog_lifelog.appendChild(lifelog_list);
@@ -138,16 +134,18 @@ export class BlogSection {
             siteMeta.blog.archiveSectionHeaderId,
             siteMeta.blog.archiveCaptionImgId,
             siteMeta.blog.archiveCaptionId,
-            'archive_list_all_viewer',
-            'post-index',
-            '아카이브 (archive) 목록',
-            'archive',
+            siteMeta.viewer.archiveListViewerId,
+            siteMeta.blog.postIndexClassName,
+            siteMeta.viewer.archiveSectionListName,
+            siteMeta.blog.archiveBlogTypeName,
             siteMeta.blog.className,
             this.blogService.archiveMetaData,
             siteMeta.blog.archiveSectionHeaderIcon,
             siteMeta.blog.archiveCaptionText,
             siteMeta.blog.archiveSectionHeaderIconAlt,
-            1, 0, 0
+            siteMeta.viewer.archiveListTitleCharLength,
+            siteMeta.viewer.archiveListSummaryCharLength,
+            siteMeta.blog.sectionHeaderItemListRowCount
         );
 
         blog_archive.appendChild(archive_section_header);
@@ -155,13 +153,13 @@ export class BlogSection {
         Templates.createSectionHeaderEvent(archive_section_header, siteMeta.blog.archiveCaptionId);
         
         const archive_list = this.generateSubjectList(
-            'archive',
-            'latest-post', 
+            siteMeta.blog.archiveBlogTypeName,
+            siteMeta.blog.latestPostClassName,
             siteMeta.blog.archiveSectionHeaderIcon, 
             this.blogService.archiveMetaData, 
             siteMeta.blog.archiveTitleCharLength, 
             siteMeta.blog.archiveSummaryCharLength,
-            3
+            siteMeta.blog.archiveSubjectListRowCount
         );
 
         blog_archive.appendChild(archive_list);
@@ -176,16 +174,18 @@ export class BlogSection {
             siteMeta.blog.reflectionSectionHeaderId,
             siteMeta.blog.reflectionCaptionImgId,
             siteMeta.blog.reflectionCaptionId,
-            'reflection_post_list_all_viewer',
-            'post-index',
-            '리플렉션 (reflection) 목록',
-            'reflection',
+            siteMeta.viewer.reflectionListViewerId,
+            siteMeta.blog.postIndexClassName,
+            siteMeta.viewer.reflectionSectionListName,
+            siteMeta.blog.reflectionBlogTypeName,
             siteMeta.blog.className,
             this.blogService.reflectionMetaData,
             siteMeta.blog.reflectionSectionHeaderIcon,
             siteMeta.blog.reflectionCaptionText,
             siteMeta.blog.reflectionSectionHeaderIconAlt,
-            1, 0, 0
+            siteMeta.viewer.reflectionTitleListCharLength,
+            siteMeta.viewer.reflectionSummaryListCharLength, 
+            siteMeta.blog.sectionHeaderItemListRowCount
         );
 
         blog_reflection.appendChild(reflection_section_header);
@@ -193,13 +193,13 @@ export class BlogSection {
         Templates.createSectionHeaderEvent(reflection_section_header, siteMeta.blog.reflectionCaptionId);
 
         const reflection_list = this.generateSubjectList(
-            'reflection',
-            'latest-post',
+            siteMeta.blog.reflectionBlogTypeName,
+            siteMeta.blog.latestPostClassName,
             siteMeta.blog.reflectionSectionHeaderIcon, 
             this.blogService.reflectionMetaData, 
             siteMeta.blog.reflectionTitleCharLength, 
             siteMeta.blog.reflectionSummaryCharLength,
-            5
+            siteMeta.blog.reflectionSubjectListRowCount
         );
 
         blog_reflection.appendChild(reflection_list);
@@ -250,9 +250,9 @@ export class BlogSection {
             viewer.configureWindow(
                 contents_id,
                 22 + 'rem',
-                44 + 'rem',
-                SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('44')) / 2)) + 'rem',
-                SiteLibrary.pxToRem(left) + 'rem',
+                38 + 'rem',
+                SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('38')) / 2)) + 'rem',
+                SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('22')) / 2)) + 'rem',
                 'viewer',
                 'blog',
                 section_icon,
