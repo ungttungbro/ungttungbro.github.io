@@ -51,13 +51,11 @@ export class Shell {
             this.applyLandscapeLayout();
         }
 
-        requestAnimationFrame(() => {
-            ProcessRegistry.get('updateSection', 'function')?.(
-                siteMeta.getSectionTitleCharLengths(),
-                siteMeta.getSectionSummaryCharLengths(), 
-                siteMeta.getSectionWeights()
-            );
-        });        
+        ProcessRegistry.get('updateSection', 'function')?.(
+            siteMeta.getSectionTitleCharLengths(),
+            siteMeta.getSectionSummaryCharLengths(), 
+            siteMeta.getSectionWeights()
+        );        
     }
 
     applyLandscapeLayout() {
@@ -312,12 +310,11 @@ export class Shell {
     registUpdateSectionSnapshot() {
         const snapshot = {
             ['process-name']: 'update-section',
-            ['function']: (section_title_char_lengths, section_summary_char_lengths, weights) => {
-                
-                Object.entries(section_summary_char_lengths).forEach(([section, length]) => {
-                    const element = document.getElementById('blog-' + section);                    
+            ['function']: (section_title_char_lengths, section_summary_char_lengths, weights) => {                
+                Object.entries(section_summary_char_lengths).forEach(([section, length]) => {                    
+                    const element = document.getElementById('blog-' + section);
                     if (!element) return;
-
+                    
                     const summaries = element.querySelectorAll('.summary');               
                     summaries.forEach(summary => {
                         if (!summary.dataset.original) {
@@ -327,7 +324,7 @@ export class Shell {
                         summary.textContent = SiteLibrary.truncateText(
                             summary.dataset.original, 
                             (length * (this.isPortraitLayout ? weights[section] : 1))
-                        );               
+                        );              
                     });
                 });    
                 

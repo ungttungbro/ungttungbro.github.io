@@ -13,13 +13,6 @@ import { PhotologSection } from './view/PhotologSection.js';
 import { LinksSection } from './view/LinksSection.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  document.fonts.ready.then(() => {
-    document.body.classList.add('font-loaded');
-  });
-
-  const taskbar_element = document.getElementById('taskbar');
-  shell.initialize(taskbar_element);
-
   const about_service = new AboutService();
   await about_service.initialize();
   new AboutSection(about_service).show();
@@ -36,9 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await links_service.initialize();
   new LinksSection(links_service).show();
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      document.body.classList.add('ready');
-    });
-  });
+  const taskbar_element = document.getElementById('taskbar');
+  await shell.initialize(taskbar_element);
+  shell.updateLayout();
 });
