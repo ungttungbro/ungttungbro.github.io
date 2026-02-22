@@ -163,10 +163,14 @@ html {
   text-shadow: var(--base_font_shadow);
   letter-spacing: var(--base_letter-spacing);
 
-  background: var(--base_background);
+  background-image: var(--base_task_bar_background_image);
+  background-repeat: repeat;
+  background-size: 5.35rem;
 }
 
 body {
+  background: var(--base_background);
+
   line-height: var(--base_font_line_height);
   font-family: var(--base_fonts);
   

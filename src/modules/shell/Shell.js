@@ -313,8 +313,7 @@ export class Shell {
             ['process-name']: 'update-section',
             ['function']: (section_title_char_lengths, section_summary_char_lengths, weights) => {                
                 Object.entries(section_summary_char_lengths).forEach(([section, length]) => {                    
-                    const element = document.getElementById('blog-' + section);
-                    console.log(element);
+                    const element = document.getElementById('blog-' + section);                    
                     if (!element) return;
                     
                     const summaries = element.querySelectorAll('.summary');               

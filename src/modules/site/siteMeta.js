@@ -137,6 +137,76 @@ export const siteMeta = Object.freeze({
         };
     },
 
+    getLifelogSectionConfig() {
+        return {
+            sectionHeaderId: this.blog.lifelogSectionHeaderId,
+            captionImgId: this.blog.lifelogCaptionImgId,
+            captionId: this.blog.lifelogCaptionId,
+            listViewerId: this.viewer.lifelogListViewerId,
+            postIndexClassName: this.blog.postIndexClassName,
+            sectionListName: this.viewer.lifelogSectionListName,
+            blogTypeName: this.blog.lifelogBlogTypeName,
+            className: this.blog.className,            
+            sectionHeaderIcon: this.blog.lifelogSectionHeaderIcon,
+            captionText: this.blog.lifelogCaptionText,
+            blogSectionHeaderIconAlt: this.blog.lifelogSectionHeaderIconAlt,
+            latestPostClassName: this.blog.latestPostClassName,
+            listTitleCharLength: this.viewer.lifelogListTitleCharLength,
+            listSummaryCharLength: this.viewer.lifelogListSummaryCharLength, 
+            headerItemListRowCount: this.blog.sectionHeaderItemListRowCount,
+            titleCharLength: this.blog.lifelogTitleCharLength, 
+            summaryCharLength: this.blog.lifelogSummaryCharLength, 
+            subjectListRowCount: this.blog.lifelogSubjectListRowCount
+        };
+    },
+
+    getArchiveSectionConfig() {
+        return {
+            sectionHeaderId: this.blog.archiveSectionHeaderId,
+            captionImgId: this.blog.archiveCaptionImgId,
+            captionId: this.blog.archiveCaptionId,
+            listViewerId: this.viewer.archiveListViewerId,
+            postIndexClassName: this.blog.postIndexClassName,
+            sectionListName: this.viewer.archiveSectionListName,
+            blogTypeName: this.blog.archiveBlogTypeName,
+            className: this.blog.className,            
+            sectionHeaderIcon: this.blog.archiveSectionHeaderIcon,
+            captionText: this.blog.archiveCaptionText,
+            blogSectionHeaderIconAlt: this.blog.archiveSectionHeaderIconAlt,
+            latestPostClassName: this.blog.latestPostClassName,
+            listTitleCharLength: this.viewer.archiveListTitleCharLength,
+            listSummaryCharLength: this.viewer.archiveListSummaryCharLength, 
+            headerItemListRowCount: this.blog.sectionHeaderItemListRowCount,
+            titleCharLength: this.blog.archiveTitleCharLength, 
+            summaryCharLength: this.blog.archiveSummaryCharLength, 
+            subjectListRowCount: this.blog.archiveSubjectListRowCount
+        };
+    },
+
+    getReflectionSectionConfig() {
+        return {
+            sectionHeaderId: this.blog.reflectionSectionHeaderId,
+            captionImgId: this.blog.reflectionCaptionImgId,
+            captionId: this.blog.reflectionCaptionId,
+            listViewerId: this.viewer.reflectionListViewerId,
+            postIndexClassName: this.blog.postIndexClassName,
+            sectionListName: this.viewer.reflectionSectionListName,
+            blogTypeName: this.blog.reflectionBlogTypeName,
+            className: this.blog.className,            
+            sectionHeaderIcon: this.blog.reflectionSectionHeaderIcon,
+            captionText: this.blog.reflectionCaptionText,
+            blogSectionHeaderIconAlt: this.blog.reflectionSectionHeaderIconAlt,
+            latestPostClassName: this.blog.latestPostClassName,
+            listTitleCharLength: this.viewer.reflectionTitleListCharLength,
+            listSummaryCharLength: this.viewer.reflectionSummaryListCharLength, 
+            headerItemListRowCount: this.blog.sectionHeaderItemListRowCount,
+            titleCharLength: this.blog.reflectionTitleCharLength, 
+            summaryCharLength: this.blog.reflectionSummaryCharLength, 
+            subjectListRowCount: this.blog.reflectionSubjectListRowCount
+        };
+    },
+
+
     getSectionSummaryCharLengths() {
         return {
             writings: this.blog.writingsSummaryCharLength,
