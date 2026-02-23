@@ -213,6 +213,10 @@ footer {
     line-height: 1.5;
   }
 
+  #viewer-maximize-button {
+    display: none;
+  }
+
   #viewer-minimize-button {
     display: none;
   }

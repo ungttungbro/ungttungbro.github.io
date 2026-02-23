@@ -78,6 +78,8 @@ export class Shell {
         }
 
         this.isPortraitLayout = false;
+        taskbar.taskBarElement.dataset.column = 3;
+
     }
 
     applyPortraitLayout() {
@@ -109,6 +111,8 @@ export class Shell {
         new_primary_contents.forEach(item => primary_contents.appendChild(item));
         new_secondary_contents.forEach(item => secondary_contents.appendChild(item));
         new_tertiary_contents.forEach(item => tertiary_contents.appendChild(item));
+
+        taskbar.taskBarElement.dataset.column = 2;
     }
 
     showTaskBar() {

@@ -134,7 +134,7 @@ export class ViewerWindow {
 
         const maximize_button = SiteLibrary.createImgElement(
             CONSTANTS.WINDOW_BUTTON_NAME,
-            '', 
+            'viewer-maximize-button', 
             CONSTANTS.MAXIMIZE_BUTTON_ICON_PATH, 
             'maximize button'
         );

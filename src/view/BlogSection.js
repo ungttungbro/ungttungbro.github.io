@@ -6,6 +6,7 @@ import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { ViewerWindow } from "../modules/viewerWindow/ViewerWindow.js";
 import { shell } from "../modules/shell/Shell.js";
 import { Templates } from "../modules/site/Templates.js";
+import { taskbar } from "../modules/taskbar/TaskBar.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
 
 export class BlogSection {
@@ -103,6 +104,12 @@ export class BlogSection {
 
             viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
+
+            if (taskbar.taskBarElement.dataset.column < 3) {
+                SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
+                if (viewer.isMaximized) viewer.isMaximized = false;
+                else viewer.isMaximized = true;
+            }
             
             shell.mountTaskItem(blog_type, viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
@@ -258,6 +265,12 @@ export class BlogSection {
             viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
             
+            if (taskbar.taskBarElement.dataset.column < 3) {
+                SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
+                if (viewer.isMaximized) viewer.isMaximized = false;
+                else viewer.isMaximized = true;
+            }
+
             shell.mountTaskItem(blog_type, viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
             console.warn('Blog Post Event : ', error);

@@ -13,23 +13,24 @@ import { PhotologSection } from './view/PhotologSection.js';
 import { LinksSection } from './view/LinksSection.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const about_service = new AboutService();
-  await about_service.initialize();
-  new AboutSection(about_service).show();
-
   const blog_service = new BlogService();
-  await blog_service.initialize();
-  new BlogSection(blog_service).show();
-
+  const about_service = new AboutService();
   const photolog_service = new PhotologService();
-  await photolog_service.initialize();
-  new PhotologSection(photolog_service).show();
-
   const links_service = new LinksService();
-  await links_service.initialize();
-  new LinksSection(links_service).show();
-
   const taskbar_element = document.getElementById('taskbar');
-  await shell.initialize(taskbar_element);
+
+  await Promise.all([
+    blog_service.initialize(),
+    about_service.initialize(),
+    photolog_service.initialize(),
+    links_service.initialize(),
+    shell.initialize(taskbar_element)
+  ]);
+   
+  new BlogSection(blog_service).show();  
+  new AboutSection(about_service).show();  
+  new PhotologSection(photolog_service).show();  
+  new LinksSection(links_service).show();  
+   
   shell.updateLayout();
 });
