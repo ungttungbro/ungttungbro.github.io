@@ -14,16 +14,11 @@ export class BlogSection {
         this.initialize();
     }
 
-    async initialize() {
-        const section_id = this.blogService.serviceName;
-        this.blogSectionElement = document.getElementById('content-primary');
-        this.reflectionSectionElement = document.getElementById('reflection');
-    }
+    async initialize() { }
 
     show() {
         try {
             this.renderBlog();
-            this.renderReflection();
         } catch (error) {
             console.log('[ Blog Section ] : ', error);
         }
@@ -31,199 +26,43 @@ export class BlogSection {
     
     renderBlog() {
         const writings = document.getElementById('writings');
-        writings.appendChild(this.createWritings());
+        writings.appendChild(this.createSection('writings', 'blog-writings', this.blogService.blogMetaData));
 
         const lifelog_and_archive = document.getElementById('lifelog-and-archive');
+        lifelog_and_archive.appendChild(this.createSection('lifelog', 'blog-lifelog', this.blogService.lifelogMetaData));
+        lifelog_and_archive.appendChild(this.createSection('archive', 'blog-archive', this.blogService.archiveMetaData));
 
-        const blog_lifelog = this.createLifelog();
-        const blog_archive = this.createArchive();
-
-        lifelog_and_archive.appendChild(blog_lifelog);
-        lifelog_and_archive.appendChild(blog_archive);
+        const reflection = document.getElementById('reflection');
+        reflection.appendChild(this.createSection('reflection', 'blog-reflection', this.blogService.reflectionMetaData));
     }
 
-    renderReflection() {
-        const reflection = this.createReflection();
-        this.reflectionSectionElement.appendChild(reflection);
+    createSection(type, section_id, data) {        
+        const section_meta_data = siteMeta.selectSectionConfig(type);
+        if(!section_meta_data) return;
+
+        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
+        const section_header = this.generateSectionHeader(data, siteMeta.selectSectionConfig(type));
+
+        Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
+
+        element.appendChild(section_header);
+
+        const subject_list = this.generateSubjectList('latest-post', data, siteMeta.selectSectionConfig(type));
+        element.appendChild(subject_list);
+
+        return element;
     }
 
-    createWritings() {
-        const blog_writings = document.createElement(ELEMENT_TYPE.DIV); blog_writings.id = 'blog-writings';
-
-        const blog_section_header = this.generateSectionHeader(
-            siteMeta.blog.blogSectionHeaderId,
-            siteMeta.blog.blogCaptionImgId,
-            siteMeta.blog.blogCaptionId,
-            siteMeta.viewer.writingsListViewerId,
-            siteMeta.blog.postIndexClassName,
-            siteMeta.viewer.writingsSectionListName,
-            siteMeta.blog.writingsBlogTypeName,
-            siteMeta.blog.className,
-            this.blogService.blogMetaData,
-            siteMeta.blog.blogSectionHeaderIcon,
-            siteMeta.blog.blogCaptionText,
-            siteMeta.blog.blogSectionHeaderIconAlt,
-            siteMeta.viewer.writingsListTitleCharLength,
-            siteMeta.viewer.writingsListSummaryCharLength, 
-            siteMeta.blog.sectionHeaderItemListRowCount
-        );
-
-        Templates.createSectionHeaderEvent(blog_section_header, siteMeta.blog.blogCaptionId);
-
-        blog_writings.appendChild(blog_section_header);
-
-        const post_list = this.generateSubjectList(
-            siteMeta.blog.writingsBlogTypeName,
-            siteMeta.blog.latestPostClassName,
-            siteMeta.blog.blogSectionHeaderIcon,
-            this.blogService.blogMetaData,
-            siteMeta.blog.writringsTitleCharLength, 
-            siteMeta.blog.writingsSummaryCharLength, 
-            siteMeta.blog.writingsSubjectListRowCount
-        );
-
-        blog_writings.appendChild(post_list);
-
-        return blog_writings;
-    }
-
-    createLifelog() {
-        const blog_lifelog = document.createElement(ELEMENT_TYPE.DIV); blog_lifelog.id = 'blog-lifelog';
-
-        const lifelog_section_header = this.generateSectionHeader(
-            siteMeta.blog.lifelogSectionHeaderId,
-            siteMeta.blog.lifelogCaptionImgId,
-            siteMeta.blog.lifelogCaptionId,
-            siteMeta.viewer.lifelogListViewerId,
-            siteMeta.blog.postIndexClassName,
-            siteMeta.viewer.lifelogSectionListName,
-            siteMeta.blog.lifelogBlogTypeName,
-            siteMeta.blog.className,
-            this.blogService.lifelogMetaData,
-            siteMeta.blog.lifelogSectionHeaderIcon,
-            siteMeta.blog.lifelogCaptionText,
-            siteMeta.blog.lifelogSectionHeaderIconAlt,
-            siteMeta.viewer.lifelogListTitleCharLength, 
-            siteMeta.viewer.lifelogListSummaryCharLength,
-            siteMeta.blog.sectionHeaderItemListRowCount
-        );
-
-        blog_lifelog.appendChild(lifelog_section_header);
-
-        Templates.createSectionHeaderEvent(lifelog_section_header, siteMeta.blog.lifelogCaptionId);
-
-        const lifelog_list = this.generateSubjectList(
-            siteMeta.blog.lifelogBlogTypeName,
-            siteMeta.blog.latestPostClassName, 
-            siteMeta.blog.lifelogSectionHeaderIcon,
-            this.blogService.lifelogMetaData, 
-            siteMeta.blog.lifelogTitleCharLength, 
-            siteMeta.blog.lifelogSummaryCharLength,
-            siteMeta.blog.lifelogSubjectListRowCount
-        );
-
-        blog_lifelog.appendChild(lifelog_list);
-
-        return blog_lifelog;
-    }
-
-    createArchive() {
-        const blog_archive = document.createElement(ELEMENT_TYPE.DIV); blog_archive.id = 'blog-archive';
-
-        const archive_section_header = this.generateSectionHeader(
-            siteMeta.blog.archiveSectionHeaderId,
-            siteMeta.blog.archiveCaptionImgId,
-            siteMeta.blog.archiveCaptionId,
-            siteMeta.viewer.archiveListViewerId,
-            siteMeta.blog.postIndexClassName,
-            siteMeta.viewer.archiveSectionListName,
-            siteMeta.blog.archiveBlogTypeName,
-            siteMeta.blog.className,
-            this.blogService.archiveMetaData,
-            siteMeta.blog.archiveSectionHeaderIcon,
-            siteMeta.blog.archiveCaptionText,
-            siteMeta.blog.archiveSectionHeaderIconAlt,
-            siteMeta.viewer.archiveListTitleCharLength,
-            siteMeta.viewer.archiveListSummaryCharLength,
-            siteMeta.blog.sectionHeaderItemListRowCount
-        );
-
-        blog_archive.appendChild(archive_section_header);
-        
-        Templates.createSectionHeaderEvent(archive_section_header, siteMeta.blog.archiveCaptionId);
-        
-        const archive_list = this.generateSubjectList(
-            siteMeta.blog.archiveBlogTypeName,
-            siteMeta.blog.latestPostClassName,
-            siteMeta.blog.archiveSectionHeaderIcon, 
-            this.blogService.archiveMetaData, 
-            siteMeta.blog.archiveTitleCharLength, 
-            siteMeta.blog.archiveSummaryCharLength,
-            siteMeta.blog.archiveSubjectListRowCount
-        );
-
-        blog_archive.appendChild(archive_list);
-
-        return blog_archive;        
-    }
-
-    createReflection() {
-        const blog_reflection = document.createElement(ELEMENT_TYPE.DIV); blog_reflection.id = 'blog-reflection';
-
-        const reflection_section_header = this.generateSectionHeader(
-            siteMeta.blog.reflectionSectionHeaderId,
-            siteMeta.blog.reflectionCaptionImgId,
-            siteMeta.blog.reflectionCaptionId,
-            siteMeta.viewer.reflectionListViewerId,
-            siteMeta.blog.postIndexClassName,
-            siteMeta.viewer.reflectionSectionListName,
-            siteMeta.blog.reflectionBlogTypeName,
-            siteMeta.blog.className,
-            this.blogService.reflectionMetaData,
-            siteMeta.blog.reflectionSectionHeaderIcon,
-            siteMeta.blog.reflectionCaptionText,
-            siteMeta.blog.reflectionSectionHeaderIconAlt,
-            siteMeta.viewer.reflectionTitleListCharLength,
-            siteMeta.viewer.reflectionSummaryListCharLength, 
-            siteMeta.blog.sectionHeaderItemListRowCount
-        );
-
-        blog_reflection.appendChild(reflection_section_header);
-
-        Templates.createSectionHeaderEvent(reflection_section_header, siteMeta.blog.reflectionCaptionId);
-
-        const reflection_list = this.generateSubjectList(
-            siteMeta.blog.reflectionBlogTypeName,
-            siteMeta.blog.latestPostClassName,
-            siteMeta.blog.reflectionSectionHeaderIcon, 
-            this.blogService.reflectionMetaData, 
-            siteMeta.blog.reflectionTitleCharLength, 
-            siteMeta.blog.reflectionSummaryCharLength,
-            siteMeta.blog.reflectionSubjectListRowCount
-        );
-
-        blog_reflection.appendChild(reflection_list);
-
-        return blog_reflection;
-    }
-
-    generateSectionHeader(
-        section_header_id, img_id, caption_id, viewer_id, post_index_class_name,
-        viewer_title_text, blog_type, section_header_class_name, data, icon_path, text, icon_alt,
-        title_char_count, summary_char_count, row_count
-    ) {
+    generateSectionHeader(data, config) {
         const section_header = Templates.createSectionHeader(
-            section_header_id, img_id, caption_id,
-            section_header_class_name, icon_path, text, icon_alt
+            config.sectionHeaderId, config.captionImgId, config.captionId,
+            config.className, config.sectionHeaderIcon, config.captionText, config.sectionHeaderIconAlt
         );
 
         section_header.addEventListener('click',  e => {
             this.onSectionHeaderClick (
-                e, blog_type, viewer_id, icon_path, viewer_title_text,
-                this.generateSubjectList(
-                    blog_type, post_index_class_name, icon_path, data,
-                    title_char_count, summary_char_count, row_count
-                ),
+                e, config.blogTypeName, config.listViewerId, config.sectionHeaderIcon, config.sectionListName,
+                this.generateSubjectList('post-index', data, config),
                 null,
                 COMMON.COPYRIGHT
             );
@@ -276,14 +115,23 @@ export class BlogSection {
         }
     }
 
-    generateSubjectList(
-        type, class_name, section_icon, data, 
-        title_char_count, summary_char_count, row_count
-    ) {
+    generateSubjectList(ux_type, data, config) {
         const frag = document.createDocumentFragment();
 
         const subject_list = document.createElement(ELEMENT_TYPE.DIV);
-        subject_list.className = class_name;
+        subject_list.className = config.postIndexClassName;
+
+        let row_count = 0;
+        let titleCharLength = config.listTitleCharLength;
+        let summaryCharLength = config.listSummaryCharLength;
+
+        if (ux_type === 'latest-post') {
+            subject_list.className = config.latestPostClassName;
+
+            titleCharLength = config.titleCharLength;
+            summaryCharLength = config.summaryCharLength;
+            row_count = config.subjectListRowCount;
+        }
 
         const iterator = data.entries();
         let result = iterator.next();
@@ -293,7 +141,7 @@ export class BlogSection {
             const [key, value] = result.value;
 
             let region = '';
-            if (type === 'lifelog') { region = ' (' + value.region + ')'; }
+            if (config.blogTypeName === 'lifelog') { region = ' (' + value.region + ')'; }
 
             const meta_span = document.createElement('span');
             meta_span.className = 'meta';
@@ -303,11 +151,11 @@ export class BlogSection {
 
             const title = document.createElement('div');
             title.className = 'title';
-            title.textContent = SiteLibrary.truncateText(value.title, title_char_count);
+            title.textContent = SiteLibrary.truncateText(value.title, titleCharLength);
 
             const summary = document.createElement('span');
             summary.className = 'summary';
-            summary.textContent = SiteLibrary.truncateText(value.summary, summary_char_count);
+            summary.textContent = SiteLibrary.truncateText(value.summary, summaryCharLength);
 
             const a =  document.createElement('a');
             a.href = '#';
@@ -315,7 +163,7 @@ export class BlogSection {
             a.appendChild(summary);
                         
             this.generatePostEvent(
-                type, data, a, key, section_icon, value.title, 
+                config.blogTypeName, data, a, key, config.sectionHeaderIcon, value.title, 
                 null, value.content_path,COMMON.COPYRIGHT
             );      
 
@@ -323,7 +171,10 @@ export class BlogSection {
 
             const nextResult = iterator.next();
             if (row_count > 0) {
-                if (!nextResult.done && index < (row_count - 1)) { frag.appendChild(document.createElement('hr')); }
+                if (!nextResult.done && index < (row_count - 1)) {
+                    frag.appendChild(document.createElement('hr')); 
+                }
+
                 if (index >= (row_count - 1)) { break; }
             } else {
                 if (!nextResult.done) {

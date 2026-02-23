@@ -1,4 +1,5 @@
 import { SiteLibrary } from "../common/SiteLibrary.js";
+import { siteMeta } from "./siteMeta.js";
 
 export class Templates {
     constructor() {}

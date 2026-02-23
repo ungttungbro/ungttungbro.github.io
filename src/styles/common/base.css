@@ -36,7 +36,7 @@
   --base_footer_background_image: url(/assets/icons/dark-mode-img/mid-dark-background.gif);
   --base_background_size: 12.25rem;
 
-  --base_background: linear-gradient(to left, #1a1a1a, #222222);
+  --base_background: linear-gradient(to left, #111111, #222222);
 
   --base_font_color: #eeeeee;
   --base_font_color_b: #aaaaaa;
@@ -160,6 +160,7 @@
 html {
   font-size: var(--base_font_size);
   color: var(--base_font_color);
+  
   text-shadow: var(--base_font_shadow);
   letter-spacing: var(--base_letter-spacing);
 

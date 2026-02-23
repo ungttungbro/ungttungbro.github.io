@@ -114,6 +114,17 @@ export const siteMeta = Object.freeze({
         reflectionSectionListName: '리플렉션 (reflection) 목록'
     }),
 
+    selectSectionConfig(type) {
+        const map = {
+            writings: this.getWritingsSectionConfig(),
+            lifelog: this.getLifelogSectionConfig(),
+            archive: this.getArchiveSectionConfig(),
+            reflection: this.getReflectionSectionConfig()
+        };
+
+        return map[type] ?? null;
+    },
+
     getWritingsSectionConfig() {
         return {
             sectionHeaderId: this.blog.blogSectionHeaderId,

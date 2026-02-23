@@ -311,24 +311,7 @@ export class Shell {
     registUpdateSectionSnapshot() {
         const snapshot = {
             ['process-name']: 'update-section',
-            ['function']: (section_title_char_lengths, section_summary_char_lengths, weights) => {                
-                Object.entries(section_summary_char_lengths).forEach(([section, length]) => {                    
-                    const element = document.getElementById('blog-' + section);                    
-                    if (!element) return;
-                    
-                    const summaries = element.querySelectorAll('.summary');               
-                    summaries.forEach(summary => {
-                        if (!summary.dataset.original) {
-                            summary.dataset.original = summary.textContent; // 최초 한 번만 저장
-                        }
-
-                        summary.textContent = SiteLibrary.truncateText(
-                            summary.dataset.original, 
-                            (length * (this.isPortraitLayout ? weights[section] : 1))
-                        );              
-                    });
-                });    
-                
+            ['function']: (section_title_char_lengths, section_summary_char_lengths, weights) => {
                 Object.entries(section_title_char_lengths).forEach(([section, length]) => {
                     const element = document.getElementById('blog-' + section);                    
                     if (!element) return;
@@ -344,7 +327,24 @@ export class Shell {
                             (length * (this.isPortraitLayout ? weights[section] : 1))
                         );               
                     });
-                });         
+                });
+                
+                Object.entries(section_summary_char_lengths).forEach(([section, length]) => {                    
+                    const element = document.getElementById('blog-' + section);                    
+                    if (!element) return;
+                    
+                    const summaries = element.querySelectorAll('.summary');               
+                    summaries.forEach(summary => {
+                        if (!summary.dataset.original) {
+                            summary.dataset.original = summary.textContent; // 최초 한 번만 저장
+                        }
+
+                        summary.textContent = SiteLibrary.truncateText(
+                            summary.dataset.original, 
+                            (length * (this.isPortraitLayout ? weights[section] : 1))
+                        );
+                    });
+                });  
             }
         };
 
