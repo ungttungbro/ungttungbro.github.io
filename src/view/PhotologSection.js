@@ -28,41 +28,39 @@ export class PhotologSection {
     }
 
     renderTeasers() {
-        const photolog_section_header = this.generateSectionHeader(
-            siteMeta.photolog.sectionHeaderId,
-            siteMeta.photolog.captionImgId,
-            siteMeta.photolog.captionId,
-            'photolog-index-viewer',
-            siteMeta.photolog.className,
-            '포토로그 (photolog) 목록',
-            siteMeta.photolog.sectionHeaderIcon,
-            siteMeta.photolog.text,
-            siteMeta.photolog.sectionHeaderIconAlt
-        );
-
-        this.photologSectionElement.appendChild(photolog_section_header);
-        
-        Templates.createSectionHeaderEvent(photolog_section_header, siteMeta.photolog.captionId);
-        
-        const teasers = this.generateTeaserList(5);
-        this.photologSectionElement.appendChild(teasers);
+        const photolog = this.createSection('photolog', 'photolog-items');
+        this.photologSectionElement.appendChild(photolog);
     }
 
-    generateSectionHeader(
-        section_header_id, img_id, caption_id, viewer_id,
-        class_name, viewer_title_text, icon_path, text, icon_alt,
-    ) {
+    createSection(type, section_id) {        
+        const section_meta_data = siteMeta.selectSectionConfig(type);
+        if(!section_meta_data) return;
+
+        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
+        const section_header = this.generateSectionHeader(siteMeta.selectSectionConfig(type));
+
+        Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
+
+        element.appendChild(section_header);
+
+        const subject_list = this.generateTeaserList(5);
+        element.appendChild(subject_list);
+
+        return element;
+    }
+
+    generateSectionHeader(config) {
         const section_header = Templates.createSectionHeader(
-            section_header_id, img_id, caption_id,
-            class_name, icon_path, text, icon_alt
+            config.sectionHeaderId, config.captionImgId, config.captionId,
+            config.className, config.sectionHeaderIcon, config.text, config.sectionHeaderIconAlt
         );
 
         section_header.addEventListener('click',  e => {
             this.onSectionHeaderClick (
                 e,
-                viewer_id,
-                icon_path,
-                viewer_title_text,
+                config.photologListViewerId,
+                config.sectionHeaderIcon,
+                config.text,
                 this.generateTeaserList(0),          
                 null,                
                 COMMON.COPYRIGHT

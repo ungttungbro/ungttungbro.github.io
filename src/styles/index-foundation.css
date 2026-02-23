@@ -59,7 +59,7 @@ main::before {
   background-size: var(--base_background_size);
   background-repeat: repeat;
 
-  opacity: 0.5; /* 원하는 투명도 */
+  opacity: 0.6; /* 원하는 투명도 */
   z-index: -1; /* 컨텐츠 뒤로 */
 }
 
@@ -145,7 +145,7 @@ footer {
 
 .title-box-more-button {
   font-weight: bold;
-  letter-spacing: 0.075rem;
+  letter-spacing: 0.05rem;
   margin-right: 0.25rem;
 }
 

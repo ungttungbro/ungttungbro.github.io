@@ -94,24 +94,26 @@ export const siteMeta = Object.freeze({
     }),
 
     viewer: Object.freeze({
-        writingsListSummaryCharLength: 54,
+        writingsListSummaryCharLength: 52,
         writingsListTitleCharLength: 26,
         lifelogListSummaryCharLength: 0,
         lifelogListTitleCharLength: 26,
         archiveListSummaryCharLength: 0,
         archiveListTitleCharLength: 26,
-        reflectionSummaryListCharLength: 26,
+        reflectionSummaryListCharLength: 24,
         reflectionTitleListCharLength: 24,
         
         writingsListViewerId: 'blog_post_list_all_viewer',
         lifelogListViewerId: 'lifelog_post_list_all_viewer',
         archiveListViewerId: 'archive_list_all_viewer',
         reflectionListViewerId: 'reflection_post_list_all_viewer',
+        photologListViewerId: 'photolog-index-viewer',
 
         writingsSectionListName: '라이팅스 (writings) 목록',
         lifelogSectionListName: '라이프로그 (lifelog) 목록',
         archiveSectionListName: '아카이브 (archive) 목록',
-        reflectionSectionListName: '리플렉션 (reflection) 목록'
+        reflectionSectionListName: '리플렉션 (reflection) 목록',
+        photologSectionListName: '포토로그 (photolog) 목록'
     }),
 
     selectSectionConfig(type) {
@@ -119,10 +121,25 @@ export const siteMeta = Object.freeze({
             writings: this.getWritingsSectionConfig(),
             lifelog: this.getLifelogSectionConfig(),
             archive: this.getArchiveSectionConfig(),
-            reflection: this.getReflectionSectionConfig()
+            reflection: this.getReflectionSectionConfig(),
+            photolog: this.getPhotologSectionConfig()
         };
 
         return map[type] ?? null;
+    },
+
+    getPhotologSectionConfig() {
+        return {
+            sectionHeaderId: this.photolog.sectionHeaderId,
+            captionImgId: this.photolog.captionImgId,
+            captionId: this.photolog.captionId,
+            photologListViewerId: this.viewer.photologListViewerId,
+            className: this.photolog.className,
+            photologSectionListName: this.viewer.photologSectionListName,
+            sectionHeaderIcon: this.photolog.sectionHeaderIcon,
+            text: this.photolog.text,
+            sectionHeaderIconAlt: this.photolog.sectionHeaderIconAlt
+        };
     },
 
     getWritingsSectionConfig() {
