@@ -9,7 +9,8 @@
     "Noto Sans KR",
     나눔고딕,
     굴림,
-    sans-serif;
+    sans-serif,
+    "Segoe UI Symbol";
   --base_font_size : 1vw;
   --base_font_line_height : 1.6;
   --base_font_light : 1rem;

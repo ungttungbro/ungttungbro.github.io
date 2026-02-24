@@ -13,10 +13,10 @@
        "scholar.google.co.kr"   : ["https://scholar.google.co.kr", "google scholar"],
        "flaticon"               : ["https://www.flaticon.com", "flaticon"],
        "chatgpt"                : ["https://chatgpt.com", "ChatGpt"],
+       "symbl"                  : ["https://symbl.cc", "(◕‿◕) SYMBL"],
        "kumoh.ac.kr"            : ["https://kumoh.ac.kr", "국립금오공과대학교"],
        "knou.ac.kr"             : ["https://knou.ac.kr", "한국방송통신대학교"],
        "kosac.re.kr"            : ["https://kosac.re.kr", "한국과학창의재단"],
-       "du.ac.kr"               : ["https://www.du.ac.kr/main.do", "동서울대학교"],
        "codingplus.co.kr"       : ["http://www.codingplus.co.kr", "코딩플러스학원"]
     }
   }

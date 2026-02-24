@@ -60,7 +60,7 @@ export class Templates {
         return panel;
     }
 
-    static typeSimbol(type) {
+    static symbol(type) {
         switch (type) {
             case 'column': return '&#128395;';
             case 'tech-note': return '&#128187;';

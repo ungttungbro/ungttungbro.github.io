@@ -234,7 +234,6 @@ export const siteMeta = Object.freeze({
         };
     },
 
-
     getSectionSummaryCharLengths() {
         return {
             writings: this.blog.writingsSummaryCharLength,
@@ -260,7 +259,5 @@ export const siteMeta = Object.freeze({
             archive: [0.66],
             reflection: [0.9]
         };
-    }
-
-    
+    }    
 });
