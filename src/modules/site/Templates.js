@@ -59,4 +59,18 @@ export class Templates {
 
         return panel;
     }
+
+    static typeSimbol(type) {
+        switch (type) {
+            case 'column': return '&#128395;';
+            case 'tech-note': return '&#128187;';
+            case 'lecture-note': return '&#128221;';
+            case 'photo' : return '&#128247;';
+            case 'video' : return '&#128249;';
+            case 'audio' : return '&#127911;';
+            case 'text' : return '&#128221;';
+            case 'code' : return '&#9000;';
+            default: return '';
+        }
+    }
 }
