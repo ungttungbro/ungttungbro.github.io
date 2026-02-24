@@ -10,29 +10,15 @@
   box-shadow: var(--base_viewer_shadow);
 }
 
-.viewer.active {
-  background: var(--base_viewer_active_overay);
-}
-
-.viewer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 35%;
-
-  background: var(--base_viewer_overay);
-
-  opacity: 0.6;
-
-  pointer-events: none;
-}
-
 .title_bar {
   position: relative;
   border-bottom: 0.075rem solid rgba(255, 255, 255, 0.15);
-  background: var(--base_viewer_title_bar_background);
+  background: var(--base_viewer_title_bar_background); 
+  background-image: var(--base_viewer_title_bar_background_image);
+}
+
+.title_bar.active {
+  background: var(--base_viewer_active_overay);
   background-image: var(--base_viewer_title_bar_background_image);
 }
 
@@ -43,7 +29,6 @@
   background-image: var(--base_viewer_footer_background_image);
   border-top: 0.075rem solid rgba(255, 255, 255, 0.1);
 }
-
 
 .header_panel hr {
   position: relative;

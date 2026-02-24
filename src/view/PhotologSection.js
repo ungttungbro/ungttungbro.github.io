@@ -60,7 +60,7 @@ export class PhotologSection {
                 e,
                 config.photologListViewerId,
                 config.sectionHeaderIcon,
-                config.text,
+                config.photologSectionListName,
                 this.generateTeaserList(0),          
                 null,                
                 COMMON.COPYRIGHT
@@ -96,7 +96,7 @@ export class PhotologSection {
                 top + 'px',
                 left + 'px',
                 'viewer',
-                'blog',
+                'photolog',
                 section_icon,
                 title,
                 Templates.createContentPanel('photolog-header-panel', header),
@@ -106,6 +106,12 @@ export class PhotologSection {
 
             viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
+
+            if (taskbar.taskBarElement.dataset.column < 3) {
+                SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
+                if (viewer.isMaximized) viewer.isMaximized = false;
+                else viewer.isMaximized = true;
+            }
             
             taskbar.mount('photolog', viewer.targetId, viewer.id, section_icon, title);
         } catch(error) {
@@ -203,7 +209,7 @@ export class PhotologSection {
             return; 
         }
 
-        const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
+        //const height_offset = taskbar.taskBarElement.getBoundingClientRect().bottom;
 
         try {
             const viewer = new ViewerWindow();
@@ -225,7 +231,13 @@ export class PhotologSection {
             viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
 
-            taskbar.mount('photolog', viewer.targetId, viewer.id, siteMeta.photolog.sectionHeaderIcon, title);
+            if (taskbar.taskBarElement.dataset.column < 3) {
+                SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
+                if (viewer.isMaximized) viewer.isMaximized = false;
+                else viewer.isMaximized = true;
+            }
+
+            taskbar.mount('photolog', viewer.targetId, viewer.id, siteMeta.photolog.sectionHeaderIcon, title);            
         } catch (error) {
             console.log('Blog Post Event : ', error);
         } finally {

@@ -44,7 +44,7 @@ export class ViewerWindow {
         this.dragWindow();
         this.resizeWindow();
 
-        ViewerWindowProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement);
+        ViewerWindowProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement.querySelector('.title_bar'));
         ViewerStateManager.stateLog(this.windowElement);
     }
 
@@ -60,15 +60,23 @@ export class ViewerWindow {
         element.style.left = this.left;
         element.style.top = this.top;
         element.style.zIndex = ViewerStateManager.maxZIndex() + 1;
-        element.addEventListener('click', e => {
+
+        element.addEventListener('click', (e) => {
+            if (e.target !== e.currentTarget) return;
+
             element.style.zIndex = ViewerStateManager.maxZIndex() + 1;
             ViewerStateManager.stateLog(element);
         });
         
-        element.addEventListener('pointerenter', e => {
-            ViewerWindowProcessRegistry.get('enforceSingle', 'function')?.(this.windowElement);
+        element.addEventListener('pointerenter', () => {
+            ViewerWindowProcessRegistry.get('enforceSingle', 'function')?.(element.querySelector('.title_bar'));
+            document.body.style.overflow = 'hidden';
         });
         
+        element.addEventListener('pointerleave', (e) => {
+            document.body.style.overflow = '';
+        });
+
         return element;
     }
 
@@ -185,12 +193,14 @@ export class ViewerWindow {
                 this.targetId,
                 this.viewerId
             );
+
+            document.body.style.overflow = '';
         });
     }
 
     resizeWindow() {        
         const resizeDirection = (e) => {
-            const EDGE = 12; // 모서리 감지 영역(px)
+            const EDGE = 8; // 모서리 감지 영역(px)
 
             const rect = this.windowElement.getBoundingClientRect();
             

@@ -257,9 +257,9 @@ export class Shell {
                     console.warn('element not found:', viewer_id);
                     return;
                 }
-
+               
                 ViewerStateManager.bringToFront(viewer);
-                TaskStateManager.enforceSingle('active', viewer);
+                TaskStateManager.enforceSingle('active', viewer.querySelector('.title_bar'));
                 ViewerStateManager.stateLog(viewer);
             }
         };
@@ -329,7 +329,7 @@ export class Shell {
                         title.textContent = SiteLibrary.truncateText(
                             title.dataset.original, 
                             (length * (this.isPortraitLayout ? weights[section] : 1))
-                        );               
+                        );
                     });
                 });
                 

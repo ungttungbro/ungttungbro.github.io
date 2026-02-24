@@ -79,7 +79,7 @@
     
     pointer-events: auto;
 
-    backdrop-filter: blur(10px) saturate(100%) brightness(40%);
+    backdrop-filter: var(--base_backdrop_filter);
 
     background:
         radial-gradient(

@@ -152,7 +152,7 @@ export class BlogSection {
 
             const meta_span = document.createElement('span');
             meta_span.className = 'meta';
-            meta_span.textContent = value.type + ' · ' + key + region;
+            meta_span.textContent = '📝 ' + value.type + ' · ' + key + region;
 
             frag.appendChild(meta_span);
 

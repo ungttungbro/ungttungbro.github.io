@@ -83,9 +83,10 @@
     scroll-snap-stop: always;
     scroll-margin-top: 3vh;
 
-    padding-left: 0.6rem;
-    padding-right: 0.6rem;
-    padding-bottom: 0.6rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+
+    color: var(--base_font_color);
 }
 
 .photolog-photo {
