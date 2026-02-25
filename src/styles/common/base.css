@@ -41,7 +41,7 @@
   --base_viewer_background_image: none;
   --base_background_size: 12.25rem;
 
-  --base_background: linear-gradient(to left, #111111, #222222);
+  --base_background: linear-gradient(to right, #111111, #222222);
 
   --base_font_color: #eeeeee;
   --base_font_color_b: #aaaaaa;
@@ -106,7 +106,7 @@
   --base_clarity_filter_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
 
   --base_background_size: 5.35rem;
-  --base_background: linear-gradient(to left, #eeeeee, #dddddd);
+  --base_background: linear-gradient(to right, #eeeeee, #dddddd);
 
   --base_font_color: rgba(0, 0, 0, 0.8);
   --base_font_color_b: #444444;
