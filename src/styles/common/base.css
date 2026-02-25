@@ -30,6 +30,64 @@
   --base_border_radius_large : 1rem;
 }
 
+[ data-theme = "light" ] { 
+  --base_background_image: url(/assets/icons/light-mode-img/light-background.gif);
+  --base_task_bar_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
+  --base_footer_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
+
+  --base_viewer_title_bar_background_image: url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_title_bar_background_active_image: url(/assets/icons/light-mode-img/mid-dark-background.gif);
+  --base_viewer_footer_background_image: url(/assets/icons/light-mode-img/mid-background.gif);
+  --base_viewer_background_image: url(/assets/icons/light-mode-img/light-background.gif);
+
+  --base_clarity_filter_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
+
+  --base_background_size: 5.35rem;
+  --base_background: linear-gradient(to right, #eeeeee, #dddddd);
+
+  --base_font_color: rgba(0, 0, 0, 0.8);
+  --base_font_color_b: #444444;
+  --base_font_color_c: #555555;
+  --base_font_meta_color: #536056;
+  
+  --base_font_weight: 500;
+
+  --base_task_item_background_color : #cccccc;
+  --base_task_item_background_color_b : #dddddd;
+
+  --base_border_line: 0.075rem solid rgba(0, 0, 0, 0.1);
+  --base_taskbar_border_line: 0.075rem solid rgba(0, 0, 0, 0.1);
+  --base_hr_border: 0.075rem solid rgba(0, 0, 0, 0.05);
+  --base_dash_border: 0.075rem dashed #bbbbbb;
+
+  --base_dark_light_toggle_button: url(/assets/icons/light-mode-img/dark-toggle.png);
+
+  --base_box_background_color: #efefef;
+  --base_section_header_box_background_color: linear-gradient(45deg, #cccccc, #dadada);
+  --base_section_header_box_background_color_b: linear-gradient(45deg, #cacaca, #cccccc);
+  --base_section_header_box_font_color: #333333;
+
+  --base_anchor_tag_hover_color: #306100;
+  --base_anchor_tag_hover_color_b: rgba(0, 0, 0, 0.95);
+  --base_anchor_tag_hover_text_decoration: none;
+
+  --base_viewer_overay: none;
+  --base_viewer_active_overay: none;
+  --base_viewer_background_gradient: none;
+  --base_viewer_title_bar_background: none;
+
+  --base_blog_content_panel_hr : rgba(19, 19, 19, 0.15);
+  --base_close_icon_filter_invert : invert(1);
+
+  --base_backdrop_filter: none;
+  --base_footer_background_color: #1a1a1a;
+
+  --base_task_item_close_background_color_b : #111111;
+  --base_viewer_shadow : 
+    0 0 0 0.075rem rgba(255,255,255,0.04),
+    0 0.3rem 0.6rem rgba(0,0,0,0.45);
+}
+
 
 [ data-theme = "dark" ] { 
   --base_background_image: url(/assets/icons/dark-mode-img/dark-background.png);
@@ -37,6 +95,7 @@
   --base_footer_background_image: url(/assets/icons/dark-mode-img/mid-dark-background.gif);
   --base_clarity_filter_background_image: none;
   --base_viewer_title_bar_background_image: none;
+  --base_viewer_title_bar_background_active_image: none;
   --base_viewer_footer_background_image: none;
   --base_viewer_background_image: none;
   --base_background_size: 12.25rem;
@@ -93,62 +152,6 @@
   --base_footer_background_color : #1a1a1a;
 
   --base_task_item_close_background_color_b : #777777;
-}
-
-
-[ data-theme = "light" ] { 
-  --base_background_image: url(/assets/icons/light-mode-img/light-background.gif);
-  --base_task_bar_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
-  --base_footer_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
-  --base_viewer_title_bar_background_image: url(/assets/icons/light-mode-img/mid-background.gif);
-  --base_viewer_footer_background_image: url(/assets/icons/light-mode-img/mid-background.gif);
-  --base_viewer_background_image: url(/assets/icons/light-mode-img/light-background.gif);
-  --base_clarity_filter_background_image: url(/assets/icons/light-mode-img/grey-background.gif);
-
-  --base_background_size: 5.35rem;
-  --base_background: linear-gradient(to right, #eeeeee, #dddddd);
-
-  --base_font_color: rgba(0, 0, 0, 0.8);
-  --base_font_color_b: #444444;
-  --base_font_color_c: #555555;
-  --base_font_meta_color: #536056;
-  
-  --base_font_weight: 500;
-
-  --base_task_item_background_color : #cccccc;
-  --base_task_item_background_color_b : #dddddd;
-
-  --base_border_line: 0.075rem solid rgba(0, 0, 0, 0.1);
-  --base_taskbar_border_line: 0.075rem solid rgba(0, 0, 0, 0.1);
-  --base_hr_border: 0.075rem solid rgba(0, 0, 0, 0.05);
-  --base_dash_border: 0.075rem dashed #bbbbbb;
-
-  --base_dark_light_toggle_button: url(/assets/icons/light-mode-img/dark-toggle.png);
-
-  --base_box_background_color: #efefef;
-  --base_section_header_box_background_color: linear-gradient(45deg, #cccccc, #dadada);
-  --base_section_header_box_background_color_b: linear-gradient(45deg, #cacaca, #cccccc);
-  --base_section_header_box_font_color: #333333;
-
-  --base_anchor_tag_hover_color: #306100;
-  --base_anchor_tag_hover_color_b: rgba(0, 0, 0, 0.95);
-  --base_anchor_tag_hover_text_decoration: none;
-
-  --base_viewer_overay: none;
-  --base_viewer_active_overay: none;
-  --base_viewer_background_gradient: none;
-  --base_viewer_title_bar_background: none;
-
-  --base_blog_content_panel_hr : rgba(19, 19, 19, 0.15);
-  --base_close_icon_filter_invert : invert(1);
-
-  --base_backdrop_filter: none;
-  --base_footer_background_color: #1a1a1a;
-
-  --base_task_item_close_background_color_b : #111111;
-  --base_viewer_shadow : 
-    0 0 0 0.075rem rgba(255,255,255,0.04),
-    0 0.3rem 0.6rem rgba(0,0,0,0.45);
 }
 
 

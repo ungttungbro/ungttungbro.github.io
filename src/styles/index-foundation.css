@@ -155,7 +155,7 @@ footer {
 
 
 /* 세로 모드 2단 (portrait) */
-@media (orientation: portrait), (orientation: landscape) and (max-width: 1280px) {
+@media (orientation: portrait), (max-width: 1152px) {
   html {
     font-size: 2vw;
   }
@@ -221,4 +221,70 @@ footer {
     display: none;
   }
 }
+
+/* 세로 모드 1단 (portrait) */
+@media (orientation: portrait) and (max-width: 541px) {
+  html {
+    font-size: 3.5vw;
+  }
+
+  #content-primary, #content-secondary, #content-tertiary {
+    grid-template-columns: 1fr; /* 1단으로 세로 배치 */
+    grid-auto-rows: auto;       /* 아이템 높이에 맞춰 자동 조정 */
+    gap: 1.5rem; 
+  }
+
+  #logo {
+    width: 6rem;
+  }
+
+  #taskbar {
+    grid-template-columns: 1fr 2.5rem 2rem;
+  }
+
+  #task-items {
+    display: none;
+  }
+
+  #photo-zone .about-photo {
+    width: 100%; 
+    height: auto;
+  }
+
+  #profile {  
+    width: 100%;
+
+    margin-top: 1rem;
+
+    font-size: 0.9rem;
+  }
+
+  #profile .profile-thumbnail {
+    width: 100%;
+    height: auto;
+  }
+
+  #blog-reflection a {
+    line-height: 1.65;
+  }
+
+  #blog-writings .summary {
+    line-height: 1.5;
+  }
+
+  #viewer-maximize-button {
+    display: none;
+  }
+
+  #viewer-minimize-button {
+    display: none;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 540px) {
+  html {
+    font-size: 2vw;  }
+}
+
+
 

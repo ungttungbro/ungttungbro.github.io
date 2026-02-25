@@ -72,6 +72,10 @@ export class BlogSection {
         return section_header;
     }
 
+    showViewer() {
+        
+    }
+
     onSectionHeaderClick(e, blog_type, id, section_icon, title, header, contents, footer) {
         e.preventDefault();
 
