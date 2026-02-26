@@ -32,5 +32,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   new PhotologSection(photolog_service).show();  
   new LinksSection(links_service).show();  
    
+  shell.initLayoutMemory();
   shell.updateLayout();
 });

@@ -254,10 +254,10 @@ export const siteMeta = Object.freeze({
 
     getSectionWeights() {
         return {
-            writings: [0.56],
-            lifelog: [0.66],
-            archive: [0.66],
-            reflection: [0.9]
+            writings: [0.9, 0.58],
+            lifelog: [0.66, 0.66],
+            archive: [0.66, 0.66],
+            reflection: [0.9, 0.9]
         };
     }    
 });

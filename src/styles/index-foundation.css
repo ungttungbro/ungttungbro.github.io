@@ -234,10 +234,14 @@ footer {
     font-size: 3.5vw;
   }
 
-  #content-primary, #content-secondary, #content-tertiary {
+  #content-primary {
     grid-template-columns: 1fr; /* 1단으로 세로 배치 */
     grid-auto-rows: auto;       /* 아이템 높이에 맞춰 자동 조정 */
-    gap: 1.5rem; 
+    gap: 1rem; 
+  }
+
+  #content-secondary, #content-tertiary {
+    display: none; /* 세로 모드에서는 보이지 않도록 */
   }
 
   #logo {
@@ -287,7 +291,7 @@ footer {
   }
 }
 
-@media (orientation: landscape) and (max-width: 540px) {
+@media (orientation: landscape) and (max-width: 541px) {
   html {
     font-size: 2vw;  }
 }

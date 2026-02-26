@@ -28,8 +28,7 @@ export class Shell {
     async initialize(task_bar_element) {
         this.isPortraitLayout = null;
         this.isTinyLayout = null;
-        this.currentMode = null;
-        
+        this.currentMode = null;        
 
         await taskbar.initialize(task_bar_element);
         taskbar.groupTypeData = GROUP_CONFIG;
@@ -40,22 +39,26 @@ export class Shell {
         this.registViewerFunction();    
         
         taskbar.taskBarElement.dataset.column = 3; // 초기값 설정
-        
-        this.updateLayout = this.updateLayout.bind(this);
-        window.addEventListener("resize", this.updateLayout);
-        window.addEventListener("load", this.updateLayout);
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                this.updateLayout();
+            }, 150);
+        });
     }
 
     updateLayout() {
         const isPortrait = window.innerHeight > window.innerWidth;
-        this.isPortraitLayout = isPortrait;
+        this.isPortraitLayout = isPortrait;       
 
         if (window.innerWidth <= 540) {
-            this.applyTinyLayout();
-        } else if (isPortrait || window.innerWidth <= 1152) {         
-            this.applyPortraitLayout();
+            this.applyLayout(1);
+        } else if (isPortrait || window.innerWidth <= 1152) {     
+            this.applyLayout(2);
         } else {
-            this.applyLandscapeLayout();
+            this.applyLayout(3);
         }
 
         ProcessRegistry.get('updateSection', 'function')?.(
@@ -65,108 +68,64 @@ export class Shell {
         );        
     }
 
-    applyTinyLayout() {
-        if (this.isTinyLayout) return;
-        this.isTinyLayout = true;
+    initLayoutMemory() {
+        if (this.baseLayout) return;
 
-        const primary_contents = document.getElementById('content-primary');
-        const secondary_contents = document.getElementById('content-secondary');
-        const tertiary_contents = document.getElementById('content-tertiary');
-
-        const content_primary_items = Array.from(primary_contents.children);
-        const content_secondary_items = Array.from(secondary_contents.children);
-        const content_tertiary_items = Array.from(tertiary_contents.children);
-
-        const columnCount = Number(taskbar.taskBarElement.dataset.column);
-
-        let new_primary_contents = null;
-        let new_secondary_contents = null;
-        let new_tertiary_contents = null;
-
-        if (columnCount === 2) {            
-            new_primary_contents = [content_primary_items[1], content_primary_items[0]];
-            new_secondary_contents = [content_secondary_items[0], content_secondary_items[1]];
-            new_tertiary_contents = [content_tertiary_items[0], content_tertiary_items[1]];  
-        }
-
-        if (columnCount === 3) {
-            new_primary_contents = [content_primary_items[2], content_secondary_items[0]];
-            new_secondary_contents = [content_primary_items[0], content_primary_items[1]];
-            new_tertiary_contents = [content_secondary_items[1], content_secondary_items[2]];
-        }
-
-        new_primary_contents.forEach(item => primary_contents.appendChild(item));
-        new_secondary_contents.forEach(item => secondary_contents.appendChild(item));
-        new_tertiary_contents.forEach(item => tertiary_contents.appendChild(item));
-
-        taskbar.taskBarElement.dataset.column = 1;
+        this.baseLayout = {
+            primary: Array.from(document.getElementById('content-primary').children),
+            secondary: Array.from(document.getElementById('content-secondary').children),
+            tertiary: Array.from(document.getElementById('content-tertiary').children),
+        };
     }
 
-    applyPortraitLayout() {
-        const portrait = ((window.innerHeight > window.innerWidth) && (window.innerWidth > 540)) || 
-            ((window.innerWidth > 540 && window.innerWidth <= 1152) && window.innerWidth > window.innerHeight);
+    applyLayout(columnCount) {
+        if (Number(taskbar.taskBarElement.dataset.column) === columnCount) return;
 
-        const columnCount = Number(taskbar.taskBarElement.dataset.column);
+        const primary = document.getElementById('content-primary');
+        const secondary = document.getElementById('content-secondary');
+        const tertiary = document.getElementById('content-tertiary');
 
-        if ((portrait === this.isPortraitLayout) && columnCount === 2) return;
-        this.isPortraitLayout = portrait;
+        primary.innerHTML = '';
+        secondary.innerHTML = '';
+        tertiary.innerHTML = '';
 
-        const primary_contents = document.getElementById('content-primary');
-        const secondary_contents = document.getElementById('content-secondary');
-        const tertiary_contents = document.getElementById('content-tertiary');
-        
-        const content_primary_items = Array.from(primary_contents.children);
-        const content_secondary_items = Array.from(secondary_contents.children);
-        const content_tertiary_items = Array.from(tertiary_contents.children);
-        
-        let new_primary_contents = null;
-        let new_secondary_contents = null;
-        let new_tertiary_contents = null;
+        const base = this.baseLayout;
+
+        if (columnCount === 3) {
+            base.primary.forEach(n => primary.appendChild(n));
+            base.secondary.forEach(n => secondary.appendChild(n));
+            base.tertiary.forEach(n => tertiary.appendChild(n));
+
+            taskbar.taskBarElement.dataset.column = columnCount;
+        }
+
+        if (columnCount === 2) {
+            tertiary.style.display = 'grid';
+
+            primary.append(base.secondary[0], base.primary[2]);
+            secondary.append(base.primary[0], base.primary[1]);
+            tertiary.append(base.secondary[1], base.secondary[2]);
+
+            this.isPortraitLayout = true;
+            taskbar.taskBarElement.dataset.column = columnCount;
+        }
 
         if (columnCount === 1) {
-            new_primary_contents = [content_primary_items[1], content_primary_items[0]];
-            new_secondary_contents = [content_secondary_items[0], content_secondary_items[1]];
-            new_tertiary_contents = [content_tertiary_items[0], content_tertiary_items[1]];
-            this.isTinyLayout = false;
-        } 
-        
-        if (columnCount === 3) {
-            tertiary_contents.style.display = 'grid';
+            const all = [
+                base.primary[2],
+                base.secondary[0],                
+                base.primary[0],
+                base.primary[1],
+                base.secondary[1],
+                base.secondary[2]
+            ];
+            all.forEach(n => primary.appendChild(n));
 
-            new_primary_contents = [content_secondary_items[0], content_primary_items[2]];
-            new_secondary_contents = [content_primary_items[0], content_primary_items[1]];
-            new_tertiary_contents = [content_secondary_items[1], content_secondary_items[2]];
+            secondary.style.display = 'none';
+            tertiary.style.display = 'none';
+
+            taskbar.taskBarElement.dataset.column = columnCount;
         }
-        
-        new_primary_contents.forEach(item => primary_contents.appendChild(item));
-        new_secondary_contents.forEach(item => secondary_contents.appendChild(item));
-        new_tertiary_contents.forEach(item => tertiary_contents.appendChild(item));
-
-        taskbar.taskBarElement.dataset.column = 2;
-    }
-
-    applyLandscapeLayout() {
-        if (this.isPortraitLayout) {
-            const primary_contents = document.getElementById('content-primary');
-            const secondary_contents = document.getElementById('content-secondary');
-            const tertiary_contents = document.getElementById('content-tertiary');
-            
-            const content_primary_items = Array.from(primary_contents.children);
-            const content_secondary_items = Array.from(secondary_contents.children);
-            const content_tertiary_items = Array.from(tertiary_contents.children);            
-
-            const new_primary_contents = [content_secondary_items[0], content_secondary_items[1], content_primary_items[1]];
-            const new_secondary_contents = [content_primary_items[0], content_tertiary_items[0], content_tertiary_items[1]];
-                       
-            new_primary_contents.forEach(item => primary_contents.appendChild(item));
-            new_secondary_contents.forEach(item => secondary_contents.appendChild(item));
-
-            tertiary_contents.style.display = 'none';
-        }
-
-        this.isPortraitLayout = false;
-        taskbar.taskBarElement.dataset.column = 3;
-
     }
 
     showTaskBar() {
@@ -382,7 +341,7 @@ export class Shell {
 
                         title.textContent = SiteLibrary.truncateText(
                             title.dataset.original, 
-                            (length * (this.isPortraitLayout ? weights[section] : 1))
+                            (length * (this.isPortraitLayout ? weights[section][0] : 1))
                         );
                     });
                 });
@@ -399,7 +358,7 @@ export class Shell {
 
                         summary.textContent = SiteLibrary.truncateText(
                             summary.dataset.original, 
-                            (length * (this.isPortraitLayout ? weights[section] : 1))
+                            (length * (this.isPortraitLayout ? weights[section][1] : 1))
                         );
                     });
                 });  
