@@ -12,6 +12,9 @@
   background-color: rgba(0, 0, 0, 0.8);
   background: var(--base_box_background_color);
 
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+
   border: 0px solid #444444; 
 }
  
@@ -19,6 +22,10 @@
   background-color: transparent;
   border-radius: 0;
   border: 0;
+}
+
+.task-group-items .task-bar-item .medium-icon {
+  display: none;
 }
 
 .task-group-items .task-bar-item:hover {

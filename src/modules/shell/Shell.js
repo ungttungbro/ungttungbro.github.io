@@ -59,13 +59,7 @@ export class Shell {
             this.applyLayout(2);
         } else {
             this.applyLayout(3);
-        }
-
-        ProcessRegistry.get('updateSection', 'function')?.(
-            siteMeta.getSectionTitleCharLengths(),
-            siteMeta.getSectionSummaryCharLengths(), 
-            siteMeta.getSectionWeights()
-        );        
+        }    
     }
 
     initLayoutMemory() {
@@ -79,7 +73,7 @@ export class Shell {
     }
 
     applyLayout(columnCount) {
-        if (Number(taskbar.taskBarElement.dataset.column) === columnCount) return;
+        if (Number(taskbar.taskBarElement.dataset.column) === columnCount) return;  
 
         const primary = document.getElementById('content-primary');
         const secondary = document.getElementById('content-secondary');
@@ -100,8 +94,6 @@ export class Shell {
         }
 
         if (columnCount === 2) {
-            tertiary.style.display = 'grid';
-
             primary.append(base.secondary[0], base.primary[2]);
             secondary.append(base.primary[0], base.primary[1]);
             tertiary.append(base.secondary[1], base.secondary[2]);
@@ -121,11 +113,14 @@ export class Shell {
             ];
             all.forEach(n => primary.appendChild(n));
 
-            secondary.style.display = 'none';
-            tertiary.style.display = 'none';
-
             taskbar.taskBarElement.dataset.column = columnCount;
         }
+
+        ProcessRegistry.get('updateSection', 'function')?.(
+            siteMeta.getSectionTitleCharLengths(),
+            siteMeta.getSectionSummaryCharLengths(), 
+            siteMeta.getSectionWeights()
+        );  
     }
 
     showTaskBar() {

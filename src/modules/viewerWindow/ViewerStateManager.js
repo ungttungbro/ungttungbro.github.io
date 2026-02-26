@@ -84,8 +84,6 @@ export class ViewerStateManager {
     static bringToFront(element) {
         let isOverlap = false;
 
-        console.log(element);
-
         for (const [key, value] of this.state) {
             if (!value.get('clientRect') || key === element.id) continue;
 

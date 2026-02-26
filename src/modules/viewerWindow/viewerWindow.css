@@ -54,6 +54,7 @@
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   scroll-behavior: auto;
+  scroll-padding-bottom: 0;
 }
 
 .header_panel {

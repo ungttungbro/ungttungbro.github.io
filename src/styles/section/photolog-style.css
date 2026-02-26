@@ -22,7 +22,8 @@
 }
 
 .teaser-list {
-    margin-top: 0.75rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .teaser-figure {
@@ -97,6 +98,7 @@
 
     scroll-snap-align: end;
     scroll-snap-stop: always;
+    scroll-margin-bottom: 0;
     /*scroll-margin-bottom: 6vh;*/
 }
 

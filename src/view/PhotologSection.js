@@ -91,10 +91,10 @@ export class PhotologSection {
             const viewer = new ViewerWindow();
             viewer.configureWindow(
                 contents_id,
-                width + 'px',
-                height + 'px',
-                top + 'px',
-                left + 'px',
+                22 + 'rem',
+                38 + 'rem',
+                SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('38')) / 2)) + 'rem',
+                SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('22')) / 2)) + 'rem',
                 'viewer',
                 'photolog',
                 section_icon,
@@ -230,6 +230,11 @@ export class PhotologSection {
 
             viewer.targetId = COMMON.TASKBAR_PREFIX + id;
             viewer.show();
+
+            const maximizeButton = viewer.windowElement.querySelector('#viewer-maximize-button');
+            if (maximizeButton) {
+                maximizeButton.style.display = 'none';
+            }
 
             if (taskbar.taskBarElement.dataset.column < 3) {
                 SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
