@@ -87,6 +87,12 @@ footer {
   gap: 1.25rem;
 }
 
+#content-tertiary {
+  display: none;
+  grid-template-columns: 1fr 1fr 20rem;
+  gap: 1.25rem;
+}
+
 .section-block {  
   break-inside: avoid;
   page-break-inside: avoid;

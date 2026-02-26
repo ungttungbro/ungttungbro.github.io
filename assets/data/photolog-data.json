@@ -3,6 +3,7 @@
     "title" : "photolog",
 
     "contents" : {
+        "20241127_photolog" : { "남산골 한옥마을" : "<p>직업상담사 자격증 관련하여 현장실습을 충무로로 가게 되었다.<br>충무로에는 남산골 한옥마을이 있는데, 불것도 많고 산책하기 좋은 곳이다.<br>한옥마을을 산책하면서 사색에 잠겼던 하루였다.</p><br><p>2024년 11월 27일 충무로 [ Samsung XCover5로 촬영 ]</p>" },
         "20150315_photolog" : { "혜화동" : "<p>랩실 식구들, 후배들이 서울에 놀러 왔다.<br>혜화동은 종종 놀러 가던 곳이어서 놀기가 좋았다.<br>즐거운 하루였다.<br>나는 행복했었던 이시절이 가끔 그립다.</p><br><p>2015년 3월 15일 혜화동 [ Canon EOS 550D로 촬영 ]</p>" },
         "20140810_photolog" : { "경마장에 갔다" : "<p>아끼는 후배들과, 조교선생님이 서울에 놀러 왔다.<br>경마장도가고 연극도보고 즐거운 하루를 보냈다.<br>거기다가 오늘은 내 생일 이어서 생일파티도 덤으로...ㅎㅎㅎ<br>힘들었던 2014년 이었는데 힘이난다.</p> <br>2014년 8월 10일 경마장에서[ Canon EOS 550D로 촬영 ]" },
         "20070421_photolog" : { "야유회" : "<p>다니던 회사에서 야유회를 갔다.<br>하루 종일 술을 마셔 머리도 아프고, 하루 종일 먹어서 배도 몹시 부른 하루 였다.<br>사람들은 고삐풀린 망아지 처럼 놀았고, 먹었고, 마셨다.<br>오늘 하루 웃음이 떠나질 않는다.</p> <br>2007년 4월 21일 야유회장에서[ Canon EOS 300D로 촬영 ]" },
@@ -12,6 +13,7 @@
     },
 
     "thumbnails" : {
+        "20241127_photolog" :  "/assets/images/photolog/thumbnails/20241127_photolog.jpg",
         "20150315_photolog" :  "/assets/images/photolog/thumbnails/20150315_photolog.jpg",
         "20140810_photolog" :  "/assets/images/photolog/thumbnails/20140810_photolog.jpg", 
         "20070421_photolog" :  "/assets/images/photolog/thumbnails/20070421_photolog.jpg", 
@@ -21,14 +23,22 @@
     },
 
     "photos" : {
+        "20241127_photolog" : [
+            "/assets/images/photolog/20241127_photolog/20241127_photo01.jpg",
+            "/assets/images/photolog/20241127_photolog/20241127_photo02.jpg",
+            "/assets/images/photolog/20241127_photolog/20241127_photo03.jpg",
+            "/assets/images/photolog/20241127_photolog/20241127_photo04.jpg",
+            "/assets/images/photolog/20241127_photolog/20241127_photo05.jpg",
+            "/assets/images/photolog/20241127_photolog/20241127_photo06.jpg"
+        ],
+
         "20150315_photolog" : [
             "/assets/images/photolog/20150315_photolog/20150315_photo01.jpg",
             "/assets/images/photolog/20150315_photolog/20150315_photo02.jpg",
             "/assets/images/photolog/20150315_photolog/20150315_photo03.jpg",
             "/assets/images/photolog/20150315_photolog/20150315_photo04.jpg",
             "/assets/images/photolog/20150315_photolog/20150315_photo05.jpg"
-        ]
-        ,
+        ],
 
         "20140810_photolog" : [
             "/assets/images/photolog/20140810_photolog/20140810_photo01.jpg",

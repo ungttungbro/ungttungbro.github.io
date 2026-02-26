@@ -21,7 +21,7 @@ export const siteMeta = Object.freeze({
         blogSectionHeaderIcon: './assets/icons/blog.png',
         blogSectionHeaderIconAlt: 'blog Section Header Icon',
         writingsTitleCharLength: 35,
-        writingsSummaryCharLength: 112,
+        writingsSummaryCharLength: 110,
         writingsSubjectListRowCount: 4,
 
         lifelogBlogTypeName: 'lifelog',

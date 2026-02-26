@@ -18,6 +18,9 @@
     },
     
     "lifelog": {
+        "2024.12.16." : ["경기 가평군", "photo", "크리스마스 장식", "", "/assets/data/lifelog/20241216A/20241216A.html", "32rem"],
+        "2024.09.01." : ["경기 가평군", "photo", "커피나무 새싹", "", "/assets/data/lifelog/20240901A/20240901A.html", "22rem"],
+        "2024.03.04." : ["경기 가평군", "photo", "기타반 수업", "", "/assets/data/lifelog/20240304A/20240304A.html", "32rem"],
         "2022.02.12." : ["서울 성수동", "photo", "쇼팽 클래식 음악회", "", "/assets/data/lifelog/20220212A/20220212A.html", "32rem"],
         "2019.10.18." : ["서울 장승배기 교육장", "video", "제자가 만든 게임", "", "/assets/data/lifelog/20191018A/20191018A.html", "36rem"],
         "2019.08.05." : ["서울 약수동", "photo", "아버지 대장암 수술 ㅠㅠ", "", "/assets/data/lifelog/20190805A/20190805A.html", "32rem"],

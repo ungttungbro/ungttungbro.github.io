@@ -157,10 +157,10 @@ export class BlogSection {
             const meta_span = document.createElement('span');
             meta_span.className = 'meta';
             meta_span.innerHTML = Templates.symbol(value.type) + '&nbsp;' + value.type + ' · ' + key + region;
-
+            meta_span.innerHTML += '<br>';
             frag.appendChild(meta_span);
 
-            const title = document.createElement('div');
+            const title = document.createElement('span');
             title.className = 'title';
             title.textContent = SiteLibrary.truncateText(value.title, titleCharLength);
 
@@ -171,6 +171,7 @@ export class BlogSection {
             const a =  document.createElement('a');
             a.href = '#';
             a.appendChild(title);
+            a.appendChild(document.createElement('br'));
             a.appendChild(summary);
                         
             this.generatePostEvent(
