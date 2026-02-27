@@ -254,7 +254,7 @@ export const siteMeta = Object.freeze({
 
     getSectionWeights() {
         return {
-            writings: [[1, 1], [0.9, 0.58], [0.8, 0.5]],
+            writings: [[1, 1], [0.9, 0.58], [0.8, 0.48]],
             lifelog: [[1, 1], [0.66, 0.66], [0.8, 0.5]],
             archive: [[1, 1], [0.66, 0.66], [0.8, 0.5]],
             reflection: [[1, 1], [0.9, 0.9], [0.8, 0.75]]
