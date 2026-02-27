@@ -1,5 +1,3 @@
-@import "../common/base.css";
-
 .meta    { font-size: 0.9rem; color: var(--base_font_meta_color); }
 .title   { font-size: 1rem; color: var(--base_font_color); }
 .summary { font-size: 0.95rem; color: var(--base_font_color_b); }
@@ -68,18 +66,18 @@
 }
 
 #blog-writings .summary {
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
-#blog-archive { margin-top: 1rem; }
+#blog-archive { margin-top: 0.75rem; }
 
 #blog-lifelog .latest-post, 
 #blog-archive .latest-post {
-  line-height: 1.45;
+  line-height: 1.475;
 }
 
 #blog-reflection .latest-post {
-  line-height: 1.5;
+  line-height: 1.52;
 }
 
 #reflection-content {

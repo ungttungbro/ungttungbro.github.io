@@ -133,7 +133,7 @@ footer {
   color: var(--base_section_header_box_font_color);
   
   margin: auto;
-  margin-bottom: var(--base_margin_size_medium);
+  margin-bottom: var(--base_margin_size_tiny);
   padding: var(--base_margin_size_medium);
 
   justify-content: space-between;
@@ -212,11 +212,16 @@ footer {
   }
 
   #blog-reflection a {
-    line-height: 1.65;
+    line-height: 1.6;
+  }
+
+  #blog-reflection hr {
+    margin-top: 0.45rem;
+    margin-bottom: 0.3rem;
   }
 
   #blog-writings .summary {
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   #viewer-maximize-button {
@@ -231,7 +236,7 @@ footer {
 /* 세로 모드 1단 (portrait) */
 @media (orientation: portrait) and (max-width: 541px) {
   html {
-    font-size: 3.5vw;
+    font-size: 4vw;
   }
 
   #content-primary {

@@ -168,6 +168,8 @@ export class Shell {
                 screen_shade.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
+
+            document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
         return logo_element;
@@ -324,9 +326,16 @@ export class Shell {
         const snapshot = {
             ['process-name']: 'update-section',
             ['function']: (section_title_char_lengths, section_summary_char_lengths, weights) => {
+                const columnCount = Number(taskbar.taskBarElement.dataset.column);
+                let revisedWeight = 1;
+
                 Object.entries(section_title_char_lengths).forEach(([section, length]) => {
-                    const element = document.getElementById('blog-' + section);                    
+                    const element = document.getElementById('blog-' + section);
                     if (!element) return;
+
+                    if (columnCount === 3) { revisedWeight = weights[section][0]; }
+                    if (columnCount === 2) {  revisedWeight = weights[section][1]; }
+                    if (columnCount === 1) {  revisedWeight = weights[section][2]; }
 
                     const titles = element.querySelectorAll('.title');               
                     titles.forEach(title => {
@@ -336,7 +345,7 @@ export class Shell {
 
                         title.textContent = SiteLibrary.truncateText(
                             title.dataset.original, 
-                            (length * (this.isPortraitLayout ? weights[section][0] : 1))
+                            length * revisedWeight[0]
                         );
                     });
                 });
@@ -344,6 +353,10 @@ export class Shell {
                 Object.entries(section_summary_char_lengths).forEach(([section, length]) => {                    
                     const element = document.getElementById('blog-' + section);                    
                     if (!element) return;
+
+                    if (columnCount === 3) { revisedWeight = weights[section][0]; }
+                    if (columnCount === 2) { revisedWeight = weights[section][1]; }
+                    if (columnCount === 1) {  revisedWeight = weights[section][2]; }
                     
                     const summaries = element.querySelectorAll('.summary');               
                     summaries.forEach(summary => {
@@ -353,7 +366,7 @@ export class Shell {
 
                         summary.textContent = SiteLibrary.truncateText(
                             summary.dataset.original, 
-                            (length * (this.isPortraitLayout ? weights[section][1] : 1))
+                            length * revisedWeight[1]
                         );
                     });
                 });  

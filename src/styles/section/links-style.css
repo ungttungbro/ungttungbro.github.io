@@ -1,5 +1,3 @@
-@import "../common/base.css";
-
 #links .title_box {
   cursor: default;
 }
@@ -24,7 +22,7 @@
   border-radius: var(--base_border_radius_medium);
   
   padding: var(--base_margin_size_medium);
-  margin-top: 0.75rem;
+  margin-top: 0.6rem;
 }
 
 .links_item_list figure {

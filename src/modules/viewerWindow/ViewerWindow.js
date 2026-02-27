@@ -70,11 +70,6 @@ export class ViewerWindow {
         
         element.addEventListener('pointerenter', () => {
             ViewerWindowProcessRegistry.get('enforceSingle', 'function')?.(element.querySelector('.title_bar'));
-            document.body.style.overflow = 'hidden';
-        });
-        
-        element.addEventListener('pointerleave', (e) => {
-            document.body.style.overflow = '';
         });
 
         return element;
@@ -193,8 +188,6 @@ export class ViewerWindow {
                 this.targetId,
                 this.viewerId
             );
-
-            document.body.style.overflow = '';
         });
     }
 

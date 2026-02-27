@@ -1,5 +1,3 @@
-@import "../common/base.css";
-
 :root {  
   --myphoto_width_size: 20rem;
   --myphoto_height_size: 15rem;
@@ -36,8 +34,11 @@
   background: var(--base_box_background_color);
   border-radius: var(--base_border_radius_medium);
 
-  margin-top: var(--base_margin_size_medium);
-  padding: 0.5rem
+  margin-top: var(--base_margin_size_large);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
 }
 
 #profile hr {

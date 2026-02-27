@@ -258,7 +258,7 @@ export class BlogSection {
                 'viewer',
                 'blog',
                 section_icon,
-                title,
+                SiteLibrary.truncateText(title, 28),
                 header,
                 Templates.createContentPanel(
                     'blog-content-panel', 
