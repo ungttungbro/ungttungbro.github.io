@@ -47,6 +47,8 @@ export class Shell {
                 this.updateLayout();
             }, 150);
         });
+
+        history.replaceState({ modal: null }, '', '');
     }
 
     updateLayout() {

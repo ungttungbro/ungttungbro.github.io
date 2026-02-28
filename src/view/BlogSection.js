@@ -8,6 +8,7 @@ import { shell } from "../modules/shell/Shell.js";
 import { Templates } from "../modules/site/Templates.js";
 import { taskbar } from "../modules/taskbar/TaskBar.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
+import { ViewerWindowProcessRegistry } from "../modules/viewerWindow/ViewerWindowProcessRegistry.js";
 
 export class BlogSection {
     constructor(blog_service) {
@@ -258,7 +259,7 @@ export class BlogSection {
                 'viewer',
                 'blog',
                 section_icon,
-                SiteLibrary.truncateText(title, 26),
+                SiteLibrary.truncateText(title, 24),
                 header,
                 Templates.createContentPanel(
                     'blog-content-panel', 
@@ -272,8 +273,22 @@ export class BlogSection {
             
             if (taskbar.taskBarElement.dataset.column < 3) {
                 SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
+
                 if (viewer.isMaximized) viewer.isMaximized = false;
                 else viewer.isMaximized = true;
+
+                history.pushState({ modal: viewer.id }, '', '');
+
+                window.addEventListener('popstate', (e) => {
+                    if (!e.state) return;
+                    if (!e.state?.modal) {
+                        ViewerWindowProcessRegistry.get('unmount', 'function')?.(
+                            viewer.windowElement.dataset.group,
+                            viewer.targetId,
+                            viewer.id
+                        );
+                    }
+                });
             }
 
             shell.mountTaskItem(blog_type, viewer.targetId, viewer.id, section_icon, title);

@@ -231,6 +231,10 @@ footer {
   #viewer-minimize-button {
     display: none;
   }
+
+  #screen-shade-button {
+    visibility: hidden;
+  }
 }
 
 /* 세로 모드 1단 (portrait) */
@@ -293,6 +297,10 @@ footer {
 
   #viewer-minimize-button {
     display: none;
+  }
+
+  #screen-shade-button {
+    visibility: hidden;
   }
 }
 

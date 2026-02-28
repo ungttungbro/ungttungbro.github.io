@@ -188,6 +188,8 @@ export class ViewerWindow {
                 this.targetId,
                 this.viewerId
             );
+
+            if (e.state) { history.back(); }
         });
     }
 
