@@ -166,6 +166,10 @@ footer {
     font-size: 2vw;
   }
 
+  .blog-post-photo-container {
+    width: 50%;
+  }
+
   #content-primary {
     display: grid;
     grid-template-columns: 1fr 20rem;
@@ -241,6 +245,10 @@ footer {
 @media (orientation: portrait) and (max-width: 541px) {
   html {
     font-size: 4vw;
+  }
+
+  .blog-post-photo-container {
+    width: 100%;
   }
 
   #content-primary {

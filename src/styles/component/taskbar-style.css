@@ -7,15 +7,15 @@
 .task-group-items {
   min-width: 100%;
   position: absolute;
+
   border-radius: 0.5rem;
   
   background-color: rgba(0, 0, 0, 0.8);
   background: var(--base_box_background_color);
 
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  margin-top: 0.35rem;
 
-  border: 0px solid #444444; 
+  box-shadow: var(--base_task_items_shadow);
 }
  
 .task-group-items .task-bar-item {

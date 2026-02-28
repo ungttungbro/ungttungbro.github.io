@@ -63,7 +63,7 @@
   --base_section_header_box_background_color_b: linear-gradient(45deg, #cacaca, #cccccc);
   --base_section_header_box_font_color: #333333;
 
-  --base_anchor_tag_hover_color: #306100;
+  --base_anchor_tag_hover_color: #0464a4;
   --base_anchor_tag_hover_color_b: rgba(0, 0, 0, 0.95);
   --base_anchor_tag_hover_text_decoration: none;
 
@@ -82,6 +82,10 @@
   --base_viewer_shadow : 
     0 0 0 0.075rem rgba(255,255,255,0.04),
     0 0.3rem 0.6rem rgba(0,0,0,0.45);
+
+  --base_task_items_shadow : 
+    0 0 0 0.025rem rgba(255,255,255,0.025),
+    0 0.1rem 0.3rem rgba(0,0,0,0.25);
 }
 
 
@@ -148,6 +152,10 @@
   --base_footer_background_color : #1a1a1a;
 
   --base_task_item_close_background_color_b : #777777;
+
+  --base_task_items_shadow : 
+    0 0 0 0.025rem rgba(255,255,255,0.025),
+    0 0.1rem 0.3rem rgba(0,0,0,0.25);
 }
 
 
