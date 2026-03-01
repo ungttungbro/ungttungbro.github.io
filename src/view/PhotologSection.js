@@ -7,6 +7,7 @@ import { Templates } from "../modules/site/Templates.js";
 import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js"
 import { siteMeta } from "../modules/site/siteMeta.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
+import { ViewerWindowProcessRegistry } from "../modules/viewerWindow/ViewerWindowProcessRegistry.js";
 
 export class PhotologSection {
     constructor(photolog_service) {
@@ -111,6 +112,18 @@ export class PhotologSection {
                 SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
                 if (viewer.isMaximized) viewer.isMaximized = false;
                 else viewer.isMaximized = true;
+
+                history.pushState({ list: viewer.id }, '', '');
+                window.addEventListener('popstate', (e) => {
+                    if (!e.state) return;
+                    if (!e.state?.list) {
+                        ViewerWindowProcessRegistry.get('unmount', 'function')?.(
+                            viewer.windowElement.dataset.group,
+                            viewer.targetId,
+                            viewer.id
+                        );
+                    }
+                });
             }
             
             taskbar.mount('photolog', viewer.targetId, viewer.id, section_icon, title);
@@ -240,6 +253,18 @@ export class PhotologSection {
                 SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
                 if (viewer.isMaximized) viewer.isMaximized = false;
                 else viewer.isMaximized = true;
+
+                history.pushState({ modal: viewer.id }, '', '');
+                window.addEventListener('popstate', (e) => {
+                    if (!e.state) return;
+                    if (!e.state?.modal) {
+                        ViewerWindowProcessRegistry.get('unmount', 'function')?.(
+                            viewer.windowElement.dataset.group,
+                            viewer.targetId,
+                            viewer.id
+                        );
+                    }
+                });                
             }
 
             taskbar.mount('photolog', viewer.targetId, viewer.id, siteMeta.photolog.sectionHeaderIcon, title);            

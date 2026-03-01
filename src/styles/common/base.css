@@ -184,6 +184,7 @@ body {
 
 hr {
   border: var(--base_hr_border);
+  
   margin-top: 0.3rem;
   margin-bottom: 0.1rem;
 }

@@ -73,6 +73,11 @@
   height:auto;
 }
 
+#blog-writings hr {
+  margin-top: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
 #blog-writings .title {
   line-height: 2;
 }
@@ -85,11 +90,11 @@
 
 #blog-lifelog .latest-post, 
 #blog-archive .latest-post {
-  line-height: 1.475;
+  line-height: 1.5;
 }
 
 #blog-reflection .latest-post {
-  line-height: 1.52;
+  line-height: 1.6;
 }
 
 #reflection-content {

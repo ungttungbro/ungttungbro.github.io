@@ -75,7 +75,7 @@ export class AboutSection {
     const data = this.aboutService.aboutData.specs;
     for (const [key, value] of data) {
       const img = SiteLibrary.createImgElement('small-icon', '',  value[1], '');
-      const figure = SiteLibrary.createImgCaption(img, null, key + ' : ' + value[0]);
+      const figure = SiteLibrary.createImgCaption(img, null, value[0]);
       specs_element.appendChild(figure);
     }
 
@@ -92,9 +92,6 @@ export class AboutSection {
       link.href = value[1];
       link.target = '_blank';
 
-      const img = SiteLibrary.createImgElement('small-icon', '',  value[2], '');
-      img.style.marginRight = '0.4rem';
-
       const text_line = document.createElement('p');
 
       const title = document.createElement('span');
@@ -108,7 +105,6 @@ export class AboutSection {
       text_line.appendChild(title);
       text_line.appendChild(link);
       
-      contacts_element.appendChild(img);
       contacts_element.appendChild(text_line);
     }
 

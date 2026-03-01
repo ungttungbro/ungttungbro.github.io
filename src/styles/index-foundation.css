@@ -312,7 +312,7 @@ footer {
   }
 }
 
-@media (orientation: landscape) and (max-width: 541px) {
+@media (orientation: landscape) and (max-width: 768px) {
   html {
     font-size: 2vw;  }
 }

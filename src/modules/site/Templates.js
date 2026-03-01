@@ -62,11 +62,11 @@ export class Templates {
 
     static symbol(type) {
         switch (type) {
-            case 'photo' : return '&#128247;';
-            case 'video' : return '&#128252;';
-            case 'audio' : return '<span style="font-size: 0.75rem;">&#127908;</span>';
-            case 'text' : return '&#9000;';
-            default: return '<span style="font-size: 1.1rem;">&#10022;</span>';
+            case 'photo' : return '&#128247;&nbsp;';
+            case 'video' : return '&#128252;&nbsp;';
+            case 'audio' : return '<span style="font-size: 0.7rem;">&#127908&nbsp;</span>';
+            case 'text' : return '&#9000;&nbsp;';
+            default: return type + ' · ';
         }
     }
 }

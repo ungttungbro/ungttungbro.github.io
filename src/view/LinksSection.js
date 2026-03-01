@@ -47,14 +47,12 @@ export class LinksSection {
 
         const oldMyWeb = this.generateLinksItem(
             this.linksService.linksData.oldMyWeb,
-            'Old My Web', 
-            './assets/icons/computer.png'
+            'Old My Web'
         );
 
         const thanks_to = this.generateLinksItem(
             this.linksService.linksData.thanksTo,
-            'Thanks to...',
-            './assets/icons/thankyou.png'
+            'Thanks to...'
         );
         
         links_list.appendChild(oldMyWeb);        
@@ -63,23 +61,17 @@ export class LinksSection {
         return links_list;
     }
 
-    generateLinksItem(links_view_data, links_name, icon_path) {
+    generateLinksItem(links_view_data, links_name) {
         const frag = document.createDocumentFragment();
 
         const element = document.createElement(ELEMENT_TYPE.DIV);
         element.className = siteMeta.links.linkItemListClassName;
 
-        const title_icon = SiteLibrary.createImgElement(
-            'medium-icon',
-            null,
-            icon_path,
-            'research links title icon'
-        );
-        
-        const figure = SiteLibrary.createImgCaption(title_icon, null, links_name);
-        figure.style.fontWeight = '500';
-        frag.appendChild(figure);
+        const caption = document.createElement(ELEMENT_TYPE.DIV);
+        caption.textContent = links_name;
+        frag.appendChild(caption);
 
+        frag.appendChild(document.createElement('hr'));
         const data = links_view_data;
 
         const ul = document.createElement('ul');

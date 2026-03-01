@@ -25,7 +25,7 @@
 }
 
 .teaser-figure {
-    max-height: calc(1.42rem * 3); /* 3줄 */
+    max-height: calc(1.525rem * 3); /* 3줄 */
     overflow: hidden;
 
     word-break: break-all;
@@ -52,7 +52,7 @@
     color: var(--base_font_color_b);
     font-weight: var(--base_font_weight);
     
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* 마지막 요소만 border 제거 */

@@ -49,6 +49,7 @@ export class Shell {
         });
 
         history.replaceState({ modal: null }, '', '');
+        history.replaceState({ list: null }, '', '');
     }
 
     updateLayout() {

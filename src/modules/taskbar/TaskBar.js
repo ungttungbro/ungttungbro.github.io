@@ -77,6 +77,7 @@ export class TaskBar {
 
     unmount(task_bar_item_id, target_id) {
         const task_element = document.getElementById(task_bar_item_id);
+        if (!task_element) return;
 
         TaskStateManager.removeTask(task_element.dataset.group, task_element.id);
 

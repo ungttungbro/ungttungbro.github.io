@@ -114,6 +114,18 @@ export class BlogSection {
                 SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
                 if (viewer.isMaximized) viewer.isMaximized = false;
                 else viewer.isMaximized = true;
+
+                history.pushState({ list: viewer.id }, '', '');
+                window.addEventListener('popstate', (e) => {
+                    if (!e.state) return;
+                    if (!e.state?.list) {
+                        ViewerWindowProcessRegistry.get('unmount', 'function')?.(
+                            viewer.windowElement.dataset.group,
+                            viewer.targetId,
+                            viewer.id
+                        );
+                    }
+                });
             }
             
             shell.mountTaskItem(blog_type, viewer.targetId, viewer.id, section_icon, title);
@@ -157,7 +169,7 @@ export class BlogSection {
 
             const meta_span = document.createElement('span');
             meta_span.className = 'meta';
-            meta_span.innerHTML = Templates.symbol(value.type) + '&nbsp;' + value.type + ' · ' + key + region;
+            meta_span.innerHTML = Templates.symbol(value.type) /*+ value.type + ' · '*/ + key + region;
             meta_span.innerHTML += '<br>';
             frag.appendChild(meta_span);
 
@@ -278,7 +290,6 @@ export class BlogSection {
                 else viewer.isMaximized = true;
 
                 history.pushState({ modal: viewer.id }, '', '');
-
                 window.addEventListener('popstate', (e) => {
                     if (!e.state) return;
                     if (!e.state?.modal) {

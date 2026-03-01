@@ -41,10 +41,6 @@
   padding-bottom: 0.25rem;
 }
 
-#profile hr {
-  border: var(--base_dash_border);
-}
-
 #thumbnails {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
