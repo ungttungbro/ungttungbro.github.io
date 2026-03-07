@@ -90,7 +90,7 @@
 
     margin: 0;
 
-    scroll-snap-align: end;
+    scroll-snap-align: start;
     scroll-snap-stop: always;
     scroll-margin-bottom: 0;
     /*scroll-margin-bottom: 6vh;*/
