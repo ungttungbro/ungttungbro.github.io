@@ -24,15 +24,15 @@ body {
     color:#eeeeee;
 }
 
-/*#header-layout::before,*/
-/*#links-header-layout::before,*/
-/*#gallery-header-layout::before {
+#header-layout::before,
+#links-header-layout::before,
+#gallery-header-layout::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.25);
     z-index: 0;
-}*/
+}
 
 #navigation {
     display: flex; 
@@ -51,7 +51,8 @@ body {
 
     border-bottom: 1px solid #333333;
 
-    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.75);
 }
 
 #navigation-items {
@@ -152,6 +153,7 @@ body {
 
 #experience,
 #works,
+#resume,
 #gallery,
 #links {
     width: 100%;
@@ -271,14 +273,16 @@ body {
 }
 
 #works-items,
-#links-items {
+#links-items,
+#resume-items {
     padding-top: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
 }
 
 .works-item-title,
-.links-item-title {
+.links-item-title,
+.resume-item-title {
     font-size: 1.5rem;
     line-height: 1.25;
     font-weight: 500;

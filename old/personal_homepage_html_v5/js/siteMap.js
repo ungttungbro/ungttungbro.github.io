@@ -6,6 +6,7 @@ export const siteMap = Object.freeze({
         skills: 'Skills',
         gallery: 'Gallery',
         links: 'Links',
+        blog: 'Blog',
         contact: 'Contact'
     })
 });

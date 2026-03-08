@@ -116,11 +116,30 @@ const createPersonalProjects = function(data) {
                 + '<br>' + '- ' + data[i][3]
                 + '<br>' + '- ' + data[i][4]
                 + '<hr>'
-            + '</div>'
+            + '</div>';
     }
 
     return item;
 };
+
+const createResume = function(data) {
+    let item = '';
+
+    item += '<div class="resume-item-title">'
+                + '<a href="' + data[0][1] + '"' + 'target="_blank"' + '>'
+                    + data[0][0]
+                + '</a>'
+            + '</div>'
+            + '<hr>'
+            +'<div class="resume-item-title">'
+                + '<a href="' + data[1][1] + '"' + 'download="jonas-resume.pdf"' + '>'
+                    + data[1][0]
+                + '</a>'
+            + '</div>'
+            + '<hr>';
+
+    return item;
+}
 
 export { createExperience };
 export { createAcademicResearch };
@@ -128,3 +147,4 @@ export { createTeachingActivity };
 export { createPublish };
 export { createProjects };
 export { createPersonalProjects };
+export { createResume };

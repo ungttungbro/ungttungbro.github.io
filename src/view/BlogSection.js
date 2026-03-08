@@ -1,6 +1,6 @@
 'use strict';
 
-import { ELEMENT_TYPE, COMMON, VIEWER } from "../modules/common/Constants.js";
+import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js";
 import { siteMeta } from "../modules/site/siteMeta.js";
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { ViewerWindow } from "../modules/viewerWindow/ViewerWindow.js";

@@ -5,6 +5,7 @@ import {
     worksPublishData, 
     worksProjectsData, 
     worksPersonalProjectsData,
+    resumeData,
     photoGalleryData,
     linksOldPageData,
     linksThanksToData
@@ -25,7 +26,8 @@ import {
     createTeachingActivity,
     createPublish,
     createProjects,
-    createPersonalProjects
+    createPersonalProjects,
+    createResume
 } from '../sections/aboutSectionTemplate.js';
 
 import {
@@ -55,8 +57,8 @@ const createNavigationItemsElement = function() {
         siteMap, 
         'index.html',
         'gallery.html',
-        'links.html', 
-        'youngwan.jang@gmail.com'
+        'https://blog.jonas.kr',
+        'links.html'
     ));
 
     return navigationEl;
@@ -142,6 +144,17 @@ const createWorksElement = function() {
 
     return worksEl;
 };
+
+const createResumeElement = function() {
+    const sectionHeaderHTML = createSectionHeader('Resume');
+    document.getElementById('resume').innerHTML += sectionHeaderHTML;
+
+    const resumeEl = document.createElement('div');
+    resumeEl.id = 'resume-items';
+    resumeEl.innerHTML += createResume(resumeData);
+
+    return resumeEl;
+}
 
 const galleryLayoutElement = function() {
     const sectionHeaderHTML = createSectionHeader('Gallery');
@@ -307,6 +320,7 @@ $(function () {
 export { headerLayoutElement };
 export { createExperienceElement };
 export { createWorksElement };
+export { createResumeElement };
 export { galleryLayoutElement };
 export { linksLayoutElement };
 export { createFooterElement };

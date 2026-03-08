@@ -58,6 +58,11 @@ const worksPersonalProjectsData = [
 ];
 
 
+const resumeData = [
+    ['Notion Resume', 'https://melodious-telescope-651.notion.site/IT-316c7e86e084804ca037da9c50ce4d46'],
+    ['PDF Download', './data/jonas-resume.pdf']
+];
+
 const photoGalleryData = [
     [ '2022. 12. 21.', '강남역','Q31', './images/gallery/photos/20221221_photo.jpg', '협의회 장면' ],
     [ '2022. 2. 12.', '성수동','Q31', './images/gallery/photos/20220212_photo.jpg', '음악회' ],
@@ -74,8 +79,7 @@ const photoGalleryData = [
 const linksOldPageData = [
     [ 'old homepage' ,'../old-site/works-site-xhtml' ],
     [ 'old old homepage' ,'../old-site/works-site-html401' ],
-    [ 'old old old homepage' ,'../old-site/works-site-html320' ],
-    [ 'old old old old homepage' ,'../old-site/works-site-html2' ]
+    [ 'old old old homepage' ,'../old-site/works-site-html320' ]
 ];
 
 
@@ -96,6 +100,7 @@ export { worksTeachingActivityData };
 export { worksPublishData };
 export { worksProjectsData };
 export { worksPersonalProjectsData };
+export { resumeData };
 export { photoGalleryData };
 export { linksOldPageData };
 export { linksThanksToData };

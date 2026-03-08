@@ -37,7 +37,7 @@
         letter-spacing: -0.02rem;
     }
 
-    #works-items {
+    #works-items, #resume-items {
         padding-top: 0.25rem;
         padding-left: 0;
         padding-right: 0;
@@ -152,6 +152,7 @@
     #experience,
     #works,
     #gallery,
+    #resume,
     #links {
         padding-left: 1rem;
         padding-right: 1rem;

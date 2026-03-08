@@ -1,6 +1,6 @@
 'use strict';
 
-const createNavigationItems = function(logoSrc, siteMap, aboutUrl, galleryUrl, linksUrl, contactEmail) {
+const createNavigationItems = function(logoSrc, siteMap, aboutUrl, galleryUrl, blogUrl, linksUrl) {
     const navigationItemEl = document.createElement('div');
     navigationItemEl.id = 'navigation-items';
 
@@ -14,8 +14,9 @@ const createNavigationItems = function(logoSrc, siteMap, aboutUrl, galleryUrl, l
     navRightEl.id = 'nav-right';
     navRightEl.innerHTML = '<a id="about-link" href="' + aboutUrl + '">' + siteMap.menus.about + '</a>'
                             + '<a id="gallery-link" href="' + galleryUrl + '">' + siteMap.menus.gallery + '</a>'
-                            + '<a id="links-link" href="' + linksUrl + '">' + siteMap.menus.links + '</a>'
-                            + '<a id="contact-link" href="mailto:' + contactEmail + '">' + siteMap.menus.contact + '</a>';
+                            + '<a id="blog-link" href="' + blogUrl + '"' + 'target="_blank">' + siteMap.menus.blog + '</a>'
+                            + '<a id="links-link" href="' + linksUrl + '">' + siteMap.menus.links + '</a>';
+                            
 
     navigationItemEl.appendChild(navLeftEl);
     navigationItemEl.appendChild(navRightEl);

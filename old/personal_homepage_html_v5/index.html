@@ -27,6 +27,7 @@
     <div id="about">
       <div id="experience"></div>
       <div id="works"></div>
+      <div id="resume"></div>
     </div>
   </main>
 
@@ -53,6 +54,7 @@
       headerLayoutElement, 
       createExperienceElement, 
       createWorksElement,
+      createResumeElement,
       createFooterElement
     } from './js/siteLayout.js';
 
@@ -69,6 +71,9 @@
 
     const $worksEl = $('#works');
     $worksEl.append(createWorksElement());
+
+    const $resumeEl = $('#resume');
+    $resumeEl.append(createResumeElement());
 
     const $footerEl = $('footer');
     $footerEl.append(createFooterElement());
