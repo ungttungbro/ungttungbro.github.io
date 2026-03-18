@@ -127,6 +127,7 @@ export class BlogSection {
 
         try {
             config.element.elementId = viewer_id;
+            config.element.offsetElementId = 'taskbar';
             config.element.className = 'viewer';
 
             config.layout.width = 22 + 'rem';
@@ -136,7 +137,7 @@ export class BlogSection {
 
             config.meta.contentType = blog_type;
             config.meta.titleIconPath = section_icon;
-            config.meta.titleText = SiteLibrary.truncateText(title, 16);
+            config.meta.titleText = SiteLibrary.truncateText(title, 18);
             
             this.mountContents(config, task_id, header, contents, footer);
         } catch(error) {
@@ -261,6 +262,7 @@ export class BlogSection {
 
         try {
             config.element.elementId = viewer_id;
+            config.element.offsetElementId = 'taskbar';
             config.element.className = 'viewer';
 
             config.layout.width = viewer_width;
