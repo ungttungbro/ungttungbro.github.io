@@ -4,36 +4,39 @@ import { BlogDAO } from '../dao/BlogDAO.js';
 import { SiteLibrary } from '../modules/common/SiteLibrary.js';
 
 export class BlogService {
-    constructor() {}
+    constructor() {
+        this.blogMetaData = null;
+        this.archiveMetaData = null;
+        this.lifelogMetaData = null;
+        this.reflectionMetaData = null;
+        this.photogMetaData = null;
+    }
 
     async initialize() {
         try {
             //dao를 호출하여 초기화함 (비동기 초기화)  
             this.dao = await BlogDAO.create();
 
-            //service name [blog]
-            //this.serviceName = this.dao.findTitle();
-            
-            //blogmetadata DTO 생성
-            this.blogMetaData = await this.metaData(this.buildPostListData());
-            
-            //archive meta data DTO
-            this.archiveMetaData = await this.metaData(this.buildArchiveListData());
-
-            //lifelog meta data DTO
-            this.lifelogMetaData = await this.metaData(this.buildLifelogListData());
-            
-             //reflection meta data DTO
-            this.reflectionMetaData = await this.metaData(this.buildReflectionListData());
-
-            //photolog meta data DTO
-            this.photogMetaData = await this.buildPhotologData();
+            [
+                this.blogMetaData,
+                this.archiveMetaData,
+                this.lifelogMetaData,
+                this.reflectionMetaData,
+                this.photogMetaData
+            ] = await Promise.all([
+                this.metaData(this.buildPostListData()),
+                this.metaData(this.buildArchiveListData()),
+                this.metaData(this.buildLifelogListData()),
+                this.metaData(this.buildReflectionListData()),
+                this.buildPhotologData()
+            ]);
         } catch (error) {
             console.log ('Blog Service : ', error);
         }
     }
 
-    async loadContentData(content_path) {        
+
+    loadContentData(content_path) {        
         return SiteLibrary.loadText(content_path);
     }
 
