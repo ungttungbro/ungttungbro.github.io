@@ -18,7 +18,7 @@ export class PhotologSection {
     }
 
     async initialize() {
-        const section_id = this.photologService.serviceName;
+        const section_id = 'photolog';
         this.photologSectionElement = document.getElementById(section_id);
     }
 
@@ -155,7 +155,7 @@ export class PhotologSection {
         const teasers_element = document.createElement(ELEMENT_TYPE.DIV);
         teasers_element.className = siteMeta.photolog.teaserListClassName;
 
-        const iterator = this.photologService.photologData.entries();
+        const iterator = this.photologService.photogMetaData.entries();
         let result = iterator.next();
 
         let index = 0;

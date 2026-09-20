@@ -1,9 +1,8 @@
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { Blog } from "../entities/Blog.js";
 
 export class BlogDAO {
     constructor() {
-        this._BLOG_DATA_PATH = "./assets/data/blog-data.json";        
+        this._BLOG_DATA_PATH = "./assets/data/";        
     }
 
     static async create() {
@@ -13,37 +12,57 @@ export class BlogDAO {
     }
 
     async initialize() {
-        // DB CONN JSON 반환
-        this.DB = await SiteLibrary.loadJson(this._BLOG_DATA_PATH);
-        this.entity = this.createEntity(this.DB);
-    }
-
-    createEntity(data) {        
-        const entity = new Blog(data);
-        return entity;
-    }
-
-    findAll() {
-        return this.entity;
-    }
-
-    findTitle() {
-        return this.entity.title;
+        [
+            this.writings,
+            this.archive,
+            this.lifelog,
+            this.reflection,
+            this.photolog
+        ] = await Promise.all([
+            SiteLibrary.loadJson(
+                `${this._BLOG_DATA_PATH}writings/writings-data.json`
+            ),
+            SiteLibrary.loadJson(
+                `${this._BLOG_DATA_PATH}archive/archive-data.json`
+            ),
+            SiteLibrary.loadJson(
+                `${this._BLOG_DATA_PATH}lifelog/lifelog-data.json`
+            ),
+            SiteLibrary.loadJson(
+                `${this._BLOG_DATA_PATH}reflection/reflection-data.json`
+            ),
+            SiteLibrary.loadJson(
+                `${this._BLOG_DATA_PATH}photolog/photolog-data.json`
+            )
+        ]);
     }
 
     findPostList() {
-        return this.entity.contents;
+        return this.writings.entries;
     }
 
     findArchive() {
-        return this.entity.archive;
+        return this.archive.entries;
     }
 
     findLifelog() {
-        return this.entity.lifelog;
+        return this.lifelog.entries;
     }
 
     findReflection() {
-        return this.entity.reflection;
+        return this.reflection.entries;
+    }
+
+    /*photolog 관련 메서드*/
+    findPhotolog() {
+        return this.photolog.entries;
+    }
+
+    findPhotologPhotos() {
+        return this.photolog.photos;
+    }
+
+    findPhotologThumbnails() {
+        return this.photolog.thumbnails;
     }
 }
