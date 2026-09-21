@@ -1,21 +1,18 @@
 'use strict';
 
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { AboutDAO } from '../dao/AboutDAO.js';
+import { MainDAO } from '../dao/MainDAO.js';
 
-export class AboutService {
+export class MainService {
     constructor() { }
 
     async initialize() {
         try {
             //dao를 호출하여 초기화함 (비동기 초기화)  
-            this.dao = await AboutDAO.create();
-
-            //service name [about]
-            this.serviceName = this.dao.findTitle();
-
-            //about data
+            this.dao = await MainDAO.create();
+            
             this.aboutData = this.buildAboutData();
+            this.linksData = this.buildLinksData();
         } catch (error) {
             console.log('About Service : ', error);
         }
@@ -32,7 +29,7 @@ export class AboutService {
     }
 
     buildPhotosData() {
-        const photo_records = this.dao.findPhotos(); 
+        const photo_records = this.dao.findAboutPhotos(); 
         const photo_path = SiteLibrary.generateRandomNumber(photo_records.length);
 
         const dtoMap = new Map();
@@ -44,7 +41,7 @@ export class AboutService {
     }
 
     buildSpecsData() {
-        const spec_records = this.dao.findSpecs();
+        const spec_records = this.dao.findAboutSpecs();
 
         const dtoMap = new Map();
         dtoMap.set('닉네임', spec_records['닉네임']);
@@ -55,13 +52,46 @@ export class AboutService {
     }
 
     buildContactsData() {
-        const contact_records = this.dao.findContacts();
+        const contact_records = this.dao.findAboutContacts();
 
         const dtoMap = new Map();
         dtoMap.set('이메일', contact_records['email']);
         dtoMap.set('홈페이지', contact_records['homepage']); 
         dtoMap.set('깃허브', contact_records['github']); 
           
+        return dtoMap;
+    }
+
+    buildLinksData() { 
+        const Links = {
+            oldMyWeb: this.buildOldMyWebData(),
+            thanksTo: this.buildThanksToData()
+        };
+
+        return Links;
+    }
+
+    buildOldMyWebData() {
+        const research_records = this.dao.findOldMyWeb();
+
+        const dtoMap = new Map();
+
+        for (const [key, value] of Object.entries(research_records)) {
+            dtoMap.set(key, value);
+        }
+
+        return dtoMap;
+    }
+
+    buildThanksToData() {
+        const research_records = this.dao.findThanksTo();
+
+        const dtoMap = new Map();
+
+        for (const [key, value] of Object.entries(research_records)) {
+            dtoMap.set(key, value);
+        }
+
         return dtoMap;
     }
 }

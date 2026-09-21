@@ -2,7 +2,6 @@
 
 import { ELEMENT_TYPE } from "../modules/common/Constants.js";
 import { siteMeta } from "../modules/site/siteMeta.js";
-import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { Templates } from "../modules/site/Templates.js";
 
 export class LinksSection {
@@ -12,7 +11,7 @@ export class LinksSection {
     }
 
     async initialize() {
-        const section_id = this.linksService.serviceName;
+        const section_id = 'links';
         this.linksSectionElement = document.getElementById(section_id);
     }
 

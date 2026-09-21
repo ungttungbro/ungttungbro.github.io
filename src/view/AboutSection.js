@@ -11,7 +11,7 @@ export class AboutSection {
   }
 
   async initialize() {
-    const section_id = this.aboutService.serviceName;
+    const section_id = 'about';
     this.aboutSectionElement = document.getElementById(section_id);
     this.aboutPhotoElement = null;
   }
