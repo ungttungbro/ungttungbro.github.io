@@ -20,6 +20,8 @@ export class PhotologSection {
     async initialize() {
         const section_id = 'photolog';
         this.photologSectionElement = document.getElementById(section_id);
+
+        this._BASE_PATH = "./assets/data/blog/photolog/";
     }
 
     show() {
@@ -164,7 +166,7 @@ export class PhotologSection {
 
             const teaser_figure = this.generateTeaser(
                 value.content_id,
-                value.thumbnail,
+                this._BASE_PATH + value.thumbnail,
                 Object.keys(value.content),
                 Object.values(value.content),
                 value.photos
@@ -266,7 +268,7 @@ export class PhotologSection {
             const image = SiteLibrary.createImgElement(
                 siteMeta.photolog.photoClassName,
                 '',
-                content,
+                this._BASE_PATH + content,
                 siteMeta.photolog.photoImgAlt
             );
 
