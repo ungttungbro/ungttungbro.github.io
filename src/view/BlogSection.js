@@ -15,6 +15,8 @@ export class BlogSection {
     constructor(blog_service) {
         this.blogService = blog_service;
         this.initialize();
+
+        this._BASE_PATH = "./assets/data/blog/";
     }
 
     async initialize() { }
@@ -200,7 +202,7 @@ export class BlogSection {
                         
             this.generatePostEvent(
                 config.blogTypeName, data, a, key, config.sectionHeaderIcon, value.title, 
-                null, value.content_path,COMMON.COPYRIGHT
+                null, this._BASE_PATH + value.content_path, COMMON.COPYRIGHT
             );      
 
             frag.appendChild(a);
