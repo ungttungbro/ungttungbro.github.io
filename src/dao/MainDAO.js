@@ -16,6 +16,7 @@ export class MainDAO {
         this.DB = await SiteLibrary.loadJson(this._ABOUT_DATA_PATH);
         this.aboutRecords = this.DB.about;
         this.linksRecords = this.DB.links;
+        this.writingRecords = this.DB.writings;
     }
 
     findAboutAll() {
@@ -44,5 +45,9 @@ export class MainDAO {
 
     findThanksTo() {
         return this.linksRecords.thanks_to;
+    }
+
+    findWritings() {
+        return this.writingRecords.entries;
     }
 }

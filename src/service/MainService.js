@@ -1,6 +1,7 @@
 'use strict';
 
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
+import { viewerConfig } from "../modules/viewerWindow/viewerConfig.js";
 import { MainDAO } from '../dao/MainDAO.js';
 
 export class MainService {
@@ -13,10 +14,32 @@ export class MainService {
             
             this.aboutData = this.buildAboutData();
             this.linksData = this.buildLinksData();
+            this.writings = await this.metaData(this.buildWritings());
         } catch (error) {
             console.log('About Service : ', error);
         }
-    }    
+    }
+    
+    async metaData(data) {
+        const contents_records = data;
+        
+        const dtoMap = new Map();        
+        for (const [key, value] of contents_records) {            
+            const blog = {
+                content_id: await SiteLibrary.hashString(key + value[1] + value[2]),
+                region: value[0],
+                type: value[1],
+                title: value[2],
+                summary: value[3],
+                content_path: value[4],
+                width: value[5]
+            };
+
+            dtoMap.set(key, blog);
+        }
+
+        return dtoMap;
+    }
 
     buildAboutData() { 
         const about = {
@@ -93,5 +116,36 @@ export class MainService {
         }
 
         return dtoMap;
+    }
+
+    buildWritings() {
+        const records = this.dao.findWritings();
+
+        const dtoMap = new Map();
+
+        for (const [key, value] of Object.entries(records)) {
+            dtoMap.set(key, value);
+        }
+
+        return dtoMap;
+    }
+
+    buildViewerConfig(viewer_id, width, height, content_type, section_icon, title, title_truncate_length) {        
+        const config = structuredClone(viewerConfig);    
+       
+        config.element.elementId = viewer_id;
+        config.element.offsetElementId = 'taskbar';
+        config.element.className = 'viewer';
+
+        config.layout.width = width + 'rem';
+        config.layout.height = height + 'rem';
+        config.layout.left = SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx(width)) / 2)) + 'rem';
+        config.layout.top = SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx(height)) / 2)) + 'rem';
+
+        config.meta.contentType = content_type;
+        config.meta.titleIconPath = section_icon;
+        config.meta.titleText = SiteLibrary.truncateText(title, title_truncate_length);
+
+        return config;
     }
 }

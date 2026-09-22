@@ -340,4 +340,16 @@ export class SiteLibrary {
 
     return rem * rootFontSize;
   }
+
+  static prefetch(element, href) {
+      if (element.dataset.prefetched) return;
+
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = href;
+      link.as = 'document';
+
+      document.head.appendChild(link);
+      element.dataset.prefetched = 'true';
+  }
 }

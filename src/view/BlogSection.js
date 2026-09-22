@@ -30,8 +30,8 @@ export class BlogSection {
     }
     
     renderBlog() {
-        const writings = document.getElementById('writings');
-        writings.appendChild(this.createSection('writings', 'blog-writings', this.blogService.blogMetaData));
+        //const writings = document.getElementById('writings');
+        //writings.appendChild(this.createSection('writings', 'blog-writings', this.blogService.blogMetaData));
 
         const lifelog_and_archive = document.getElementById('lifelog-and-archive');
         lifelog_and_archive.appendChild(this.createSection('lifelog', 'blog-lifelog', this.blogService.lifelogMetaData));
@@ -231,7 +231,7 @@ export class BlogSection {
     }
 
     generatePostEvent(type, data, element, id, section_icon, title, header, content_path, footer) {
-        element.addEventListener('mouseenter', e => { this.prefetchPost(element, content_path); }); 
+        element.addEventListener('mouseenter', e => { SiteLibrary.prefetch(element, content_path); }); 
         element.addEventListener('click',  e => {
             let viewer_width = '48rem';
             if (type === 'lifelog') { viewer_width = data.get(id)['width']; }
@@ -241,18 +241,6 @@ export class BlogSection {
                 title, header,content_path, footer
             );
         });
-    }
-    
-    prefetchPost(element, content_path) {
-        if (element.dataset.prefetched) return;
-
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = content_path;
-        link.as = 'document';
-
-        document.head.appendChild(link);
-        element.dataset.prefetched = 'true';
     }
 
     async onPostClick(e, id, blog_type, viewer_width, section_icon, title, header, content_path, footer) {
