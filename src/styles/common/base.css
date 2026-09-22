@@ -121,9 +121,9 @@
 
   --base_dark_light_toggle_button: url(/assets/icons/dark-mode-img/light-toggle.png);
 
-  --base_box_background_color: linear-gradient(45deg, #222222, #333333);
-  --base_section_header_box_background_color: linear-gradient(45deg, #222222, #333333);
-  --base_section_header_box_background_color_b: linear-gradient(45deg, #555555, #444444);
+  --base_box_background_color: linear-gradient(45deg, #222222, #2e2e2e);
+  --base_section_header_box_background_color: linear-gradient(45deg, #222222, #2e2e2e);
+  --base_section_header_box_background_color_b: linear-gradient(45deg, #4e4e4e, #444444);
   --base_section_header_box_font_color: #cccccc;
 
   --base_task_bar_background_color: #202020;

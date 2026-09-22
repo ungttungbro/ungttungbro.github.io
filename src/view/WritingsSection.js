@@ -9,7 +9,6 @@ import { Templates } from "../modules/site/Templates.js";
 import { taskbar } from "../modules/taskbar/TaskBar.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
 import { ViewerWindowProcessRegistry } from "../modules/viewerWindow/ViewerWindowProcessRegistry.js";
-import { viewerConfig } from "../modules/viewerWindow/viewerConfig.js";
 
 export class WritingsSection {
     constructor(MainService, BlogService) {
@@ -32,21 +31,21 @@ export class WritingsSection {
 
     render() {
         const writings = document.getElementById('writings');
-        writings.appendChild(this.createSection('writings', 'blog-writings', this.main_service.writings));
+        writings.appendChild(this.createSection('writings', 'blog-writings'));
     }
 
-    createSection(type, section_id, data) {        
+    createSection(type, section_id) {        
         const section_meta_data = siteMeta.selectSectionConfig(type);
         if(!section_meta_data) return;
 
         const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(data, siteMeta.selectSectionConfig(type));
+        const section_header = this.generateSectionHeader(this.blog_service.blogMetaData, siteMeta.selectSectionConfig(type));
 
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
 
         element.appendChild(section_header);
 
-        const items = this.generateSectionItems(data, siteMeta.selectSectionConfig(type));
+        const items = this.generateSectionItems('contents',this.main_service.writings, siteMeta.selectSectionConfig(type));
         element.appendChild(items);
 
         return element;
@@ -101,11 +100,21 @@ export class WritingsSection {
         });
     }
 
-    generateSectionItems(data, config) {
+    generateSectionItems(type, data, config) {
         const frag = document.createDocumentFragment();
 
         const element = document.createElement(ELEMENT_TYPE.DIV);
-        element.className = config.latestPostClassName;
+        element.className = config.postIndexClassName;
+
+        let title_char_max_length = config.listTitleCharLength;
+        let summary_char_max_length = config.listSummaryCharLength;
+
+        if (type === 'contents') {
+            element.className = config.latestPostClassName;
+
+            title_char_max_length = config.titleCharLength;
+            summary_char_max_length = config.summaryCharLength;
+        }
 
         let index = 0;
         for (const [key, value] of data) {
@@ -113,9 +122,9 @@ export class WritingsSection {
                 value.content_id,
                 Templates.symbol(value.type) + key,
                 value.title,
-                config.titleCharLength,
+                title_char_max_length,
                 value.summary,
-                config.summaryCharLength,
+                summary_char_max_length,
                 value.content_path
             );
 
@@ -130,8 +139,6 @@ export class WritingsSection {
 
         return element;
     }
-
-    
 
     generateSectionHeader(data, config) {
         const section_header = Templates.createSectionHeader(
@@ -151,43 +158,32 @@ export class WritingsSection {
                 config.listViewerId, 
                 config.sectionHeaderIcon, 
                 config.sectionListName,
-                this.generateSectionItems(data, config),
+                this.generateSectionItems('header', data, config),
                 null,
                 COMMON.COPYRIGHT
             );
         });
 
         return section_header;
-    }
-
-    
+    }    
 
     onSectionHeaderClick(e, blog_type, id, section_icon, title, header, contents, footer) {
         e.preventDefault();
 
-        const viewer_id = COMMON.VIEWER_PREFIX + id;
-        const task_id = COMMON.TASKBAR_PREFIX + id;
-        const config = structuredClone(viewerConfig);
+        const config = this.main_service.buildViewerConfig(id, 22, 38, blog_type, section_icon, title, 18);
 
         try {
-            config.element.elementId = viewer_id;
-            config.element.offsetElementId = 'taskbar';
-            config.element.className = 'viewer';
-
-            config.layout.width = 22 + 'rem';
-            config.layout.height = 38 + 'rem';
-            config.layout.left = SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('22')) / 2)) + 'rem';
-            config.layout.top = SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('38')) / 2)) + 'rem';
-
-            config.meta.contentType = blog_type;
-            config.meta.titleIconPath = section_icon;
-            config.meta.titleText = SiteLibrary.truncateText(title, 18);
-            
-            this.mountContents(config, task_id, header, contents, footer);
+            this.mountContents(
+                config, 
+                COMMON.TASKBAR_PREFIX + id,
+                header, 
+                contents, 
+                footer
+            );
         } catch(error) {
             console.warn('Section Header Event : ', error);
         } finally {
-            const element = document.getElementById(viewer_id);
+            const element = document.getElementById(id);
             element.dataset.group = config.meta.contentType;
 
             ViewerStateManager.stateLog(element);
