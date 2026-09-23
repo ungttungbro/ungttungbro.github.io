@@ -9,7 +9,7 @@ import { Templates } from "../modules/site/Templates.js";
 import { taskbar } from "../modules/taskbar/TaskBar.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
 
-export class WritingsSection {
+export class ReflectionSection {
     constructor(MainService, BlogService) {
         this.main_service = MainService;
         this.blog_service = BlogService;
@@ -24,13 +24,13 @@ export class WritingsSection {
         try {
             this.render();
         } catch (error) {
-            console.log('[ Blog Section ] : ', error);
+            console.log('[ Reflection Section ] : ', error);
         }
     }
 
     render() {
-        const writings = document.getElementById('writings');
-        writings.appendChild(this.createSection('writings', 'blog-writings'));
+        const reflection = document.getElementById('reflection');
+        reflection.appendChild(this.createSection('reflection', 'blog-reflection'));
     }
 
     createSection(type, section_id) {        
@@ -38,13 +38,13 @@ export class WritingsSection {
         if(!section_meta_data) return;
 
         const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.blogMetaData, siteMeta.selectSectionConfig(type));
+        const section_header = this.generateSectionHeader(this.blog_service.reflectionMetaData, siteMeta.selectSectionConfig(type));
 
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
 
         element.appendChild(section_header);
 
-        const items = this.generateSectionItems('contents',this.main_service.writings, siteMeta.selectSectionConfig(type));
+        const items = this.generateSectionItems('contents',this.main_service.reflection, siteMeta.selectSectionConfig(type));
         element.appendChild(items);
 
         return element;
@@ -52,7 +52,7 @@ export class WritingsSection {
 
     createSectionItem(id, meta_data, title, title_char_max_length, summary, summary_char_max_length, content_path) {
         const element = document.createElement(ELEMENT_TYPE.DIV);
-        element.className = 'writings-section-item-panel';
+        element.className = 'reflection-section-item-panel';
 
         const meta_span = document.createElement('span');
         meta_span.className = 'meta';
@@ -75,7 +75,7 @@ export class WritingsSection {
         a.appendChild(document.createElement('br'));
         a.appendChild(summary_span);
 
-        const section_config = siteMeta.selectSectionConfig('writings');
+        const section_config = siteMeta.selectSectionConfig('reflection');
         this.generatePostEvent(
             section_config.blogTypeName, 
             COMMON.VIEWER_PREFIX + id, 

@@ -1,5 +1,5 @@
 import { SiteLibrary } from "../common/SiteLibrary.js";
-import { siteMeta } from "./siteMeta.js";
+import { ViewerWindowProcessRegistry } from "../viewerWindow/ViewerWindowProcessRegistry.js";
 
 export class Templates {
     constructor() {}
@@ -58,6 +58,26 @@ export class Templates {
         }
 
         return panel;
+    }
+
+    static setupResponsiveViewer(taskbar_element, viewer_element) {
+        if (taskbar_element.taskBarElement.dataset.column < 3) {
+            SiteLibrary.toggleElementMaximize(viewer_element.windowElement, 'taskbar');
+            if (viewer_element.isMaximized) viewer_element.isMaximized = false;
+            else viewer_element.isMaximized = true;
+
+            history.pushState({ list: viewer_element.id }, '', '');
+            window.addEventListener('popstate', (e) => {
+                if (!e.state) return;
+                if (!e.state?.list) {
+                    ViewerWindowProcessRegistry.get('unmount', 'function')?.(
+                        viewer_element.windowElement.dataset.group,
+                        viewer_element.targetId,
+                        viewer_element.id
+                    );
+                }
+            });
+        }
     }
 
     static symbol(type) {

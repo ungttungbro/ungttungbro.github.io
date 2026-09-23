@@ -37,8 +37,8 @@ export class BlogSection {
         lifelog_and_archive.appendChild(this.createSection('lifelog', 'blog-lifelog', this.blogService.lifelogMetaData));
         lifelog_and_archive.appendChild(this.createSection('archive', 'blog-archive', this.blogService.archiveMetaData));
 
-        const reflection = document.getElementById('reflection');
-        reflection.appendChild(this.createSection('reflection', 'blog-reflection', this.blogService.reflectionMetaData));
+        //const reflection = document.getElementById('reflection');
+        //reflection.appendChild(this.createSection('reflection', 'blog-reflection', this.blogService.reflectionMetaData));
     }
 
     createSection(type, section_id, data) {        

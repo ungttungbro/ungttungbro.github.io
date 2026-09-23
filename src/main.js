@@ -7,6 +7,7 @@ import { BlogService } from './service/BlogService.js';
 
 import { AboutSection } from './view/AboutSection.js';
 import { WritingsSection } from './view/WritingsSection.js';
+import { ReflectionSection } from './view/ReflectionSection.js';
 import { BlogSection } from './view/BlogSection.js';
 import { PhotologSection } from './view/PhotologSection.js';
 import { LinksSection } from './view/LinksSection.js';
@@ -23,11 +24,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     shell.initialize(taskbar_element)
   ]);
    
-  new BlogSection(blog_service).show();  
-  new AboutSection(main_service).show();  
-  new WritingsSection(main_service, blog_service).show();  
-  new PhotologSection(blog_service).show();  
-  new LinksSection(main_service).show();  
+  new BlogSection(blog_service).show();
+  new AboutSection(main_service).show();
+  new WritingsSection(main_service, blog_service).show();
+  new ReflectionSection(main_service, blog_service).show();
+  new PhotologSection(blog_service).show();
+  new LinksSection(main_service).show();
    
   shell.initLayoutMemory();
   shell.updateLayout();

@@ -17,6 +17,7 @@ export class MainDAO {
         this.aboutRecords = this.DB.about;
         this.linksRecords = this.DB.links;
         this.writingRecords = this.DB.writings;
+        this.reflectionRecords = this.DB.reflection;
     }
 
     findAboutAll() {
@@ -49,5 +50,9 @@ export class MainDAO {
 
     findWritings() {
         return this.writingRecords.entries;
+    }
+
+    findReflection() {
+        return this.reflectionRecords.entries;
     }
 }
