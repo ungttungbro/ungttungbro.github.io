@@ -112,7 +112,7 @@ export class LifelogSection extends BaseView {
             const sectionItemElement = this.createSectionItem(
                 value.content_id,
                 value.width,
-                Templates.symbol(value.type) + key + ' · ' + value.region,
+                Templates.symbol(value.type) + key + ' (' + value.region + ')',
                 value.title,
                 title_char_max_length,
                 value.content_path

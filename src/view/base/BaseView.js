@@ -22,6 +22,7 @@ export class BaseView {
         );
 
         viewer.targetId = task_id;
+        viewer.show();
 
         Templates.setupResponsiveViewer(taskbar, viewer);
 
@@ -32,7 +33,5 @@ export class BaseView {
             viewer_config.meta.titleIconPath, 
             viewer_config.meta.titleText
         );
-
-        viewer.show();
     }
 }

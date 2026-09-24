@@ -40,7 +40,7 @@
 
   --base_background_size: 5.35rem;
   /*--base_background: linear-gradient(to left, #ececec, #dfdfdf);*/
-  --base_background: #f9f9f9;
+  --base_background: #ffffff;
 
 
   --base_font_color: rgba(0, 0, 0, 0.8);
@@ -61,9 +61,9 @@
 
   --base_dark_light_toggle_button: url(/assets/icons/light-mode-img/dark-toggle.png);
 
-  --base_box_background_color: linear-gradient(45deg, #ededed, #eaeaea);
-  --base_section_header_box_background_color: linear-gradient(45deg, #ededed, #eaeaea);
-  --base_section_header_box_background_color_b: linear-gradient(45deg, #dddddd, #dadada);
+  --base_box_background_color: linear-gradient(45deg, #eeeeee, #eaeaea);
+  --base_section_header_box_background_color: linear-gradient(45deg, #eeeeee, #eaeaea);
+  --base_section_header_box_background_color_b: linear-gradient(45deg, #e2e2e2, #e5e5e5);
   --base_section_header_box_font_color: #333333;
 
   --base_anchor_tag_hover_color: #d1651e;
