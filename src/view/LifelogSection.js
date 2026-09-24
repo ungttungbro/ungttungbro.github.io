@@ -7,7 +7,7 @@ import { Templates } from "../modules/site/Templates.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
 import { BaseView } from "./base/BaseView.js";
 
-export class WritingsSection extends BaseView {
+export class LifelogSection extends BaseView {
     constructor(MainService, BlogService) {
         super();
 
@@ -24,13 +24,13 @@ export class WritingsSection extends BaseView {
         try {
             this.render();
         } catch (error) {
-            console.log('[ Blog Section ] : ', error);
+            console.log('[ lifelog Section ] : ', error);
         }
     }
 
     render() {
-        const writings = document.getElementById('writings');
-        writings.appendChild(this.createSection('writings', 'blog-writings'));
+        const lifelog = document.getElementById('lifelog');
+        lifelog.appendChild(this.createSection('lifelog', 'blog-lifelog'));
     }
 
     createSection(type, section_id) {        
@@ -38,21 +38,21 @@ export class WritingsSection extends BaseView {
         if(!section_meta_data) return;
 
         const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.blogMetaData, siteMeta.selectSectionConfig(type));
+        const section_header = this.generateSectionHeader(this.blog_service.lifelogMetaData, siteMeta.selectSectionConfig(type));
 
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
 
         element.appendChild(section_header);
 
-        const items = this.generateSectionItems('contents',this.main_service.writings, siteMeta.selectSectionConfig(type));
+        const items = this.generateSectionItems('contents',this.main_service.lifelog, siteMeta.selectSectionConfig(type));
         element.appendChild(items);
 
         return element;
     }
 
-    createSectionItem(id, meta_data, title, title_char_max_length, summary, summary_char_max_length, content_path) {
+    createSectionItem(id, width, meta_data, title, title_char_max_length, content_path) {
         const element = document.createElement(ELEMENT_TYPE.DIV);
-        element.className = 'writings-section-item-panel';
+        element.className = 'lifelog-section-item-panel';
 
         const meta_span = document.createElement('span');
         meta_span.className = 'meta';
@@ -65,20 +65,16 @@ export class WritingsSection extends BaseView {
         title_span.className = 'title';
         title_span.textContent = SiteLibrary.truncateText(title, title_char_max_length);
 
-        const summary_span = document.createElement('span');
-        summary_span.className = 'summary';
-        summary_span.textContent = SiteLibrary.truncateText(summary, summary_char_max_length);
-
         const a =  document.createElement('a');
         a.href = '#';
         a.appendChild(title_span);
         a.appendChild(document.createElement('br'));
-        a.appendChild(summary_span);
 
-        const section_config = siteMeta.selectSectionConfig('writings');
+        const section_config = siteMeta.selectSectionConfig('lifelog');
         this.generatePostEvent(
             section_config.blogTypeName, 
             COMMON.VIEWER_PREFIX + id, 
+            width,
             a, 
             section_config.sectionHeaderIcon, 
             title, 
@@ -92,10 +88,10 @@ export class WritingsSection extends BaseView {
         return element;
     }
 
-    generatePostEvent(type, id, element, section_icon, title, header, content_path, footer) {
+    generatePostEvent(type, id, width, element, section_icon, title, header, content_path, footer) {
         element.addEventListener('mouseenter', e => { SiteLibrary.prefetch(element, content_path); }); 
         element.addEventListener('click',  e => {
-            this.onPostClick (e, id, type, section_icon, title, header, content_path, footer);
+            this.onPostClick (e, id, width, type, section_icon, title, header, content_path, footer);
         });
     }
 
@@ -106,24 +102,19 @@ export class WritingsSection extends BaseView {
         element.className = config.postIndexClassName;
 
         let title_char_max_length = config.listTitleCharLength;
-        let summary_char_max_length = config.listSummaryCharLength;
-
         if (type === 'contents') {
             element.className = config.latestPostClassName;
-
             title_char_max_length = config.titleCharLength;
-            summary_char_max_length = config.summaryCharLength;
         }
 
         let index = 0;
         for (const [key, value] of data) {
             const sectionItemElement = this.createSectionItem(
                 value.content_id,
-                Templates.symbol(value.type) + key,
+                value.width,
+                Templates.symbol(value.type) + key + ' · ' + value.region,
                 value.title,
                 title_char_max_length,
-                value.summary,
-                summary_char_max_length,
                 value.content_path
             );
 
@@ -189,15 +180,15 @@ export class WritingsSection extends BaseView {
         }
     }
     
-    async onPostClick(e, id, blog_type, section_icon, title, header, content_path, footer) {
+    async onPostClick(e, id, width, blog_type, section_icon, title, header, content_path, footer) {
         e.preventDefault();
 
-        const config = this.main_service.buildViewerConfig(id, 48, 36, blog_type, section_icon, title, 24);
+        const config = this.main_service.buildViewerConfig(id, width, 36, blog_type, section_icon, title, 24);
 
         try {
             super.mountContents(
                 config, 
-                COMMON.TASKBAR_PREFIX + id, 
+                COMMON.TASKBAR_PREFIX + id,
                 header, 
                 await SiteLibrary.loadText(content_path), 
                 footer

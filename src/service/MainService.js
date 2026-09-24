@@ -16,6 +16,7 @@ export class MainService {
             this.linksData = this.buildLinksData();
             this.writings = await this.metaData(this.buildWritings());
             this.reflection = await this.metaData(this.buildReflection());
+            this.lifelog = await this.metaData(this.buildLifelog());
         } catch (error) {
             console.log('About Service : ', error);
         }
@@ -133,6 +134,18 @@ export class MainService {
 
     buildReflection() {
         const records = this.dao.findReflection();
+
+        const dtoMap = new Map();
+
+        for (const [key, value] of Object.entries(records)) {
+            dtoMap.set(key, value);
+        }
+
+        return dtoMap;
+    }
+
+    buildLifelog() {
+        const records = this.dao.findLifelog();
 
         const dtoMap = new Map();
 

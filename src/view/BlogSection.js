@@ -33,8 +33,8 @@ export class BlogSection {
         //const writings = document.getElementById('writings');
         //writings.appendChild(this.createSection('writings', 'blog-writings', this.blogService.blogMetaData));
 
-        const lifelog_and_archive = document.getElementById('lifelog-and-archive');
-        lifelog_and_archive.appendChild(this.createSection('lifelog', 'blog-lifelog', this.blogService.lifelogMetaData));
+        const lifelog_and_archive = document.getElementById('archive');
+        //lifelog_and_archive.appendChild(this.createSection('lifelog', 'blog-lifelog', this.blogService.lifelogMetaData));
         lifelog_and_archive.appendChild(this.createSection('archive', 'blog-archive', this.blogService.archiveMetaData));
 
         //const reflection = document.getElementById('reflection');

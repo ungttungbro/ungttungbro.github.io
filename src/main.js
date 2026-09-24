@@ -8,6 +8,7 @@ import { BlogService } from './service/BlogService.js';
 import { AboutSection } from './view/AboutSection.js';
 import { WritingsSection } from './view/WritingsSection.js';
 import { ReflectionSection } from './view/ReflectionSection.js';
+import { LifelogSection } from "./view/LifelogSection.js";
 import { BlogSection } from './view/BlogSection.js';
 import { PhotologSection } from './view/PhotologSection.js';
 import { LinksSection } from './view/LinksSection.js';
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   new AboutSection(main_service).show();
   new WritingsSection(main_service, blog_service).show();
   new ReflectionSection(main_service, blog_service).show();
+  new LifelogSection(main_service, blog_service).show();
   new PhotologSection(blog_service).show();
   new LinksSection(main_service).show();
    

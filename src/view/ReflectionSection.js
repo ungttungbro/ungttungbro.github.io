@@ -3,14 +3,14 @@
 import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js";
 import { siteMeta } from "../modules/site/siteMeta.js";
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { ViewerWindow } from "../modules/viewerWindow/ViewerWindow.js";
-import { shell } from "../modules/shell/Shell.js";
 import { Templates } from "../modules/site/Templates.js";
-import { taskbar } from "../modules/taskbar/TaskBar.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
+import { BaseView } from "./base/BaseView.js";
 
-export class ReflectionSection {
+export class ReflectionSection extends BaseView {
     constructor(MainService, BlogService) {
+        super();
+
         this.main_service = MainService;
         this.blog_service = BlogService;
         this.initialize();
@@ -172,7 +172,7 @@ export class ReflectionSection {
         const config = this.main_service.buildViewerConfig(id, 22, 38, blog_type, section_icon, title, 18);
 
         try {
-            this.mountContents(
+            super.mountContents(
                 config, 
                 COMMON.TASKBAR_PREFIX + id,
                 header, 
@@ -195,7 +195,7 @@ export class ReflectionSection {
         const config = this.main_service.buildViewerConfig(id, 48, 36, blog_type, section_icon, title, 24);
 
         try {
-            this.mountContents(
+            super.mountContents(
                 config, 
                 COMMON.TASKBAR_PREFIX + id, 
                 header, 
@@ -210,34 +210,5 @@ export class ReflectionSection {
 
             ViewerStateManager.stateLog(element);
         }
-    }
-
-    mountContents(viewer_config, task_id, header, contents, footer) {        
-        if (document.getElementById(viewer_config.element.elementId)) {
-            ViewerStateManager.bringToFront(document.getElementById(viewer_config.element.elementId));
-            return; 
-        }
-
-        const viewer = new ViewerWindow();
-        viewer.configureWindow(
-            viewer_config,
-            Templates.createContentPanel('blog-header-panel', header),
-            Templates.createContentPanel('blog-content-panel', contents),
-            Templates.createContentPanel('blog-footer-panel', footer)
-        );
-
-        viewer.targetId = task_id;
-
-        Templates.setupResponsiveViewer(taskbar, viewer);
-
-        shell.mountTaskItem(
-            viewer_config.meta.contentType, 
-            viewer.targetId, 
-            viewer.id, 
-            viewer_config.meta.titleIconPath, 
-            viewer_config.meta.titleText
-        );
-
-        viewer.show();
     }
 }
