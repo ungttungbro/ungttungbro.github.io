@@ -9,7 +9,7 @@ export class BlogService {
         this.archiveMetaData = null;
         this.lifelogMetaData = null;
         this.reflectionMetaData = null;
-        this.photogMetaData = null;
+        this.photologMetaData = null;
     }
 
     async initialize() {
@@ -22,7 +22,7 @@ export class BlogService {
                 this.archiveMetaData,
                 this.lifelogMetaData,
                 this.reflectionMetaData,
-                this.photogMetaData
+                this.photologMetaData
             ] = await Promise.all([
                 this.metaData(this.buildPostListData()),
                 this.metaData(this.buildArchiveListData()),

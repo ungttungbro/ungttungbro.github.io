@@ -1,40 +1,36 @@
 'use strict';
 
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { taskbar } from "../modules/taskbar/TaskBar.js";
-import { ViewerWindow } from "../modules/viewerWindow/ViewerWindow.js";
 import { Templates } from "../modules/site/Templates.js";
 import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js"
 import { siteMeta } from "../modules/site/siteMeta.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
-import { ViewerWindowProcessRegistry } from "../modules/viewerWindow/ViewerWindowProcessRegistry.js";
-import { viewerConfig } from "../modules/viewerWindow/viewerConfig.js";
-import { shell } from "../modules/shell/Shell.js";
+import { BaseView } from "./base/BaseView.js";
 
-export class PhotologSection {
-    constructor(photolog_service) {
-        this.photologService = photolog_service;
+export class PhotologSection extends BaseView {
+    constructor(MainService, BlogService) {
+        super();
+
+        this.main_service = MainService;
+        this.blog_service = BlogService;
         this.initialize();
-    }
-
-    async initialize() {
-        const section_id = 'photolog';
-        this.photologSectionElement = document.getElementById(section_id);
 
         this._BASE_PATH = "./assets/data/blog/photolog/";
     }
 
+    async initialize() { }
+
     show() {
         try {
-            this.renderTeasers();
+            this.render();
         } catch (error) {
             console.log('error state : ', error);
         }
     }
 
-    renderTeasers() {
-        const photolog = this.createSection('photolog', 'photolog-items');
-        this.photologSectionElement.appendChild(photolog);
+    render() {
+        const photolog = document.getElementById('photolog');
+        photolog.appendChild(this.createSection('photolog', 'photolog-items'));
     }
 
     createSection(type, section_id) {        
@@ -42,160 +38,19 @@ export class PhotologSection {
         if(!section_meta_data) return;
 
         const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(siteMeta.selectSectionConfig(type));
+        const section_header = this.generateSectionHeader(this.blog_service.photologMetaData, section_meta_data);
 
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
 
         element.appendChild(section_header);
 
-        const subject_list = this.generateTeaserList(5);
-        element.appendChild(subject_list);
+        const items = this.generateSectionItems('photolog',this.main_service.photolog, section_meta_data);
+        element.appendChild(items);
 
         return element;
     }
 
-    generateSectionHeader(config) {
-        const section_header = Templates.createSectionHeader(
-            config.sectionHeaderId, config.captionImgId, config.captionId,
-            config.className, config.sectionHeaderIcon, config.text, config.sectionHeaderIconAlt
-        );
-
-        section_header.addEventListener('click',  e => {
-            this.onSectionHeaderClick (
-                e,
-                config.photologListViewerId,
-                config.sectionHeaderIcon,
-                config.photologSectionListName,
-                this.generateTeaserList(0),          
-                null,                
-                COMMON.COPYRIGHT
-            );
-        });
-
-        return section_header;
-    }
-
-    mountContents(viewer_config, task_id, header, contents, footer) {        
-        if (document.getElementById(viewer_config.element.elementId)) {
-            ViewerStateManager.bringToFront(document.getElementById(viewer_config.element.elementId));
-            return; 
-        }
-
-        const viewer = new ViewerWindow();
-        viewer.configureWindow(
-            viewer_config,
-            Templates.createContentPanel('photolog-header-panel', header),
-            Templates.createContentPanel('photolog-content-panel', contents),
-            Templates.createContentPanel('photolog-footer-panel', footer)
-        );
-
-        viewer.targetId = task_id;        
-        viewer.show();
-
-        if (taskbar.taskBarElement.dataset.column < 3) {
-            SiteLibrary.toggleElementMaximize(viewer.windowElement, 'taskbar');
-            if (viewer.isMaximized) viewer.isMaximized = false;
-            else viewer.isMaximized = true;
-
-            history.pushState({ list: viewer.id }, '', '');
-            window.addEventListener('popstate', (e) => {
-                if (!e.state) return;
-                if (!e.state?.list) {
-                    ViewerWindowProcessRegistry.get('unmount', 'function')?.(
-                        viewer.windowElement.dataset.group,
-                        viewer.targetId,
-                        viewer.id
-                    );
-                }
-            });
-        }
-
-        shell.mountTaskItem(
-            viewer_config.meta.contentType, 
-            viewer.targetId, 
-            viewer.id, 
-            viewer_config.meta.titleIconPath, 
-            viewer_config.meta.titleText
-        );
-    }
-
-    onSectionHeaderClick(e, id, section_icon, title, header, contents, footer) {
-        e.preventDefault();
-
-        const viewer_id = COMMON.VIEWER_PREFIX + id;
-        const task_id = COMMON.TASKBAR_PREFIX + id;
-        const config = structuredClone(viewerConfig);
-       
-        try {
-            config.element.elementId = viewer_id;
-            config.element.offsetElementId = 'taskbar';
-            config.element.className = 'viewer';
-
-            config.layout.width = '22rem';
-            config.layout.height = '38rem';
-            config.layout.left = SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('22')) / 2)) + 'rem';
-            config.layout.top = SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('38')) / 2)) + 'rem';
-
-            config.meta.contentType = 'photolog';
-            config.meta.titleIconPath = section_icon;
-            config.meta.titleText = SiteLibrary.truncateText(title, 24);
-
-            this.mountContents(config, task_id, header, contents, footer);
-        } catch(error) {
-            console.log('Section Header Event : ', error);
-        } finally {
-            const element = document.getElementById(viewer_id);
-            element.dataset.group = config.meta.contentType;
-
-            ViewerStateManager.stateLog(element);
-        }
-    }
-
-    generateTeaserList(row_count) {
-        const frag = document.createDocumentFragment();
-
-        const teasers_element = document.createElement(ELEMENT_TYPE.DIV);
-        teasers_element.className = siteMeta.photolog.teaserListClassName;
-
-        const iterator = this.photologService.photogMetaData.entries();
-        let result = iterator.next();
-
-        let index = 0;
-        while (!result.done) {
-            const [key, value] = result.value;
-
-            const teaser_figure = this.generateTeaser(
-                value.content_id,
-                this._BASE_PATH + value.thumbnail,
-                Object.keys(value.content),
-                Object.values(value.content),
-                value.photos
-            );
-
-            frag.appendChild(teaser_figure);
-
-            const nextResult = iterator.next();
-            
-            if (row_count > 0) {
-                if (!nextResult.done && index < (row_count - 1)) { frag.appendChild(document.createElement('hr')); }
-                if (index >= (row_count - 1)) { break; }
-            } else {
-                if (!nextResult.done) {
-                    frag.appendChild(document.createElement('hr'));
-                }
-            }
-
-            result = nextResult;
-
-            index++;
-        }
-
-        teasers_element.appendChild(frag);
-
-        return teasers_element;
-    }
-
-    generateTeaser(id, thumbnail_path, title, text, photos_path) {
+    createSectionItem(id, thumbnail_path, title, text, photos_path) {
         const thumbnail = SiteLibrary.createImgElement(
             siteMeta.photolog.thumbnailClassName,
             null,
@@ -211,47 +66,141 @@ export class PhotologSection {
         
         teaser.className = siteMeta.photolog.teaserClassName;
         
-        this.generateTeaserEvent(teaser, id, title, text.toString(), photos_path, COMMON.COPYRIGHT);
+        const section_config = siteMeta.selectSectionConfig('photolog');
+        this.generateTeaserEvent(
+            section_config.typeName,
+            teaser, 
+            id, 
+            section_config.sectionHeaderIcon,
+            title, 
+            text.toString(), 
+            photos_path,
+            COMMON.COPYRIGHT
+        );
         
         return teaser;
     }
 
-    generateTeaserEvent(element, id, title, header_contents, main_contents, footer_contents) {        
+    generateTeaserEvent(type, element, id, section_icon, title, header_contents, main_contents, footer_contents) {        
         element.addEventListener('click', e => {
-            this.openPhotologContent(
-                id,
-                title,
-                header_contents,
-                main_contents,
-                footer_contents
-            );            
+            this.onTeaserClick(e, type, id, section_icon, title, header_contents, main_contents, footer_contents);            
         });
     }
 
-    openPhotologContent(id, title, header_contents, main_contents, footer_contents) {
-        const viewer_id = COMMON.VIEWER_PREFIX + id;
-        const task_id = COMMON.TASKBAR_PREFIX + id;
-        const config = structuredClone(viewerConfig);
+    generateSectionHeader(data, config) {
+        const section_header = Templates.createSectionHeader(
+            config.sectionHeaderId, 
+            config.captionImgId, 
+            config.captionId,
+            config.className, 
+            config.sectionHeaderIcon, 
+            config.captionText, 
+            config.sectionHeaderIconAlt
+        );
+
+        section_header.addEventListener('click',  e => {
+            this.onSectionHeaderClick (
+                e, 
+                config.typeName, 
+                config.photologListViewerId,
+                config.sectionHeaderIcon,
+                config.photologSectionListName,
+                this.generateSectionItems('header', data, config),
+                null,
+                COMMON.COPYRIGHT
+            );
+        });
+
+        return section_header;
+    }
+    
+    generateSectionItems(type, data, config) {
+        const frag = document.createDocumentFragment();
+
+        const element = document.createElement(ELEMENT_TYPE.DIV);
+        element.className = config.teaserListClassName;
+
+        let index = 0;
+        for (const [key, value] of data) {
+
+            const sectionItemElement = this.createSectionItem(
+                value.content_id,
+                this._BASE_PATH + value.thumbnail,
+                Object.keys(value.content),
+                Object.values(value.content),
+                value.photos
+            );
+
+            frag.appendChild(sectionItemElement);
+
+            if (++index < data.size) {
+                frag.appendChild(document.createElement('hr'));
+            }      
+        }
+
+        element.appendChild(frag);
+
+        return element;
+    }
+
+    async onTeaserClick(e, blog_type, id, section_icon, title, header, contents, footer) {
+        e.preventDefault();
+
+        const config = this.main_service.buildViewerConfig(
+            COMMON.VIEWER_PREFIX + id, 
+            44, 
+            36,
+            blog_type, 
+            section_icon, 
+            title, 
+            24
+        );
 
         try {
-            config.element.elementId = viewer_id;
-            config.element.offsetElementId = 'taskbar';
-            config.element.className = 'viewer';
-
-            config.layout.width = '44rem';
-            config.layout.height = '32rem';
-            config.layout.left = SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx('48')) / 2)) + 'rem';
-            config.layout.top = SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx('36')) / 2)) + 'rem';
-
-            config.meta.contentType = 'photolog';
-            config.meta.titleIconPath = siteMeta.photolog.sectionHeaderIcon;
-            config.meta.titleText = SiteLibrary.truncateText(title, 24);
-
-            this.mountContents(config, task_id, header_contents, this.createPhotoContents(main_contents), footer_contents);
-        } catch (error) {
-            console.log('Blog Post Event : ', error);
+            super.mountContents(
+                'photolog',
+                config, 
+                COMMON.TASKBAR_PREFIX + id,
+                header, 
+                this.createPhotoContents(contents), 
+                footer
+            );
+        } catch(error) {
+            console.warn('Phtolog Teaser Event : ', error);
         } finally {
-            const element = document.getElementById(viewer_id);
+            const element = document.getElementById(COMMON.VIEWER_PREFIX + id);
+            element.dataset.group = config.meta.contentType;
+
+            ViewerStateManager.stateLog(element);
+        }
+    }
+
+    onSectionHeaderClick(e, blog_type, id, section_icon, title, header, contents, footer) {
+        e.preventDefault();
+
+        const config = this.main_service.buildViewerConfig(
+            COMMON.VIEWER_PREFIX + id, 
+            22, 
+            38,
+            blog_type, 
+            section_icon, 
+            title, 
+            18
+        );
+
+        try {
+            super.mountContents(
+                'photolog',
+                config, 
+                COMMON.TASKBAR_PREFIX + id,
+                header, 
+                contents, 
+                footer
+            );
+        } catch(error) {
+            console.warn('Section Header Event : ', error);
+        } finally {
+            const element = document.getElementById(COMMON.VIEWER_PREFIX + id);
             element.dataset.group = config.meta.contentType;
 
             ViewerStateManager.stateLog(element);

@@ -17,6 +17,8 @@ export class MainService {
             this.writings = await this.metaData(this.buildWritings());
             this.reflection = await this.metaData(this.buildReflection());
             this.lifelog = await this.metaData(this.buildLifelog());
+            this.archive = await this.metaData(this.buildArchive());
+            this.photolog = await this.buildPhotologData();
         } catch (error) {
             console.log('About Service : ', error);
         }
@@ -146,6 +148,74 @@ export class MainService {
 
     buildLifelog() {
         const records = this.dao.findLifelog();
+
+        const dtoMap = new Map();
+
+        for (const [key, value] of Object.entries(records)) {
+            dtoMap.set(key, value);
+        }
+
+        return dtoMap;
+    }
+
+    buildArchive() {
+        const records = this.dao.findArchive();
+
+        const dtoMap = new Map();
+
+        for (const [key, value] of Object.entries(records)) {
+            dtoMap.set(key, value);
+        }
+
+        return dtoMap;
+    }
+
+    async buildPhotologData() {
+        const contents_records = this.buildPhotologEntriesData();
+        const thumbnail_records = this.buildPhotologThumbnailsData();
+        const photo_records = this.buildPhotologPhotosData();
+        
+        const dtoMap = new Map();        
+        for (const [key, value] of contents_records) {
+            const photolog = {
+                content_id: await SiteLibrary.hashString(key),
+                content: value,
+                thumbnail: thumbnail_records.get(key),
+                photos: photo_records.get(key)
+            };
+            
+            dtoMap.set(key, photolog);
+        }
+
+        return dtoMap;
+    }
+
+    buildPhotologEntriesData() {
+        const records = this.dao.findPhotolog();
+
+        const dtoMap = new Map();
+
+        for (const [key, value] of Object.entries(records)) {
+            dtoMap.set(key, value);
+        }
+
+        return dtoMap;
+    }
+
+
+    buildPhotologThumbnailsData() {
+        const records = this.dao.findPhotologThumbnails();
+
+        const dtoMap = new Map();
+        for (const [key, value] of Object.entries(records)) {
+            dtoMap.set(key, value);
+        }
+
+        return dtoMap;
+    }
+
+    buildPhotologPhotosData() {
+        const records = this.dao.findPhotologPhotos();
 
         const dtoMap = new Map();
 

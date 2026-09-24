@@ -7,7 +7,7 @@ import { Templates } from "../modules/site/Templates.js";
 import { ViewerStateManager } from "../modules/viewerWindow/ViewerStateManager.js";
 import { BaseView } from "./base/BaseView.js";
 
-export class LifelogSection extends BaseView {
+export class ArchiveSection extends BaseView {
     constructor(MainService, BlogService) {
         super();
 
@@ -24,13 +24,13 @@ export class LifelogSection extends BaseView {
         try {
             this.render();
         } catch (error) {
-            console.log('[ lifelog Section ] : ', error);
+            console.log('[ Archive Section ] : ', error);
         }
     }
 
     render() {
-        const lifelog = document.getElementById('lifelog');
-        lifelog.appendChild(this.createSection('lifelog', 'blog-lifelog'));
+        const archive = document.getElementById('archive');
+        archive.appendChild(this.createSection('archive', 'blog-archive'));
     }
 
     createSection(type, section_id) {        
@@ -38,21 +38,21 @@ export class LifelogSection extends BaseView {
         if(!section_meta_data) return;
 
         const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.lifelogMetaData, section_meta_data);
+        const section_header = this.generateSectionHeader(this.blog_service.archiveMetaData, section_meta_data);
 
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
 
         element.appendChild(section_header);
 
-        const items = this.generateSectionItems('contents',this.main_service.lifelog, section_meta_data);
+        const items = this.generateSectionItems('contents',this.main_service.archive, section_meta_data);
         element.appendChild(items);
 
         return element;
     }
 
-    createSectionItem(id, width, meta_data, title, title_char_max_length, content_path) {
+    createSectionItem(id, meta_data, title, title_char_max_length, content_path) {
         const element = document.createElement(ELEMENT_TYPE.DIV);
-        element.className = 'lifelog-section-item-panel';
+        element.className = 'archive-section-item-panel';
 
         const meta_span = document.createElement('span');
         meta_span.className = 'meta';
@@ -70,11 +70,10 @@ export class LifelogSection extends BaseView {
         a.appendChild(title_span);
         a.appendChild(document.createElement('br'));
 
-        const section_config = siteMeta.selectSectionConfig('lifelog');
+        const section_config = siteMeta.selectSectionConfig('archive');
         this.generatePostEvent(
             section_config.blogTypeName, 
-            COMMON.VIEWER_PREFIX + id, 
-            width,
+            COMMON.VIEWER_PREFIX + id,
             a, 
             section_config.sectionHeaderIcon, 
             title, 
@@ -88,10 +87,10 @@ export class LifelogSection extends BaseView {
         return element;
     }
 
-    generatePostEvent(type, id, width, element, section_icon, title, header, content_path, footer) {
+    generatePostEvent(type, id, element, section_icon, title, header, content_path, footer) {
         element.addEventListener('mouseenter', e => { SiteLibrary.prefetch(element, content_path); }); 
         element.addEventListener('click',  e => {
-            this.onPostClick (e, id, width, type, section_icon, title, header, content_path, footer);
+            this.onPostClick (e, id, type, section_icon, title, header, content_path, footer);
         });
     }
 
@@ -111,8 +110,7 @@ export class LifelogSection extends BaseView {
         for (const [key, value] of data) {
             const sectionItemElement = this.createSectionItem(
                 value.content_id,
-                value.width,
-                Templates.symbol(value.type) + key + ' · ' + value.region,
+                Templates.symbol(value.type) + key,
                 value.title,
                 title_char_max_length,
                 value.content_path
@@ -181,10 +179,10 @@ export class LifelogSection extends BaseView {
         }
     }
     
-    async onPostClick(e, id, width, blog_type, section_icon, title, header, content_path, footer) {
+    async onPostClick(e, id, blog_type, section_icon, title, header, content_path, footer) {
         e.preventDefault();
 
-        const config = this.main_service.buildViewerConfig(id, width, 36, blog_type, section_icon, title, 24);
+        const config = this.main_service.buildViewerConfig(id, 48, 36, blog_type, section_icon, title, 24);
 
         try {
             super.mountContents(

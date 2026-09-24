@@ -19,6 +19,8 @@ export class MainDAO {
         this.writingRecords = this.DB.writings;
         this.reflectionRecords = this.DB.reflection;
         this.lifelogRecords = this.DB.lifelog;
+        this.archiveRecords = this.DB.archive;
+        this.photologRecords = this.DB.photolog;
     }
 
     findAboutAll() {
@@ -59,5 +61,22 @@ export class MainDAO {
 
     findLifelog() {
         return this.lifelogRecords.entries;
+    }
+
+    findArchive() {
+        return this.archiveRecords.entries;
+    }
+
+    /*photolog 관련 메서드*/
+    findPhotolog() {
+        return this.photologRecords.entries;
+    }
+
+    findPhotologPhotos() {
+        return this.photologRecords.photos;
+    }
+
+    findPhotologThumbnails() {
+        return this.photologRecords.thumbnails;
     }
 }

@@ -7,7 +7,7 @@ import { ViewerStateManager } from "../../modules/viewerWindow/ViewerStateManage
 export class BaseView {
     constructor(){}
 
-    mountContents(viewer_config, task_id, header, contents, footer) {        
+    mountContents(type, viewer_config, task_id, header, contents, footer) {        
         if (document.getElementById(viewer_config.element.elementId)) {
             ViewerStateManager.bringToFront(document.getElementById(viewer_config.element.elementId));
             return; 
@@ -16,9 +16,9 @@ export class BaseView {
         const viewer = new ViewerWindow();
         viewer.configureWindow(
             viewer_config,
-            Templates.createContentPanel('blog-header-panel', header),
-            Templates.createContentPanel('blog-content-panel', contents),
-            Templates.createContentPanel('blog-footer-panel', footer)
+            Templates.createContentPanel(type + '-header-panel', header),
+            Templates.createContentPanel(type + '-content-panel', contents),
+            Templates.createContentPanel(type + '-footer-panel', footer)
         );
 
         viewer.targetId = task_id;

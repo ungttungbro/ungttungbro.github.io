@@ -65,6 +65,7 @@ export const siteMeta = Object.freeze({
 
 
     photolog: Object.freeze({
+        typeName: 'photolog',
         sectionHeaderId: 'photolog_title',
         sectionHeaderIcon: './assets/icons/photographer.png',
         sectionHeaderIconAlt: 'Photolog Icon',
@@ -130,14 +131,16 @@ export const siteMeta = Object.freeze({
 
     getPhotologSectionConfig() {
         return {
+            typeName: this.photolog.typeName,
             sectionHeaderId: this.photolog.sectionHeaderId,
             captionImgId: this.photolog.captionImgId,
             captionId: this.photolog.captionId,
             photologListViewerId: this.viewer.photologListViewerId,
+            teaserListClassName: this.photolog.teaserListClassName,
             className: this.photolog.className,
             photologSectionListName: this.viewer.photologSectionListName,
             sectionHeaderIcon: this.photolog.sectionHeaderIcon,
-            text: this.photolog.text,
+            captionText: this.photolog.text,
             sectionHeaderIconAlt: this.photolog.sectionHeaderIconAlt
         };
     },

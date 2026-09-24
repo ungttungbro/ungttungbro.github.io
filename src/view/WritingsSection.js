@@ -38,13 +38,13 @@ export class WritingsSection extends BaseView {
         if(!section_meta_data) return;
 
         const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.blogMetaData, siteMeta.selectSectionConfig(type));
+        const section_header = this.generateSectionHeader(this.blog_service.blogMetaData, section_meta_data);
 
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
 
         element.appendChild(section_header);
 
-        const items = this.generateSectionItems('contents',this.main_service.writings, siteMeta.selectSectionConfig(type));
+        const items = this.generateSectionItems('contents',this.main_service.writings, section_meta_data);
         element.appendChild(items);
 
         return element;
@@ -173,6 +173,7 @@ export class WritingsSection extends BaseView {
 
         try {
             super.mountContents(
+                'blog',
                 config, 
                 COMMON.TASKBAR_PREFIX + id,
                 header, 
@@ -196,6 +197,7 @@ export class WritingsSection extends BaseView {
 
         try {
             super.mountContents(
+                'blog',
                 config, 
                 COMMON.TASKBAR_PREFIX + id, 
                 header, 
