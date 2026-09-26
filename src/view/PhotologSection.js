@@ -30,24 +30,7 @@ export class PhotologSection extends BaseView {
 
     render() {
         const photolog = document.getElementById('photolog');
-        photolog.appendChild(this.createSection('photolog', 'photolog-items'));
-    }
-
-    createSection(type, section_id) {        
-        const section_meta_data = siteMeta.selectSectionConfig(type);
-        if(!section_meta_data) return;
-
-        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.photologMetaData, section_meta_data);
-
-        Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
-
-        element.appendChild(section_header);
-
-        const items = this.generateSectionItems('photolog',this.main_service.photolog, section_meta_data);
-        element.appendChild(items);
-
-        return element;
+        photolog.appendChild(super.createSection('photolog', 'photolog-items', this.main_service.photolog));
     }
 
     createSectionItem(id, thumbnail_path, title, text, photos_path) {
@@ -87,7 +70,7 @@ export class PhotologSection extends BaseView {
         });
     }
 
-    generateSectionHeader(data, config) {
+    generateSectionHeader(config) {
         const section_header = Templates.createSectionHeader(
             config.sectionHeaderId, 
             config.captionImgId, 
@@ -98,14 +81,14 @@ export class PhotologSection extends BaseView {
             config.sectionHeaderIconAlt
         );
 
-        section_header.addEventListener('click',  e => {
+        section_header.addEventListener('click',  async e => {
             this.onSectionHeaderClick (
                 e, 
                 config.typeName, 
                 config.photologListViewerId,
                 config.sectionHeaderIcon,
                 config.photologSectionListName,
-                this.generateSectionItems('header', data, config),
+                this.generateSectionItems('header', await this.blog_service.buildPhotologData(), config),
                 null,
                 COMMON.COPYRIGHT
             );

@@ -2,164 +2,50 @@
 
 import { BlogDAO } from '../dao/BlogDAO.js';
 import { SiteLibrary } from '../modules/common/SiteLibrary.js';
+import { BaseService } from "./common/BaseService.js";
 
-export class BlogService {
+export class BlogService extends BaseService {
     constructor() {
-        this.blogMetaData = null;
-        this.archiveMetaData = null;
-        this.lifelogMetaData = null;
-        this.reflectionMetaData = null;
-        this.photologMetaData = null;
+        super();
     }
 
     async initialize() {
-        try {
-            //dao를 호출하여 초기화함 (비동기 초기화)  
-            this.dao = await BlogDAO.create();
-
-            [
-                this.blogMetaData,
-                this.archiveMetaData,
-                this.lifelogMetaData,
-                this.reflectionMetaData,
-                this.photologMetaData
-            ] = await Promise.all([
-                this.metaData(this.buildPostListData()),
-                this.metaData(this.buildArchiveListData()),
-                this.metaData(this.buildLifelogListData()),
-                this.metaData(this.buildReflectionListData()),
-                this.buildPhotologData()
-            ]);
-        } catch (error) {
-            console.log ('Blog Service : ', error);
-        }
+        this.dao = await BlogDAO.create();
     }
 
-
-    loadContentData(content_path) {        
-        return SiteLibrary.loadText(content_path);
+    async buildReflectionListData() {
+        const records = await this.dao.findReflection();
+        return super.metaData(records);
     }
 
-    async metaData(data) {
-        const contents_records = data;
-        
-        const dtoMap = new Map();        
-        for (const [key, value] of contents_records) {            
-            const blog = {
-                content_id: await SiteLibrary.hashString(key + value[1] + value[2]),
-                region: value[0],
-                type: value[1],
-                title: value[2],
-                summary: value[3],
-                content_path: value[4],
-                width: value[5]
-            };
-
-            dtoMap.set(key, blog);
-        }
-
-        return dtoMap;
+    async buildLifelogListData() {
+        const records = await this.dao.findLifelog();
+        return super.metaData(records);
     }
 
-    buildReflectionListData() {
-        const records = this.dao.findReflection();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
+    async buildArchiveListData() {
+        const records = await this.dao.findArchive();
+        return super.metaData(records);
     }
 
-    buildLifelogListData() {
-        const records = this.dao.findLifelog();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildArchiveListData() {
-        const records = this.dao.findArchive();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildPostListData() {
-        const records = this.dao.findPostList();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
+    async buildPostListData() {
+        const records = await this.dao.findPostList();
+        return super.metaData(records);
     }
 
     async buildPhotologData() {
-        const contents_records = this.buildPhotologEntriesData();
-        const thumbnail_records = this.buildPhotologThumbnailsData();
-        const photo_records = this.buildPhotologPhotosData();
+        const records = await this.dao.findPhotolog();
         
         const dtoMap = new Map();        
-        for (const [key, value] of contents_records) {
+        for (const [key, value] of Object.entries(records.entries)) {
             const photolog = {
                 content_id: await SiteLibrary.hashString(key),
                 content: value,
-                thumbnail: thumbnail_records.get(key),
-                photos: photo_records.get(key)
+                thumbnail: records.thumbnails[key],
+                photos: records.photos[key]
             };
             
             dtoMap.set(key, photolog);
-        }
-
-        return dtoMap;
-    }
-
-    buildPhotologEntriesData() {
-        const records = this.dao.findPhotolog();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-
-    buildPhotologThumbnailsData() {
-        const records = this.dao.findPhotologThumbnails();
-
-        const dtoMap = new Map();
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildPhotologPhotosData() {
-        const records = this.dao.findPhotologPhotos();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
         }
 
         return dtoMap;

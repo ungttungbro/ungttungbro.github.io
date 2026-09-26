@@ -14,9 +14,10 @@ export class MainDAO {
     async initialize() {
         // DB CONN JSON 반환
         this.DB = await SiteLibrary.loadJson(this._ABOUT_DATA_PATH);
+        
         this.aboutRecords = this.DB.about;
         this.linksRecords = this.DB.links;
-        this.writingRecords = this.DB.writings;
+        this.writingsRecords = this.DB.writings;
         this.reflectionRecords = this.DB.reflection;
         this.lifelogRecords = this.DB.lifelog;
         this.archiveRecords = this.DB.archive;
@@ -52,7 +53,7 @@ export class MainDAO {
     }
 
     findWritings() {
-        return this.writingRecords.entries;
+        return this.writingsRecords.entries;
     }
 
     findReflection() {

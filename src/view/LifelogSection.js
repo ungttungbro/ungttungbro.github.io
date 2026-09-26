@@ -30,24 +30,7 @@ export class LifelogSection extends BaseView {
 
     render() {
         const lifelog = document.getElementById('lifelog');
-        lifelog.appendChild(this.createSection('lifelog', 'blog-lifelog'));
-    }
-
-    createSection(type, section_id) {        
-        const section_meta_data = siteMeta.selectSectionConfig(type);
-        if(!section_meta_data) return;
-
-        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.lifelogMetaData, section_meta_data);
-
-        Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
-
-        element.appendChild(section_header);
-
-        const items = this.generateSectionItems('contents',this.main_service.lifelog, section_meta_data);
-        element.appendChild(items);
-
-        return element;
+        lifelog.appendChild(super.createSection('lifelog', 'blog-lifelog', this.main_service.lifelog));
     }
 
     createSectionItem(id, width, meta_data, title, title_char_max_length, content_path) {
@@ -130,7 +113,7 @@ export class LifelogSection extends BaseView {
         return element;
     }
 
-    generateSectionHeader(data, config) {
+    generateSectionHeader(config) {
         const section_header = Templates.createSectionHeader(
             config.sectionHeaderId, 
             config.captionImgId, 
@@ -141,14 +124,14 @@ export class LifelogSection extends BaseView {
             config.sectionHeaderIconAlt
         );
 
-        section_header.addEventListener('click',  e => {
+        section_header.addEventListener('click',  async e => {
             this.onSectionHeaderClick (
                 e, 
                 config.blogTypeName, 
                 config.listViewerId, 
                 config.sectionHeaderIcon, 
                 config.sectionListName,
-                this.generateSectionItems('header', data, config),
+                this.generateSectionItems('header', await this.blog_service.buildLifelogListData(), config),
                 null,
                 COMMON.COPYRIGHT
             );

@@ -3,46 +3,46 @@
 import { SiteLibrary } from "../modules/common/SiteLibrary.js";
 import { viewerConfig } from "../modules/viewerWindow/viewerConfig.js";
 import { MainDAO } from '../dao/MainDAO.js';
+import { BaseService } from "./common/BaseService.js";
 
-export class MainService {
-    constructor() { }
+export class MainService extends BaseService {
+    constructor() {
+        super();
+
+        this.aboutData = null;
+        this.linksData = null;
+        this.writings = null;
+        this.reflection = null;
+        this.lifelog = null;
+        this.archive = null;
+        this.photolog = null;
+    }
 
     async initialize() {
         try {
             //dao를 호출하여 초기화함 (비동기 초기화)  
             this.dao = await MainDAO.create();
-            
-            this.aboutData = this.buildAboutData();
-            this.linksData = this.buildLinksData();
-            this.writings = await this.metaData(this.buildWritings());
-            this.reflection = await this.metaData(this.buildReflection());
-            this.lifelog = await this.metaData(this.buildLifelog());
-            this.archive = await this.metaData(this.buildArchive());
-            this.photolog = await this.buildPhotologData();
+
+            [
+                this.aboutData,
+                this.linksData,
+                this.writings,
+                this.reflection,
+                this.lifelog,
+                this.archive,
+                this.photolog,
+            ] = await Promise.all([
+                this.buildAboutData(),
+                this.buildLinksData(),
+                super.metaData(this.dao.findWritings()),
+                super.metaData(this.dao.findReflection()),
+                super.metaData(this.dao.findLifelog()),
+                super.metaData(this.dao.findArchive()),
+                this.buildPhotologData()
+            ]);
         } catch (error) {
-            console.log('About Service : ', error);
+            console.log ('Main Service : ', error);
         }
-    }
-    
-    async metaData(data) {
-        const contents_records = data;
-        
-        const dtoMap = new Map();        
-        for (const [key, value] of contents_records) {            
-            const blog = {
-                content_id: await SiteLibrary.hashString(key + value[1] + value[2]),
-                region: value[0],
-                type: value[1],
-                title: value[2],
-                summary: value[3],
-                content_path: value[4],
-                width: value[5]
-            };
-
-            dtoMap.set(key, blog);
-        }
-
-        return dtoMap;
     }
 
     buildAboutData() { 
@@ -50,7 +50,7 @@ export class MainService {
             specs: this.buildSpecsData(),
             contacts: this.buildContactsData(),
             photos: this.buildPhotosData()
-        };     
+        };
 
         return about;
     }
@@ -91,91 +91,19 @@ export class MainService {
 
     buildLinksData() { 
         const Links = {
-            oldMyWeb: this.buildOldMyWebData(),
-            thanksTo: this.buildThanksToData()
+            oldMyWeb: super.toPostMap(this.dao.findOldMyWeb()),
+            thanksTo: super.toPostMap(this.dao.findThanksTo())
         };
 
         return Links;
     }
 
-    buildOldMyWebData() {
-        const research_records = this.dao.findOldMyWeb();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(research_records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildThanksToData() {
-        const research_records = this.dao.findThanksTo();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(research_records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildWritings() {
-        const records = this.dao.findWritings();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildReflection() {
-        const records = this.dao.findReflection();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildLifelog() {
-        const records = this.dao.findLifelog();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildArchive() {
-        const records = this.dao.findArchive();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
     async buildPhotologData() {
-        const contents_records = this.buildPhotologEntriesData();
-        const thumbnail_records = this.buildPhotologThumbnailsData();
-        const photo_records = this.buildPhotologPhotosData();
+        const contents_records = super.toPostMap(this.dao.findPhotolog());
+        const thumbnail_records = super.toPostMap(this.dao.findPhotologThumbnails());
+        const photo_records = super.toPostMap(this.dao.findPhotologPhotos());
         
-        const dtoMap = new Map();        
+        const dtoMap = new Map();
         for (const [key, value] of contents_records) {
             const photolog = {
                 content_id: await SiteLibrary.hashString(key),
@@ -185,42 +113,6 @@ export class MainService {
             };
             
             dtoMap.set(key, photolog);
-        }
-
-        return dtoMap;
-    }
-
-    buildPhotologEntriesData() {
-        const records = this.dao.findPhotolog();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-
-    buildPhotologThumbnailsData() {
-        const records = this.dao.findPhotologThumbnails();
-
-        const dtoMap = new Map();
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
-        }
-
-        return dtoMap;
-    }
-
-    buildPhotologPhotosData() {
-        const records = this.dao.findPhotologPhotos();
-
-        const dtoMap = new Map();
-
-        for (const [key, value] of Object.entries(records)) {
-            dtoMap.set(key, value);
         }
 
         return dtoMap;

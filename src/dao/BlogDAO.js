@@ -11,58 +11,31 @@ export class BlogDAO {
         return dao;
     }
 
-    async initialize() {
-        [
-            this.writings,
-            this.archive,
-            this.lifelog,
-            this.reflection,
-            this.photolog
-        ] = await Promise.all([
-            SiteLibrary.loadJson(
-                `${this._BLOG_DATA_PATH}writings/writings-data.json`
-            ),
-            SiteLibrary.loadJson(
-                `${this._BLOG_DATA_PATH}archive/archive-data.json`
-            ),
-            SiteLibrary.loadJson(
-                `${this._BLOG_DATA_PATH}lifelog/lifelog-data.json`
-            ),
-            SiteLibrary.loadJson(
-                `${this._BLOG_DATA_PATH}reflection/reflection-data.json`
-            ),
-            SiteLibrary.loadJson(
-                `${this._BLOG_DATA_PATH}photolog/photolog-data.json`
-            )
-        ]);
+    async initialize() {}
+
+    async findPostList() {
+        const data = await SiteLibrary.loadJson(`${this._BLOG_DATA_PATH}writings/writings-data.json`);
+        return data.entries;
     }
 
-    findPostList() {
-        return this.writings.entries;
+    async findArchive() {
+        const data = await SiteLibrary.loadJson(`${this._BLOG_DATA_PATH}archive/archive-data.json`);
+        return data.entries;
     }
 
-    findArchive() {
-        return this.archive.entries;
+    async findLifelog() {
+        const data = await SiteLibrary.loadJson(`${this._BLOG_DATA_PATH}lifelog/lifelog-data.json`);
+        return data.entries;
     }
 
-    findLifelog() {
-        return this.lifelog.entries;
-    }
-
-    findReflection() {
-        return this.reflection.entries;
+    async findReflection() {
+        const data = await SiteLibrary.loadJson(`${this._BLOG_DATA_PATH}reflection/reflection-data.json`);
+        return data.entries;
     }
 
     /*photolog 관련 메서드*/
-    findPhotolog() {
-        return this.photolog.entries;
-    }
-
-    findPhotologPhotos() {
-        return this.photolog.photos;
-    }
-
-    findPhotologThumbnails() {
-        return this.photolog.thumbnails;
+    async findPhotolog() {
+        const data = await SiteLibrary.loadJson(`${this._BLOG_DATA_PATH}photolog/photolog-data.json`);
+        return data;
     }
 }

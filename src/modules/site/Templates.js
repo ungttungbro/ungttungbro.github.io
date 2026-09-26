@@ -62,7 +62,6 @@ export class Templates {
 
     static setupResponsiveViewer(taskbar_element, viewer_element) {
         if (taskbar_element.taskBarElement.dataset.column < 3) {
-            console.log(viewer_element.windowElement);
             SiteLibrary.toggleElementMaximize(viewer_element.windowElement, 'taskbar');
             if (viewer_element.isMaximized) viewer_element.isMaximized = false;
             else viewer_element.isMaximized = true;

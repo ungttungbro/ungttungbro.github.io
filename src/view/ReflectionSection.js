@@ -30,24 +30,7 @@ export class ReflectionSection extends BaseView {
 
     render() {
         const reflection = document.getElementById('reflection');
-        reflection.appendChild(this.createSection('reflection', 'blog-reflection'));
-    }
-
-    createSection(type, section_id) {        
-        const section_meta_data = siteMeta.selectSectionConfig(type);
-        if(!section_meta_data) return;
-
-        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.reflectionMetaData, section_meta_data);
-
-        Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
-
-        element.appendChild(section_header);
-
-        const items = this.generateSectionItems('contents',this.main_service.reflection, section_meta_data);
-        element.appendChild(items);
-
-        return element;
+        reflection.appendChild(super.createSection('reflection', 'blog-reflection', this.main_service.reflection));
     }
 
     createSectionItem(id, meta_data, title, title_char_max_length, summary, summary_char_max_length, content_path) {
@@ -139,7 +122,7 @@ export class ReflectionSection extends BaseView {
         return element;
     }
 
-    generateSectionHeader(data, config) {
+    generateSectionHeader(config) {
         const section_header = Templates.createSectionHeader(
             config.sectionHeaderId, 
             config.captionImgId, 
@@ -150,14 +133,14 @@ export class ReflectionSection extends BaseView {
             config.sectionHeaderIconAlt
         );
 
-        section_header.addEventListener('click',  e => {
+        section_header.addEventListener('click',  async e => {
             this.onSectionHeaderClick (
                 e, 
                 config.blogTypeName, 
                 config.listViewerId, 
                 config.sectionHeaderIcon, 
                 config.sectionListName,
-                this.generateSectionItems('header', data, config),
+                this.generateSectionItems('header', await this.blog_service.buildReflectionListData(), config),
                 null,
                 COMMON.COPYRIGHT
             );

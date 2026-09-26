@@ -30,24 +30,7 @@ export class ArchiveSection extends BaseView {
 
     render() {
         const archive = document.getElementById('archive');
-        archive.appendChild(this.createSection('archive', 'blog-archive'));
-    }
-
-    createSection(type, section_id) {        
-        const section_meta_data = siteMeta.selectSectionConfig(type);
-        if(!section_meta_data) return;
-
-        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.archiveMetaData, section_meta_data);
-
-        Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
-
-        element.appendChild(section_header);
-
-        const items = this.generateSectionItems('contents',this.main_service.archive, section_meta_data);
-        element.appendChild(items);
-
-        return element;
+        archive.appendChild(super.createSection('archive', 'blog-archive', this.main_service.archive));
     }
 
     createSectionItem(id, meta_data, title, title_char_max_length, content_path) {
@@ -128,7 +111,7 @@ export class ArchiveSection extends BaseView {
         return element;
     }
 
-    generateSectionHeader(data, config) {
+    generateSectionHeader(config) {
         const section_header = Templates.createSectionHeader(
             config.sectionHeaderId, 
             config.captionImgId, 
@@ -139,14 +122,14 @@ export class ArchiveSection extends BaseView {
             config.sectionHeaderIconAlt
         );
 
-        section_header.addEventListener('click',  e => {
+        section_header.addEventListener('click',  async e => {
             this.onSectionHeaderClick (
                 e, 
                 config.blogTypeName, 
                 config.listViewerId, 
                 config.sectionHeaderIcon, 
                 config.sectionListName,
-                this.generateSectionItems('header', data, config),
+                this.generateSectionItems('header', await this.blog_service.buildArchiveListData(), config),
                 null,
                 COMMON.COPYRIGHT
             );

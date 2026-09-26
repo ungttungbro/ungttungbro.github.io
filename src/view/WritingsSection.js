@@ -30,24 +30,7 @@ export class WritingsSection extends BaseView {
 
     render() {
         const writings = document.getElementById('writings');
-        writings.appendChild(this.createSection('writings', 'blog-writings'));
-    }
-
-    createSection(type, section_id) {        
-        const section_meta_data = siteMeta.selectSectionConfig(type);
-        if(!section_meta_data) return;
-
-        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
-        const section_header = this.generateSectionHeader(this.blog_service.blogMetaData, section_meta_data);
-
-        Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
-
-        element.appendChild(section_header);
-
-        const items = this.generateSectionItems('contents',this.main_service.writings, section_meta_data);
-        element.appendChild(items);
-
-        return element;
+        writings.appendChild(super.createSection('writings', 'blog-writings', this.main_service.writings));
     }
 
     createSectionItem(id, meta_data, title, title_char_max_length, summary, summary_char_max_length, content_path) {
@@ -139,7 +122,7 @@ export class WritingsSection extends BaseView {
         return element;
     }
 
-    generateSectionHeader(data, config) {
+    generateSectionHeader(config) {
         const section_header = Templates.createSectionHeader(
             config.sectionHeaderId, 
             config.captionImgId, 
@@ -148,16 +131,16 @@ export class WritingsSection extends BaseView {
             config.sectionHeaderIcon, 
             config.captionText, 
             config.sectionHeaderIconAlt
-        );
+        );        
 
-        section_header.addEventListener('click',  e => {
+        section_header.addEventListener('click',  async e => {
             this.onSectionHeaderClick (
                 e, 
                 config.blogTypeName, 
                 config.listViewerId, 
                 config.sectionHeaderIcon, 
                 config.sectionListName,
-                this.generateSectionItems('header', data, config),
+                this.generateSectionItems('header', await this.blog_service.buildPostListData(), config),
                 null,
                 COMMON.COPYRIGHT
             );
