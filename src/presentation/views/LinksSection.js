@@ -1,8 +1,8 @@
 'use strict';
 
-import { ELEMENT_TYPE } from "../modules/common/Constants.js";
-import { siteMeta } from "../modules/site/siteMeta.js";
-import { Templates } from "../modules/site/Templates.js";
+import { ELEMENT_TYPE } from "../../modules/common/Constants.js";
+import { siteMeta } from "../../modules/site/siteMeta.js";
+import { Templates } from "../../modules/site/Templates.js";
 
 export class LinksSection {
     constructor(links_service) {

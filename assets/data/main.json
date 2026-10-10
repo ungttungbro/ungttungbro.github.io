@@ -219,25 +219,14 @@
         "entries" : {
             "20260131A" : {
                 "date" : "2026.01.31.",
+                "type" : "Samsung XCover5",
                 "location" : "서울 용산 전쟁기념관",
                 "title" : "전쟁기념관",
                 "thumbnails" : "20260131_photolog.jpg",
                 "description" : "용산에 약속이 있어 오랜만에 전쟁기념관을 둘러 보았다.<br>행사도 많고 편의시설도 많아져서 시간을 보내기가 좋았다.<br>전쟁과 관련한 무기들도 꼼꼼하게 전시되어 있었다." ,
                 "tags" : ["전쟁기념관", "Samsung XCover5"],
                 "orientation" : "landscape",
-                "files" : [
-                    "20260131_photo01.jpg",
-                    "20260131_photo02.jpg",
-                    "20260131_photo03.jpg",
-                    "20260131_photo04.jpg",
-                    "20260131_photo05.jpg",
-                    "20260131_photo06.jpg",
-                    "20260131_photo07.jpg",
-                    "20260131_photo08.jpg",
-                    "20260131_photo09.jpg",
-                    "20260131_photo10.jpg",
-                    "20260131_photo11.jpg"
-                ]
+                "contentUrl" : "20260131A.html"
             },
 
             "20241127A" : {
@@ -249,14 +238,7 @@
                 "description" :"직업상담사 자격증 관련하여 현장실습을 충무로로 가게 되었다.<br>충무로에는 남산골 한옥마을이 있는데, 불것도 많고 산책하기 좋은 곳이다.<br>한옥마을을 산책하면서 사색에 잠겼던 하루였다.",
                 "tags" : ["남산골 한옥마을", "Samsung XCover5"],
                 "orientation" : "landscape",
-                "files" : [
-                    "20241127_photo01.jpg",
-                    "20241127_photo02.jpg",
-                    "20241127_photo03.jpg",
-                    "20241127_photo04.jpg",
-                    "20241127_photo05.jpg",
-                    "20241127_photo06.jpg"
-                ]
+                "contentUrl" : "20241127A.html"
             },
 
             "20140810A" : {
@@ -268,15 +250,7 @@
                 "description" : "아끼는 후배들과, 조교선생님이 서울에 놀러 왔다.<br>경마장도가고 연극도보고 즐거운 하루를 보냈다.<br>힘들었던 2014년 이었는데 힘이난다.",
                 "tags" : ["경마장", "Canon EOS 550D"],
                 "orientation" : "landscape",
-                "files" : [
-                    "20140810_photo01.jpg",
-                    "20140810_photo02.jpg",
-                    "20140810_photo03.jpg",
-                    "20140810_photo04.jpg",
-                    "20140810_photo05.jpg",
-                    "20140810_photo06.jpg",
-                    "20140810_photo07.jpg"
-                ]
+                "contentUrl" : "20140810A.html"
             },
 
             "20050101A" : {
@@ -288,35 +262,7 @@
                 "description" : "새해를 맞아서 전국여행을 계획하였다.<br>서울에서 출발하여 오이도를 거쳐 해안선을 따라서 왜목마을, 삽교, 해남, 부산, 정동진, 설악산등을 방문하였다.<br>중간중간 좋은 사람들도 만났고, 겨울 여행은 좋은 추억이 되었다.",
                 "tags" : ["전국여행", "Nikon Coolpix3100"],
                 "orientation" : "landscape",
-                "files" : [
-                    "20050101_photo01.jpg",
-                    "20050101_photo02.jpg",
-                    "20050101_photo03.jpg",
-                    "20050101_photo04.jpg",
-                    "20050101_photo05.jpg",
-                    "20050101_photo06.jpg",
-                    "20050101_photo07.jpg",
-                    "20050101_photo08.jpg",
-                    "20050101_photo09.jpg",
-                    "20050101_photo10.jpg",
-                    "20050101_photo11.jpg",
-                    "20050101_photo12.jpg",
-                    "20050101_photo13.jpg",
-                    "20050101_photo14.jpg",
-                    "20050101_photo15.jpg",
-                    "20050101_photo16.jpg",
-                    "20050101_photo17.jpg",
-                    "20050101_photo18.jpg",
-                    "20050101_photo19.jpg",
-                    "20050101_photo20.jpg",
-                    "20050101_photo21.jpg",
-                    "20050101_photo22.jpg",
-                    "20050101_photo23.jpg",
-                    "20050101_photo24.jpg",
-                    "20050101_photo25.jpg",
-                    "20050101_photo26.jpg",
-                    "20050101_photo27.jpg"
-                ]
+                "contentUrl" : "20050101A.html"
              },
 
             "20040405A" : {
@@ -328,20 +274,7 @@
                 "description" : "같이 일하던 친구들과 함께 강화도에 놀러갔다.<br>바닷가와 마니산을 방문하여 좋은 추억을 남겼다.<br>땀이 조금 날 정도의 봄날씨와 함께 행복한 시간 이었다.",
                 "tags" : ["강화도", "마니산", "여행", "Nikon Coolpix3100"],
                 "orientation" : "landscape",
-                "files" : [
-                    "20040405_photo01.jpg",
-                    "20040405_photo02.jpg",
-                    "20040405_photo03.jpg",
-                    "20040405_photo04.jpg",
-                    "20040405_photo05.jpg",
-                    "20040405_photo06.jpg",
-                    "20040405_photo07.jpg",
-                    "20040405_photo08.jpg",
-                    "20040405_photo09.jpg",
-                    "20040405_photo10.jpg",
-                    "20040405_photo11.jpg",
-                    "20040405_photo12.jpg"
-                ]
+                "contentUrl" : "20040405A.html"
             }
         }
     }

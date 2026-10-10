@@ -22,7 +22,7 @@ export class ViewerStateManager {
         return this.state.get(groupKey).get(key);
     }
 
-    static has(groupKey) {
+    static has(groupKey, key) {
         if (!this.state.has(groupKey)) return false;
         return this.state.get(groupKey).has(key);
     }

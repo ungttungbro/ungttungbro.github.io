@@ -1,57 +1,61 @@
 'use strict';
 
-import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js";
-import { siteMeta } from "../modules/site/siteMeta.js";
-import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { Templates } from "../modules/site/Templates.js";
-import { BaseView } from "./common/BaseView.js";
+import { ELEMENT_TYPE, COMMON } from "../../modules/common/Constants.js";
+import { siteMeta } from "../../modules/site/siteMeta.js";
+import { SiteLibrary } from "../../modules/common/SiteLibrary.js";
+import { Templates } from "../../modules/site/Templates.js";
 
-export class LifelogSection extends BaseView {
-    constructor(MainService, BlogService) {
-        super();
-
-        this.main_service = MainService;
-        this.blog_service = BlogService;
+export class ReflectionSection {
+    constructor() {
         this.initialize();
 
-        this._BASE_PATH = "/assets/data/blog/lifelog/";
+        this._BASE_PATH = "/assets/data/blog/reflection/";
+        this._SECTION_NAME = "reflection";
     }
 
     async initialize() { }
 
+    setOriginalDTO(data) {
+        this.original_data = data;
+    }
+
+    getOriginalDTO() {
+        return this.original_data;
+    }
+
+    setCurationDTO(data) {
+        this.curation_data = data;
+    }
+
+    getCurationDTO() {
+        return this.curation_data;
+    }
+
     show() {
         try {
-            this.render();
+            const el = document.getElementById(this._SECTION_NAME);
+            const data = this.getCurationDTO();
+            this.createSection(el, data);
         } catch (error) {
-            console.log('[ lifelog Section ] : ', error);
+            console.log('[ Reflection Section ] : ', error);
         }
     }
 
-    render() {
-        const lifelog = document.getElementById('lifelog');
-        lifelog.appendChild(this.createSection('lifelog', 'blog-lifelog', this.main_service.lifelog));
-    }
-
-    createSection(type, section_id, data) {        
-        const section_meta_data = siteMeta.selectSectionConfig(type);
+    createSection(el, data) {        
+        const section_meta_data = siteMeta.selectSectionConfig(this._SECTION_NAME);
         if(!section_meta_data) return;
 
-        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
         const section_header = this.generateSectionHeader(section_meta_data);
-
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
-
-        element.appendChild(section_header);
+        el.appendChild(section_header);
 
         const items = this.generateSectionItems('contents', data, section_meta_data);
-        element.appendChild(items);
-
-        return element;
+        el.appendChild(items);
     }
 
-    createSectionItem(id, orientation, meta_data, title, title_char_max_length, content_path) {
+    createSectionItem(id, orientation, meta_data, title, title_char_max_length, summary, summary_char_max_length, content_path) {
         const element = document.createElement(ELEMENT_TYPE.DIV);
-        element.className = 'lifelog-section-item-panel';
+        element.className = 'reflection-section-item-panel';
 
         const meta_span = document.createElement('span');
         meta_span.className = 'meta';
@@ -64,20 +68,17 @@ export class LifelogSection extends BaseView {
         title_span.className = 'title';
         title_span.textContent = SiteLibrary.truncateText(title, title_char_max_length);
 
+        const summary_span = document.createElement('span');
+        summary_span.className = 'summary';
+        summary_span.textContent = SiteLibrary.truncateText(summary, summary_char_max_length);
+
         const a =  document.createElement('a');
         a.href = '#';
         a.appendChild(title_span);
         a.appendChild(document.createElement('br'));
+        a.appendChild(summary_span);
 
-        const section_config = siteMeta.selectSectionConfig('lifelog');
-
-        const footer_span = document.createElement('span');
-        footer_span.className = 'footer';
-        footer_span.innerHTML = "<p align='right' style='font-size:0.85rem; font-weight:400;'>" 
-                                + meta_data 
-                                + "</p>";
-        footer_span.innerHTML += COMMON.COPYRIGHT;
-
+        const section_config = siteMeta.selectSectionConfig('reflection');
         this.generatePostEvent(
             section_config.blogTypeName, 
             COMMON.VIEWER_PREFIX + id, 
@@ -86,8 +87,8 @@ export class LifelogSection extends BaseView {
             section_config.sectionHeaderIcon, 
             title, 
             null,
-            this._BASE_PATH + content_path,
-            footer_span
+            this._BASE_PATH + content_path, 
+            COMMON.COPYRIGHT
         );
 
         element.appendChild(a);
@@ -96,16 +97,19 @@ export class LifelogSection extends BaseView {
     }
 
     generatePostEvent(section_name, id, orientation, element, section_icon, title, header, content_url, footer) {
-        element.addEventListener('mouseenter', e => { SiteLibrary.prefetch(element, content_url); });
-        element.addEventListener('click', e => {
+        element.addEventListener('mouseenter', e => { SiteLibrary.prefetch(element, content_url); }); 
+        element.addEventListener('click', async e => {
             e.preventDefault();
-            super.openPost(
+
+            const data = await SiteLibrary.loadText(content_url);
+
+            Templates.openPost(
                 id,
                 section_name,                 
                 section_icon,
                 title,
-                orientation, 1, 1.01, 0.8, 1.15,
-                header, content_url, footer
+                orientation, 1.5, 1.25, 0, 0,
+                header, data, footer
             );
         });
     }
@@ -117,19 +121,25 @@ export class LifelogSection extends BaseView {
         element.className = config.postIndexClassName;
 
         let title_char_max_length = config.listTitleCharLength;
+        let summary_char_max_length = config.listSummaryCharLength;
+
         if (type === 'contents') {
             element.className = config.latestPostClassName;
+
             title_char_max_length = config.titleCharLength;
+            summary_char_max_length = config.summaryCharLength;
         }
 
         let index = 0;
-        for (const [key, value] of data) {
+        for (const [key ,value] of data) {
             const sectionItemElement = this.createSectionItem(
                 value.id,
                 value.orientation,
-                Templates.symbol(value.type) + value.date + ' (' + value.location + ')',
-                value.tags.map(tag => '#' + tag).join(" · "),
+                value.date,
+                value.title,
                 title_char_max_length,
+                value.description,
+                summary_char_max_length,
                 key + '/' + value.contentUrl
             );
 
@@ -158,13 +168,13 @@ export class LifelogSection extends BaseView {
 
         section_header.addEventListener('click',  async e => {
             e.preventDefault();
-            super.openPost(
+            Templates.openPost(
                 config.listViewerId,
                 config.blogTypeName,
                 config.sectionHeaderIcon,
                 config.sectionListName,
-                'portrait', 0, 0, 0.8, 1.15,
-                this.generateSectionItems('header', await this.blog_service.buildLifelogList(), config),
+                'portrait', 0, 0, 1, 1.2,
+                this.generateSectionItems('header', await this.getOriginalDTO(), config),
                 null,
                 COMMON.COPYRIGHT
             );

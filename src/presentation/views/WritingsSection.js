@@ -1,57 +1,70 @@
 'use strict';
 
-import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js";
-import { siteMeta } from "../modules/site/siteMeta.js";
-import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { Templates } from "../modules/site/Templates.js";
-import { BaseView } from "./common/BaseView.js";
+import { ELEMENT_TYPE, COMMON } from "../../modules/common/Constants.js";
+import { siteMeta } from "../../modules/site/siteMeta.js";
+import { SiteLibrary } from "../../modules/common/SiteLibrary.js";
+import { Templates } from "../../modules/site/Templates.js";
 
-export class ReflectionSection extends BaseView {
-    constructor(MainService, BlogService) {
-        super();
-
-        this.main_service = MainService;
-        this.blog_service = BlogService;
+export class WritingsSection {
+    constructor() {
         this.initialize();
 
-        this._BASE_PATH = "/assets/data/blog/reflection/";
+        this._BASE_PATH = "/assets/data/blog/writings/";
+        this._SECTION_NAME = "writings";
     }
 
-    async initialize() { }
+    async initialize(){}
+
+    setOriginalDTO(data) {
+        this.original_data = data;
+    }
+
+    getOriginalDTO() {
+        return this.original_data;
+    }
+
+    setCurationDTO(data) {
+        this.curation_data = data;
+    }
+
+    getCurationDTO() {
+        return this.curation_data;
+    }
 
     show() {
         try {
-            this.render();
+            const el = document.getElementById(this._SECTION_NAME);
+            const data = this.getCurationDTO();
+            this.createSection(el, data);
         } catch (error) {
-            console.log('[ Reflection Section ] : ', error);
+            console.log('[ Writings Section ] : ', error);
         }
     }
 
-    render() {
-        const reflection = document.getElementById('reflection');
-        reflection.appendChild(this.createSection('reflection', 'blog-reflection', this.main_service.reflection));
-    }
-
-    createSection(type, section_id, data) {        
-        const section_meta_data = siteMeta.selectSectionConfig(type);
+    createSection(el, data) {        
+        const section_meta_data = siteMeta.selectSectionConfig(this._SECTION_NAME);
         if(!section_meta_data) return;
 
-        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
         const section_header = this.generateSectionHeader(section_meta_data);
-
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
-
-        element.appendChild(section_header);
+        el.appendChild(section_header);
 
         const items = this.generateSectionItems('contents', data, section_meta_data);
-        element.appendChild(items);
-
-        return element;
+        el.appendChild(items);
     }
 
-    createSectionItem(id, orientation, meta_data, title, title_char_max_length, summary, summary_char_max_length, content_path) {
+    createSectionItem(
+        id, 
+        orientation, 
+        meta_data, 
+        title, 
+        title_char_max_length, 
+        summary, 
+        summary_char_max_length, 
+        content_path
+    ) {
         const element = document.createElement(ELEMENT_TYPE.DIV);
-        element.className = 'reflection-section-item-panel';
+        element.className = 'writings-section-item-panel';
 
         const meta_span = document.createElement('span');
         meta_span.className = 'meta';
@@ -74,7 +87,7 @@ export class ReflectionSection extends BaseView {
         a.appendChild(document.createElement('br'));
         a.appendChild(summary_span);
 
-        const section_config = siteMeta.selectSectionConfig('reflection');
+        const section_config = siteMeta.selectSectionConfig('writings');
         this.generatePostEvent(
             section_config.blogTypeName, 
             COMMON.VIEWER_PREFIX + id, 
@@ -94,15 +107,18 @@ export class ReflectionSection extends BaseView {
 
     generatePostEvent(section_name, id, orientation, element, section_icon, title, header, content_url, footer) {
         element.addEventListener('mouseenter', e => { SiteLibrary.prefetch(element, content_url); }); 
-        element.addEventListener('click', e => {
+        element.addEventListener('click', async e => {
             e.preventDefault();
-            super.openPost(
+
+            const data = await SiteLibrary.loadText(content_url);
+
+            Templates.openPost(
                 id,
                 section_name,                 
                 section_icon,
                 title,
-                orientation, 1.5, 1.25, 0, 0,
-                header, content_url, footer
+                orientation, 1, 0.8, 0, 0,
+                header, data, footer
             );
         });
     }
@@ -128,7 +144,7 @@ export class ReflectionSection extends BaseView {
             const sectionItemElement = this.createSectionItem(
                 value.id,
                 value.orientation,
-                value.date,
+                value.type + ' · ' + value.date,
                 value.title,
                 title_char_max_length,
                 value.description,
@@ -161,13 +177,13 @@ export class ReflectionSection extends BaseView {
 
         section_header.addEventListener('click',  async e => {
             e.preventDefault();
-            super.openPost(
+            Templates.openPost(
                 config.listViewerId,
                 config.blogTypeName,
                 config.sectionHeaderIcon,
                 config.sectionListName,
-                'portrait', 0, 0, 1, 1.2,
-                this.generateSectionItems('header', await this.blog_service.buildReflectionList(), config),
+                'portrait', 0, 0, 0.7, 0.8,
+                this.generateSectionItems('header', await this.getOriginalDTO(), config),
                 null,
                 COMMON.COPYRIGHT
             );

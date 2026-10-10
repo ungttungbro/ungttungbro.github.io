@@ -41,7 +41,7 @@ main {
   width: 100%;
   
   text-align: initial;
-  padding: 4.4rem 1rem 1rem 1rem;
+  padding: 3.8rem 0.75rem 0.5rem 0.5rem;
   margin: auto;
   
   position: relative; /* pseudo-element 기준 */
@@ -83,6 +83,36 @@ footer {
   page-break-inside: avoid;
   -webkit-column-break-inside: avoid;
   text-align: justify;
+}
+
+#writings hr {
+  margin-top: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+#writings .title {
+  line-height: 1.8;
+}
+
+#writings .summary {
+  line-height: 1.6;
+}
+
+#archive { margin-top: 0.75rem; }
+
+#lifelog .latest-post, 
+#archive .latest-post {
+  line-height: 1.5;
+}
+
+#reflection .latest-post {
+  line-height: 1.58;
+}
+
+#reflection-content {
+  padding-top: 1rem;
+  color: var(--base_font_color);
+  /*text-align: center;*/
 }
 
 #site-copyright {
@@ -242,10 +272,6 @@ footer {
   #blog-reflection hr {
     margin-top: 0.45rem;
     margin-bottom: 0.3rem;
-  }
-
-  #blog-writings .summary {
-    line-height: 1.6;
   }
 
   #viewer-maximize-button {

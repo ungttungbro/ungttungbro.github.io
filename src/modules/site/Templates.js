@@ -1,5 +1,14 @@
 import { SiteLibrary } from "../common/SiteLibrary.js";
+
 import { ViewerWindowProcessRegistry } from "../viewerWindow/ViewerWindowProcessRegistry.js";
+import { ViewerStateManager } from "../viewerWindow/ViewerStateManager.js";
+import { viewerConfig } from "../viewerWindow/viewerConfig.js";
+import { ViewerWindow } from "../viewerWindow/ViewerWindow.js";
+
+import { shell } from "../shell/Shell.js";
+import { taskbar } from "../taskbar/TaskBar.js";
+
+import { COMMON } from "../common/Constants.js";
 
 export class Templates {
     constructor() {}
@@ -79,6 +88,94 @@ export class Templates {
             });
         }
     }
+
+    static mountViewerContents(type, viewer_config, task_id, header, contents, footer) {
+        if (document.getElementById(viewer_config.element.elementId)) {
+            ViewerStateManager.bringToFront(document.getElementById(viewer_config.element.elementId));
+            return; 
+        }
+
+        const viewer = new ViewerWindow();
+        viewer.configureWindow(
+            viewer_config,
+            this.createContentPanel(type + '-header-panel', header),
+            this.createContentPanel(type + '-content-panel', contents),
+            this.createContentPanel(type + '-footer-panel', footer)
+        );
+
+        viewer.targetId = task_id;
+        viewer.show();
+
+        this.setupResponsiveViewer(taskbar, viewer);
+
+        shell.mountTaskItem(
+            viewer_config.meta.contentType, 
+            viewer.targetId, 
+            viewer.id, 
+            viewer_config.meta.titleIconPath, 
+            viewer_config.meta.titleText
+        );
+    }
+
+    static openPost(
+        id, section_name, section_icon, title,
+        orientation, landscape_width_weight, landscape_height_weight,portrait_width_weight, portrait_height_height,   
+        header, contents, footer
+    ) {
+        const content_size = SiteLibrary.calculateContentSize(
+            '#' + section_name,
+            orientation, 
+            landscape_width_weight,landscape_height_weight, 
+            portrait_width_weight, portrait_height_height
+        );
+
+        const config = this.buildViewerConfig(
+            id, 
+            content_size.width, content_size.height, 
+            section_name, section_icon, title, 
+            (content_size.width * 0.6)
+        );
+        
+        try {
+            this.mountViewerContents(
+                section_name,
+                config,
+                COMMON.TASKBAR_PREFIX + id,
+                header,
+                contents,
+                footer
+            );
+
+            const element = document.getElementById(id);
+
+            if (element) {
+                element.dataset.group = config.meta.contentType;
+                ViewerStateManager.stateLog(element);
+            }
+        } catch(error) {
+            console.warn('open Post Event : ', error);
+        }
+    }
+
+    static buildViewerConfig(viewer_id, width, height, content_type, section_icon, title, title_truncate_length) {        
+        const config = structuredClone(viewerConfig);    
+        
+        config.element.elementId = viewer_id;
+        config.element.offsetElementId = 'taskbar';
+        config.element.className = 'viewer';
+
+        config.layout.width = width + 'rem';
+        config.layout.height = height + 'rem';
+        config.layout.left = SiteLibrary.pxToRem(((window.innerWidth - SiteLibrary.remToPx(width)) / 2)) + 'rem';
+        config.layout.top = SiteLibrary.pxToRem(((window.innerHeight - SiteLibrary.remToPx(height)) / 2)) + 'rem';
+
+        config.meta.contentType = content_type;
+        config.meta.titleIconPath = section_icon;
+        config.meta.titleText = SiteLibrary.truncateText(title, title_truncate_length);
+
+        return config;
+    }
+    
 
     static symbol(type) {
         switch (type) {

@@ -8,13 +8,20 @@ import { shell } from './modules/shell/Shell.js';
 import { MainService } from './service/MainService.js';
 import { BlogService } from './service/BlogService.js';
 
-import { AboutSection } from './view/AboutSection.js';
-import { WritingsSection } from './view/WritingsSection.js';
-import { ReflectionSection } from './view/ReflectionSection.js';
-import { LifelogSection } from "./view/LifelogSection.js";
-import { ArchiveSection } from './view/ArchiveSection.js';
-import { PhotologSection } from './view/PhotologSection.js';
-import { LinksSection } from './view/LinksSection.js';
+import { WritingsController } from './presentation/controllers/WritingsController.js';
+import { LifelogController } from './presentation/controllers/LifelogController.js';
+import { ArchiveController } from './presentation/controllers/ArchiveController.js';
+import { ReflectionController } from './presentation/controllers/ReflectionController.js';
+import { PhotologController } from './presentation/controllers/PhotologController.js';
+
+import { AboutSection } from './presentation/views/AboutSection.js';
+import { LinksSection } from './presentation/views/LinksSection.js';
+import { WritingsSection } from './presentation/views/WritingsSection.js';
+import { LifelogSection } from './presentation/views/LifelogSection.js';
+import { ArchiveSection } from './presentation/views/ArchiveSection.js';
+import { ReflectionSection } from './presentation/views/ReflectionSection.js';
+import { PhotologSection } from './presentation/views/PhotologSection.js';
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   /**
@@ -36,20 +43,24 @@ document.addEventListener('DOMContentLoaded', async () => {
    */
   const about_section = new AboutSection(main_service);
   const links_section = new LinksSection(main_service);
-  const writings_section = new WritingsSection(main_service, blog_service);
-  const reflection_section = new ReflectionSection(main_service, blog_service);
-  const lifelog_section = new LifelogSection(main_service, blog_service);
-  const archive_section = new ArchiveSection(main_service, blog_service);
-  const photolog_section = new PhotologSection(main_service, blog_service);
 
   await Promise.all([
       about_section.show(),
-      links_section.show(),
-      writings_section.show(),
-      reflection_section.show(),
-      lifelog_section.show(),
-      archive_section.show(),
-      photolog_section.show()
+      links_section.show()
+  ]);
+
+  const writings = new WritingsController(main_service, blog_service, new WritingsSection);
+  const lifelog = new LifelogController(main_service, blog_service, new LifelogSection);
+  const archive = new ArchiveController(main_service, blog_service, new ArchiveSection);
+  const reflection = new ReflectionController(main_service, blog_service, new ReflectionSection);
+  const photolog = new PhotologController(main_service, blog_service, new PhotologSection);
+
+  await Promise.all([
+    writings.displaySection(),
+    lifelog.displaySection(),
+    archive.displaySection(),
+    reflection.displaySection(),
+    photolog.displaySection()
   ]);
 
   shell.initLayoutMemory();
@@ -59,11 +70,11 @@ document.addEventListener('DOMContentLoaded', async () => {
    * Run the Deep Link
    */
   const section_map = new Map([
-    ['writings',  [writings_section, '/assets/icons/blog.png']],
-    ['reflection',[reflection_section, '/assets/icons/reflection.png']],
-    ['lifelog',   [lifelog_section, '/assets/icons/lifelog.png']],
-    ['archive',   [archive_section, '/assets/icons/archive.png']],
-    ['photolog',  [photolog_section, '/assets/icons/photographer.png']]
+    ['writings',  [writings, '/assets/icons/blog.png']],
+    ['reflection',[reflection, '/assets/icons/reflection.png']],
+    ['lifelog',   [lifelog, '/assets/icons/lifelog.png']],
+    ['archive',   [archive, '/assets/icons/archive.png']],
+    ['photolog',  [photolog, '/assets/icons/photographer.png']]
   ]);
 
  /* const view_size_map = {

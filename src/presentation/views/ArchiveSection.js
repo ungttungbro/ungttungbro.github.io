@@ -1,52 +1,56 @@
 'use strict';
 
-import { ELEMENT_TYPE, COMMON } from "../modules/common/Constants.js";
-import { siteMeta } from "../modules/site/siteMeta.js";
-import { SiteLibrary } from "../modules/common/SiteLibrary.js";
-import { Templates } from "../modules/site/Templates.js";
-import { BaseView } from "./common/BaseView.js";
+import { ELEMENT_TYPE, COMMON } from "../../modules/common/Constants.js";
+import { siteMeta } from "../../modules/site/siteMeta.js";
+import { SiteLibrary } from "../../modules/common/SiteLibrary.js";
+import { Templates } from "../../modules/site/Templates.js";
 
-export class ArchiveSection extends BaseView {
-    constructor(MainService, BlogService) {
-        super();
-
-        this.main_service = MainService;
-        this.blog_service = BlogService;
+export class ArchiveSection {
+    constructor() {
         this.initialize();
 
         this._BASE_PATH = "/assets/data/blog/archive/";
+        this._SECTION_NAME = "archive";
     }
 
-    async initialize() { }
+    async initialize(){}
+
+    setOriginalDTO(data) {
+        this.original_data = data;
+    }
+
+    getOriginalDTO() {
+        return this.original_data;
+    }
+
+    setCurationDTO(data) {
+        this.curation_data = data;
+    }
+
+    getCurationDTO() {
+        return this.curation_data;
+    }
 
     show() {
         try {
-            this.render();
+            const el = document.getElementById(this._SECTION_NAME);
+            const data = this.getCurationDTO();
+            this.createSection(el, data);
         } catch (error) {
             console.log('[ Archive Section ] : ', error);
         }
     }
 
-    render() {
-        const archive = document.getElementById('archive');
-        archive.appendChild(this.createSection('archive', 'blog-archive', this.main_service.archive));
-    }
-
-    createSection(type, section_id, data) {        
-        const section_meta_data = siteMeta.selectSectionConfig(type);
+    createSection(el, data) {        
+        const section_meta_data = siteMeta.selectSectionConfig(this._SECTION_NAME);
         if(!section_meta_data) return;
 
-        const element = document.createElement(ELEMENT_TYPE.DIV); element.id = section_id;
         const section_header = this.generateSectionHeader(section_meta_data);
-
         Templates.createSectionHeaderEvent(section_header, section_meta_data.captionId);
-
-        element.appendChild(section_header);
+        el.appendChild(section_header);
 
         const items = this.generateSectionItems('contents', data, section_meta_data);
-        element.appendChild(items);
-
-        return element;
+        el.appendChild(items);
     }
 
     createSectionItem(id, orientation, meta_data, title, title_char_max_length, content_path) {
@@ -89,15 +93,18 @@ export class ArchiveSection extends BaseView {
 
     generatePostEvent(section_name, id, orientation, element, section_icon, title, header, content_url, footer) {
         element.addEventListener('mouseenter', e => { SiteLibrary.prefetch(element, content_url); }); 
-        element.addEventListener('click', e => {
+        element.addEventListener('click', async e => {
             e.preventDefault();
-            super.openPost(
+
+            const data = await SiteLibrary.loadText(content_url);
+
+            Templates.openPost(
                 id,
                 section_name,                 
                 section_icon,
                 title,
                 orientation, 1.5, 1.2, 0, 0,
-                header, content_url, footer
+                header, data, footer
             );
         });
     }
@@ -150,13 +157,13 @@ export class ArchiveSection extends BaseView {
 
         section_header.addEventListener('click',  async e => {
             e.preventDefault();
-            super.openPost(
+            Templates.openPost(
                 config.listViewerId,
                 config.blogTypeName,
                 config.sectionHeaderIcon,
                 config.sectionListName,
                 'portrait', 0, 0, 0.8, 1.15,
-                this.generateSectionItems('header', await this.blog_service.buildArchiveList(), config),
+                this.generateSectionItems('header', await this.getOriginalDTO(), config),
                 null,
                 COMMON.COPYRIGHT
             );

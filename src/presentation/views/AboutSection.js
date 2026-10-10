@@ -1,8 +1,8 @@
 'use strict';
 
-import { ELEMENT_TYPE } from "../modules/common/Constants.js"
-import { siteMeta } from "../modules/site/siteMeta.js";
-import { SiteLibrary } from "../modules/common/SiteLibrary.js";
+import { ELEMENT_TYPE } from "../../modules/common/Constants.js"
+import { siteMeta } from "../../modules/site/siteMeta.js";
+import { SiteLibrary } from "../../modules/common/SiteLibrary.js";
 
 export class AboutSection {
   constructor(about_service) { 

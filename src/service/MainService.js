@@ -97,23 +97,23 @@ export class MainService extends BaseService {
         return Links;
     }
 
-    async buildPhotologData() {
-        const contents_records = super.toSectionMap(this.dao.findPhotolog());
-        const thumbnail_records = super.toSectionMap(this.dao.findPhotologThumbnails());
-        const photo_records =  super.toSectionMap(this.dao.findPhotologPhotos());
-        
-        const dtoMap = new Map();
-        for (const [key, value] of contents_records) {
-            const photolog = {
-                content_id: await SiteLibrary.hashString(key),
-                content: value,
-                thumbnail: thumbnail_records.get(key),
-                photos: photo_records.get(key)
-            };
-            
-            dtoMap.set(key, photolog);
-        }
+    async getWritings() {
+        return await this.writings;
+    }
 
-        return dtoMap;
+    async getLifelog() {
+        return await this.lifelog;
+    }
+
+    async getArchive() {
+        return await this.archive;
+    }
+
+    async getReflection() {
+        return await this.reflection;
+    }
+
+    async getPhotolog() {
+        return await this.photolog;
     }
 }
