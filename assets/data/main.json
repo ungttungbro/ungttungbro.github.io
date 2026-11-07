@@ -57,6 +57,16 @@
         "title": "writings",
 
         "entries": {
+            "20190728A" : {
+                "date" : "2019.07.28.",
+                "type" : "column",
+                "title" : "코딩을 배운다는 것",
+                "description" : "몇 년 전부터 초중등 교육에서 코딩 교육에 대한 관심이 높아지고 있다. 초중등 교육과정에 정보 교과가 도입되고, 그 일부로 코딩 관련 내용이 포함되면서 이러한 관심도 자연스럽게 늘어나고 있는 것으로 보인다.",
+                "orientation" : "landscape",
+                "thumbnails" : "class-room.webp",
+                "contentUrl" : "20190728A.html"
+            },
+
             "20160630A" : {
                 "date" : "2016.06.30.",
                 "type" : "column",
@@ -65,16 +75,6 @@
                 "orientation" : "landscape",
                 "thumbnails" : "iphone_jobs.jpg",
                 "contentUrl" : "20160630A.html"
-            },
-
-            "20120113A" : {
-                "date" : "2012.01.13.",
-                "type" : "tech-note",
-                "title" : "C++ stream 기반의 파일 복사",
-                "description" : "fstream을 사용해서 파일 복사 로직을 만들었다. C++의 32비트 포인터 문제로 2GB 이상의 File Pointing이 되지 않음을 확인했다. 이를 해결할수 있는 몇몇 방법이 소개되어 있으며 되도록이면 C++의 표준적 방법으로 해결 방안을 모색해보고자 한다.",
-                "orientation" : "landscape",
-                "thumbnails" : "",
-                "contentUrl" : "20120113A.html"
             },
 
             "20120116A" : {
