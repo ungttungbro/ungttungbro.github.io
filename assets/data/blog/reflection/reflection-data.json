@@ -2,6 +2,15 @@
     "title": "Reflection",
 
     "entries": {
+        "20260503A" : {
+            "date" : "2026.05.03.", 
+            "tags" : ["개발자", "CRM"], 
+            "title" : "E-Soft 이야기", 
+            "description" : "대학교 졸업후 개발자로 재취업하여 활동했던 순간의 이야기",
+            "orientation" : "landscape",
+            "contentUrl" : "20260503A.html"
+        },
+
         "20260301A" : {
             "date" : "2026.03.01.", 
             "tags" : ["첫 직장", "개발자"], 
