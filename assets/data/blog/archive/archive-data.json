@@ -36,6 +36,15 @@
             "title" : "파일 암호화 라이브러리",   
             "orientation" : "landscape",        
             "contentUrl" : "20140827A.html"
+        },
+
+        "20130925A" : {
+            "date" : "2013.09.25.",
+            "type" : "lecture-note", 
+            "tags" : ["C#", "강의자료"], 
+            "title" : "C# 프로그래밍 멘토링 자료",   
+            "orientation" : "landscape",        
+            "contentUrl" : "20130925A.html"
         }
     }
 }

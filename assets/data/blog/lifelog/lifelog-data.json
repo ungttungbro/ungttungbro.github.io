@@ -56,30 +56,12 @@
             "orientation" : "landscape"
         },
 
-        "20190410A": {
-            "date": "2019.04.10.",
-            "location": "서울 길동 성심병원",
-            "type": "photo",
-            "tags": ["친할머니", "소천"],
-            "contentUrl": "20190410A.html",
-            "orientation" : "landscape"
-        },
-
         "20190401A": {
             "date": "2019.04.01.",
             "location": "서울 장승배기 교육장",
             "type": "photo",
             "tags": ["타자왕", "대회"],
             "contentUrl": "20190401A.html",
-            "orientation" : "portrait"
-        },
-
-        "20190315A": {
-            "date": "2019.03.15.",
-            "location": "서울 장례식장",
-            "type": "photo",
-            "tags": ["외할머니", "소천"],
-            "contentUrl": "20190315A.html",
             "orientation" : "portrait"
         },
 
@@ -116,15 +98,6 @@
             "type": "photo",
             "tags": ["실업급여", "교육일"],
             "contentUrl": "20180213A.html",
-            "orientation" : "landscape"
-        },
-
-        "20171029A": {
-            "date": "2017.10.29.",
-            "location": "서울 암사동 우리집",
-            "type": "text",
-            "tags": ["입주", "점검"],
-            "contentUrl": "20171029A.html",
             "orientation" : "landscape"
         },
 

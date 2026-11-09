@@ -195,6 +195,14 @@
   #taskbar .settings-dropdown hr {
     display:none;
   }
+
+  #taskbar .settings-dropdown {
+    border: var(--taskbar-task-item-border);
+    color: var(--font-color);
+
+    background: var(--background-A);
+    backdrop-filter: var(--backdrop-filter-A);
+  }
 }
 
 /* 세로 모드 1단 (portrait) */

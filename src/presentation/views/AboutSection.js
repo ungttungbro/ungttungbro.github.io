@@ -155,7 +155,7 @@ export class AboutSection {
 
     photo.style.setProperty(
       'filter', 
-      'drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5))'
+      'drop-shadow(0 0 1.5rem rgba(220, 218, 211, 0.5)) grayscale(0) brightness(1.1) contrast(1)'
     );
       
     this.aboutPhotoElement.appendChild(photo);
