@@ -101,6 +101,24 @@
             "orientation" : "landscape"
         },
 
+        "20140627A": {
+            "date": "2014.06.27.",
+            "location": "서울 서울역",
+            "type": "photo",
+            "tags": ["치킨집"],
+            "contentUrl": "20140627A.html",
+            "orientation" : "portrait"
+        },
+
+        "20140625A": {
+            "date": "2014.06.25.",
+            "location": "부산 해운대",
+            "type": "photo",
+            "tags": ["출렁다리", "연구실"],
+            "contentUrl": "20140625A.html",
+            "orientation" : "portrait"
+        },
+
         "20130627A": {
             "date": "2013.06.27.",
             "location": "제주도 정보과학회",
