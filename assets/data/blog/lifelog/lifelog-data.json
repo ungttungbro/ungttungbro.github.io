@@ -2,6 +2,15 @@
     "title": "Lifelog",
 
     "entries": {
+        "20241221A": {
+            "date": "2024.12.21.",
+            "location": "충남 천안시 한기대",
+            "type": "photo",
+            "tags": ["눈", "겨울"],
+            "contentUrl": "20241221A.html",
+            "orientation" : "landscape"
+        },
+
         "20241216A": {
             "date": "2024.12.16.",
             "location": "충남 천안시 한기대",
@@ -36,6 +45,15 @@
             "tags": ["쇼팽", "클래식", "음악회"],
             "contentUrl": "20220212A.html",
             "orientation" : "landscape"
+        },
+
+        "20210310A": {
+            "date": "2021.03.10.",
+            "location": "경기 가평 우리집",
+            "type": "photo",
+            "tags": ["덕구", "강아지"],
+            "contentUrl": "20210310A.html",
+            "orientation" : "portrait"
         },
 
         "20191018A": {
@@ -99,6 +117,51 @@
             "tags": ["실업급여", "교육일"],
             "contentUrl": "20180213A.html",
             "orientation" : "landscape"
+        },
+
+        "20170122A": {
+            "date": "2017.01.22.",
+            "location": "혜화동 한국방송통신대학교",
+            "type": "photo",
+            "tags": ["혜화동", "사무실"],
+            "contentUrl": "20170122A.html",
+            "orientation" : "portrait"
+        },
+
+        "20171221A": {
+            "date": "2017.12.21.",
+            "location": "청평감리교회",
+            "type": "photo",
+            "tags": ["청평역", "청평감리교회"],
+            "contentUrl": "20171221A.html",
+            "orientation" : "landscape"
+        },
+
+        "20150315A": {
+            "date": "2015.03.15.",
+            "location": "서울역",
+            "type": "photo",
+            "tags": ["서울역", "학교모임"],
+            "contentUrl": "20150315A.html",
+            "orientation" : "portrait"
+        },
+
+        "20141224A": {
+            "date": "2014.12.24.",
+            "location": "서울 신촌역 쌍용직업훈련학원",
+            "type": "photo",
+            "tags": ["신촌역", "쌍용직업훈련학원"],
+            "contentUrl": "20141224A.html",
+            "orientation" : "portrait"
+        },
+
+        "20140810A": {
+            "date": "2014.08.10.",
+            "location": "서울 서울역",
+            "type": "photo",
+            "tags": ["삼성역", "COEX"],
+            "contentUrl": "20140810A.html",
+            "orientation" : "portrait"
         },
 
         "20140627A": {
