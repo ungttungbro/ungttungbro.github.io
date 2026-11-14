@@ -37,6 +37,18 @@
             "contentUrl" : "20150315A.html"
         },
 
+        "20140818A" : {
+            "date" : "2014.08.18.",
+            "type" : "Canon EOS 550D",
+            "location" : "경북 구미 금오공과대학교",
+            "title" : "졸업식",
+            "thumbnails" : "20140818_photolog.webp",
+            "description" : "오늘 나는 석사과정을 마치고 이제 다시 사회로나간다.<br>좋은 사람들도 만났고 의미있는 시간을 보냈다.<br>졸업을 축하해준 모든 사람들께 감사함을 전한다.",
+            "tags" : ["석사", "졸업"],
+            "orientation" : "landscape",
+            "contentUrl" : "20140818A.html"
+        },
+
         "20140810A" : {
             "date" : "2014.08.10.",
             "type" : "Canon EOS 550D",
